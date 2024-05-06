@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/27 11:52:46 by janhan            #+#    #+#              #
-#    Updated: 2024/05/04 13:49:20 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/06 14:14:40 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS			=		./cub3d.c							\
 						./srcs/1_parse/check_argument.c		\
 						./srcs/1_parse/parsing.c			\
 						./srcs/1_parse/parsing_sub.c		\
+						./srcs/1_parse/init_mutil_imgs.c	\
 						./srcs/2_run/input.c				\
 						./srcs/gnl/get_next_line.c			\
 						./srcs/gnl/get_next_line_utils.c	\

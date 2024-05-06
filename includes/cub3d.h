@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 16:57:06 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/04 13:48:57 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/06 13:39:19 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ void	init_map_info(t_game *game, int i, int j);
 void	check_map(t_game *game);
 void	parse_map(t_game *game);
 void	parsing(t_game *game);
+void	paint_img(t_game *game, t_img *img, char *path, int res_x, int res_y);
+void	init_guns(t_game *game);
+void	init_motion(t_game *game);
 /* 2_run */
 int		input(int key, t_game *game);
 /* UTILS */
