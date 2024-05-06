@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/31 16:52:32 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/06 14:18:26 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/06 15:27:53 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,185 @@
 #include <fcntl.h>
 #include <stdio.h>
 #include <pthread.h>
+
+void    up_monster(int i, double speed, int angle, t_game *game)
+{
+	int x;
+	int y;
+
+	x = game->data->enemy[i].x + round(speed * cos((angle + 180) * M_PI / 180.0));
+	y = game->data->enemy[i].y + round(speed * sin((angle + 180) * M_PI / 180.0));
+
+	if (game->data->map[(y + 17) / 50][(x + 17) / 50] != '1'
+		&& game->data->map[(y + 17) / 50][(game->data->enemy[i].x + 17) / 50] != '1'
+		&& game->data->map[(game->data->enemy[i].y + 17) / 50][(x + 17) / 50] != '1'
+		&& game->data->map[(y + 10) / 50][(x + 10) / 50] != '1'
+		&& game->data->map[(y + 10) / 50][(game->data->enemy[i].x + 10) / 50] != '1'
+		&& game->data->map[(game->data->enemy[i].y + 10) / 50][(x + 10) / 50] != '1')
+	{
+		game->data->enemy[i].x = x;
+		game->data->enemy[i].y = y;
+	}
+	else if (game->data->map[(game->data->enemy[i].y + 17) / 50][(x + 17) / 50] != '1'
+			&& game->data->map[(game->data->enemy[i].y + 10) / 50][(x + 10) / 50] != '1')
+		game->data->enemy[i].x = x;
+	else if (game->data->map[(y + 17) / 50][(game->data->enemy[i].x + 17) / 50] != '1'
+			&& game->data->map[(y + 10) / 50][(game->data->enemy[i].x + 10) / 50] != '1')
+		game->data->enemy[i].y = y;
+}
+
+void	sort_enemies(t_game *game)
+{
+	int	i;
+	int	j;
+	int	tmp;
+
+	i = -1;
+	while (++i < game->data->enm_nb - 1)
+	{
+		tmp = i;
+		j = i;
+		while (++j < game->data->enm_nb)
+			if (game->data->enemy[j].dist < game->data->enemy[tmp].dist)
+				tmp = j;
+		if (tmp != i)
+		{
+			t_enm p = game->data->enemy[tmp];
+			game->data->enemy[tmp] = game->data->enemy[i];
+			game->data->enemy[i] = p;
+		}
+	}
+	game->data->show_health = 0;
+	i = -1;
+	while (++i < game->data->enm_nb)
+	{
+	    double angle = atan2(game->data->enemy[i].y - game->data->dir.y, game->data->enemy[i].x - game->data->dir.x) * 180 / M_PI;
+	    angle += 360 * (angle < 0);
+	    int ang = (int)(game->data->dir.angle - angle) % 360;
+	    ang += 360 * ((ang < -180) - (ang > 180));
+	    if (game->data->enemy[i].dist > 65 && !game->data->enemy[i].hit)
+	    {
+	        if (game->data->enemy[i].old_motion)
+	            game->data->enemy[i].frm = 0,
+	            game->data->enemy[i].motion = 0;
+	        if (!i)
+	            up_monster(i, 5, angle, game);
+	        game->data->enemy[i].frm++;
+	    }
+	    else if (game->data->enemy[i].dist > 50 && !game->data->enemy[i].hit)
+	    {
+	        if (game->data->enemy[i].old_motion != 1)
+	            game->data->enemy[i].frm = 0,
+	            game->data->enemy[i].motion = 1;
+	        if (!i)
+	            up_monster(i, 1, angle, game);
+	        game->data->enemy[i].frm++;
+	    }
+	    else
+	    {
+	        if (!game->data->enemy[i].frm || game->data->enemy[i].motion <= 1)
+	        {
+	            game->data->enemy[i].frm = 0,
+	            game->data->enemy[i].motion++;
+	            if (game->data->enemy[i].motion >= 5)
+	                game->data->enemy[i].motion = 2;
+	        }
+	        if (game->data->enemy[i].motion == 4)
+	            game->data->enemy[i].dist -= 15;
+	        if (game->data->enemy[i].dist < 0)
+	            game->data->enemy[i].dist = 0;
+	        game->data->enemy[i].frm += 2;
+	        if (game->data->enemy[i].frm > 10 && game->data->enemy[i].frm < 30 + 40 * (game->data->enemy[i].motion == 4) && game->data->enemy[i].motion > 1 && game->data->enemy[i].motion < 5)
+	        {
+	            if (game->data->enemy[i].frm < 30 && (game->data->enemy[i].motion == 4 || game->data->enemy[i].motion == 2))
+	                right_angle(game, game->data);
+	            else if (game->data->enemy[i].motion == 4 && game->data->enemy[i].frm >= 50)
+	                game->data->c += 30 * (game->data->c + 30 < RES_Y - 200);
+	            else
+	                left_angle(game, game->data);
+	            game->data->bld = 80,
+	            paint_hit_blood(),
+	            game->data->objects.health -= 10 * !(game->data->light % 5),
+	            game->data->sound.hit = 1;
+	        }
+	    }
+	    if (game->data->enemy[i].frm >= game->data->motion[game->data->enemy[i].motion].frame)
+	    {
+	        if (game->data->enemy[i].hit != -1)
+	            game->data->enemy[i].hit = 0;
+			game->data->enemy[i].frm = 0;
+	        if (game->data->enemy[i].hit == -1)
+			    game->data->enemy[i].frm = game->data->motion[game->data->enemy[i].motion].frame - 1;
+	    }
+	    game->data->enemy[i].old_motion = game->data->enemy[i].motion;
+	    if (ang < 40 && ang > -40)
+	        game->data->show_health = 1,
+	        cast_to_3d_for_enemies(1750 - (ang + 40) / 0.04, i, game->data->enemy[i].dist);
+	}
+}
+
+void    variant_calculate_d(double *cord, double decrease, int angl, t_game *game)
+{
+    int v;
+
+    v = 0;
+    while (game->data->map[(int)(cord[1] + decrease * game->data->angles.r_sin[angl])/50][(int)cord[0]/50] == '0'
+        && game->data->map[(int)cord[1] /50][(int)(cord[0] + decrease * game->data->angles.r_cos[angl])/50] == '0'
+        && game->data->map[(int)(cord[1] + decrease * game->data->angles.r_sin[angl])/50][(int)(cord[0] + decrease * game->data->angles.r_cos[angl])/50] == '0')
+    {
+        cord[0] += decrease * game->data->angles.r_cos[angl];
+        cord[1] += decrease * game->data->angles.r_sin[angl];
+        v = 1;
+    }
+    if (v)
+    {
+        cord[0] -= decrease * game->data->angles.r_cos[angl];
+        cord[1] -= decrease * game->data->angles.r_sin[angl];
+    }
+}
+
+void    variant_calculate(double *cord, double decrease, int angl, t_game *game)
+{
+    int v;
+
+    v = 0;
+    while (game->data->map[(int)(cord[1] + decrease * game->data->angles.r_sin[angl])/50][(int)cord[0]/50] != '1'
+        && game->data->map[(int)cord[1] /50][(int)(cord[0] + decrease * game->data->angles.r_cos[angl])/50] != '1'
+        && game->data->map[(int)(cord[1] + decrease * game->data->angles.r_sin[angl])/50][(int)(cord[0] + decrease * game->data->angles.r_cos[angl])/50] != '1')
+    {
+        cord[0] += decrease * game->data->angles.r_cos[angl];
+        cord[1] += decrease * game->data->angles.r_sin[angl];
+        v = 1;
+    }
+    if (v)
+    {
+        cord[0] -= decrease * game->data->angles.r_cos[angl];
+        cord[1] -= decrease * game->data->angles.r_sin[angl];
+    }
+}
+
+void	init_angles(t_game *game)
+{
+	double	r;
+	double	angl;
+	int		i;
+
+	i = -1;
+	r = -30;
+	while (++i < RES_X)
+	{
+		angl = game->data->dir.angle + r;
+		game->data->angles.r_cos[i] = cos(angl * M_PI / 180);
+		game->data->angles.r_sin[i] = sin(angl * M_PI / 180);
+		game->data->angles.r_res_cos[i] = cos(r * M_PI / 180);
+		r += 0.04;
+	}
+	game->data->angles.pl_cos = cos(game->data->dir.angle * M_PI / 180);
+	game->data->angles.pl_sin = sin(game->data->dir.angle * M_PI / 180);
+	game->data->angles.pl_cos_plus_90 = cos((game->data->dir.angle + 90) * M_PI / 180);
+	game->data->angles.pl_sin_plus_90 = sin((game->data->dir.angle + 90) * M_PI / 180);
+	game->data->angles.cte_tan = tan(30 * M_PI / 180);
+}
 
 int	get_img_color(t_img *img, int x, int y)
 {
@@ -33,11 +212,114 @@ void	img_pix_put(t_img *img, int x, int y, int color)
 	*(int *)pixel = color;
 }
 
-//void	init_img_control(t_game *game)
-//{
-//	//int arr[20];
+void    set_rays(t_game *game)
+{
+    int i;
+    double cord[2];
+	i = 0;
+	while (i < RES_X)
+	{
+	    game->data->color[0] = 0;
+	    cord[0] = game->data->dir.x + 17;
+	    cord[1] = game->data->dir.y + 17;
+	    game->data->indx = i;
+	    variant_calculate_d(cord, 45, i, game);
+	    variant_calculate_d(cord, 20, i, game);
+	    variant_calculate_d(cord, 10, i, game);
+	    variant_calculate_d(cord, 1, i, game);
+	    variant_calculate_d(cord, 0.1, i, game);
+	    game->data->door.hit_wall = 0;
+	    if (game->data->map[(int)(cord[1] + game->data->angles.r_sin[i])/50][(int)cord[0]/50] == 'H' || game->data->map[(int)cord[1]/50][(int)(cord[0] + game->data->angles.r_cos[i])/50] == 'H')
+	    {
+	        game->data->door.cord[0] = (int)cord[0];
+	        game->data->door.cord[1] = (int)cord[1];
+	        game->data->color[0] = 1;
+	        game->data->door.is_op = !(fabs(cord[0] - game->data->dir.x - 17) < 90 && fabs(cord[1] - game->data->dir.y - 17) < 90);
+	        if (game->data->map[(int)cord[1]/50][(int)(cord[0] + game->data->angles.r_cos[i])/50] == 'H' && cord[0] + game->data->angles.r_cos[i] > cord[0])
+	            game->data->door.color[1] = (int)cord[1];
+	        else if (game->data->map[(int)cord[1]/50][(int)(cord[0] + game->data->angles.r_cos[i])/50] == 'H' && cord[0] + game->data->angles.r_cos[i] < cord[0])
+	            game->data->door.color[1] = (int)cord[1];
+	        else if (game->data->map[(int)(cord[1] + game->data->angles.r_sin[i])/50][(int)cord[0]/50] == 'H' && cord[1] + game->data->angles.r_sin[i] > cord[1])
+	            game->data->door.color[1] = (int)cord[0];
+	        else if (game->data->map[(int)(cord[1] + game->data->angles.r_sin[i])/50][(int)cord[0]/50] == 'H' && cord[1] + game->data->angles.r_sin[i] < cord[1])
+	            game->data->door.color[1] = (int)cord[0];
+	        game->data->door.rays[i] = sqrt((cord[0] - (double)game->data->dir.x - 17)*(cord[0] - (double)game->data->dir.x - 17) + (cord[1] - (double)game->data->dir.y - 17)*(cord[1] - (double)game->data->dir.y - 17)) * game->data->angles.r_res_cos[i];
+	        variant_calculate(cord, 45, i, game);
+	        variant_calculate(cord, 20, i, game);
+	        variant_calculate(cord, 10, i, game);
+	        variant_calculate(cord, 1, i, game);
+	        variant_calculate(cord, 0.1, i, game);
+	        game->data->door.hit_wall = game->data->map[(int)(cord[1])/50][(int)(cord[0])/50] == 'H';
+	    }
+	    if (game->data->map[(int)cord[1]/50][(int)(cord[0] + game->data->angles.r_cos[i])/50] == '1' && cord[0] + game->data->angles.r_cos[i] > cord[0])
+	        game->data->color[1] = (int)cord[1];
+	    else if (game->data->map[(int)cord[1]/50][(int)(cord[0] + game->data->angles.r_cos[i])/50] == '1' && cord[0] + game->data->angles.r_cos[i] < cord[0])
+	        game->data->color[1] = (int)cord[1];
+	    else if (game->data->map[(int)(cord[1] + game->data->angles.r_sin[i])/50][(int)cord[0]/50] == '1' && cord[1] + game->data->angles.r_sin[i] > cord[1])
+	        game->data->color[1] = (int)cord[0];
+	    else if (game->data->map[(int)(cord[1] + game->data->angles.r_sin[i])/50][(int)cord[0]/50] == '1' && cord[1] + game->data->angles.r_sin[i] < cord[1])
+	        game->data->color[1] = (int)cord[0];
 
-//}
+	    game->data->rays[i] = sqrt((cord[0] - (double)game->data->dir.x - 17)*(cord[0] - (double)game->data->dir.x - 17) + (cord[1] - (double)game->data->dir.y - 17)*(cord[1] - (double)game->data->dir.y - 17)) * game->data->angles.r_res_cos[i];
+	    i++;
+	    game->data->cord = cord;
+	    game->data->design = game->data->door.map[(int)(cord[1] - game->data->angles.r_sin[i])/50][(int)(cord[0] - game->data->angles.r_cos[i])/50];
+	    if (i <= RES_X)
+	        cast_to_3d(i - 1, game);
+	}
+	game->data->light++;
+	if (game->data->light >= 600)
+	    game->data->light = 0;
+}
+
+void	set_char_to_win(t_game *game)
+{
+	int j = -1;
+
+	mlx_clear_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr);
+	set_rays(game);
+	j = -1;
+	while (++j < game->data->enm_nb)
+	    game->data->enemy[j].dist = sqrt((game->data->enemy[j].x - game->data->dir.x) * (game->data->enemy[j].x - game->data->dir.x) + (game->data->enemy[j].y - game->data->dir.y) * (game->data->enemy[j].y - game->data->dir.y));
+	sort_enemies(game);
+	if (game->data->show_health)
+	    health_left_for_enemy(&game->data->health_enm, game->data->enemy[0].health);
+	// pthread_join(p, NULL);
+	if (game->data->aim)
+	    paint_img3(&game->data->img2, &game->data->img);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->img.mlx_img, 0, 0);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->img3.mlx_img, (RES_X / 3) * 2, 0);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->mlx.player, MX, MY);
+
+
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->objects.time[game->data->objects.t4].mlx_img, RES_X - 142, 30);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->objects.time[game->data->objects.t3].mlx_img, RES_X - 142 + 30, 30);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->objects.time[game->data->objects.t2].mlx_img, RES_X - 132 + 60, 30);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->objects.time[game->data->objects.t1].mlx_img, RES_X - 132 + 90, 30);
+
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->nums[game->data->gun[game->data->objects.w].case_bullet / 10].mlx_img, RES_X - (242 + 17 * 2), 175);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->nums[game->data->gun[game->data->objects.w].case_bullet % 10].mlx_img, RES_X - (242 + 17), 175);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->sl, RES_X - 242, 175);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->nums[game->data->gun[game->data->objects.w].bullet / 10].mlx_img, RES_X - (242 - 17), 175);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->nums[game->data->gun[game->data->objects.w].bullet % 10].mlx_img, RES_X - (242 - 17 * 2), 175);
+	mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->cross.mlx_img, RES_X / 2 - 20, RES_Y / 2 - 20);
+	if (game->data->show_health)
+	    mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->health_enm.mlx_img, 150, RES_Y - 100);
+	if (game->data->enemy[0].frm > 10 && game->data->enemy[0].frm < 30 + 20 * (game->data->enemy[0].motion == 4) && game->data->enemy[0].motion > 1 && game->data->enemy[0].motion < 5)
+	    mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->blood_hit2.mlx_img, 0, 0);
+	if (game->data->objects.health <= 0)
+	    mlx_put_image_to_window(game->data->mlx.mlx_ptr, game->data->mlx.win_ptr, game->data->lose.mlx_img, (RES_X - game->data->lose.x) / 2, (RES_Y - game->data->lose.y) / 2);
+	if (game->data->objects.health <= 0 && game->data->death < 200)
+	{
+	    game->data->c += 25 * (game->data->c + 25 < RES_Y - 200);
+	    game->data->death++;
+	    if (game->data->dir.ph < 0.9)
+			game->data->dir.ph += 0.05;
+	    if (game->data->death < 20)
+	        game->data->speed = -6,
+	        up();
+	}
+}
 
 void	paint_img(t_game *game, t_img *img, char *path, int res_x, int res_y)
 {
@@ -71,6 +353,94 @@ void	paint_color(t_img *img, int color, int x_s, int y_s)
 	}
 }
 
+void	init_img_control(t_game *game)
+{
+	int		i;
+	int		arr[26];
+	char	path[50];
+	int		tmp;
+
+	ft_memcpy(path, "img/keys/?.xpm", 15);
+	arr[0] = KEY_A;
+	arr[1] = KEY_B;
+	arr[2] = KEY_C;
+	arr[3] = KEY_D;
+	arr[4] = KEY_E;
+	arr[5] = KEY_F;
+	arr[6] = KEY_G;
+	arr[7] = KEY_H;
+	arr[8] = KEY_I;
+	arr[9] = KEY_J;
+	arr[10] = KEY_K;
+	arr[11] = KEY_L;
+	arr[12] = KEY_N;
+	arr[13] = KEY_M;
+	arr[14] = KEY_O;
+	arr[15] = KEY_P;
+	arr[16] = KEY_Q;
+	arr[17] = KEY_R;
+	arr[18] = KEY_S;
+	arr[19] = KEY_T;
+	arr[20] = KEY_U;
+	arr[21] = KEY_V;
+	arr[22] = KEY_W;
+	arr[23] = KEY_X;
+	arr[24] = KEY_Y;
+	arr[25] = KEY_Z;
+	i = -1;
+	while (++i < 26)
+	{
+		path[9] = 'A' + i;
+		game->data->intro.keys[arr[i]] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, path, &tmp, &tmp);
+	}
+
+	game->data->intro.keys[UP] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/up.xpm", &tmp, &tmp);
+	game->data->intro.keys[DOWN] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/down.xpm", &tmp, &tmp);
+	game->data->intro.keys[LEFT] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/left.xpm", &tmp, &tmp);
+	game->data->intro.keys[RIGHT] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/right.xpm", &tmp, &tmp);
+	game->data->intro.keys[TAB] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/tab.xpm", &tmp, &tmp);
+	game->data->intro.keys[SHIFT] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/shift.xpm", &tmp, &tmp);
+	game->data->intro.keys[CAPS] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/caps.xpm", &tmp, &tmp);
+	game->data->intro.keys[SPACE] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/space.xpm", &tmp, &tmp);
+	game->data->intro.keys[ENTER] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/enter.xpm", &tmp, &tmp);
+	game->data->intro.keys[CONTROL] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/ctrl.xpm", &tmp, &tmp);
+	game->data->intro.keys[M_LEFT_CLICK] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/l_click.xpm", &tmp, &tmp);
+	game->data->intro.keys[M_RIGHT_CLICK] = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/keys/r_click.xpm", &tmp, &tmp);
+	///////////
+	game->data->intro.guide[0].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/fov.xpm", &game->data->intro.guide[0].x, &game->data->intro.guide[0].y);
+	game->data->intro.guide[0].addr = mlx_get_data_addr(game->data->intro.guide[0].mlx_img, &game->data->intro.guide[0].bpp, &game->data->intro.guide[0].line_len, &game->data->intro.guide[0].endian);
+	game->data->intro.guide[1].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/arrows.xpm", &game->data->intro.guide[1].x, &game->data->intro.guide[1].y);
+	game->data->intro.guide[1].addr = mlx_get_data_addr(game->data->intro.guide[1].mlx_img, &game->data->intro.guide[1].bpp, &game->data->intro.guide[1].line_len, &game->data->intro.guide[1].endian);
+	game->data->intro.guide[2].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/mouse.xpm", &game->data->intro.guide[2].x, &game->data->intro.guide[2].y);
+	game->data->intro.guide[2].addr = mlx_get_data_addr(game->data->intro.guide[2].mlx_img, &game->data->intro.guide[2].bpp, &game->data->intro.guide[2].line_len, &game->data->intro.guide[2].endian);
+	game->data->intro.guide[3].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/l_ch1.xpm", &game->data->intro.guide[3].x, &game->data->intro.guide[3].y);
+	game->data->intro.guide[3].addr = mlx_get_data_addr(game->data->intro.guide[3].mlx_img, &game->data->intro.guide[3].bpp, &game->data->intro.guide[3].line_len, &game->data->intro.guide[3].endian);
+	game->data->intro.guide[4].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/r_ch1.xpm", &game->data->intro.guide[4].x, &game->data->intro.guide[4].y);
+	game->data->intro.guide[4].addr = mlx_get_data_addr(game->data->intro.guide[4].mlx_img, &game->data->intro.guide[4].bpp, &game->data->intro.guide[4].line_len, &game->data->intro.guide[4].endian);
+	game->data->intro.guide[5].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/up.xpm", &game->data->intro.guide[5].x, &game->data->intro.guide[5].y);
+	game->data->intro.guide[5].addr = mlx_get_data_addr(game->data->intro.guide[5].mlx_img, &game->data->intro.guide[5].bpp, &game->data->intro.guide[5].line_len, &game->data->intro.guide[5].endian);
+	game->data->intro.guide[6].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/down.xpm", &game->data->intro.guide[6].x, &game->data->intro.guide[6].y);
+	game->data->intro.guide[6].addr = mlx_get_data_addr(game->data->intro.guide[6].mlx_img, &game->data->intro.guide[6].bpp, &game->data->intro.guide[6].line_len, &game->data->intro.guide[6].endian);
+	game->data->intro.guide[7].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/left.xpm", &game->data->intro.guide[7].x, &game->data->intro.guide[7].y);
+	game->data->intro.guide[7].addr = mlx_get_data_addr(game->data->intro.guide[7].mlx_img, &game->data->intro.guide[7].bpp, &game->data->intro.guide[7].line_len, &game->data->intro.guide[7].endian);
+	game->data->intro.guide[8].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/right.xpm", &game->data->intro.guide[8].x, &game->data->intro.guide[8].y);
+	game->data->intro.guide[8].addr = mlx_get_data_addr(game->data->intro.guide[8].mlx_img, &game->data->intro.guide[8].bpp, &game->data->intro.guide[8].line_len, &game->data->intro.guide[8].endian);
+	game->data->intro.guide[9].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/jump.xpm", &game->data->intro.guide[9].x, &game->data->intro.guide[9].y);
+	game->data->intro.guide[9].addr = mlx_get_data_addr(game->data->intro.guide[9].mlx_img, &game->data->intro.guide[9].bpp, &game->data->intro.guide[9].line_len, &game->data->intro.guide[9].endian);
+	game->data->intro.guide[10].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/crouch.xpm", &game->data->intro.guide[10].x, &game->data->intro.guide[10].y);
+	game->data->intro.guide[10].addr = mlx_get_data_addr(game->data->intro.guide[10].mlx_img, &game->data->intro.guide[10].bpp, &game->data->intro.guide[10].line_len, &game->data->intro.guide[10].endian);
+	game->data->intro.guide[11].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/attack.xpm", &game->data->intro.guide[11].x, &game->data->intro.guide[11].y);
+	game->data->intro.guide[11].addr = mlx_get_data_addr(game->data->intro.guide[11].mlx_img, &game->data->intro.guide[11].bpp, &game->data->intro.guide[11].line_len, &game->data->intro.guide[11].endian);
+	game->data->intro.guide[12].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/aim.xpm", &game->data->intro.guide[12].x, &game->data->intro.guide[12].y);
+	game->data->intro.guide[12].addr = mlx_get_data_addr(game->data->intro.guide[12].mlx_img, &game->data->intro.guide[12].bpp, &game->data->intro.guide[12].line_len, &game->data->intro.guide[12].endian);
+	game->data->intro.guide[13].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/run.xpm", &game->data->intro.guide[13].x, &game->data->intro.guide[13].y);
+	game->data->intro.guide[13].addr = mlx_get_data_addr(game->data->intro.guide[13].mlx_img, &game->data->intro.guide[13].bpp, &game->data->intro.guide[13].line_len, &game->data->intro.guide[13].endian);
+	game->data->intro.guide[14].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/setting.xpm", &game->data->intro.guide[14].x, &game->data->intro.guide[14].y);
+	game->data->intro.guide[14].addr = mlx_get_data_addr(game->data->intro.guide[14].mlx_img, &game->data->intro.guide[14].bpp, &game->data->intro.guide[14].line_len, &game->data->intro.guide[14].endian);
+	game->data->intro.guide[15].mlx_img = mlx_xpm_file_to_image(game->data->mlx.mlx_ptr, "img/str/map.xpm", &game->data->intro.guide[15].x, &game->data->intro.guide[15].y);
+	game->data->intro.guide[15].addr = mlx_get_data_addr(game->data->intro.guide[15].mlx_img, &game->data->intro.guide[15].bpp, &game->data->intro.guide[15].line_len, &game->data->intro.guide[15].endian);
+}
+
 void	put_color(int i, int j, char p, t_game *game)
 {
 	if (game->data->map[i][j] != '0')
@@ -82,7 +452,7 @@ void	put_color(int i, int j, char p, t_game *game)
 	put_color(i, j - 1, p, game);
 }
 
-void    init_virtual_map(t_game *game)
+void	init_virtual_map(t_game *game)
 {
 	int	i;
 	int	j;
@@ -106,8 +476,8 @@ void	set_minimap(t_game *game, t_data *data)
 	int	w;
 	int	h;
 
-	//pthread_t t;
-	//pthread_t t2;
+	pthread_t t;
+	pthread_t t2;
 
 	w = 50;
 	h = 50;
@@ -272,22 +642,23 @@ void	set_minimap(t_game *game, t_data *data)
 
 	i = -1;
 	while (++i < 1000)
-	{
 		data->keys[i] = 0,
 		data->intro.keys[i] = NULL;
-	}
 	init_virtual_map(game);
-	//init_img_control(game);
-	//init_angles(game);
-	//mlx_mouse_hide();
-	//pthread_create(&t, NULL, &time_count, NULL);
-	//pthread_create(&t2, NULL, &check_sound, NULL);
-	//mlx_hook(data->mlx.win_ptr, 2, 1L<<0, key_press, NULL);
-	//mlx_hook(data->mlx.win_ptr, 3, 1L<<1, key_release, NULL);
+	printf("----------init_virtual_map OK-----------\n");
+	init_img_control(game);
+	printf("----------init_img_control OK-----------\n");
+	init_angles(game);
+	printf("----------init_angles OK-----------\n");
+	mlx_mouse_hide();
+	pthread_create(&t, NULL, &time_count, NULL);
+	pthread_create(&t2, NULL, &check_sound, NULL);
+	mlx_hook(data->mlx.win_ptr, 2, 1L<<0, key_press, NULL);
+	mlx_hook(data->mlx.win_ptr, 3, 1L<<1, key_release, NULL);
 
-	//mlx_loop_hook(data->mlx.mlx_ptr, rendering, NULL);
-	//mlx_hook(data->mlx.win_ptr, 17, 1, ft_close, NULL);
-	//mlx_loop(data->mlx.mlx_ptr);
+	mlx_loop_hook(data->mlx.mlx_ptr, rendering, NULL);
+	mlx_hook(data->mlx.win_ptr, 17, 1, ft_close, NULL);
+	mlx_loop(data->mlx.mlx_ptr);
 }
 int	main(int ac, char **av)
 {
