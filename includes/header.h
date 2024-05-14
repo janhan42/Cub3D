@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 17:22:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 18:17:09 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	init_multi_png_img(t_game *game, t_img **img, char *file_path, int size);
 /*************************************************************/
 /*========                 ray utils                 ========*/
 /*************************************************************/
-t_dest	*get_dest(int x, int y, double rad, t_game *game);
+t_dest	*get_dest(double x, double y, double rad, t_game *game);
 
 
 /*************************************************************/
@@ -188,6 +188,7 @@ void	draw_line(t_img *img, t_2dot dots, int color);
 void	draw_square_on_img(t_img *img, int x, int y, int color);
 void	put_pixel_on_img(t_img	*img, int x, int y, int color);
 int		weapon_sprite_handle(t_game *game);
+void	one_line(t_img *img, int x0, int y0, int x1, int y1, int color);
 // 1_trash
 double	dist(double x, double y, double hx, double hy);
 

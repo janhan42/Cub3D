@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 13:38:24 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:50:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*
 	수평선 체크를 위한 info 정리 및 초기화
 */
-static void	check_horizion_init(int x, int y, double rad, t_ray_dest *ray)
+static void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray)
 {
 	ray->hx = x;
 	ray->hy = y;
@@ -25,14 +25,14 @@ static void	check_horizion_init(int x, int y, double rad, t_ray_dest *ray)
 	ray->dof = 0;
 	if (rad > M_PI)
 	{
-		ray->ry = ((y >> 6) << 6) - 0.0001;
+		ray->ry = (((int)y >> 6) << 6) - 0.0001;
 		ray->rx = (y - ray->ry) * ray->a_tan + x;
 		ray->yo = -64;
 		ray->xo = -ray->yo * ray->a_tan;
 	}
 	if (rad < M_PI)
 	{
-		ray->ry = ((y >> 6) << 6) + 64;
+		ray->ry = (((int)y >> 6) << 6) + 64;
 		ray->rx = (y - ray->ry) * ray->a_tan + x;
 		ray->yo = 64;
 		ray->xo = -ray->yo * ray->a_tan;
@@ -48,7 +48,7 @@ static void	check_horizion_init(int x, int y, double rad, t_ray_dest *ray)
 /*
 	맵 파일에서의 좌표 및 ray의 좌표를 확인후 거리 계산
 */
-static void	check_horizion(t_game *game, t_ray_dest *ray, int x, int y)
+static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 {
 	while (ray->dof < 8)
 	{
@@ -77,7 +77,7 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, int x, int y)
 /*
 	수직선 체크를 위한 info 정리 및 초기화
 */
-static void	check_vertical_init(int x, int y, double rad, t_ray_dest *ray)
+static void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray)
 {
 	ray->n_tan = -tan(rad);
 	ray->dof = 0;
@@ -86,14 +86,14 @@ static void	check_vertical_init(int x, int y, double rad, t_ray_dest *ray)
 	ray->vy = y;
 	if (rad > M_PI_2 && rad < M_PI + M_PI_2)
 	{
-		ray->rx = ((x >> 6) << 6) - 0.0001;
+		ray->rx = (((int)x >> 6) << 6) - 0.0001;
 		ray->ry = (x - ray->rx) * ray->n_tan + y;
 		ray->xo = -64;
 		ray->yo = -ray->xo * ray->n_tan;
 	}
 	if (rad < M_PI_2 || rad > M_PI + M_PI_2)
 	{
-		ray->rx = ((x >> 6) << 6) + 64;
+		ray->rx = (((int)x >> 6) << 6) + 64;
 		ray->ry = (x - ray->rx) * ray->n_tan + y;
 		ray->xo = 64;
 		ray->yo = -ray->xo * ray->n_tan;
@@ -147,7 +147,7 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
  * dest[3] == 0 or 1 or 2 or 3
  * 			 right / up / left / down
  */
-t_dest	*get_dest(int x, int y, double rad, t_game *game)
+t_dest	*get_dest(double x, double y, double rad, t_game *game)
 {
 	t_dest	*dest;
 

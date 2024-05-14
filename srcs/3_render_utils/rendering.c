@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 13:47:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 18:27:59 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	render_mini_map(t_img *img, char **map)
 				draw_square_on_img(img, x, y, 0x00FFFFFF);
 			else
 				draw_square_on_img(img, x, y, 0x00000000);
-			x += 64;
+			x += MINI_MAP_PIXEL;
 			j++;
 		}
-		y += 64;
+		y += MINI_MAP_PIXEL;
 		i++;
 	}
 }
@@ -52,8 +52,8 @@ void	draw_player(t_img *img, t_game *game)
 		while (j < r)
 		{
 			if (i * i + j * j <= r * r)
-				put_pixel_on_img(img, game->player->player_x + j,
-					game->player->player_y + i, 0x00FF0000);
+				put_pixel_on_img(img, game->player->player_x / (int)(PIXEL / MINI_MAP_PIXEL) + j,
+					game->player->player_y / (int)(PIXEL / MINI_MAP_PIXEL) + i, 0x00FF0000);
 			j++;
 		}
 		i++;
@@ -82,7 +82,6 @@ void	render_3d(t_game *game)
 	ray_direction = game->player->player_rad - (0.002 * 320);
 	while (ray_direction <= game->player->player_rad + (0.002 * 320))
 	{
-		t++;
 		f_dest = get_dest(game->player->player_x, game->player->player_y,
 					ray_direction, game);
 		//printf("x, y : (%d, %d)\n", f_dest->x, f_dest->y);
@@ -94,6 +93,7 @@ void	render_3d(t_game *game)
 		free(f_dest);
 		//printf("%f\n", ray_direction);
 		ray_direction += 0.002;
+		t++;
 	}
 }
 
@@ -173,8 +173,8 @@ void	render(t_game *game, double distance, int time, int side)
 	while (i < 3)
 	{
 		dots.dest_y = mid - line_h / 2;
-		dots.start_x += 1;
-		dots.dest_x += 1;
+			dots.start_x += 1;
+			dots.dest_x += 1;
 		if (dots.dest_y < 0)
 			dots.dest_y = 0;
 		draw_line(render, dots, color/*create_color_hex(255, 255, 255, distance / 255)*/);

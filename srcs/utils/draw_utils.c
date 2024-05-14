@@ -6,13 +6,13 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:26:51 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 10:00:59 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 18:25:37 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-static void	one_line(t_img *img, int x0, int y0, int x1, int y1, int color)
+void	one_line(t_img *img, int x0, int y0, int x1, int y1, int color)
 {
 	const int	dx = x1 - x0;
 	const int	dy = y1 - y0;
@@ -38,6 +38,7 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 	{
 		offset = (dots.start_y > dots.dest_y) * -1
 			+ (dots.start_y < dots.dest_y) * 1;
+		printf("offset : [%d]\n", offset);
 		while (dots.start_y != dots.dest_y)
 		{
 			put_pixel_on_img(img, dots.start_x, dots.start_y, color);
@@ -48,6 +49,7 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 	{
 		offset = (dots.start_x > dots.dest_x) * -1
 			+ (dots.start_x < dots.dest_x) * 1;
+		printf("offset : [%d]\n", offset);
 		while (dots.start_x != dots.dest_x)
 		{
 			put_pixel_on_img(img, dots.start_x, dots.start_y, color);
@@ -56,7 +58,7 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 	}
 	else
 		one_line(img, dots.start_x, dots.start_y,
-		   dots.dest_x, dots.dest_y, color);
+		dots.dest_x, dots.dest_y, color);
 }
 
 /**
@@ -73,10 +75,10 @@ void	draw_square_on_img(t_img *img, int x, int y, int color)
 	int	j;
 
 	i = 0;
-	while (i < 64)
+	while (i < MINI_MAP_PIXEL)
 	{
 		j = 0;
-		while (j < 64)
+		while (j < MINI_MAP_PIXEL)
 		{
 			put_pixel_on_img(img, x + j, y + i, color);
 			j++;
