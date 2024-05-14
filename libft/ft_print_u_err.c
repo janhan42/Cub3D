@@ -1,20 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_print_u_err.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2024/03/19 16:12:27 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+static void	ft_run_alt(unsigned int n, int fd, int *res)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	if (n > 9)
+		ft_run_alt(n / 10, fd, res);
+	ft_putchar_fd((n % 10) + '0', fd);
+	(*res)++;
+}
+
+static void	ft_putnbr_fd_alt(unsigned int n, int fd, int *res)
+{
+	if (n == 0)
+	{
+		ft_putchar_fd('0', fd);
+		(*res)++;
+		return ;
+	}
+	ft_run_alt(n, fd, res);
+}
+
+void	ft_print_u(unsigned int nb, int *res)
+{
+	ft_putnbr_fd_alt(nb, 2, res);
 }

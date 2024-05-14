@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2023/10/08 08:46:34 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+void	ft_putchar_fd(char c, int fd)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	if (fd < 0)
+		return ;
+	write(fd, &c, 1);
 }

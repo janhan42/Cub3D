@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2023/10/05 22:51:41 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+char	*ft_strdup(const char *s1)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	int		len;
+	char	*result;
+
+	len = ft_strlen(s1);
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	ft_memcpy(result, s1, len);
+	result[len] = '\0';
+	return (result);
 }

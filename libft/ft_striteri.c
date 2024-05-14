@@ -1,20 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2023/10/08 11:46:23 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	size_t	i;
+
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }

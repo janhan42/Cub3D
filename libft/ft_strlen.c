@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2023/10/04 23:38:22 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+size_t	ft_strlen(const char *str)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

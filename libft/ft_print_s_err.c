@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_print_s_err.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2024/03/19 16:12:23 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+void	ft_print_s(char *str, int *res)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	size_t	len;
+
+	if (str == NULL)
+	{
+		write(2, "(null)", 6);
+		(*res) = (*res) + 6;
+		return ;
+	}
+	len = ft_strlen(str);
+	write(2, str, len);
+	(*res) = (*res) + len;
 }

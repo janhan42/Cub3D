@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2023/10/06 02:08:35 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+char	*ft_strrchr(const char *s, int c)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	unsigned char	temp_c;
+	size_t			i;
+	size_t			j;
+
+	i = ft_strlen((char *)s);
+	j = 0;
+	temp_c = (char)c;
+	while (j <= i)
+	{
+		if (s[i - j] == temp_c)
+			return ((char *)&s[i - j]);
+		j++;
+	}
+	return (0);
 }

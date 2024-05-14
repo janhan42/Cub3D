@@ -5,39 +5,51 @@
 #                                                     +:+ +:+         +:+      #
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/27 11:52:46 by janhan            #+#    #+#              #
-#    Updated: 2024/05/06 14:34:22 by janhan           ###   ########.fr        #
+#    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
+#    Updated: 2024/05/14 11:11:23 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			=		Cub3d
+NAME			=		cub3d
 
 CC				=		cc
 
-CFLAGS			=		-Wall -Wextra -Werror #-fsanitize
+CFLAGS			=		#-Wall -Wextra -Werror
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 
-LIBFT_DIR		=		srcs/libft
-LIBFT_A			=		srcs/libft/libft.a
+LIBFT_DIR		=		libft
+LIBFT_A			=		libft/libft.a
 
 MLX_DIR			=		mlx
 
-SRCS			=		./cub3d.c							\
-						./srcs/0_init/ft_init_maps.c		\
-						./srcs/1_src/check_argument.c		\
-						./srcs/1_src/parsing.c				\
-						./srcs/1_src/parsing_sub.c			\
-						./srcs/1_src/init_mutil_imgs.c		\
-						./srcs/2_run/input.c				\
-						./srcs/gnl/get_next_line.c			\
-						./srcs/gnl/get_next_line_utils.c	\
-						./srcs/utils/error_exit.c			\
-						./srcs/utils/ft_lst.c				\
-						./srcs/utils/ft_lst_new.c
+SRCS_MAN		=		./srcs/main.c											\
+						./srcs/0_init_utils/init_game.c							\
+						./srcs/0_init_utils/init_map.c							\
+						./srcs/0_init_utils/init_player.c						\
+						./srcs/0_init_utils/multi_img_init.c					\
+						./srcs/1_ray_utils/get_dest.c							\
+						./srcs/2_hook_utils/key_hook.c							\
+						./srcs/2_hook_utils/mouse_handle.c						\
+						./srcs/3_render_utils/rendering.c						\
+						./srcs/3_render_utils/update.c							\
+						./srcs/utils/color_rgb.c								\
+						./srcs/utils/dist.c										\
+						./srcs/utils/draw_utils.c								\
+						./srcs/utils/end_program.c								\
+						./srcs/utils/error_exit.c								\
+						./srcs/utils/sprite_handle.c							\
+						./srcs/utils/make_img.c									\
+						./srcs/utils/print_info.c
+OBJS_MAND		=	$(SRCS_MAN:.c=.o)
 
-OBJ_DIR			=		./srcs/obj
+SRCS_BONUS		=
+OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)
 
-OBJ_FILES		=		$(SRCS:.c=.o)
+ifdef FLAG
+	OBJS_FILES = $(OBJS_BONUS)
+else
+	OBJS_FILES = $(OBJS_MAND)
+endif
 
 NONE='\033[0m'
 GREEN='\033[32m'
@@ -50,11 +62,14 @@ DELETELINE='\033[K;
 
 all : $(NAME)
 
-$(NAME) : $(OBJ_FILES)
+bonus :
+	make all FLAG=1
+
+$(NAME) : $(OBJS_FILES)
 	@echo $(CURSIVE)$(YELLOW) "      - Making $(NAME) Game -" $(NONE)
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
-	@$(CC) $(LDFLAGS) $(LIBFT_A) $(INCLUDE)  $^ -o $@
+	@$(CC) $(CFLAGS) $(LIBFT_A) $(INCLUDE)  $^ -o $@
 	@install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
 	@echo $(CURSIVE)$(YELLOW) "        - Compiling $(NAME) -" $(NONE)
 	@echo $(GREEN) "            - Complete -"$(NONE)
@@ -64,14 +79,14 @@ $(NAME) : $(OBJ_FILES)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
-	@rm -fr $(OBJ_FILES)
+	@rm -fr $(OBJS_MAND) $(OBJS_BONUS)
 	@make clean -C $(LIBFT_DIR)
-	@make clean -C $(MLX_DIR)
 	@echo $(CURSIVE)$(BLUE) "     - clean OBJ files -" $(NONE)
 
 fclean : clean
 	@rm -fr $(NAME)
 	@make fclean -C $(LIBFT_DIR)
+	@make clean -C $(MLX_DIR)
 	@echo $(CURSIVE)$(PURPLE)"      - clean $(NAME) file -"$(NONE)
 
 re	:
@@ -79,4 +94,5 @@ re	:
 	@make fclean
 	@make all
 
-.PHONY: all make clean fclean re
+.PHONY: all make clean fclean bonus re
+

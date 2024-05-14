@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   dist.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2024/05/14 08:32:45 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/14 08:33:01 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-void	error_exit(char *msg)
+double	dist(double x, double y, double hx, double hy)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	return (sqrt((hx - x) * (hx - x) + (hy - y) * (hy - y )));
 }

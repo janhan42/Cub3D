@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 09:18:58 by janhan           ###   ########.fr       */
+/*   Created: 2023/10/05 09:45:42 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/13 10:48:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "libft.h"
 
-void	error_exit(char *msg)
+void	*ft_memchr(const void *str, int c, size_t n)
 {
-	printf("Error\n");
-	printf("%s\n", msg);
-	exit(1);
+	const unsigned char	*temp_str;
+	unsigned char		temp_c;
+
+	temp_str = (unsigned char *)str;
+	temp_c = (unsigned char)c;
+	while (n--)
+	{
+		if (*temp_str == temp_c)
+			return ((void *)temp_str);
+		temp_str++;
+	}
+	return (0);
 }
