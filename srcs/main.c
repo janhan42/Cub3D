@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 13:18:13 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:22:13 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int	main(int ac, char **av)
 	game.texture = &texture;
 	printf("--------------------load_texture OK--------------------\n");
 
+	print_game_info(&game);
 	mlx_mouse_hook(game.mlx_win, mouse_handle, (void *)&game);
 	mlx_hook(game.mlx_win, KEY_PRESS, 1L<<0, key_hook, &game);
 	mlx_hook(game.mlx_win, KEY_RELEASE, 1L<<1, key_hook_release, &game);

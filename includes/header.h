@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 13:26:54 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:22:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,12 @@ typedef struct s_game		/* 메인 구조체 */
 	void		*mlx;				//	mlx -> init_game()
 	void		*mlx_win;			//	mlx window -> init_game()
 	char		**map;				//	문자열로 읽어들인 맵 -> init_map()
+	int			map_len_w;			//	MAP 의 최대 X의 길이 -> init_map()
+	int			map_len_h;			//	MAP 의 최대 Y의 길이 ->init_map()
 	int			map_width;			//	MAP X * IMG_SIZE -> init_map()
 	int			map_height;			//	MAP Y * IMG_SIZE -> init_map()
 	int			floor_color;		//	MAP 바닥 색상 -> init_map()
 	int			ceiling_color;		//	MAP 천장 색상 -> init_map()
-	// double		player_x;			//	플레이어의 X 좌표 -> init_player()
-	// double		player_y;			//	플레이어의 Y 좌표 -> init_player()
-	// double		player_rad;			//	플레이어의 각도 -> init_player()
 	t_img		*minimap_img;		//	좌측 상단 미니맵을 위한 mlx_img
 	t_img		*render;			//	3DWall 을 위한 mlx_img
 	t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
@@ -212,6 +211,7 @@ void	print_img_info(t_img *img, char *name);
 void	print_player_info(t_player *player);
 void	print_ray_result_info(double ray_result[4]);
 void	print_ray_info(t_ray_dest *ray);
+void	print_game_info(t_game *game);
 
 /*************************************************************/
 /*========                   TEST                    ========*/

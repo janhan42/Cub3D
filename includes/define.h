@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 08:49:35 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:09:57 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 /*************************************************************/
 
 # define PIXEL 64
+# define MINI_MAP_PIXEL 32
 # define WINDOW_W 1920
 # define WINDOW_H 1080
 # define MAX_DISTANCE 10000

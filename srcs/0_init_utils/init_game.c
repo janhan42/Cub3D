@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 13:03:08 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:11:02 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	init_game(t_game *game)
 	printf("--------------------init_mlx->mlx_init OK--------------------\n");
 	game->mlx_win = mlx_new_window(game->mlx, WINDOW_W, WINDOW_H, "Testing");
 	printf("--------------------init_mlx->mlx_win_init OK--------------------\n");
-	game->minimap_img = make_image(game, game->map_width, game->map_height);
+	game->minimap_img = make_image(game, game->map_len_w * MINI_MAP_PIXEL, game->map_len_h * MINI_MAP_PIXEL);
 	printf("--------------------init_mlx->minimap init OK--------------------\n");
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	printf("--------------------init_mlx->render init OK--------------------\n");

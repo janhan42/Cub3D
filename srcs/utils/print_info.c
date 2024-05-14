@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:52:03 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 12:40:26 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:45:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	print_ray_result_info(double ray_result[4])
 	printf("/*     double x                     : %-22f */\n", ray_result[0]);
 	printf("/*     double y                     : %-22f */\n", ray_result[0]);
 	printf("/*     double distance              : %-22f */\n", ray_result[0]);
+	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }
 
@@ -39,21 +40,22 @@ void	print_ray_info(t_ray_dest *ray)
 	printf("/*************************************************************/\n");
 	printf("/*                     ray_info info                         */\n");
 	printf("/*     ray_info address    : %-31p */\n", ray);
-	printf("/*     double rx                   : %-31f */\n", ray->rx);
-	printf("/*     double ry                   : %-31f */\n", ray->ry);
-	printf("/*     double hx                   : %-31f */\n", ray->hx);
-	printf("/*     double hy                   : %-31f */\n", ray->hy);
-	printf("/*     double vx                   : %-31f */\n", ray->vx);
-	printf("/*     double vy                   : %-31f */\n", ray->vy);
-	printf("/*     double xo                   : %-31f */\n", ray->xo);
-	printf("/*     double yo                   : %-31f */\n", ray->yo);
-	printf("/*     double distance_h           : %-31f */\n", ray->distance_h);
-	printf("/*     double distance_v           : %-31f */\n", ray->distance_v);
-	printf("/*     double a_tan                : %-31f */\n", ray->a_tan);
-	printf("/*     double n_tan                : %-31f */\n", ray->n_tan);
-	printf("/*     int map_x                   : %-31d */\n", ray->mx);
-	printf("/*     int map_y                   : %-31d */\n", ray->my);
-	printf("/*     int dof                     : %-31d */\n", ray->dof);
+	printf("/*     double rx                   : %-23f */\n", ray->rx);
+	printf("/*     double ry                   : %-23f */\n", ray->ry);
+	printf("/*     double hx                   : %-23f */\n", ray->hx);
+	printf("/*     double hy                   : %-23f */\n", ray->hy);
+	printf("/*     double vx                   : %-23f */\n", ray->vx);
+	printf("/*     double vy                   : %-23f */\n", ray->vy);
+	printf("/*     double xo                   : %-23f */\n", ray->xo);
+	printf("/*     double yo                   : %-23f */\n", ray->yo);
+	printf("/*     double distance_h           : %-23f */\n", ray->distance_h);
+	printf("/*     double distance_v           : %-23f */\n", ray->distance_v);
+	printf("/*     double a_tan                : %-23f */\n", ray->a_tan);
+	printf("/*     double n_tan                : %-23f */\n", ray->n_tan);
+	printf("/*     int map_x                   : %-23d */\n", ray->mx);
+	printf("/*     int map_y                   : %-23d */\n", ray->my);
+	printf("/*     int dof                     : %-23d */\n", ray->dof);
+	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }
 
@@ -71,6 +73,7 @@ void	print_mouse_info(t_mouse *mouse)
 	printf("/*     int mouse_y         : %-31d */\n", mouse->mouse_y);
 	printf("/*     int prev_x          : %-31d */\n", mouse->prev_x);
 	printf("/*     int prev_y          : %-31d */\n", mouse->prev_y);
+	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }
 
@@ -89,7 +92,7 @@ void	print_img_info(t_img *img, char *name)
 	int right_padding = padding;
 
 	printf("/%.*s/\n", border_len, "**************************************************************");
-	printf("/*%*s%s%*s*/\n", left_padding, "", name, right_padding, "");
+	printf("/*%*s%s%*s*/\n", left_padding, "IMG ", name, right_padding, "");
 	printf("/*     t_img address       : %-31p */\n", img);
 	printf("/*     void *img           : %-31p */\n", img->img);
 	printf("/*     char *addr          : %-31p */\n", img->addr);
@@ -98,6 +101,7 @@ void	print_img_info(t_img *img, char *name)
 	printf("/*     int endian          : %-31d */\n", img->endian);
 	printf("/*     int width           : %-31d */\n", img->width);
 	printf("/*     int height          : %-31d */\n", img->height);
+	printf("/*                                                           */\n");
 	printf("/%.*s/\n", border_len, "**************************************************************");
 }
 
@@ -123,5 +127,30 @@ void	print_player_info(t_player *player)
 	printf("/*     int    move_s       : %-31d */\n", player->move_s);
 	printf("/*     int    move_a       : %-31d */\n", player->move_a);
 	printf("/*     int    move_d       : %-31d */\n", player->move_d);
+	printf("/*                                                           */\n");
+	printf("/*************************************************************/\n");
+}
+
+void	print_game_info(t_game *game)
+{
+	printf("/*************************************************************/\n");
+	printf("/*                      PLAYER   INFO                        */\n");
+	printf("/*     void *mlx     address    : %-26p */\n", game->mlx);
+	printf("/*     void *mlx_win address    : %-26p */\n", game->mlx_win);
+	printf("/*     char **map    address    : %-26p */\n", game->map);
+	printf("/*     int map_len_w            : %-26d */\n", game->map_len_w);
+	printf("/*     int map_len_h            : %-26d */\n", game->map_len_h);
+	printf("/*     int map_width            : %-26d */\n", game->map_width);
+	printf("/*     int map_height           : %-26d */\n", game->map_height);
+	printf("/*     int floor_color          : %-26d */\n", game->floor_color);
+	printf("/*     int ceiling_color        : %-26d */\n", game->ceiling_color);
+	printf("/*     img *minimap   address   : %-26p */\n", game->minimap_img);
+	printf("/*     img *render    address   : %-26p */\n", game->render);
+	printf("/*     img *back_g    address   : %-26p */\n", game->background);
+	printf("/*     mouse *mouse   address   : %-26p */\n", game->mouse);
+	printf("/*     ray_d ray_info address   : %-26p */\n", game->ray_info);
+	printf("/*     player *player address   : %-26p */\n", game->player);
+	printf("/*     t_img *texture address   : %-26p */\n", game->texture);
+	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }
