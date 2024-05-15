@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:19:20 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:24:47 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 
 	int	line_h = (WINDOW_H / dest->distance) * PIXEL; // -> line의 길이
 	double	step = 1.0 * game->texture->height / line_h;
-	printf("line_h [%d]\n", line_h);
 	//texture_x = texture_x * game->texture->width / 70;
 	//printf("step [%f]\n", step);
 	int		color;

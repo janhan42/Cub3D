@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/15 17:19:47 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/16 00:33:12 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ MLX_DIR			=		mlx
 SRCS_MAN		=		./srcs/main.c											\
 						./srcs/0_init_utils/init_game.c							\
 						./srcs/0_init_utils/init_map.c							\
+						./srcs/0_init_utils/init_object.c						\
 						./srcs/0_init_utils/init_player.c						\
 						./srcs/0_init_utils/multi_img_init.c					\
 						./srcs/1_ray_utils/get_dest.c							\

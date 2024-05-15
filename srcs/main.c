@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/15 22:15:36 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 00:40:00 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ int	main(int ac, char **av)
 	printf("--------------------init_mlx OK--------------------\n");
 	init_player(&game);
 	printf("--------------------init_player OK--------------------\n");
+	init_object(&game);
+	printf("--------------------init_object OK--------------------\n");
 	pthread_create(&game.sound_test, NULL, &sound_handle, &game); // 병렬 프로세스 TEST중
 	pthread_create(&game.sound_test_theme, NULL, &sound_theme, &game); // 병렬 프로세스 TEST중
 

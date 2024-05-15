@@ -6,39 +6,42 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 00:04:53 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:50:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-/**
- * @brief jang hun han
- *	char **map에서
- * x, y로 **map을 탐색하면서
- * 플레이어 포지션에서의 좌표 지정
- * @param map
- * @param player
- */
-static void	get_object_position(char **map, t_object *object, int x, int y)
+static void	get_object_position(char **map, t_object *object)
 {
+	int	y;
+	int	x;
+
+	y = 0;
 	while (map[y])
 	{
+		x = 0;
 		while (map[y][x])
 		{
 			if (map[y][x] == 'G' || map[y][x] == 'R' || map[y][x] == 'L')
 			{
+				printf("여기 들어옴?\n");
 				object->object_x = x * PIXEL + (int)(PIXEL / 2);
-				object->object_x = y * PIXEL + (int)(PIXEL / 2);
+				object->object_y = y * PIXEL + (int)(PIXEL / 2);
+				object->object_z = 0;
 				if (map[y][x] == 'G')
+					object->type = GREEN_LIGHT;
 				if (map[y][x] == 'R')
+					object->type = RED_LIGHT;
 				if (map[y][x] == 'L')
-				if (map[y][x] == 'L')
+					object->type = NOMAL_LIGHT;
+				object->img_pos_x = 0;
+				object->img_pos_y = 0;
+				object->img_pos_z = 0;
 				return ;
 			}
 			x++;
 		}
-		x = 0;
 		y++;
 	}
 }
@@ -56,21 +59,15 @@ void	init_object(t_game *game)
 	if (game->objects == NULL)
 		error_exit("init_object malloc failed");
 	while (i < game->object_count)
-		get_object_position(game->map, game->objects[i], x, y);
-	game->player->shotgun = (t_img **)malloc(sizeof(t_img *) * 6);
-	if(game->player->shotgun == NULL)
-		error_exit("init_player shotgun malloc failed");
-	init_multi_xpm_img(game, game->player->shotgun, "resources/sprites/weapon/shotgun/", 6);
-	print_img_info(game->player->shotgun[0], "shotgun[0]");
-	game->player->shot_time = 0;
-	game->player->shot_frame = 0;
-	game->player->shot = FALSE;
-	game->player->shot_sound = FALSE;
-	game->player->move_w = FALSE;
-	game->player->move_s = FALSE;
-	game->player->move_a = FALSE;
-	game->player->move_d = FALSE;
-	game->player->player_fov_off_y = 0;
-	//mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2); -> game->mode = GAME 일때
-	print_player_info(game->player);
+	{
+		game->objects[i] = (t_object *)malloc(sizeof(t_object));
+		if (game->objects == NULL)
+			error_exit("init_object malloc failed");
+		get_object_position(game->map, game->objects[i]);
+		i++;
+	}
+	game->object_texture = (t_img *)malloc(sizeof(t_img));
+	game->object_texture->img = mlx_xpm_file_to_image(game->mlx, "resources/sprites/static_sprites/candlebra.xpm", &game->object_texture->width, &game->object_texture->height);
+	game->object_texture->addr = mlx_get_data_addr(game->object_texture->img, &game->object_texture->bit_per_pixel, &game->object_texture->line_length, &game->object_texture->endian);
+	print_object_info(game->objects[0]);
 }

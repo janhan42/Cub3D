@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:08:21 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:33:40 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	init_map(t_game *game, int ac, char **av)
 	map[5] = "1010101011";
 	map[6] = "1000000001";
 	map[7] = "1000000001";
-	map[7] = "1000000001";
+	map[7] = "10000000G1";
 	map[8] = "1111111111";
 	map[9] = 0;
 
@@ -56,7 +56,7 @@ void	init_map(t_game *game, int ac, char **av)
 	game->map_height = height * PIXEL;
 	game->map_width = width * PIXEL;
 	// 맵을 끝까지 읽었을때의 object 의 개수를 셀것
-	game->object_count = 2;
+	game->object_count = 1;
 	// 천장 바닥 색 불러오는 함수 추가 필요
 	game->ceiling_color = 0x000a6eff;
 	game->floor_color = 0x000a6e0a;

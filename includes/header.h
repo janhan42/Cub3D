@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:15:30 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:50:38 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,16 +139,17 @@ typedef struct s_player		/* player info */
 	t_img	**shotgun;			//	플레이어의 총 스프라이트 이미지 **
 }	t_player;
 
-typedef struct s_object
+typedef struct s_object		/* object struct */
 {
-	e_game_mode	type;
-	int			state;
-	double		object_x;
-	double		object_y;
-	t_img		*img;
-	double		pos_x;
-	double		pos_y;
-	double		pos_z;
+	e_object_type	type;		//	오브젝트 타입
+	int				state;		//	오브젝트 상태
+	double			object_x;	//	오브젝트 좌표 x
+	double			object_y;	//	오브젝트 좌표 y
+	double			object_z;
+	t_img			*img;		//	그 오브젝트의 이미지
+	double			img_pos_x;	//	이미지의 좌표 x
+	double			img_pos_y;	//	이미지의 좌표 y
+	double			img_pos_z;	//	이미지의 좌표 z
 }	t_object;
 
 typedef struct s_game		/* 메인 구조체 */
@@ -172,8 +173,9 @@ typedef struct s_game		/* 메인 구조체 */
 	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
 	/* TEST */
 	double		ray_distance[WINDOW_W];
-	t_object	**objects;
-	int			object_count;
+	t_object	**objects;			//	오브젝트 전체의 포인터
+	int			object_count;		//	맵의 오브젝트의 개수
+	t_img		*object_texture;	//	오브젝트 텍스쳐 테스트
 	t_img		*texture;			//	texture TEST
 	pthread_t	sound_test;			//	sound TEST ptrhead
 	pthread_t	sound_test_theme;	//	sound TEST ptrhead
@@ -257,10 +259,12 @@ void	print_player_info(t_player *player);
 void	print_ray_result_info(double ray_result[4]);
 void	print_ray_info(t_ray_dest *ray);
 void	print_game_info(t_game *game);
+void	print_object_info(t_object *object);
 
 /*************************************************************/
 /*========                   TEST                    ========*/
 /*************************************************************/
-double get_delta_time(struct timeval *last_time);
-void scale_texture(t_img *src, t_img *dst, float scale_factor);
+double	get_delta_time(struct timeval *last_time);
+void	scale_texture(t_img *src, t_img *dst, float scale_factor);
+void	init_object(t_game *game);
 #endif

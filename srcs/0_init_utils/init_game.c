@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/15 23:42:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 00:41:40 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,5 @@ void	init_game(t_game *game)
 	game->main_menu = make_image(game, 2000, 2000);
 	game->main_menu->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/klipartz.com.xpm", &game->main_menu->width, &game->main_menu->height);
 	game->main_menu->addr = mlx_get_data_addr(game->main_menu->img, &game->main_menu->bit_per_pixel, &game->main_menu->line_length, &game->main_menu->endian);
+	print_game_info(game);
 }

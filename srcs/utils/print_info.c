@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:52:03 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 20:56:41 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:23:33 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ void	print_game_info(t_game *game)
 	"MENU"
 };
 	printf("/*************************************************************/\n");
-	printf("/*                      PLAYER   INFO                        */\n");
+	printf("/*                      GAME     INFO                        */\n");
 	printf("/*     void *mlx     address    : %-26p */\n", game->mlx);
 	printf("/*     void *mlx_win address    : %-26p */\n", game->mlx_win);
 	printf("/*     char **map    address    : %-26p */\n", game->map);
@@ -158,6 +158,27 @@ void	print_game_info(t_game *game)
 	printf("/*     player *player address   : %-26p */\n", game->player);
 	printf("/*     t_img *texture address   : %-26p */\n", game->texture);
 	printf("/*     e_mode mode              : %-26s */\n", mode_names[game->mode]);
+	printf("/*                                                           */\n");
+	printf("/*************************************************************/\n");
+}
+
+void	print_object_info(t_object *object)
+{
+		const char *object_names[] = {
+	"GREEN_LIGHT",
+	"RED_LIGHT",
+	"NOMAL_LIGHT",
+};
+	printf("/*************************************************************/\n");
+	printf("/*                       OBJECT  INFO                        */\n");
+	printf("/*     s_object     address     : %-26p */\n", object);
+	printf("/*     e_object	    type        : %-26s */\n", object_names[object->type]);
+	printf("/*     double object_x          : %-26f */\n", object->object_x);
+	printf("/*     double object_y          : %-26f */\n", object->object_y);
+	printf("/*     double img_pos_x         : %-26f */\n", object->img_pos_x);
+	printf("/*     double img_pos_y         : %-26f */\n", object->img_pos_y);
+	printf("/*     double img_pos_z         : %-26f */\n", object->img_pos_z);
+	printf("/*     t_img *img     address   : %-26p */\n", object->img);
 	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }
