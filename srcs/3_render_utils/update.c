@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 18:24:27 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:15:58 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,24 +135,59 @@ void	draw_background(t_game *game)
 	}
 }
 
+/**
+ * @brief
+ * game->mode = menu
+ * @param game
+ */
+void	render_menu(t_game *game)
+{
+	mlx_clear_window(game->mlx, game->mlx_win);
+	game->render = make_image(game, WINDOW_W, WINDOW_H);
+	/* render 에 이미지 처리 */
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
+}
+
+/**
+ * @brief
+ * game->mode == intro
+ * @param game
+ */
+void	render_intro(t_game *game)
+{
+	t_img intro;
+	float		scale_factor;
+
+	scale_factor = 0.3;
+	mlx_clear_window(game->mlx, game->mlx_win);
+	game->render = make_image(game, WINDOW_W, WINDOW_H);
+	intro.width = (int)(game->main_menu->width * scale_factor);
+	intro.height = (int)(game->main_menu->height * scale_factor);
+	intro.img = mlx_new_image(game->mlx, intro.width, intro.height);
+	intro.addr = mlx_get_data_addr(intro.img, &intro.bit_per_pixel, &intro.line_length, &intro.endian);
+	scale_texture(game->main_menu, &intro,  scale_factor);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, intro.img, WINDOW_W / 2 - (intro.width / 2), WINDOW_H / 2 - (intro.height));
+	/* render 에 이미지 처리 */
+}
+
+/**
+ * @brief
+ * game->mode = GAME
+ * @param game
+ */
 void	render_game(t_game *game)
 {
-	int i =0;
+	int i = 0;
 
 	mlx_clear_window(game->mlx, game->mlx_win);
 	// BackGround
 	render_mini_map(game->minimap_img, game->map);
-	//mlx_destroy_image(game->mlx, game->render->img);
-	//mlx_destroy_image(game->mlx, game->background->img);
-	// game->render->img = mlx_new_image(game->mlx, WINDOW_W, WINDOW_H);
-	// game->render->addr = mlx_get_data_addr(game->render->img, &game->render->bit_per_pixel, &game->render->line_length, &game->render->endian);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
-	//game->background = make_image(game, WINDOW_W, WINDOW_H);
 	draw_player(game->minimap_img, game);
 
 	int x = 0;
 	int y = 0;
-	while (y < WINDOW_H)
+	while (y < WINDOW_H) // TODO: 이거 왜 넣었는지 설명 필요.
 	{
 		x = 0;
 		while (x < WINDOW_W)
@@ -177,7 +212,6 @@ void	mouse_update(t_game *game)
 	t_vec2i	mouse_diff;
 
 	mlx_mouse_get_pos(game->mlx_win, &game->mouse->mouse_x, &game->mouse->mouse_y);
-	//printf("mouse_x : %d mouse_y : %d\n", game->mouse->mouse_x, game->mouse->mouse_y);
 	mouse_diff.x = game->mouse->prev_x - game->mouse->mouse_x;
 	mouse_diff.y = game->mouse->prev_y - game->mouse->mouse_y;
 	if (mouse_diff.x > 0) // a
@@ -185,46 +219,40 @@ void	mouse_update(t_game *game)
 	if (mouse_diff.x < 0) // d
 		game->player->player_rad += 0.07;
 	if (mouse_diff.y > 0)
-	{
 		game->player->player_fov_off_y += mouse_diff.y * 3;
-		//printf("UP");
-		//printf("game->player->player_fov_off_y += mouse_diff.y : %d\n", game->player->player_fov_off_y);
-	}
 	if (mouse_diff.y < 0)
-	{
 		game->player->player_fov_off_y += mouse_diff.y * 3;
-		//printf("DOWN");
-		//printf("game->player->player_fov_off_y += mouse_diff.y : %d\n", game->player->player_fov_off_y);
-	}
 	game->mouse->prev_x = WINDOW_W / 2;
 	game->mouse->prev_y = WINDOW_H / 2;
 	if (game->player->player_rad > M_PI * 2)
 		game->player->player_rad -= 2 * M_PI;
 	else if (game->player->player_rad < 0)
 		game->player->player_rad += 2 * M_PI;
-	mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
+	if (game->mouse->mouse_x > 0  && game->mouse->mouse_y > 0)
+		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
 }
 
 int	update(t_game *game)
 {
-	//printf("game->player->shot : %d\n", game->player->shot);
-	//printf("game->player->shot_frame : %d\n", game->player->shot_frame);
-	//printf("game->player->shot_time : %d\n", game->player->shot_time);
 	game->s_time++;
 	if (game->player->shot == TRUE)
-	{
 		game->player->shot_time++;
-		//printf("print->shot_time : [%d]\n", game->player->shot_time);
-	}
-	//game->delta_time = get_delta_time(&game->current_time);
-	//printf("Delta Time: %.2f seconds\n", 1.0 / game->delta_time);
-	mouse_update(game);
-	//print_player_info(game->player);
-	//printf("%f\n", game->delta_time);
 	if (game->s_time == 50)
 	{
-		player_animation(game);
-		render_game(game);
+		if (game->mode == GAME)
+		{
+			mouse_update(game);
+			player_animation(game);
+			render_game(game);
+		}
+		if (game->mode == MENU)
+		{
+			render_menu(game);
+		}
+		if (game->mode == INTRO)
+		{
+			render_intro(game);
+		}
 		game->s_time = 0;
 	}
 	return (0);

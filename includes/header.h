@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 18:17:09 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:17:52 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,14 @@
 # include <math.h>
 # include <stdio.h>
 # include <pthread.h>
+
+typedef enum e_game_mode
+{
+	INTRO,
+	GAME,
+	DIE,
+	MENU,
+}	e_game_mode;
 
 typedef struct s_vec2i /* vector int */
 {
@@ -128,9 +136,11 @@ typedef struct s_game		/* 메인 구조체 */
 	t_img		*minimap_img;		//	좌측 상단 미니맵을 위한 mlx_img
 	t_img		*render;			//	3DWall 을 위한 mlx_img
 	t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
+	t_img		*main_menu;			//	게임 시작 이전의 메인메뉴 mlx_img
 	t_mouse		*mouse;				//	마우스 이벤트 관리 구조체
 	t_ray_dest	*ray_info;			//	ray 계산용 구조체
 	t_player	*player;			//	PLAYER 구조체
+	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
 	/* TEST */
 	t_img		*texture;			//	texture TEST
 	pthread_t	sound_test;			//	sound TEST ptrhead
@@ -218,4 +228,5 @@ void	print_game_info(t_game *game);
 /*========                   TEST                    ========*/
 /*************************************************************/
 double get_delta_time(struct timeval *last_time);
+void scale_texture(t_img *src, t_img *dst, float scale_factor);
 #endif

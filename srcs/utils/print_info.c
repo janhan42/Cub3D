@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:52:03 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 17:45:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 20:56:41 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,12 @@ void	print_player_info(t_player *player)
 
 void	print_game_info(t_game *game)
 {
+	const char *mode_names[] = {
+	"INTRO",
+	"GAME",
+	"DIE",
+	"MENU"
+};
 	printf("/*************************************************************/\n");
 	printf("/*                      PLAYER   INFO                        */\n");
 	printf("/*     void *mlx     address    : %-26p */\n", game->mlx);
@@ -151,6 +157,7 @@ void	print_game_info(t_game *game)
 	printf("/*     ray_d ray_info address   : %-26p */\n", game->ray_info);
 	printf("/*     player *player address   : %-26p */\n", game->player);
 	printf("/*     t_img *texture address   : %-26p */\n", game->texture);
+	printf("/*     e_mode mode              : %-26s */\n", mode_names[game->mode]);
 	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }

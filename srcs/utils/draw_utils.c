@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:26:51 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 18:25:37 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/14 20:56:08 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 	{
 		offset = (dots.start_y > dots.dest_y) * -1
 			+ (dots.start_y < dots.dest_y) * 1;
-		printf("offset : [%d]\n", offset);
 		while (dots.start_y != dots.dest_y)
 		{
 			put_pixel_on_img(img, dots.start_x, dots.start_y, color);
@@ -49,7 +48,6 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 	{
 		offset = (dots.start_x > dots.dest_x) * -1
 			+ (dots.start_x < dots.dest_x) * 1;
-		printf("offset : [%d]\n", offset);
 		while (dots.start_x != dots.dest_x)
 		{
 			put_pixel_on_img(img, dots.start_x, dots.start_y, color);

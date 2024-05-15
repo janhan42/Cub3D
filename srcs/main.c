@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 17:22:13 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:22:11 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <stdio.h>
 #include <pthread.h>
 #include <sys/time.h>
+
+void	chekc(void)
+{
+	system("leaks cu3d");
+}
 
 double get_delta_time(struct timeval *last_time)
 {
@@ -60,5 +65,6 @@ int	main(int ac, char **av)
 	mlx_hook(game.mlx_win, WINDOW_CLOSE, 0, end_program, (void *)&game);
 	mlx_loop_hook(game.mlx, update, &game);
 	mlx_loop(game.mlx);
+	atexit(chekc);
 	return (0);
 }

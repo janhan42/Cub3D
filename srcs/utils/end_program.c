@@ -6,19 +6,19 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:31:30 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 10:13:14 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 00:27:03 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-int	key_press(int key, t_game *game)
-{
-	printf("Key : %d\n", key);
-	if (key == 53)
-		end_program(game);
-	return (0);
-}
+// int	key_press(int key, t_game *game)
+// {
+// 	printf("Key : %d\n", key);
+// 	if (key == 53)
+// 		end_program(game);
+// 	return (0);
+// }
 
 int	end_program(t_game *game)
 {

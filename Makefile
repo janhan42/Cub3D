@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/14 11:11:23 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/14 22:36:23 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,8 @@ LIBFT_A			=		libft/libft.a
 
 MLX_DIR			=		mlx
 
+# SRCS_MAN		=		./test.c
+
 SRCS_MAN		=		./srcs/main.c											\
 						./srcs/0_init_utils/init_game.c							\
 						./srcs/0_init_utils/init_map.c							\
@@ -32,6 +34,7 @@ SRCS_MAN		=		./srcs/main.c											\
 						./srcs/2_hook_utils/mouse_handle.c						\
 						./srcs/3_render_utils/rendering.c						\
 						./srcs/3_render_utils/update.c							\
+						./srcs/4_thread_utils/thread_utils.c					\
 						./srcs/utils/color_rgb.c								\
 						./srcs/utils/dist.c										\
 						./srcs/utils/draw_utils.c								\
