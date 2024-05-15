@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:09:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 00:16:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ void	render_3d(t_game *game)
 	int t;
 
 	t = 0;
-	ray_direction = game->player->player_rad - (0.000545415391 * WINDOW_W / 2);
-	while (ray_direction <= game->player->player_rad + (0.000545415391 * WINDOW_W / 2))
+	ray_direction = game->player->player_rad - (0.002 * 320);
+	while (ray_direction <= game->player->player_rad + (0.002 * 320))
 	{
 		f_dest = get_dest(game->player->player_x, game->player->player_y,
 					ray_direction, game);
@@ -88,9 +88,8 @@ void	render_3d(t_game *game)
 		//draw_line(img, game->player_x, game->player_y, f_dest[0], f_dest[1], 0x00FF0000);
 		ca = game->player->player_rad - ray_direction;
 		f_dest->distance = f_dest->distance * cos(ca);
-		game->ray_distance[t] = f_dest->distance;
-		//render(game, f_dest->distance, t, f_dest->direction);
-		texture_map(game, f_dest, t);
+		render(game, f_dest->distance, t, f_dest->direction);
+		//texture_map(game, f_dest, t);
 		free(f_dest);
 		//printf("%f\n", ray_direction);
 		ray_direction += 0.000545415391;
@@ -111,19 +110,16 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	const int	wall_x = (dest->x + 1) & 63;
 	const int	wall_y = (dest->y + 1) & 63;
 
-
-	//printf("wall_x : [%f] wall_y : [%f]\n", wall_x, wall_y);
+	//printf("wall_x : [%d] wall_y : [%d]\n", wall_x, wall_y);
 	int	texture_x;
 
 	if (wall_x > wall_y)
 		texture_x = wall_x * game->texture->width >> 6;
 	else
-		texture_x = wall_y * game->texture->width >> 6;
-
-	int	line_h = (WINDOW_H / dest->distance) * PIXEL; // -> line의 길이
-	double	step = 1.0 * game->texture->height / line_h;
-	printf("line_h [%d]\n", line_h);
-	//texture_x = texture_x * game->texture->width / 70;
+		texture_x = wall_y;
+	double	line_h = 1080 / dest->distance * 70; // -> line의 길이
+	double	step = 0.9 * game->texture->height / line_h;
+	texture_x = texture_x * game->texture->width / 70;
 	//printf("step [%f]\n", step);
 	int		color;
 	int	x;
@@ -134,32 +130,35 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 
 	t_2dot	dots;
 
+	t_2dot	dots;
+
 	h_offset = (int)(WINDOW_H / 2) - (line_h / 2) + game->player->player_fov_off_y;
 	// 화면 중앙 빼기 -
 	step_y = 0;
 	y = 0;
-	x = t;
-	int	i = 0;
-	while (y < line_h) // 라인의 길이
+	x = t * 3;
+	while ((int)step_y < game->texture->height)
 	{
 		color = color_spoid(texture_x, (int)step_y, game->texture);
-		if (y + h_offset > WINDOW_H)
-			return ;
-		while (y + h_offset < 0)
-		{
-			step_y += step;
-			y++;
-		}
-		while (i < (int)line_h >> 6 && y < line_h)
-		{
-			put_pixel_on_img(game->render, x, y + h_offset, color);
-			step_y += step;
-			y++;
-			i++;
-		}
-		i = 0;
+		put_pixel_on_img(game->render, x, y + h_offset, color);
+		put_pixel_on_img(game->render, x + 1, y + h_offset, color);
+		put_pixel_on_img(game->render, x + 2, y + h_offset, color);
+		step_y += step;
+		y++;
 	}
 }
+/*
+ * line_h / 64
+ */
+
+/* wall_x 0 ~ 63
+ *  -> 0 ~ 1023
+ *
+ *  64: 1024 = wall_x : texture_x
+ *
+ *  1024 * wx = 64 * tx;
+ *  tx = 1024 * wx / 64
+ */
 
 void	render(t_game *game, double distance, int time, int side)
 {
@@ -184,10 +183,10 @@ void	render(t_game *game, double distance, int time, int side)
 	mid += game->player->player_fov_off_y;
 	line_h = (1080/(distance)) * 70;
 	render = game->render;
-	dots.start_x = time * 3;
+	dots.start_x = time;// * 3;
 	dots.start_y = mid;
-	dots.dest_x = time * 3;
-	while (i < 3)
+	dots.dest_x = time;// * 3;
+	while (i < 1)
 	{
 		dots.dest_y = mid - line_h / 2;
 			dots.start_x += 1;
