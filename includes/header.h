@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 01:50:38 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:04:45 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ typedef enum e_object_type
 	RED_LIGHT,
 	NOMAL_LIGHT,
 }	e_object_type;
+
+typedef enum e_wall_type
+{
+	EAST,
+	NORTH,
+	WEST,
+	SOUTH,
+	DOOR,
+}	e_wall_type;
 
 typedef struct s_vec2i /* vector int */
 {
@@ -75,7 +84,9 @@ typedef struct s_ray_dest		/* ray 계산용 구조체 */
 	double	xo;					//	ray 계산용 ray의 x 오프셋 값
 	double	yo;					//	ray 계산용 ray의 y 오프셋 값
 	double	distance_h;			//	ray 계산용 ray의 수평선에 대한 거리
+	int		is_h_door;
 	double	distance_v;			//	ray 계산용 ray의 수직선에 대한 거리
+	int		is_v_door;
 	double	a_tan;				//	ray 계산용 ray의 수평에서의 삼각함수 계산용
 	double	n_tan;				//	ray 계산용 ray의 수직에서의 삼각함수 계산용
 	int		mx;					//	ray 계산용 ray의 map에서의 x 좌표
@@ -88,7 +99,8 @@ typedef struct	s_dest /* ray 케이스팅 결과값 계산용 */
 	int		x;				// 결과 ray의 x 좌표
 	int		y;				// 결과 ray의 y 좌표
 	double	distance;		// 결과 ray의 거리
-	int		direction;		// 결과 ray의 방향
+	//int		direction;		// 결과 ray의 방향
+	int		wall_type;
 	double	offset;			// 결과 ray의 texture offset
 	int		y_vert;			// 결과 ray의 수직일때 좌표
 	int		x_hor;			// 결과 ray의 수평일때 좌표
@@ -173,9 +185,8 @@ typedef struct s_game		/* 메인 구조체 */
 	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
 	/* TEST */
 	double		ray_distance[WINDOW_W];
-	t_object	**objects;			//	오브젝트 전체의 포인터
-	int			object_count;		//	맵의 오브젝트의 개수
-	t_img		*object_texture;	//	오브젝트 텍스쳐 테스트
+	t_object	**objects;
+	int			object_count;
 	t_img		*texture;			//	texture TEST
 	pthread_t	sound_test;			//	sound TEST ptrhead
 	pthread_t	sound_test_theme;	//	sound TEST ptrhead
@@ -264,7 +275,6 @@ void	print_object_info(t_object *object);
 /*************************************************************/
 /*========                   TEST                    ========*/
 /*************************************************************/
-double	get_delta_time(struct timeval *last_time);
-void	scale_texture(t_img *src, t_img *dst, float scale_factor);
-void	init_object(t_game *game);
+double get_delta_time(struct timeval *last_time);
+void scale_texture(t_img *src, t_img *dst, float scale_factor);
 #endif

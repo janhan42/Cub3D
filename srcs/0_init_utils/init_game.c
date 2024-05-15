@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 00:41:40 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:06:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void init_ray_result(t_game *game)
 
 static void	init_ray_info(t_game *game)
 {
-	game->ray_info = (t_ray_dest *)malloc(sizeof(t_ray_dest));
+	game->ray_info = (t_ray_dest *)ft_calloc(1, sizeof(t_ray_dest));
 	if (game->ray_info == NULL)
 		error_exit("init_ray_info malloc failed");
 	game->ray_info->rx = 0;
@@ -54,6 +54,25 @@ static void init_mouse(t_game *game)
 	print_mouse_info(game->mouse);
 }
 
+static void	load_texture(t_game *game)
+{
+	t_img	*tmp;
+
+	tmp = ft_calloc(5, sizeof(t_img));
+	tmp[EAST].img = mlx_png_file_to_image(game->mlx, "resources/textures/1.png", &tmp[EAST].width, &tmp[EAST].height);
+	tmp[EAST].addr = mlx_get_data_addr(tmp[EAST].img, &tmp[EAST].bit_per_pixel, &tmp[EAST].line_length, &tmp[EAST].endian);
+	tmp[NORTH].img = mlx_png_file_to_image(game->mlx, "resources/textures/2.png", &tmp[NORTH].width, &tmp[NORTH].height);
+	tmp[NORTH].addr = mlx_get_data_addr(tmp[NORTH].img, &tmp[NORTH].bit_per_pixel, &tmp[NORTH].line_length, &tmp[NORTH].endian);
+	tmp[WEST].img = mlx_png_file_to_image(game->mlx, "resources/textures/3.png", &tmp[WEST].width, &tmp[WEST].height);
+	tmp[WEST].addr = mlx_get_data_addr(tmp[WEST].img, &tmp[WEST].bit_per_pixel, &tmp[WEST].line_length, &tmp[WEST].endian);
+	tmp[SOUTH].img = mlx_png_file_to_image(game->mlx, "resources/textures/5.png", &tmp[SOUTH].width, &tmp[SOUTH].height);
+	tmp[SOUTH].addr = mlx_get_data_addr(tmp[SOUTH].img, &tmp[SOUTH].bit_per_pixel, &tmp[SOUTH].line_length, &tmp[SOUTH].endian);
+	tmp[DOOR].img = mlx_png_file_to_image(game->mlx, "resources/doors/door_close.png", &tmp[DOOR].width, &tmp[DOOR].height);
+	tmp[DOOR].addr = mlx_get_data_addr(tmp[DOOR].img, &tmp[DOOR].bit_per_pixel, &tmp[DOOR].line_length, &tmp[DOOR].endian);
+	game->texture = tmp;
+	printf("texture loading OK--------------------\n");
+}
+
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init(); // mlx 포인터 init
@@ -70,6 +89,8 @@ void	init_game(t_game *game)
 	printf("---------------init_mlx->ray_info && dest init OK------------------\n");
 	game->background = make_image(game, WINDOW_W, WINDOW_H); // 배경 그리기용 이미지
 	printf("--------------------init_mlx->background init OK--------------------\n");
+	load_texture(game);
+
 	/* TEST */
 	game->delta_time = 0;
 	game->s_time = 0;

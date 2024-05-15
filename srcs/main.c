@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:40:00 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:05:44 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ int	main(int ac, char **av)
 	pthread_create(&game.sound_test, NULL, &sound_handle, &game); // 병렬 프로세스 TEST중
 	pthread_create(&game.sound_test_theme, NULL, &sound_theme, &game); // 병렬 프로세스 TEST중
 
-	t_img texture;
-
-	texture.img = mlx_png_file_to_image(game.mlx, "resources/textures/1.png",
-										&texture.width, &texture.height);
-	texture.addr = mlx_get_data_addr(texture.img, &texture.bit_per_pixel, &texture.line_length, &texture.endian);
-	game.texture = &texture;
 	printf("--------------------load_texture OK--------------------\n");
 
 	print_game_info(&game);
