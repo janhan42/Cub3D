@@ -1,61 +1,76 @@
 #include "includes/header.h"
+#include <math.h>
+#include <stdio.h>
 
-// resources/sprites/weapon/shotgun/0.xpm
-typedef struct s_image {
-    void *img;
-    char *data;
-    int bpp;
-    int size_line;
-    int endian;
-    int width;
-    int height;
-} t_image;
+int color_spoid(int x, int y, t_img *texture)
+{
+	return *(int *)(texture->addr + (y * texture->line_length + x * (texture->bit_per_pixel / 8)));
+}
 
-void scale_texture(t_image *src, t_image *dst, float scale_factor) {
-	int x, y;
-	int new_x, new_y;
-	int color;
-	float inv_scale = 1.0 / scale_factor;
+void put_pixel_on_img(t_img *img, int x, int y, int color) {
+    *(int *)(img->addr + (y * img->line_length + x * (img->bit_per_pixel / 8))) = color;
+}
 
-	for (new_y = 0; new_y < dst->height; new_y++) {
-		for (new_x = 0; new_x < dst->width; new_x++) {
-			x = (int)(new_x * inv_scale);
-			y = (int)(new_y * inv_scale);
-			if (x >= src->width || y >= src->height)
-				continue;
-			color = *(int *)(src->data + (y * src->size_line + x * (src->bpp / 8)));
-			*(int *)(dst->data + (new_y * dst->size_line + new_x * (dst->bpp / 8))) = color;
-		}
-	}
+void draw_wall_slice(t_game *game, int screen_x, double ray_distance, int texture_x) {
+    double wall_height = 600 / ray_distance;  // 예시: 화면 높이 600
+    double step = game->texture->height / wall_height;
+    double texture_pos = 0;
+
+    int start = (300 - wall_height / 2);
+    if (start < 0)
+        start = 0;
+    int end = (300 + wall_height / 2);
+    if (end >= 600)
+        end = 599;
+
+    for (int y = start; y < end; y++) {
+        int tex_y = (int)texture_pos & (game->texture->height - 1);
+        texture_pos += step;
+        int color = color_spoid(texture_x, tex_y, game->texture);
+        put_pixel_on_img(game->render->img, screen_x, y, color);
+    }
 }
 
 int main() {
-    void *mlx;
-    void *win;
-    t_image src_img;
-    t_image dst_img;
-    float scale_factor = 0.2; // Example scale factor
+    t_game game;
+    game.mlx = mlx_init();
+    game.mlx_win = mlx_new_window(game.mlx, 800, 600, "Raycasting with Texture Mapping");
+	game.texture = malloc(sizeof(t_img ));
+    game.texture->img = mlx_xpm_file_to_image(game.mlx, "path/to/texture->xpm", &game.texture->width, &game.texture->height);
+    game.texture->addr = mlx_get_data_addr(game.texture->img, &game.texture->bit_per_pixel, &game.texture->line_length, &game.texture->endian);
+	game.render = malloc(sizeof(t_img));
+    game.render->img = mlx_new_image(game.mlx, 800, 600);
+    game.render->addr = mlx_get_data_addr(game.render->img, &game.render->bit_per_pixel, &game.render->line_length, &game.render->endian);
+    game.render->width = 800;
+    game.render->height = 600;
 
-	mlx = mlx_init();
-	win = mlx_new_window(mlx, 800, 600, "Texture Scaling");
+    game.player->player_x = 1.5;
+    game.player->player_y = 1.5;
+    game.player->player_rad = M_PI / 4;
 
-	// Load your source texture
-	src_img.img = mlx_xpm_file_to_image(mlx, "resources/sprites/weapon/shotgun/0.xpm", &src_img.width, &src_img.height);
-	src_img.data = mlx_get_data_addr(src_img.img, &src_img.bpp, &src_img.size_line, &src_img.endian);
+    // 레이캐스팅 및 텍스처 매핑 루프 (간단한 예제)
+    for (int x = 0; x < 800; x++) {
+        double ray_angle = (game.player->player_rad - M_PI / 6) + (x * M_PI / 3 / 800);
+        double ray_x = game.player->player_x;
+        double ray_y = game.player->player_y;
+        double ray_dir_x = cos(ray_angle);
+        double ray_dir_y = sin(ray_angle);
+        double distance = 0;
 
-	// Create destination image with scaled dimensions
-	dst_img.width = (int)(src_img.width * scale_factor);
-	dst_img.height = (int)(src_img.height * scale_factor);
-	dst_img.img = mlx_new_image(mlx, dst_img.width, dst_img.height);
+        while (1) {
+            ray_x += ray_dir_x * 0.1;
+            ray_y += ray_dir_y * 0.1;
+            if (ray_x >= 2 || ray_y >= 2 || ray_x <= 0 || ray_y <= 0) {
+                break; // 벽에 닿았다고 가정
+            }
+            distance += 0.1;
+        }
 
-	dst_img.data = mlx_get_data_addr(dst_img.img, &dst_img.bpp, &dst_img.size_line, &dst_img.endian);
+        int texture_x = (int)(ray_x * game.texture->width) % game.texture->width;
+        draw_wall_slice(&game, x, distance, texture_x);
+    }
 
-	// Scale the texture
-	scale_texture(&src_img, &dst_img, scale_factor);
-
-	// Display the scaled image
-	mlx_put_image_to_window(mlx, win, dst_img.img, 0, 0);
-	mlx_loop(mlx);
-
-	return 0;
+    mlx_put_image_to_window(game.mlx, game.mlx_win, game.render->img, 0, 0);
+    mlx_loop(game.mlx);
+    return 0;
 }

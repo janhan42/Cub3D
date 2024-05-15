@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 20:41:20 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 00:08:21 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,21 @@ void	init_map(t_game *game, int ac, char **av)
 	int		height;
 	int		width;
 
-	map = ft_calloc(sizeof(char *), 6);
-	map[0] = "111111";
-	map[1] = "100101";
-	map[2] = "101001";
-	map[3] = "1100S1";
-	map[4] = "111111";
-	map[5] = 0;
+	map = ft_calloc(sizeof(char *), 10);
+	map[0] = "1111111111";
+	map[1] = "1000000001";
+	map[2] = "1010000001";
+	map[3] = "1100S00001";
+	map[4] = "1000000001";
+	map[5] = "1010101011";
+	map[6] = "1000000001";
+	map[7] = "1000000001";
+	map[7] = "1000000001";
+	map[8] = "1111111111";
+	map[9] = 0;
 
-	height = 5;
-	width = 6;
+	height = 9;
+	width = 10;
 	// 맵 읽는 함수 추가 하면 지울것
 
 	game->map = map;
@@ -50,7 +55,8 @@ void	init_map(t_game *game, int ac, char **av)
 	game->map_len_h = height;
 	game->map_height = height * PIXEL;
 	game->map_width = width * PIXEL;
-
+	// 맵을 끝까지 읽었을때의 object 의 개수를 셀것
+	game->object_count = 2;
 	// 천장 바닥 색 불러오는 함수 추가 필요
 	game->ceiling_color = 0x000a6eff;
 	game->floor_color = 0x000a6e0a;

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/15 16:56:13 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 23:58:58 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,13 @@ typedef enum e_game_mode
 	DIE,
 	MENU,
 }	e_game_mode;
+
+typedef enum e_object_type
+{
+	GREEN_LIGHT,
+	RED_LIGHT,
+	NOMAL_LIGHT,
+}	e_object_type;
 
 typedef struct s_vec2i /* vector int */
 {
@@ -132,6 +139,18 @@ typedef struct s_player		/* player info */
 	t_img	**shotgun;			//	플레이어의 총 스프라이트 이미지 **
 }	t_player;
 
+typedef struct s_object
+{
+	e_game_mode	type;
+	int			state;
+	double		object_x;
+	double		object_y;
+	t_img		*img;
+	double		pos_x;
+	double		pos_y;
+	double		pos_z;
+}	t_object;
+
 typedef struct s_game		/* 메인 구조체 */
 {
 	void		*mlx;				//	mlx -> init_game()
@@ -152,12 +171,17 @@ typedef struct s_game		/* 메인 구조체 */
 	t_player	*player;			//	PLAYER 구조체
 	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
 	/* TEST */
+	double		ray_distance[WINDOW_W];
+	t_object	**objects;
+	int			object_count;
 	t_img		*texture;			//	texture TEST
 	pthread_t	sound_test;			//	sound TEST ptrhead
 	pthread_t	sound_test_theme;	//	sound TEST ptrhead
 	int			pthread_kill;		//	pthread kill flag
 	struct timeval	current_time;
 	double		delta_time;
+	double		frame_time;
+	int			frame;
 	int			s_time;
 }	t_game;
 
