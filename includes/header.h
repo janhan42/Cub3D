@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 02:04:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 03:04:07 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ typedef struct s_game		/* 메인 구조체 */
 	/* TEST */
 	double		ray_distance[WINDOW_W];
 	t_object	**objects;
+	t_img		*object_texture;
 	int			object_count;
 	t_img		*texture;			//	texture TEST
 	pthread_t	sound_test;			//	sound TEST ptrhead
@@ -277,4 +278,7 @@ void	print_object_info(t_object *object);
 /*************************************************************/
 double get_delta_time(struct timeval *last_time);
 void scale_texture(t_img *src, t_img *dst, float scale_factor);
+void	init_object(t_game *game);
+t_img	*get_texture(t_game *game, t_dest *dest);
+void	render_sprite_object(t_game *game);
 #endif

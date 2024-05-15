@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/16 00:33:12 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/16 03:03:04 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_MAN		=		./srcs/main.c											\
 						./srcs/1_ray_utils/get_dest.c							\
 						./srcs/2_hook_utils/key_hook.c							\
 						./srcs/2_hook_utils/mouse_handle.c						\
+						./srcs/3_render_utils/object_render.c					\
 						./srcs/3_render_utils/rendering.c						\
 						./srcs/3_render_utils/sprite_handle.c					\
 						./srcs/3_render_utils/update.c							\

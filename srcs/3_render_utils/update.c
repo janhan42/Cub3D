@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 00:15:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 03:03:58 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,9 +215,9 @@ void	mouse_update(t_game *game)
 	mouse_diff.x = game->mouse->prev_x - game->mouse->mouse_x;
 	mouse_diff.y = game->mouse->prev_y - game->mouse->mouse_y;
 	if (mouse_diff.x > 0) // a
-		game->player->player_rad -= 0.07;
+		game->player->player_rad -= 0.003 * abs(mouse_diff.x);
 	if (mouse_diff.x < 0) // d
-		game->player->player_rad += 0.07;
+		game->player->player_rad += 0.003 * abs(mouse_diff.x);
 	if (mouse_diff.y > 0)
 		game->player->player_fov_off_y += mouse_diff.y * 3;
 	if (mouse_diff.y < 0)
@@ -248,6 +248,7 @@ int	update(t_game *game)
 			mouse_update(game);
 			player_animation(game);
 			render_game(game);
+			render_sprite_object(game);
 		}
 		if (game->mode == MENU)
 		{

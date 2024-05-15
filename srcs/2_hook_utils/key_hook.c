@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/15 00:43:05 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:14:29 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,13 @@ int	key_hook(int keycode, t_game *game)
 		if (game->mode == GAME)
 		{
 			game->mode = INTRO;
+			mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
 			mlx_mouse_show();
 		}
 		else if (game->mode == INTRO)
 		{
-			mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
 			game->mode = GAME;
+			mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
 			mlx_mouse_hide();
 		}
 	}
