@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/15 15:15:58 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:22:26 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,23 @@ static void	player_animation(t_game *game)
 	//}
 	if (game->player->move_w)
 	{
-		printf("KEY W\n");
-		printf("WALL COL : [%f]\n", wall_collision(game, 5));
-		printf("WALL COL : [%f]\n", wall_collision(game, 4 + 2 + 0));
+		// printf("KEY W\n");
+		// printf("WALL COL : [%f]\n", wall_collision(game, 5));
+		// printf("WALL COL : [%f]\n", wall_collision(game, 4 + 2 + 0));
 		game->player->player_x += wall_collision(game, 5);
 		game->player->player_y += wall_collision(game, 4 + 2 + 0);
-		printf("game->player_x : [%f]\n", game->player->player_x);
-		printf("game->player_y : [%f]\n", game->player->player_y);
+		// printf("game->player_x : [%f]\n", game->player->player_x);
+		// printf("game->player_y : [%f]\n", game->player->player_y);
 	}
 	if (game->player->move_s)
 	{
-		printf("KEY S\n");
-		printf("WALL COL : [%f]\n", wall_collision(game, 0 + 0 + 1));
-		printf("WALL COL : [%f]\n", wall_collision(game, 0 + 2 + 0));
+		// printf("KEY S\n");
+		// printf("WALL COL : [%f]\n", wall_collision(game, 0 + 0 + 1));
+		// printf("WALL COL : [%f]\n", wall_collision(game, 0 + 2 + 0));
 		game->player->player_x += wall_collision(game, 0 + 0 + 1);
 		game->player->player_y += wall_collision(game, 0 + 2 + 0);
-		printf("game->player_x : [%f]\n", game->player->player_x);
-		printf("game->player_y : [%f]\n", game->player->player_y);
+		// printf("game->player_x : [%f]\n", game->player->player_x);
+		// printf("game->player_y : [%f]\n", game->player->player_y);
 	}
 	if (game->player->move_a)
 	{
@@ -179,7 +179,7 @@ void	render_game(t_game *game)
 {
 	int i = 0;
 
-	mlx_clear_window(game->mlx, game->mlx_win);
+	//mlx_clear_window(game->mlx, game->mlx_win);
 	// BackGround
 	render_mini_map(game->minimap_img, game->map);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
@@ -188,7 +188,7 @@ void	render_game(t_game *game)
 	int x = 0;
 	int y = 0;
 	while (y < WINDOW_H) // TODO: 이거 왜 넣었는지 설명 필요.
-	{
+	{						// 우리가 그릴 벽 제외하고 투명하게 바꿔주는 부분임
 		x = 0;
 		while (x < WINDOW_W)
 		{
