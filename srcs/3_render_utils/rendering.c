@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:16:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 00:16:28 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,9 +129,6 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	double	step_y;
 
 	t_2dot	dots;
-
-	t_2dot	dots;
-
 	h_offset = (int)(WINDOW_H / 2) - (line_h / 2) + game->player->player_fov_off_y;
 	// 화면 중앙 빼기 -
 	step_y = 0;
