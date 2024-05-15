@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/14 22:36:23 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/15 17:19:47 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_MAN		=		./srcs/main.c											\
 						./srcs/2_hook_utils/key_hook.c							\
 						./srcs/2_hook_utils/mouse_handle.c						\
 						./srcs/3_render_utils/rendering.c						\
+						./srcs/3_render_utils/sprite_handle.c					\
 						./srcs/3_render_utils/update.c							\
 						./srcs/4_thread_utils/thread_utils.c					\
 						./srcs/utils/color_rgb.c								\
@@ -40,7 +41,6 @@ SRCS_MAN		=		./srcs/main.c											\
 						./srcs/utils/draw_utils.c								\
 						./srcs/utils/end_program.c								\
 						./srcs/utils/error_exit.c								\
-						./srcs/utils/sprite_handle.c							\
 						./srcs/utils/make_img.c									\
 						./srcs/utils/print_info.c
 OBJS_MAND		=	$(SRCS_MAN:.c=.o)

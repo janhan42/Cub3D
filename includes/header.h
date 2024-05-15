@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/15 15:17:52 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/15 16:56:13 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ struct t_vec2u		/* vector usigned int */
 	unsigned int x;
 	unsigned int y;
 };
+
+typedef struct s_scale
+{
+	int		x;
+	int		y;
+	int		new_x;
+	int		new_y;
+	int		color;
+	float	sacle;
+}	t_scale;
 
 typedef struct s_ray_dest		/* ray 계산용 구조체 */
 {
