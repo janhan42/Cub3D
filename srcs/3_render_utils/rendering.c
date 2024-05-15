@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/15 21:58:22 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/15 22:38:14 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,13 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	int	i = 0;
 	while (y < line_h)
 	{
+		if (y + h_offset > 1080)
+			return ;
+		while (y + h_offset < 0)
+		{
+			step_y += step;
+			y++;
+		}
 		color = color_spoid(texture_x, (int)step_y, game->texture);
 		while (i < (int)line_h >> 6 && y < line_h)
 		{
