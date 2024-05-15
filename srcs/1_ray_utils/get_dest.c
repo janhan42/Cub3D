@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 17:50:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 01:37:59 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,14 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 			break ;
 		if (ray->mx >= 0 && ray->mx < game->map_width / 64
 			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& game->map[ray->my][ray->mx] == '1')
+			&& (game->map[ray->my][ray->mx] == '1' || game->map[ray->my][ray->mx] == 'D'))
 		{
 			ray->hx = ray->rx;
 			ray->hy = ray->ry;
 			ray->distance_h = dist(x, y, ray->hx, ray->hy);
 			ray->dof = 8;
+			if (game->map[ray->my][ray->mx] == 'D')
+				ray->is_h_door = 1;
 		}
 		else
 		{
@@ -127,12 +129,14 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 		if (ray->mx >= 0
 			&& ray->mx < game->map_width / 64
 			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& game->map[ray->my][ray->mx] == '1')
+			&& (game->map[ray->my][ray->mx] == '1' || game->map[ray->my][ray->mx] == 'D'))
 		{
 			ray->vx = ray->rx;
 			ray->vy = ray->ry;
 			ray->distance_v = dist(x, y, ray->vx, ray->vy);
 			ray->dof = 8;
+			if (game->map[ray->my][ray->mx] == 'D')
+				ray->is_v_door = 1;
 		}
 		else
 		{
@@ -156,6 +160,8 @@ t_dest	*get_dest(double x, double y, double rad, t_game *game)
 		rad -= 2 * M_PI;
 	if (rad < 0)
 		rad += 2 * M_PI;
+	game->ray_info->is_h_door = 0;
+	game->ray_info->is_v_door = 0;
 	check_horizion_init(x, y, rad, game->ray_info);
 	check_horizion(game, game->ray_info, x, y);
 	check_vertical_init(x, y, rad, game->ray_info);
@@ -166,10 +172,12 @@ t_dest	*get_dest(double x, double y, double rad, t_game *game)
 		dest->y = game->ray_info->hy;
 		dest->distance = game->ray_info->distance_h;
 
-		if (rad > 0 && rad < M_PI) // upside
-			dest->direction = 1;
+		if (game->ray_info->is_h_door) // door
+			dest->wall_type = DOOR;
+		else if (rad > 0 && rad < M_PI) // upside
+			dest->wall_type = NORTH;
 		else
-			dest->direction = 3;
+			dest->wall_type = SOUTH;
 		dest->offset = game->ray_info->hx - floor(game->ray_info->hx);
 		if (!(rad > 0 && rad < M_PI)) // 하단
 			dest->offset = 1 - dest->offset;
@@ -181,10 +189,12 @@ t_dest	*get_dest(double x, double y, double rad, t_game *game)
 		dest->distance = game->ray_info->distance_v;
 		dest->y_vert %= 1;
 		dest->offset =  dest->y_vert;
-		if (rad > M_PI_2 && rad < M_PI + M_PI_2) // leftside
-			dest->direction = 2;
+		if (game->ray_info->is_v_door) // door
+			dest->wall_type = DOOR;
+		else if (rad > M_PI_2 && rad < M_PI + M_PI_2) // leftside
+			dest->wall_type = WEST;
 		else
-			dest->direction = 0;
+			dest->wall_type = EAST;
 		dest->offset = game->ray_info->vy - floor(game->ray_info->vy);
 		if (!(rad > M_PI_2 && rad < 3 * M_PI_2)) // 우측
 			dest->offset = 1 - dest->offset;

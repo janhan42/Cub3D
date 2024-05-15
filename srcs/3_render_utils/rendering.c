@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 00:19:20 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 02:01:11 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	render_3d(t_game *game)
 		t++;
 	}
 }
+// f_dest-> wall_type
+// 
 
 int	color_spoid(int x, int y, t_img *img)
 {
@@ -110,6 +112,9 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	const int	wall_x = (dest->x + 1) & 63;
 	const int	wall_y = (dest->y + 1) & 63;
 
+	t_img	*texture;
+
+	texture = get_texture(game, dest);
 
 	//printf("wall_x : [%f] wall_y : [%f]\n", wall_x, wall_y);
 	int	texture_x;
@@ -141,7 +146,6 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	int	i = 0;
 	while (y < line_h) // 라인의 길이
 	{
-		color = color_spoid(texture_x, (int)step_y, game->texture);
 		if (y + h_offset > WINDOW_H)
 			return ;
 		while (y + h_offset < 0)
@@ -149,6 +153,8 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 			step_y += step;
 			y++;
 		}
+		color = color_spoid(texture_x, (int)step_y, texture);
+		/*
 		while (i < (int)line_h >> 6 && y < line_h)
 		{
 			put_pixel_on_img(game->render, x, y + h_offset, color);
@@ -157,6 +163,10 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 			i++;
 		}
 		i = 0;
+		*/
+		put_pixel_on_img(game->render, x, y + h_offset, color);
+		step_y += step;
+		y++;
 	}
 }
 /*
@@ -171,6 +181,20 @@ void	texture_map(t_game *game, t_dest *dest, int t)
  *  1024 * wx = 64 * tx;
  *  tx = 1024 * wx / 64
  */
+
+t_img	*get_texture(t_game *game, t_dest *dest)
+{
+	if (dest->wall_type == EAST)
+		return (&game->texture[EAST]);
+	if (dest->wall_type == NORTH)
+		return (&game->texture[NORTH]);
+	if (dest->wall_type == WEST)
+		return (&game->texture[WEST]);
+	if (dest->wall_type == SOUTH)
+		return (&game->texture[SOUTH]);
+	else // door
+		return (&game->texture[DOOR]);
+}
 
 void	render(t_game *game, double distance, int time, int side)
 {
