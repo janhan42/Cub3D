@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 00:15:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/16 03:36:57 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,8 @@ void	draw_background(t_game *game)
 void	render_menu(t_game *game)
 {
 	mlx_clear_window(game->mlx, game->mlx_win);
+	mlx_destroy_image(game->mlx, game->render->img);
+	free(game->render);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	/* render 에 이미지 처리 */
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
@@ -160,6 +162,8 @@ void	render_intro(t_game *game)
 
 	scale_factor = 0.3;
 	mlx_clear_window(game->mlx, game->mlx_win);
+	mlx_destroy_image(game->mlx, game->render->img);
+	free(game->render);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	intro.width = (int)(game->main_menu->width * scale_factor);
 	intro.height = (int)(game->main_menu->height * scale_factor);
@@ -182,6 +186,8 @@ void	render_game(t_game *game)
 	//mlx_clear_window(game->mlx, game->mlx_win);
 	// BackGround
 	render_mini_map(game->minimap_img, game->map);
+	mlx_destroy_image(game->mlx, game->render->img);
+	free(game->render);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	draw_player(game->minimap_img, game);
 
@@ -236,6 +242,7 @@ int	update(t_game *game)
 {
 	game->delta_time = get_delta_time(&game->current_time);
 	double fps;
+	static int flag;
 
 	fps = 1.0 / game->delta_time;
 	game->s_time++;
@@ -245,17 +252,20 @@ int	update(t_game *game)
 	{
 		if (game->mode == GAME)
 		{
+			flag = 0;
 			mouse_update(game);
 			player_animation(game);
 			render_game(game);
 		}
 		if (game->mode == MENU)
 		{
+			flag = 0;
 			render_menu(game);
 		}
-		if (game->mode == INTRO)
+		if (game->mode == INTRO && flag == 0)
 		{
 			render_intro(game);
+			flag += 1;
 		}
 		game->s_time = 0;
 	}
