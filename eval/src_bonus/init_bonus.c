@@ -31,16 +31,16 @@ void	set_wall_diretion(t_god *god, int i)
 void	init_3D(t_god *god, t_3d *v, int i)
 {
 	if (god->rray[i].distance == 0)
-		god->rray[i].distance = 0.1;
+		god->rray[i].distance = 0.1; // 0으로 나누기 방지
 	v->correct_distance = god->rray[i].distance
-		* cos(god->rray[i].angle - god->player.rota_angle);
-	v->distance_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2);
+		* cos(god->rray[i].angle - god->player.rota_angle); // 피쉬아이 보정
+	v->distance_plane = (god->map.window_width / 2) / tan(FOV_ANGLE / 2); // 모르게씀
 	v->projected_height = (int)((TILE_SIZE / v->correct_distance)
-			* v->distance_plane);
-	v->top = (god->map.window_height / 2)
+			* v->distance_plane); // line_h
+	v->top = (god->map.window_height / 2) // 하늘과 벽의 경계 위치
 		- (v->projected_height / 2) - god->player.updown_sight;
 	v->correct_top = ternaries_func(v->top < 0, 1, v->top);
-	v->bottom = (god->map.window_height / 2)
+	v->bottom = (god->map.window_height / 2) // 벽과 바닥 경계 위치
 		+ (v->projected_height / 2) - god->player.updown_sight;
 	v->correct_bottom = ternaries_func(v->bottom > god->map.window_height,
 			god->map.window_height, v->bottom);

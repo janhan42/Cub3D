@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 02:04:23 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/23 19:01:28 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,13 @@ void	render_3d(t_game *game)
 	 * f_dest[3] = direction
 	 */
 	double	ray_direction;
+	const double	ray_destination = game->player->player_rad + (0.002 * 320);
 	double	ca;
 	int t;
 
 	t = 0;
 	ray_direction = game->player->player_rad - (0.002 * 320);
-	while (ray_direction <= game->player->player_rad + (0.002 * 320))
+	while (ray_direction <= ray_destination)
 	{
 		f_dest = get_dest(game->player->player_x, game->player->player_y,
 					ray_direction, game);
@@ -124,7 +125,9 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	else
 		texture_x = wall_y * game->texture->width >> 6;
 
-	int	line_h = (WINDOW_H / dest->distance) * PIXEL; // -> line의 길이
+	if (dest->distance < 1)
+		dest->distance = 1;
+	int	line_h = (WINDOW_H / dest->distance) * 100; // -> line의 길이
 	double	step = 1.0 * game->texture->height / line_h;
 	//texture_x = texture_x * game->texture->width / 70;
 	//printf("step [%f]\n", step);
@@ -153,16 +156,6 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 			y++;
 		}
 		color = color_spoid(texture_x, (int)step_y, texture);
-		/*
-		while (i < (int)line_h >> 6 && y < line_h)
-		{
-			put_pixel_on_img(game->render, x, y + h_offset, color);
-			step_y += step;
-			y++;
-			i++;
-		}
-		i = 0;
-		*/
 		put_pixel_on_img(game->render, x, y + h_offset, color);
 		step_y += step;
 		y++;

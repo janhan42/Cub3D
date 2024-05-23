@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 05:24:31 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/23 18:03:49 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ static void	player_animation(t_game *game)
 
 double	wall_collision(t_game *game, int state)
 {
-	const double	offset = 2 * (sin(game->player->player_rad) * ((state & 2) == 2)
+	const double	offset = 3 * (sin(game->player->player_rad) * ((state & 2) == 2)
 						 + cos(game->player->player_rad) * ((state & 2) == 0));
 	const int	sign = 1 * ((state & 4) == 4) - 1 * ((state & 4) == 0);
 
@@ -193,18 +193,18 @@ void	render_game(t_game *game)
 
 	int x = 0;
 	int y = 0;
-	while (y < WINDOW_H) // TODO: 이거 왜 넣었는지 설명 필요.
-	{						// 우리가 그릴 벽 제외하고 투명하게 바꿔주는 부분임
-		x = 0;
-		while (x < WINDOW_W)
-		{
-			put_pixel_on_img(game->render, x, y, 0xFFFFFFFF);
-			x++;
-		}
-		y++;
-	}
+	// while (y < WINDOW_H) // TODO: 이거 왜 넣었는지 설명 필요.
+	// {						// 우리가 그릴 벽 제외하고 투명하게 바꿔주는 부분임
+	// 	x = 0;
+	// 	while (x < WINDOW_W)
+	// 	{
+	// 		put_pixel_on_img(game->render, x, y, 0xFFFFFFFF);
+	// 		x++;
+	// 	}
+	// 	y++;
+	// }
 	render_3d(game);
-	draw_background(game);
+	//draw_background(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->background->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap_img->img, 0, 0);
