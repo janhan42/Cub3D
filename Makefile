@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/16 03:03:04 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/23 19:55:24 by sangshin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,8 @@ CC				=		cc
 
 CFLAGS			=		#-Wall -Wextra -Werror
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
+HEADER			=		./includes/header.h										\
+						./includes/define.h
 
 LIBFT_DIR		=		libft
 LIBFT_A			=		libft/libft.a
@@ -79,7 +81,7 @@ $(NAME) : $(OBJS_FILES)
 	@echo $(CURSIVE)$(YELLOW) "        - Compiling $(NAME) -" $(NONE)
 	@echo $(GREEN) "            - Complete -"$(NONE)
 
-%.o : %.c
+%.o : %.c $(HEADER)
 	@echo $(CURSIVE)$(YELLOW) "      - Making object files -" $(NONE)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

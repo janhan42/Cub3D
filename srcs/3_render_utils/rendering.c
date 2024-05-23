@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/23 19:01:28 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:26:24 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,11 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	y = 0;
 	x = t;
 	int	i = 0;
+	while (i < h_offset)
+	{
+		put_pixel_on_img(game->render, x, i, game->ceiling_color);
+		i++;
+	}
 	while (y < line_h) // 라인의 길이
 	{
 		if (y + h_offset > WINDOW_H)
@@ -158,6 +163,11 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 		color = color_spoid(texture_x, (int)step_y, texture);
 		put_pixel_on_img(game->render, x, y + h_offset, color);
 		step_y += step;
+		y++;
+	}
+	while (y + h_offset < WINDOW_H)
+	{
+		put_pixel_on_img(game->render, x, y + h_offset, game->floor_color);
 		y++;
 	}
 }

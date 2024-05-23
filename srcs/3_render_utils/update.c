@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/23 18:03:49 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/23 19:29:06 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ double	wall_collision(t_game *game, int state)
 
 	if (state & 1) // x축이
 	{
-		if (game->map[(int)game->player->player_y >> 6][(int)(game->player->player_x + offset * sign) >> 6] == '1')
+		if (game->map[(int)game->player->player_y >> 6][(int)(game->player->player_x + offset * sign * 10) >> 6] == '1')
 			return (0);
 		else
 			return (offset * sign);
 	}
 	else // y축
 	{
-		if (game->map[(int)(game->player->player_y + offset * sign) >> 6][(int)game->player->player_x >> 6] == '1')
+		if (game->map[(int)(game->player->player_y + offset * sign * 10) >> 6][(int)game->player->player_x >> 6] == '1')
 			return (0);
 		else
 			return (offset * sign);
@@ -205,7 +205,7 @@ void	render_game(t_game *game)
 	// }
 	render_3d(game);
 	//draw_background(game);
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->background->img, 0, 0);
+	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->background->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap_img->img, 0, 0);
 	// Wall
