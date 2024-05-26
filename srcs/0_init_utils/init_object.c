@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 01:50:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/25 11:54:13 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	init_object(t_game *game)
 	game->object_texture->img = mlx_xpm_file_to_image(game->mlx, "resources/sprites/static_sprites/candlebra.xpm", &game->object_texture->width, &game->object_texture->height);
 	game->object_texture->addr = mlx_get_data_addr(game->object_texture->img, &game->object_texture->bit_per_pixel, &game->object_texture->line_length, &game->object_texture->endian);
 	print_object_info(game->objects[0]);
+	printf("--------------------init_object OK--------------------\n");
 }

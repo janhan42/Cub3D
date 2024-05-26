@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/16 03:35:04 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/25 11:53:46 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	init_map(t_game *game, int ac, char **av)
 	// 천장 바닥 색 불러오는 함수 추가 필요
 	game->ceiling_color = 0x000a6eff;
 	game->floor_color = 0x000a6e0a;
+	printf("--------------------raed_map OK--------------------\n");
 }

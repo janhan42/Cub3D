@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/23 19:29:06 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/25 13:12:33 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,9 +159,12 @@ void	render_intro(t_game *game)
 {
 	t_img intro;
 	float		scale_factor;
+	int			x;
+	int			y;
 
+	mlx_mouse_get_pos(game->mlx_win, &x, &y);
+	printf("render intro mouse_x : [%d] mouse_y [%d]\n", x, y);
 	scale_factor = 0.3;
-	mlx_clear_window(game->mlx, game->mlx_win);
 	mlx_destroy_image(game->mlx, game->render->img);
 	free(game->render);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
@@ -170,7 +173,19 @@ void	render_intro(t_game *game)
 	intro.img = mlx_new_image(game->mlx, intro.width, intro.height);
 	intro.addr = mlx_get_data_addr(intro.img, &intro.bit_per_pixel, &intro.line_length, &intro.endian);
 	scale_texture(game->main_menu, &intro,  scale_factor);
+	mlx_put_image_to_window(game->mlx, game->mlx_win, game->main_background->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, intro.img, WINDOW_W / 2 - (intro.width / 2), WINDOW_H / 2 - (intro.height));
+	if (WINDOW_W / 2 - (game->start_n->width / 2) < x && x < WINDOW_W / 2 + (game->start_n->width / 2)
+		&& 600 < y && y < 600 + game->start_n->height)
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->start_h->img, WINDOW_W / 2 - (game->start_h->width / 2), 600);
+	else
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->start_n->img, WINDOW_W / 2 - (game->start_n->width / 2), 600);
+
+	if (WINDOW_W / 2 - (game->exit_game_n->width / 2) < x && x < WINDOW_W / 2 + (game->exit_game_n->width / 2)
+		&& 700 < y && y < 700 + game->exit_game_n->height)
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->exit_game_h->img, WINDOW_W / 2 - (game->exit_game_h->width / 2), 700);
+	else
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->exit_game_n->img, WINDOW_W / 2 - (game->exit_game_n->width / 2), 700);
 	/* render 에 이미지 처리 */
 }
 
@@ -266,7 +281,7 @@ int	update(t_game *game)
 		if (game->mode == INTRO && flag == 0)
 		{
 			render_intro(game);
-			flag += 1;
+			flag = 0;
 		}
 		game->s_time = 0;
 	}

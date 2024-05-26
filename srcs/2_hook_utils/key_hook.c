@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 02:14:29 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/25 11:59:55 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	key_hook(int keycode, t_game *game)
 		game->player->move_a = TRUE;
 	if (keycode == KEY_D) // d
 		game->player->move_d = TRUE;
-	if (game->player->player_x >= game->map_width - 8)
+	if (game->player->player_x >= game->map_width - 8) // TODO: 이거 wall_collition에 있어야하는거 아닌가 싶음.
 		game->player->player_x = game->map_width - 1 - 8;
 	if (game->player->player_x <= 8)
 		game->player->player_x = 8;

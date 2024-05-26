@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:11:15 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 20:50:26 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/25 11:54:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,5 @@ void	init_player(t_game *game)
 	game->player->player_fov_off_y = 0;
 	//mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2); -> game->mode = GAME 일때
 	print_player_info(game->player);
+	printf("--------------------init_player OK--------------------\n");
 }

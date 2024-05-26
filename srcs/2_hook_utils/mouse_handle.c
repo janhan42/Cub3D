@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 07:23:35 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 02:12:48 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/25 12:54:56 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,16 @@ int	mouse_handle(int button, int x, int y, t_game *game)
 	}
 	if (button == 1 && x > 0 && y > 0 && game->mode == INTRO)
 	{
-		mlx_mouse_hide();
-		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
-		game->mode = GAME;
+		if (WINDOW_W / 2 - (game->start_h->width / 2) < x && x < WINDOW_W / 2 + (game->start_h->width / 2)
+			&& 600 < y && y < 600 + game->start_h->height)
+		{
+			mlx_mouse_hide();
+			mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
+			game->mode = GAME;
+		}
+		if (WINDOW_W / 2 - (game->exit_game_h->width / 2) < x && x < WINDOW_W / 2 + (game->exit_game_h->width / 2)
+			&& 700 < y && y < 700 + game->exit_game_h->height)
+			end_program(game);
 	}
 	return (0);
 }

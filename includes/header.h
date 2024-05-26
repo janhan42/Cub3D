@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/23 19:55:30 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/25 12:28:02 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,11 @@ typedef struct s_game		/* 메인 구조체 */
 	t_img		*minimap_img;		//	좌측 상단 미니맵을 위한 mlx_img
 	t_img		*render;			//	3DWall 을 위한 mlx_img
 	t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
+	t_img		*main_background;	// 메인메뉴 백그라운드.
+	t_img		*start_n;
+	t_img		*start_h;
+	t_img		*exit_game_n;
+	t_img		*exit_game_h;
 	t_img		*main_menu;			//	게임 시작 이전의 메인메뉴 mlx_img
 	t_mouse		*mouse;				//	마우스 이벤트 관리 구조체
 	t_ray_dest	*ray_info;			//	ray 계산용 구조체
