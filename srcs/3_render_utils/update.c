@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/25 13:12:33 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 07:24:16 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,11 +255,8 @@ void	mouse_update(t_game *game)
 
 int	update(t_game *game)
 {
-	game->delta_time = get_delta_time(&game->current_time);
-	double fps;
 	static int flag;
 
-	fps = 1.0 / game->delta_time;
 	game->s_time++;
 	if (game->player->shot == TRUE)
 		game->player->shot_time++;

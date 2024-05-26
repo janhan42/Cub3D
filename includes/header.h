@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/25 12:28:02 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 07:51:52 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void	init_game(t_game *game);
 void	init_player(t_game *game);
 void	init_multi_xpm_img(t_game *game, t_img **img, char *file_path, int size);
 void	init_multi_png_img(t_game *game, t_img **img, char *file_path, int size);
+void	load_texture(t_game *game);
 /*************************************************************/
 /*========                 ray utils                 ========*/
 /*************************************************************/
@@ -253,6 +254,7 @@ void	draw_square_on_img(t_img *img, int x, int y, int color);
 void	put_pixel_on_img(t_img	*img, int x, int y, int color);
 int		weapon_sprite_handle(t_game *game);
 void	one_line(t_img *img, int x0, int y0, int x1, int y1, int color);
+void	scale_texture(t_img *src, t_img *dst, float scale_factor);
 // 1_trash
 double	dist(double x, double y, double hx, double hy);
 
@@ -282,8 +284,6 @@ void	print_object_info(t_object *object);
 /*************************************************************/
 /*========                   TEST                    ========*/
 /*************************************************************/
-double get_delta_time(struct timeval *last_time);
-void scale_texture(t_img *src, t_img *dst, float scale_factor);
 void	init_object(t_game *game);
 t_img	*get_texture(t_game *game, t_dest *dest);
 void	render_sprite_object(t_game *game);

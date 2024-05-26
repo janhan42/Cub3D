@@ -6,15 +6,23 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 07:23:35 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/25 12:54:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 07:31:12 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
+/**
+ * @brief
+ * 마우스의 클릭 이벤트와 이동좌표를 저장
+ * @param button 버튼 이벤트 코드
+ * @param x mouse x좌표
+ * @param y mouse y좌표
+ * @param game
+ * @return int
+ */
 int	mouse_handle(int button, int x, int y, t_game *game)
 {
-	printf("mouse x : [%d] mouse y : [%d]\n", x , y);
 	game->mouse->mouse_x = x;
 	game->mouse->mouse_x = y;
 	if (button == 1 && game->player->shot == FALSE && game->mode == GAME)

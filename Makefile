@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/23 19:55:24 by sangshin         ###   ########.fr        #
+#    Updated: 2024/05/27 07:58:16 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=		cub3d
 
 CC				=		cc
 
-CFLAGS			=		#-Wall -Wextra -Werror
+CFLAGS			=		-Wall -Wextra -Werror
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 HEADER			=		./includes/header.h										\
 						./includes/define.h
@@ -31,6 +31,7 @@ SRCS_MAN		=		./srcs/main.c											\
 						./srcs/0_init_utils/init_map.c							\
 						./srcs/0_init_utils/init_object.c						\
 						./srcs/0_init_utils/init_player.c						\
+						./srcs/0_init_utils/load_texture.c						\
 						./srcs/0_init_utils/multi_img_init.c					\
 						./srcs/1_ray_utils/get_dest.c							\
 						./srcs/2_hook_utils/key_hook.c							\

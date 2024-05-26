@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/25 11:59:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 07:32:19 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	key_hook(int keycode, t_game *game)
 	// 플레이어 x, y 좌표를 이동, 회전만 시키는 함수
 
 	// print_game_info(game);
-	if (keycode == ESC)
+	if (keycode == KEY_C)
 	{
 		if (game->mode == GAME)
 		{
@@ -32,6 +32,8 @@ int	key_hook(int keycode, t_game *game)
 			mlx_mouse_hide();
 		}
 	}
+	if (keycode == ESC)
+		end_program(game);
 	if (keycode == KEY_W) // w
 		game->player->move_w = TRUE;
 	if (keycode == KEY_S) // s
