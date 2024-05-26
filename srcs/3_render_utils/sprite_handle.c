@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 08:21:37 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 07:15:49 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:11:57 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	weapon_sprite_handle(t_game *game)
 			weapon_pos_x, weapon_pos_y);
 		return (0);
 	}
-	if (game->player->shot == TRUE)
+	else
 	{
 		if (game->player->shot_frame < 3 && game->player->shot_time >= 100)
 		{

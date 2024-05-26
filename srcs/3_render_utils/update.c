@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 07:24:16 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:26:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,6 @@ void	render_intro(t_game *game)
  */
 void	render_game(t_game *game)
 {
-	int i = 0;
-
-	//mlx_clear_window(game->mlx, game->mlx_win);
 	// BackGround
 	render_mini_map(game->minimap_img, game->map);
 	mlx_destroy_image(game->mlx, game->render->img);
@@ -206,8 +203,6 @@ void	render_game(t_game *game)
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	draw_player(game->minimap_img, game);
 
-	int x = 0;
-	int y = 0;
 	// while (y < WINDOW_H) // TODO: 이거 왜 넣었는지 설명 필요.
 	// {						// 우리가 그릴 벽 제외하고 투명하게 바꿔주는 부분임
 	// 	x = 0;
@@ -219,8 +214,6 @@ void	render_game(t_game *game)
 	// 	y++;
 	// }
 	render_3d(game);
-	//draw_background(game);
-	//mlx_put_image_to_window(game->mlx, game->mlx_win, game->background->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->minimap_img->img, 0, 0);
 	// Wall

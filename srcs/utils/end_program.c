@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:31:30 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/15 00:27:03 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:12:32 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	end_program(t_game *game)
 void	kill_sound(int sig)
 {
 	sig++;
+	(void)sig;
 	system("kill -9 $(ps | grep sound/ | grep -v grep | sed 's/^[ \\t]*//g' | cut -d ' ' -f 1)"); // sound 쓰레드 전체 종료
 	exit(0);
 }

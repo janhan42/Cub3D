@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 06:56:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:32:11 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	render_mini_map(t_img *img, char **map)
 		{
 			if (map[i][j] == '1')
 				draw_square_on_img(img, x, y, 0x00FFFFFF);
+			else if (map[i][j] == 'D')
+				draw_square_on_img(img, x, y, 0xD0D7FE);
 			else
 				draw_square_on_img(img, x, y, 0x00000000);
 			x += MINI_MAP_PIXEL;
@@ -85,20 +87,14 @@ void	render_3d(t_game *game)
 	{
 		f_dest = get_dest(game->player->player_x, game->player->player_y,
 					ray_direction, game);
-		//printf("x, y : (%d, %d)\n", f_dest->x, f_dest->y);
-		//draw_line(img, game->player_x, game->player_y, f_dest[0], f_dest[1], 0x00FF0000);
 		ca = game->player->player_rad - ray_direction;
 		f_dest->distance = f_dest->distance * cos(ca);
-		//render(game, f_dest->distance, t, f_dest->direction);
 		texture_map(game, f_dest, t);
 		free(f_dest);
-		//printf("%f\n", ray_direction);
 		ray_direction += 0.000545415391;
 		t++;
 	}
 }
-// f_dest-> wall_type
-//
 
 int	color_spoid(int x, int y, t_img *img)
 {
@@ -110,16 +106,15 @@ int	color_spoid(int x, int y, t_img *img)
 
 void	texture_map(t_game *game, t_dest *dest, int t)
 {
-	const int	wall_x = (dest->x + 1) & 63;
-	const int	wall_y = (dest->y + 1) & 63;
-
+	int	wall_x;
+	int	wall_y;
+	int	texture_x;
 	t_img	*texture;
 
+
 	texture = get_texture(game, dest);
-
-	//printf("wall_x : [%f] wall_y : [%f]\n", wall_x, wall_y);
-	int	texture_x;
-
+	wall_x = (dest->x + 1) & 63;
+	wall_y = (dest->y + 1) & 63;
 	if (wall_x > wall_y)
 		texture_x = wall_x * game->texture->width >> 6;
 	else
@@ -135,10 +130,7 @@ void	texture_map(t_game *game, t_dest *dest, int t)
 	int	x;
 	int	y;
 	int	h_offset;
-	double	step_x;
 	double	step_y;
-
-	t_2dot	dots;
 
 	h_offset = (int)(WINDOW_H / 2) - (line_h / 2) + game->player->player_fov_off_y;
 	// 화면 중앙 빼기 -

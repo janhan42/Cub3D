@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 07:50:32 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:16:27 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ int	main(int ac, char **av)
 	t_game	game;
 
 	signal(SIGINT, kill_sound);
-	init_map(&game, ac, av);
-	init_game(&game);
-	init_player(&game);
-	init_object(&game);
+	init(&game, ac, av);
 	pthread_create(&game.sound_test, NULL, &sound_handle, &game);
 	pthread_create(&game.sound_test_theme, NULL, &sound_theme, &game);
 	print_game_info(&game);

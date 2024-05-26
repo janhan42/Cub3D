@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 07:51:35 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:18:19 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,20 @@ static void	init_mouse(t_game *game)
 
 void	init_game(t_game *game)
 {
-	game->mlx = mlx_init(); // mlx 포인터 init
-	printf("--------------------init_mlx->mlx_init OK--------------------\n");
-	game->mlx_win = mlx_new_window(game->mlx, WINDOW_W, WINDOW_H, "Testing"); // mlx_window 포인터
-	printf("--------------------init_mlx->mlx_win_init OK--------------------\n");
-	game->minimap_img = make_image(game, game->map_len_w * MINI_MAP_PIXEL, game->map_len_h * MINI_MAP_PIXEL); // minimap 그리기용 이미지
-	printf("--------------------init_mlx->minimap init OK--------------------\n");
-	game->render = make_image(game, WINDOW_W, WINDOW_H); // 3D wall 그리기용 이미지
-	printf("--------------------init_mlx->render init OK--------------------\n");
-	init_mouse(game); // mouse 구조체 init
-	printf("--------------------init_mlx->mouse init OK--------------------\n");
-	init_ray_info(game); // ray 케스팅 계산용 구조체 init
-	printf("---------------init_mlx->ray_info && dest init OK------------------\n");
-	game->background = make_image(game, WINDOW_W, WINDOW_H); // 배경 그리기용 이미지
-	printf("--------------------init_mlx->background init OK--------------------\n");
+	game->mlx = mlx_init();
+	game->mlx_win = mlx_new_window(game->mlx, WINDOW_W, WINDOW_H, "cub3d");
+	game->minimap_img = make_image(game, game->map_len_w * MINI_MAP_PIXEL, game->map_len_h * MINI_MAP_PIXEL);
+	game->render = make_image(game, WINDOW_W, WINDOW_H);
+	init_mouse(game);
+	init_ray_info(game);
+	game->background = make_image(game, WINDOW_W, WINDOW_H);
 	load_texture(game);
 
 	/* TEST */
 	game->delta_time = 0;
 	game->s_time = 0;
 	game->mode = INTRO;
-	game->main_menu = make_image(game, 2000, 2000);
+	game->main_menu = make_image(game, 1920, 1080);
 	game->main_menu->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/klipartz.com.xpm", &game->main_menu->width, &game->main_menu->height);
 	game->main_menu->addr = mlx_get_data_addr(game->main_menu->img, &game->main_menu->bit_per_pixel, &game->main_menu->line_length, &game->main_menu->endian);
 	game->main_background = make_image(game, 1920, 1080);

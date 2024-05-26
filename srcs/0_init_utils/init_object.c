@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/25 11:54:13 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:08:25 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,8 @@ static void	get_object_position(char **map, t_object *object)
 void	init_object(t_game *game)
 {
 	int	i;
-	int	x;
-	int y;
 
 	i = 0;
-	x = 0;
-	y = 0;
 	game->objects = (t_object **)malloc(sizeof(t_object *) * game->object_count);
 	if (game->objects == NULL)
 		error_exit("init_object malloc failed");

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 07:51:52 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 08:23:19 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ typedef enum e_wall_type
 	WEST,
 	SOUTH,
 	DOOR,
+	DOOR1,
+	DOOR2,
+	DOOR3,
 }	e_wall_type;
 
 typedef struct s_vec2i /* vector int */
@@ -207,7 +210,7 @@ typedef struct s_game		/* 메인 구조체 */
 /*************************************************************/
 /*========                   init                    ========*/
 /*************************************************************/
-
+void	init(t_game *game, int ac, char **av);
 void	init_map(t_game *game, int ac, char **av);
 void	init_game(t_game *game);
 void	init_player(t_game *game);
