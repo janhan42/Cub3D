@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/23 19:26:24 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/27 06:56:45 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ void	render_3d(t_game *game)
 	 * f_dest[3] = direction
 	 */
 	double	ray_direction;
-	const double	ray_destination = game->player->player_rad + (0.002 * 320);
+	const double	ray_destination = game->player->player_rad + (0.000545415391 * WINDOW_W / 2);
 	double	ca;
 	int t;
 
 	t = 0;
-	ray_direction = game->player->player_rad - (0.002 * 320);
+	ray_direction = game->player->player_rad - (0.000545415391 * WINDOW_W / 2);
 	while (ray_direction <= ray_destination)
 	{
 		f_dest = get_dest(game->player->player_x, game->player->player_y,

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/26 19:35:21 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 06:55:47 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ double get_delta_time(struct timeval *last_time)
 	return delta_time;
 }
 
-TODO: // 코드 정리, 구조체 정리, 로직 한번더 처리 및 생각
+// TODO: // 코드 정리, 구조체 정리, 로직 한번더 처리 및 생각
 // 순서 init -> update -> key hook flag -> 정보 업데이트(플레이어 포지션에 따른 반응)-> 업데이트된 정보를 가지고 렌더 -> 화면에 띄우기
 			//->																								<-
 int	main(int ac, char **av)
