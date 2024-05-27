@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 15:23:48 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 22:12:16 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 */
 static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 {
-	while (ray->dof < 8)
+	while (ray->dof < 100)
 	{
 		ray->mx = (int)ray->rx >> 6;
 		ray->my = (int)ray->ry >> 6;
@@ -32,7 +32,7 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 			ray->hx = ray->rx;
 			ray->hy = ray->ry;
 			ray->distance_h = dist(x, y, ray->hx, ray->hy);
-			ray->dof = 8;
+			ray->dof = 100;
 			if (game->map[ray->my][ray->mx] == 'D')
 				ray->is_h_door = 1;
 		}
@@ -50,7 +50,7 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 */
 static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 {
-	while (ray->dof < 8)
+	while (ray->dof < 100)
 	{
 		ray->mx = (int)ray->rx >> 6;
 		ray->my = (int)ray->ry >> 6;
@@ -64,7 +64,7 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 			ray->vx = ray->rx;
 			ray->vy = ray->ry;
 			ray->distance_v = dist(x, y, ray->vx, ray->vy);
-			ray->dof = 8;
+			ray->dof = 100;
 			if (game->map[ray->my][ray->mx] == 'D')
 				ray->is_v_door = 1;
 		}

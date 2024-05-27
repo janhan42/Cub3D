@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 19:35:58 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 22:36:56 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,9 +271,15 @@ int		parse_map(t_parse *parse);
 char	*update_map(char *s1, char *s2);
 char	*parse_path_malloc(char *line);
 // _valid
-int	is_cub_file(const char *cub_file_path);
-int	is_space(char c);
-int	is_upper(char c);
+int		is_cub_file(const char *cub_file_path);
+int		is_space(char c);
+int		is_upper(char c);
+int		is_space_around_position(t_game *game, int row, int col);
+int		is_blank_line(char *line);
+int		is_map_valid(char *line);
+int		find_char(const char *value, char c);
+// _check
+int		check_tex(t_game *game);
 
 /*************************************************************/
 /*========                   init                    ========*/
@@ -371,6 +377,7 @@ void	print_ray_result_info(double ray_result[4]);
 void	print_ray_info(t_ray_dest *ray);
 void	print_game_info(t_game *game);
 void	print_object_info(t_object *object);
+void	print_map_info(char **map);
 
 /*************************************************************/
 /*========                   TEST                    ========*/
@@ -378,4 +385,5 @@ void	print_object_info(t_object *object);
 void	init_object(t_game *game);
 t_img	*get_texture(t_game *game, t_dest *dest);
 void	render_sprite_object(t_game *game);
+
 #endif

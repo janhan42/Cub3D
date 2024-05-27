@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/27 19:04:39 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/27 22:38:48 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRCS_MAN		=		print_info.c											\
 						./srcs/0_parse/parse.c									\
 						./srcs/0_parse/parse_utils.c							\
 						./srcs/0_parse/parse_utils2.c							\
+						./srcs/0_parse/parse_utils3.c							\
 						./srcs/1_init_utils/init.c								\
 						./srcs/1_init_utils/init_game.c							\
 						./srcs/1_init_utils/init_map.c							\

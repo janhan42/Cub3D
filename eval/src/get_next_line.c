@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 static char	*ft_strndup(const char *str, ssize_t offst)
 {

@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 static int	check_bonus_symbol(t_god *god, int row, int col, int value)
 {

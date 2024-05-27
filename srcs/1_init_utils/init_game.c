@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 19:12:42 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 22:00:03 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	init_game(t_game *game)
 	load_texture(game);
 	game->s_time = 0;
 	game->mode = INTRO;
+	game->object_count = 0;
 	if (game->main_background->img == NULL)
 		printf("ERROR");
 	print_game_info(game);

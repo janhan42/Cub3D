@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 15:17:49 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 21:57:54 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	init_object(t_game *game)
 {
 	int	i;
 
+	if (game->object_count == 0)
+		return ;
 	i = 0;
 	game->objects
 		= (t_object **)malloc(sizeof(t_object *) * game->object_count);

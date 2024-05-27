@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   check_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 08:13:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 21:58:12 by janhan           ###   ########.fr       */
+/*   Created: 2024/05/27 22:25:53 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/27 22:26:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-void	init(t_game *game, int ac, char **av)
+int	check_tex(t_game *game)
 {
-	init_map(game, ac, av);
-	init_game(game);
-	init_player(game);
-	init_object(game);
-	printf("------------init_object OK-----------------\n");
+	int	i;
+	int	j;
+
+	i = -1;
+	while (++i <= T_WE)
+	{
+		j = i;
+		while (++j <= T_EA)
+		{
+			if (ft_strncmp(game->parse.tex[i].tex_path,
+					game->parse.tex[j].tex_path,
+					ft_strlen(game->parse.tex[i].tex_path)) == 0)
+				return (ERROR);
+		}
+	}
+	return (SUCCESS);
 }

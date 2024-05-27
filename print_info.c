@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:52:03 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:48:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 22:10:02 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ void	print_game_info(t_game *game)
 	printf("/*     player *player address   : %-26p */\n", game->player);
 	printf("/*     t_img *texture address   : %-26p */\n", game->texture);
 	printf("/*     e_mode mode              : %-26s */\n", mode_names[game->mode]);
+	printf("/*     int object_count         : %-26d */\n", game->object_count);
 	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
 }
@@ -181,4 +182,31 @@ void	print_object_info(t_object *object)
 	printf("/*     t_img *img     address   : %-26p */\n", object->img);
 	printf("/*                                                           */\n");
 	printf("/*************************************************************/\n");
+}
+
+void	print_map_info(char **map)
+{
+	int	x;
+	int	y;
+	int	max_len_x;
+	int	max_len_y;
+	y = 0;
+	max_len_x = 0;
+	max_len_y = 0;
+	printf("!!!!!!!!!!!!!MAP!!!!!!!!!!!!\n");
+	while (map[y])
+	{
+		x = 0;
+		while (map[y][x])
+		{
+			printf("%c", map[y][x]);
+			x++;
+		}
+		if (max_len_x < x)
+			max_len_x = x;
+		printf("\n");
+		max_len_y++;
+		y++;
+	}
+	printf("max_len_x [%d] max_len_y [%d]\n", max_len_x, max_len_y);
 }
