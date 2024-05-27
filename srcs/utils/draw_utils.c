@@ -6,27 +6,35 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:26:51 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 20:56:08 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:42:59 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-void	one_line(t_img *img, int x0, int y0, int x1, int y1, int color)
+/*
+
+dots.start_x, dots.start_y, dots.dest_x, dots.dest_y
+ x0            y0              x1          y1
+*/
+void	one_line(t_img *img, t_2dot *dots, int color)
 {
-	const int	dx = x1 - x0;
-	const int	dy = y1 - y0;
+	const int	dx = dots->dest_x - dots->start_x;
+	const int	dy = dots->dest_y - dots->start_y;
 	t_vec2d		vec;
 	int			steps;
+	int			i;
 
-	vec.x = x0;
-	vec.y = y0;
+	i = 0;
+	vec.x = dots->start_x;
+	vec.y = dots->start_y;
 	steps = abs(dx) * (abs(dx) > abs(dy)) + abs(dy) * (abs(dx) <= abs(dy));
-	for (int i = 0; i <= steps; i++)
+	while (i <= steps)
 	{
 		put_pixel_on_img(img, (int)vec.x, (int)vec.y, color);
 		vec.x += dx / (double)steps;
 		vec.y += dy / (double)steps;
+		i++;
 	}
 }
 
@@ -55,8 +63,7 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 		}
 	}
 	else
-		one_line(img, dots.start_x, dots.start_y,
-		dots.dest_x, dots.dest_y, color);
+		one_line(img, &dots, color);
 }
 
 /**
@@ -87,10 +94,43 @@ void	draw_square_on_img(t_img *img, int x, int y, int color)
 
 void	put_pixel_on_img(t_img	*img, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
 
 	if (x >= img->width || y >= img->height || x < 0 || y < 0)
 		return ;
 	dst = img->addr + (y * img->line_length + x * (img->bit_per_pixel >> 3));
 	*(unsigned int *)dst = color;
+}
+
+// TODO: 이미지 스케일링 함수인데 전달 방식 및 처리 방식의 개편이 필요
+/**
+ * @brief
+ *
+ * @param src 변환전 오리지널 이미지 구조체.
+ * @param dst 스케일링후 이미지를 넣을 구조체.
+ * @param scale_factor 스케일
+ */
+void	scale_texture(t_img *src, t_img *dst, float scale_factor)
+{
+	t_single_scale	info;
+
+	info.scale = 1.0 / scale_factor;
+	info.new_y = 0;
+	while (info.new_y < dst->height)
+	{
+		info.new_x = 0;
+		while (info.new_x < dst->width)
+		{
+			info.x = (int)(info.new_x * info.scale);
+			info.y = (int)(info.new_y * info.scale);
+			if (info.x >= src->width || info.y >= src->height)
+				continue ;
+			info.color = *(int *)(src->addr + (info.y * src->line_length
+						+ info.x * (src->bit_per_pixel / 8)));
+			*(int *)(dst->addr + (info.new_y * dst->line_length + info.new_x
+						* (dst->bit_per_pixel / 8))) = info.color;
+			info.new_x++;
+		}
+		info.new_y++;
+	}
 }

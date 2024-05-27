@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 08:23:19 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:40:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef enum e_wall_type
 	DOOR3,
 }	e_wall_type;
 
+
 typedef struct s_vec2i /* vector int */
 {
 	int x;
@@ -65,15 +66,31 @@ struct t_vec2u		/* vector usigned int */
 	unsigned int y;
 };
 
-typedef struct s_scale
+/* Single ton */
+typedef struct s_single_scale
 {
 	int		x;
 	int		y;
 	int		new_x;
 	int		new_y;
 	int		color;
-	float	sacle;
-}	t_scale;
+	float	scale;
+}	t_single_scale;
+
+typedef struct s_single_texuture
+{
+	int		wall_x;
+	int		wall_y;
+	int		texture_x;
+	int		line_h;
+	double	step;
+	int		color;
+	int		x;
+	int		y;
+	int		h_offset;
+	double	step_y;
+}	t_single_texture;
+/*------------------------------*/
 
 typedef struct s_ray_dest		/* ray 계산용 구조체 */
 {
@@ -131,8 +148,8 @@ typedef	struct	s_img		/* mlx 이미지 구조체 */
 
 typedef struct s_mouse		/* mouse 이벤트 관리용 */
 {
-	int	mouse_x;				// mlx_get_mouse_pos
-	int	mouse_y;				// mlx_get_mouse_pos
+	int	x;						// mlx_get_mouse_pos
+	int	y;						// mlx_get_mouse_pos
 	int	prev_x;					// mlx_get_mouse_pos
 	int	prev_y;					// mlx_get_mouse_pos
 }	t_mouse;
@@ -201,7 +218,6 @@ typedef struct s_game		/* 메인 구조체 */
 	pthread_t	sound_test_theme;	//	sound TEST ptrhead
 	int			pthread_kill;		//	pthread kill flag
 	struct timeval	current_time;
-	double		delta_time;
 	double		frame_time;
 	int			frame;
 	int			s_time;
@@ -221,7 +237,8 @@ void	load_texture(t_game *game);
 /*========                 ray utils                 ========*/
 /*************************************************************/
 t_dest	*get_dest(double x, double y, double rad, t_game *game);
-
+void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray);
+void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray);
 
 /*************************************************************/
 /*========                 event hook                ========*/
@@ -233,17 +250,27 @@ int		mouse_handle(int button, int x, int y, t_game *game);
 /*************************************************************/
 /*========                render utils               ========*/
 /*************************************************************/
+
 int		update(t_game *game);
-void	mouse_update(t_game *game);
+
+// 0_intro
+void	render_intro(t_game *game);
+
+// 1_game
+void	game_mouse_update(t_game *game);
 void	render_game(t_game *game);
-void	draw_background(t_game *game);
+void	player_movement(t_game *game);
+
+// void	draw_background(t_game *game);
 double	wall_collision(t_game *game, int state);
 void	render(t_game *game, double distance, int time, int side);
-void	texture_map(t_game *game, t_dest *dest, int t);
+void	render_texture(t_game *game, t_dest *dest, int t);
 int		color_spoid(int x, int y, t_img *img);
 void	render_3d(t_game *game);
-void	draw_player(t_img *img, t_game *game);
 void	render_mini_map(t_img *img, char **map);
+void	render_map_player(t_img *img, t_game *game);
+int		render_weapon(t_game *game);
+t_img	*get_texture(t_game *game, t_dest *dest);
 
 /*************************************************************/
 /*========                   utils                   ========*/
@@ -255,8 +282,7 @@ t_img	*make_image(t_game *game, int width, int height);
 void	draw_line(t_img *img, t_2dot dots, int color);
 void	draw_square_on_img(t_img *img, int x, int y, int color);
 void	put_pixel_on_img(t_img	*img, int x, int y, int color);
-int		weapon_sprite_handle(t_game *game);
-void	one_line(t_img *img, int x0, int y0, int x1, int y1, int color);
+void	one_line(t_img *img, t_2dot *dots, int color);
 void	scale_texture(t_img *src, t_img *dst, float scale_factor);
 // 1_trash
 double	dist(double x, double y, double hx, double hy);

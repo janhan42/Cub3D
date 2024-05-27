@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:24:00 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 07:33:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:37:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	*sound_theme(void	*game)
 {
-	t_game *sound_game;
-	sound_game = (t_game *)game;
+	t_game	*sound_game;
 
+	sound_game = (t_game *)game;
 	while (1)
 	{
 		system("afplay resources/sound/theme.mp3 &");
@@ -32,10 +32,11 @@ void	*sound_handle(void *game)
 {
 	t_game	*sound_game;
 
-	sound_game =  (t_game *)game;
+	sound_game = (t_game *)game;
 	while (1)
 	{
-		if (sound_game->player->shot == TRUE && sound_game->player->shot_sound == TRUE)
+		if (sound_game->player->shot == TRUE
+			&& sound_game->player->shot_sound == TRUE)
 		{
 			system("afplay resources/sound/shotgun.wav &");
 			usleep(100);

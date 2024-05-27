@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:00:25 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/14 23:00:52 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:47:27 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ t_img	*make_image(t_game *game, int width, int height)
 	if (img->img == NULL)
 		error_exit("make_image failed");
 	img->addr = mlx_get_data_addr(img->img, &img->bit_per_pixel,
-							&img->line_length, &img->endian);
+			&img->line_length, &img->endian);
 	img->width = width;
 	img->height = height;
 	return (img);

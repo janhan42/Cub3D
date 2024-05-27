@@ -1,21 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_rgb.c                                        :+:      :+:    :+:   */
+/*   render_mini_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 14:35:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:29:35 by janhan           ###   ########.fr       */
+/*   Created: 2024/05/27 15:26:52 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/27 16:57:28 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-int	color_spoid(int x, int y, t_img *img)
+void	render_mini_map(t_img *img, char **map)
 {
-	char	*dst;
+	int	i;
+	int	j;
+	int	x;
+	int	y;
 
-	dst = img->addr + (y * img->line_length + x * (img->bit_per_pixel >> 3));
-	return (*(int *)dst);
+	i = 0;
+	y = 0;
+	while (map[i])
+	{
+		j = 0;
+		x = 0;
+		while (map[i][j])
+		{
+			if (map[i][j] == '1')
+				draw_square_on_img(img, x, y, 0x00FFFFFF);
+			else if (map[i][j] == 'D')
+				draw_square_on_img(img, x, y, 0xD0D7FE);
+			else
+				draw_square_on_img(img, x, y, 0x00000000);
+			x += MINI_MAP_PIXEL;
+			j++;
+		}
+		y += MINI_MAP_PIXEL;
+		i++;
+	}
 }

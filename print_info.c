@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:52:03 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/16 01:23:33 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:48:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "includes/header.h"
 
 /**
  * @brief
@@ -69,8 +69,8 @@ void	print_mouse_info(t_mouse *mouse)
 	printf("/*************************************************************/\n");
 	printf("/*                    game->mouse  OK                        */\n");
 	printf("/*     game->mouse address : %-31p */\n", mouse);
-	printf("/*     int mouse_x         : %-31d */\n", mouse->mouse_x);
-	printf("/*     int mouse_y         : %-31d */\n", mouse->mouse_y);
+	printf("/*     int mouse_x         : %-31d */\n", mouse->x);
+	printf("/*     int mouse_y         : %-31d */\n", mouse->y);
 	printf("/*     int prev_x          : %-31d */\n", mouse->prev_x);
 	printf("/*     int prev_y          : %-31d */\n", mouse->prev_y);
 	printf("/*                                                           */\n");

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 17:09:57 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:45:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@
 # define WINDOW_CLOSE	17
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
-
 #endif

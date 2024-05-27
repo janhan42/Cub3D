@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 08:18:19 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 17:03:15 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_mouse(t_game *game)
 	if (game->mouse == NULL)
 		error_exit("init mouse malloc failed");
 	mlx_mouse_get_pos(game->mlx_win,
-		&game->mouse->mouse_x, &game->mouse->mouse_y);
+		&game->mouse->x, &game->mouse->y);
 	game->mouse->prev_x = WINDOW_W / 2;
 	game->mouse->prev_y = WINDOW_H / 2;
 	print_mouse_info(game->mouse);
@@ -42,39 +42,17 @@ static void	init_mouse(t_game *game)
 void	init_game(t_game *game)
 {
 	game->mlx = mlx_init();
-	game->mlx_win = mlx_new_window(game->mlx, WINDOW_W, WINDOW_H, "cub3d");
-	game->minimap_img = make_image(game, game->map_len_w * MINI_MAP_PIXEL, game->map_len_h * MINI_MAP_PIXEL);
+	game->mlx_win = mlx_new_window(game->mlx, WINDOW_W,
+			WINDOW_H, "cub3d");
+	game->minimap_img = make_image(game, game->map_len_w * MINI_MAP_PIXEL,
+			game->map_len_h * MINI_MAP_PIXEL);
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	init_mouse(game);
 	init_ray_info(game);
 	game->background = make_image(game, WINDOW_W, WINDOW_H);
 	load_texture(game);
-
-	/* TEST */
-	game->delta_time = 0;
 	game->s_time = 0;
 	game->mode = INTRO;
-	game->main_menu = make_image(game, 1920, 1080);
-	game->main_menu->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/klipartz.com.xpm", &game->main_menu->width, &game->main_menu->height);
-	game->main_menu->addr = mlx_get_data_addr(game->main_menu->img, &game->main_menu->bit_per_pixel, &game->main_menu->line_length, &game->main_menu->endian);
-	game->main_background = make_image(game, 1920, 1080);
-	game->main_background->img  = mlx_xpm_file_to_image(game->mlx, "resources/textures/main_background.xpm", &game->main_background->width, &game->main_background->height);
-	game->main_background->addr = mlx_get_data_addr(game->main_background->img, &game->main_background->bit_per_pixel, &game->main_background->line_length, &game->main_background->endian);
-	game->start_n = make_image(game, 145, 71);
-	game->start_n->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/Start_n.xpm", &game->start_n->width, &game->start_n->height);
-	game->start_n->addr = mlx_get_data_addr(game->start_n->img, &game->start_n->bit_per_pixel, &game->start_n->line_length, &game->start_n->endian);
-//
-	game->start_h = make_image(game, 154, 75);
-	game->start_h->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/Start_h.xpm", &game->start_h->width, &game->start_h->height);
-	game->start_h->addr = mlx_get_data_addr(game->start_h->img, &game->start_h->bit_per_pixel, &game->start_h->line_length, &game->start_h->endian);
-
-	game->exit_game_n = make_image(game, 240, 83);
-	game->exit_game_n->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/Exit_game_n.xpm", &game->exit_game_n->width, &game->exit_game_n->height);
-	game->exit_game_n->addr = mlx_get_data_addr(game->exit_game_n->img, &game->exit_game_n->bit_per_pixel, &game->exit_game_n->line_length, &game->exit_game_n->endian);
-//
-	game->exit_game_h = make_image(game, 269, 93);
-	game->exit_game_h->img = mlx_xpm_file_to_image(game->mlx, "resources/textures/Exit_game_h.xpm", &game->exit_game_h->width, &game->exit_game_h->height);
-	game->exit_game_h->addr = mlx_get_data_addr(game->exit_game_h->img, &game->exit_game_h->bit_per_pixel, &game->exit_game_h->line_length, &game->exit_game_h->endian);
 	if (game->main_background->img == NULL)
 		printf("ERROR");
 	print_game_info(game);

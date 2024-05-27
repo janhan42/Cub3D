@@ -6,11 +6,27 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 08:08:25 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:17:49 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
+
+static void	set_object_position(t_object *object, char **map, int x, int y)
+{
+	object->object_x = x * PIXEL + (int)(PIXEL / 2);
+	object->object_y = y * PIXEL + (int)(PIXEL / 2);
+	object->object_z = 0;
+	if (map[y][x] == 'G')
+		object->type = GREEN_LIGHT;
+	if (map[y][x] == 'R')
+		object->type = RED_LIGHT;
+	if (map[y][x] == 'L')
+		object->type = NOMAL_LIGHT;
+	object->img_pos_x = 0;
+	object->img_pos_y = 0;
+	object->img_pos_z = 0;
+}
 
 static void	get_object_position(char **map, t_object *object)
 {
@@ -25,19 +41,7 @@ static void	get_object_position(char **map, t_object *object)
 		{
 			if (map[y][x] == 'G' || map[y][x] == 'R' || map[y][x] == 'L')
 			{
-				printf("여기 들어옴?\n");
-				object->object_x = x * PIXEL + (int)(PIXEL / 2);
-				object->object_y = y * PIXEL + (int)(PIXEL / 2);
-				object->object_z = 0;
-				if (map[y][x] == 'G')
-					object->type = GREEN_LIGHT;
-				if (map[y][x] == 'R')
-					object->type = RED_LIGHT;
-				if (map[y][x] == 'L')
-					object->type = NOMAL_LIGHT;
-				object->img_pos_x = 0;
-				object->img_pos_y = 0;
-				object->img_pos_z = 0;
+				set_object_position(object, map, x, y);
 				return ;
 			}
 			x++;
@@ -51,7 +55,8 @@ void	init_object(t_game *game)
 	int	i;
 
 	i = 0;
-	game->objects = (t_object **)malloc(sizeof(t_object *) * game->object_count);
+	game->objects
+		= (t_object **)malloc(sizeof(t_object *) * game->object_count);
 	if (game->objects == NULL)
 		error_exit("init_object malloc failed");
 	while (i < game->object_count)
@@ -63,8 +68,11 @@ void	init_object(t_game *game)
 		i++;
 	}
 	game->object_texture = (t_img *)malloc(sizeof(t_img));
-	game->object_texture->img = mlx_xpm_file_to_image(game->mlx, "resources/sprites/static_sprites/candlebra.xpm", &game->object_texture->width, &game->object_texture->height);
-	game->object_texture->addr = mlx_get_data_addr(game->object_texture->img, &game->object_texture->bit_per_pixel, &game->object_texture->line_length, &game->object_texture->endian);
+	game->object_texture->img = mlx_xpm_file_to_image(game->mlx,
+			"resources/sprites/static_sprites/candlebra.xpm",
+			&game->object_texture->width, &game->object_texture->height);
+	game->object_texture->addr = mlx_get_data_addr(game->object_texture->img,
+			&game->object_texture->bit_per_pixel,
+			&game->object_texture->line_length, &game->object_texture->endian);
 	print_object_info(game->objects[0]);
-	printf("--------------------init_object OK--------------------\n");
 }

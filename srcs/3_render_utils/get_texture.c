@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_rgb.c                                        :+:      :+:    :+:   */
+/*   get_texture.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/13 14:35:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:29:35 by janhan           ###   ########.fr       */
+/*   Created: 2024/05/27 15:54:36 by janhan            #+#    #+#             */
+/*   Updated: 2024/05/27 15:54:49 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/header.h"
 
-int	color_spoid(int x, int y, t_img *img)
+t_img	*get_texture(t_game *game, t_dest *dest)
 {
-	char	*dst;
-
-	dst = img->addr + (y * img->line_length + x * (img->bit_per_pixel >> 3));
-	return (*(int *)dst);
+	if (dest->wall_type == EAST)
+		return (&game->texture[EAST]);
+	if (dest->wall_type == NORTH)
+		return (&game->texture[NORTH]);
+	if (dest->wall_type == WEST)
+		return (&game->texture[WEST]);
+	if (dest->wall_type == SOUTH)
+		return (&game->texture[SOUTH]);
+	else
+		return (&game->texture[DOOR]);
 }
