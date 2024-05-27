@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 17:40:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 19:35:58 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <math.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <fcntl.h>
+#include <sys/_types/_ssize_t.h>
 
 typedef enum e_game_mode
 {
@@ -90,6 +92,22 @@ typedef struct s_single_texuture
 	int		h_offset;
 	double	step_y;
 }	t_single_texture;
+
+typedef struct s_single_parse
+{
+	int		fd;
+	int		gnl_ret;
+	int		parse_type;
+	char	*line;
+}	t_single_parse;
+
+typedef struct s_gnl
+{
+	char	*buf;
+	char	*temp;
+	ssize_t	offset;
+	ssize_t	index;
+}	t_gnl;
 /*------------------------------*/
 
 typedef struct s_ray_dest		/* ray 계산용 구조체 */
@@ -184,6 +202,28 @@ typedef struct s_object		/* object struct */
 	double			img_pos_z;	//	이미지의 좌표 z
 }	t_object;
 
+typedef struct s_texture
+{
+	int		*texture;
+	char	*tex_path;
+	double	width;
+	double	height;
+}	t_texture;
+
+typedef struct s_parse
+{
+	int			is_d;
+	int			is_f;
+	int			is_c;
+	int			floor_color;
+	int			ceiling_color;
+	int			row;
+	int			col;
+	char		*temp_map;
+	char		**map;
+	t_texture	tex[TEXTURE_COUNT];
+}	t_parse;
+
 typedef struct s_game		/* 메인 구조체 */
 {
 	void		*mlx;				//	mlx -> init_game()
@@ -195,6 +235,7 @@ typedef struct s_game		/* 메인 구조체 */
 	int			map_height;			//	MAP Y * IMG_SIZE -> init_map()
 	int			floor_color;		//	MAP 바닥 색상 -> init_map()
 	int			ceiling_color;		//	MAP 천장 색상 -> init_map()
+	t_parse		parse;
 	t_img		*minimap_img;		//	좌측 상단 미니맵을 위한 mlx_img
 	t_img		*render;			//	3DWall 을 위한 mlx_img
 	t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
@@ -209,7 +250,6 @@ typedef struct s_game		/* 메인 구조체 */
 	t_player	*player;			//	PLAYER 구조체
 	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
 	/* TEST */
-	double		ray_distance[WINDOW_W];
 	t_object	**objects;
 	t_img		*object_texture;
 	int			object_count;
@@ -217,11 +257,23 @@ typedef struct s_game		/* 메인 구조체 */
 	pthread_t	sound_test;			//	sound TEST ptrhead
 	pthread_t	sound_test_theme;	//	sound TEST ptrhead
 	int			pthread_kill;		//	pthread kill flag
-	struct timeval	current_time;
 	double		frame_time;
 	int			frame;
 	int			s_time;
 }	t_game;
+
+/*************************************************************/
+/*========                   parse                   ========*/
+/*************************************************************/
+int		parse_file(t_game *game, const char *cub_file_path);
+int		parse_color(int *cf, char *line);
+int		parse_map(t_parse *parse);
+char	*update_map(char *s1, char *s2);
+char	*parse_path_malloc(char *line);
+// _valid
+int	is_cub_file(const char *cub_file_path);
+int	is_space(char c);
+int	is_upper(char c);
 
 /*************************************************************/
 /*========                   init                    ========*/
@@ -233,6 +285,7 @@ void	init_player(t_game *game);
 void	init_multi_xpm_img(t_game *game, t_img **img, char *file_path, int size);
 void	init_multi_png_img(t_game *game, t_img **img, char *file_path, int size);
 void	load_texture(t_game *game);
+
 /*************************************************************/
 /*========                 ray utils                 ========*/
 /*************************************************************/
@@ -278,6 +331,9 @@ t_img	*get_texture(t_game *game, t_dest *dest);
 // _init_utils
 t_img	*make_image(t_game *game, int width, int height);
 
+// _gnl
+int	get_next_line(int fd, char **line);
+
 // 0_draw_utils
 void	draw_line(t_img *img, t_2dot dots, int color);
 void	draw_square_on_img(t_img *img, int x, int y, int color);
@@ -292,6 +348,12 @@ void	kill_sound(int sig);
 int		end_program(t_game *game);
 int		key_press(int key, t_game *game);
 void	error_exit(char *msg);
+
+// 3_free
+void	str_free(char *str);
+void	free_memory(void *memory);
+int		free_memory_return(void *memory, int return_code);
+void	free_array_memory(void **memory, int index);
 
 /*************************************************************/
 /*========               pthread utils               ========*/

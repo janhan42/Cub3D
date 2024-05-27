@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/27 17:46:30 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/27 19:04:39 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,36 +26,41 @@ MLX_DIR			=		mlx
 
 # SRCS_MAN		=		./test.c
 
-SRCS_MAN		=		./srcs/main.c											\
-						./srcs/0_init_utils/init.c								\
-						./srcs/0_init_utils/init_game.c							\
-						./srcs/0_init_utils/init_map.c							\
-						./srcs/0_init_utils/init_object.c						\
-						./srcs/0_init_utils/init_player.c						\
-						./srcs/0_init_utils/load_texture.c						\
-						./srcs/0_init_utils/multi_img_init.c					\
-						./srcs/1_ray_utils/get_dest.c							\
-						./srcs/1_ray_utils/get_dest_sub.c						\
+SRCS_MAN		=		print_info.c											\
+						./srcs/main.c											\
+						./srcs/0_parse/parse.c									\
+						./srcs/0_parse/parse_utils.c							\
+						./srcs/0_parse/parse_utils2.c							\
+						./srcs/1_init_utils/init.c								\
+						./srcs/1_init_utils/init_game.c							\
+						./srcs/1_init_utils/init_map.c							\
+						./srcs/1_init_utils/init_object.c						\
+						./srcs/1_init_utils/init_player.c						\
+						./srcs/1_init_utils/load_texture.c						\
+						./srcs/1_init_utils/multi_img_init.c					\
 						./srcs/2_hook_utils/key_hook.c							\
 						./srcs/2_hook_utils/mouse_handle.c						\
-						./srcs/3_render_utils/get_texture.c						\
-						./srcs/3_render_utils/object_render.c					\
-						./srcs/3_render_utils/player_movement.c					\
-						./srcs/3_render_utils/render_intro.c					\
-						./srcs/3_render_utils/render_mini_map.c					\
-						./srcs/3_render_utils/render_player.c					\
-						./srcs/3_render_utils/render_texture.c					\
-						./srcs/3_render_utils/render3d.c						\
-						./srcs/3_render_utils/sprite_handle.c					\
-						./srcs/3_render_utils/update.c							\
-						./srcs/4_thread_utils/thread_utils.c					\
+						./srcs/3_ray_utils/get_dest.c							\
+						./srcs/3_ray_utils/get_dest_sub.c						\
+						./srcs/4_render_utils/get_texture.c						\
+						./srcs/4_render_utils/object_render.c					\
+						./srcs/4_render_utils/player_movement.c					\
+						./srcs/4_render_utils/render_intro.c					\
+						./srcs/4_render_utils/render_mini_map.c					\
+						./srcs/4_render_utils/render_player.c					\
+						./srcs/4_render_utils/render_texture.c					\
+						./srcs/4_render_utils/render3d.c						\
+						./srcs/4_render_utils/sprite_handle.c					\
+						./srcs/4_render_utils/update.c							\
+						./srcs/5_thread_utils/thread_utils.c					\
 						./srcs/utils/color_rgb.c								\
 						./srcs/utils/dist.c										\
 						./srcs/utils/draw_utils.c								\
 						./srcs/utils/end_program.c								\
 						./srcs/utils/error_exit.c								\
-						./srcs/utils/make_img.c									\
-						./srcs/utils/print_info.c
+						./srcs/utils/free.c										\
+						./srcs/utils/get_next_line.c							\
+						./srcs/utils/make_img.c
 OBJS_MAND		=	$(SRCS_MAN:.c=.o)
 
 SRCS_BONUS		=

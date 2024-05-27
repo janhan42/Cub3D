@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:45:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 18:25:46 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@
 # define WINDOW_W 1920
 # define WINDOW_H 1080
 # define MAX_DISTANCE 10000
+
+/*************************************************************/
+/*========               parse define                ========*/
+/*************************************************************/
+
+/* texture */
+# define T_NO 0
+# define T_SO 1
+# define T_WE 2
+# define T_EA 3
+# define T_FLOOR 4
+# define T_CEIL 5
+# define T_MAP 6
+# define TEXTURE_COUNT 4
 
 /*************************************************************/
 /*========               keyboard code               ========*/
