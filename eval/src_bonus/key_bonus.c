@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 int	key_press2(int keycode, t_key *key)
 {

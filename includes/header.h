@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 22:36:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 23:58:06 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <fcntl.h>
-#include <sys/_types/_ssize_t.h>
+# include <sys/_types/_ssize_t.h>
 
 typedef enum e_game_mode
 {
@@ -49,12 +49,11 @@ typedef enum e_wall_type
 	DOOR3,
 }	e_wall_type;
 
-
 typedef struct s_vec2i /* vector int */
 {
 	int x;
 	int y;
-} t_vec2i;
+}	t_vec2i;
 
 typedef struct s_vec2d /* vector double */
 {
@@ -62,11 +61,11 @@ typedef struct s_vec2d /* vector double */
 	double y;
 }	t_vec2d;
 
-struct t_vec2u		/* vector usigned int */
+struct s_vec2u		/* vector usigned int */
 {
 	unsigned int x;
 	unsigned int y;
-};
+}	t_vec2u;
 
 /* Single ton */
 typedef struct s_single_scale
@@ -151,7 +150,6 @@ typedef	struct	s_2dot /* pixel_put_img */
 	int	dest_x;			// 도착 x
 	int	dest_y;			// 도착 y
 }	t_2dot;
-
 
 typedef	struct	s_img		/* mlx 이미지 구조체 */
 {
@@ -280,6 +278,7 @@ int		is_map_valid(char *line);
 int		find_char(const char *value, char c);
 // _check
 int		check_tex(t_game *game);
+int		check_parse(t_game *game);
 
 /*************************************************************/
 /*========                   init                    ========*/

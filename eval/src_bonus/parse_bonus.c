@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 int	parse_color2(int *cf, char **color_malloc)
 {

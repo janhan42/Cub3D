@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 void	ray_init(t_ray *ray, double rayAngle)
 {

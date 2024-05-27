@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 22:39:18 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 23:55:32 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,15 @@ int	check_color(int type, t_parse *parse, char *line)
 {
 	if (type == T_CEIL)
 	{
-		if (parse->is_c == TRUE || parse_color(&parse->ceiling_color, line) == FAILURE)
+		if (parse->is_c == TRUE
+			|| parse_color(&parse->ceiling_color, line) == FAILURE)
 			return (FAILURE);
 		parse->is_c = TRUE;
 	}
 	else if (type == T_FLOOR)
 	{
-		if (parse->is_f == TRUE || parse_color(&parse->floor_color, line) == FAILURE)
+		if (parse->is_f == TRUE
+			|| parse_color(&parse->floor_color, line) == FAILURE)
 			return (FAILURE);
 		parse->is_f = TRUE;
 	}

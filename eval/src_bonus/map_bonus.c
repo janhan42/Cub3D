@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 void	setting_map_location(t_parse *parse, int *x, int *y, t_point *p)
 {

@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 int	set_sprite_color(t_god *god, t_sprite *sprite, int i, int k)
 {

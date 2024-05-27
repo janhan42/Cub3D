@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 void	init_t_cal_ray(t_god *god, t_cal_ray *c, double *dx, double *dy)
 {

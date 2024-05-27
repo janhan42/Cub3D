@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 static void	floor_ceiling_init(t_god *god)
 {

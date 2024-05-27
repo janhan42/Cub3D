@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 static int	check_col(int type, t_parse *parse, char *line)
 {

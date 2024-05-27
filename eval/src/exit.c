@@ -1,4 +1,4 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	exit_cub3d(t_god *god, int exit_code)
 {

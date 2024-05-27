@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 22:32:01 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 23:56:03 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	check_type(t_game *game)
 		error_exit("check_type map error");
 	if ((game->parse.ceiling_color == NO_COLOR)
 		|| (game->parse.floor_color == NO_COLOR))
-				error_exit("Ceiling and Floor color wasn't parsed!");
+		error_exit("Ceiling and Floor color wasn't parsed!");
 	if (check_tex(game) == ERROR)
 		error_exit("NO,SO,EA,WE direction must be different each other!");
 	i = -1;

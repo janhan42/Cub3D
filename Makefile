@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/27 22:38:48 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/27 23:33:12 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,8 @@ MLX_DIR			=		mlx
 
 SRCS_MAN		=		print_info.c											\
 						./srcs/main.c											\
+						./srcs/0_parse/check_parse.c							\
+						./srcs/0_parse/check_utils.c							\
 						./srcs/0_parse/parse.c									\
 						./srcs/0_parse/parse_utils.c							\
 						./srcs/0_parse/parse_utils2.c							\

@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 static int	*load_image_malloc(t_god *god, char *path, t_img *img, int i)
 {

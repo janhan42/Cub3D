@@ -1,4 +1,4 @@
-#include "cub3d_bonus.h"
+#include "../includes_bonus/cub3d_bonus.h"
 
 int	draw_sky(t_god *god, int ray_num, int wall_top, int color)
 {

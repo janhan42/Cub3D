@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:59:28 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 22:39:08 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/27 23:56:18 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ int	is_upper(char c)
 
 int	is_space_around_position(t_game *game, int row, int col)
 {
-	if (row <= 0 || row >= game->parse.row || col <= 0 || col >= game->parse.col)
+	if (row <= 0 || row >= game->parse.row
+		|| col <= 0 || col >= game->parse.col)
 		return (FAILURE);
 	else if (game->parse.map[row][col + 1] == ' '
 		|| game->parse.map[row][col + 1] == '\0'
