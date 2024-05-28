@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/28 23:56:13 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/29 00:44:45 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -121,28 +121,28 @@ bonus :
 	make all FLAG=1
 
 $(NAME) : $(OBJS_FILES)
-	@echo $(CURSIVE)$(YELLOW) "      - Making $(NAME) Game -" $(NONE)
+	@echo $(CURSIVE)$(YELLOW) "		- Making $(NAME) Game -" $(NONE)
 	@make -C $(LIBFT_DIR)
 	@make -C $(MLX_DIR)
 	@$(CC) $(CFLAGS) $(LIBFT_A) $(INCLUDE)  $^ -o $@
 	@install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
-	@echo $(CURSIVE)$(YELLOW) "        - Compiling $(NAME) -" $(NONE)
-	@echo $(GREEN) "            - Complete -"$(NONE)
+	@echo $(CURSIVE)$(YELLOW) "		- Compiling $(NAME) -" $(NONE)
+	@echo $(GREEN) "		- Complete -"$(NONE)
 
 %.o : %.c $(HEADER)
-	@echo $(CURSIVE)$(YELLOW) "      - Making object files -" $(NONE)
+	@echo $(CURSIVE)$(YELLOW) "		- Making object files -" $(NONE)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean :
 	@rm -fr $(OBJS_MAND) $(OBJS_BONUS)
 	@make clean -C $(LIBFT_DIR)
-	@echo $(CURSIVE)$(BLUE) "     - clean OBJ files -" $(NONE)
+	@echo $(CURSIVE)$(BLUE) "		- clean OBJ files -" $(NONE)
 
 fclean : clean
 	@rm -fr $(NAME)
 	@make fclean -C $(LIBFT_DIR)
 	@make clean -C $(MLX_DIR)
-	@echo $(CURSIVE)$(PURPLE)"      - clean $(NAME) file -"$(NONE)
+	@echo $(CURSIVE)$(PURPLE)"		- clean $(NAME) file -"$(NONE)
 
 re	:
 	@make -C $(LIBFT_DIR)

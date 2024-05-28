@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/08 13:40:39 by janhan            #+#    #+#              #
-#    Updated: 2024/03/22 19:23:43 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/29 00:44:18 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,21 +71,22 @@ DELETELINE='\033[K;
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	@echo $(CURSIVE)$(YELLOW) "      - Making $(NAME) -" $(NONE)
+	@echo $(CURSIVE)$(YELLOW) "		- Making $(NAME) -" $(NONE)
 	@ar cr $@ $^
-	@echo $(CURSIVE)$(YELLOW) "      - Compiling $(NAME) -" $(NONE)
-	@echo $(GREEN) "      - Libft Complete -"$(NONE)
+	@echo $(CURSIVE)$(YELLOW) "		- Compiling $(NAME) -" $(NONE)
+	@echo $(GREEN) "		- Libft Complete -"$(NONE)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD)
+	@echo $(CURSIVE)$(YELLOW) "		- Making object files -" $(NONE)
+	@$(CC) $(CFLAGS) -c $< -o $@ -I$(HEAD)
 
 clean :
 	@rm -f $(OBJS)
-	@echo $(CURSIVE)$(BLUE) "      - clean OBJ files -" $(NONE)
+	@echo $(CURSIVE)$(BLUE) "		- clean OBJ files -" $(NONE)
 
 fclean : clean
 	@rm -f $(NAME)
-	@echo $(CURSIVE)$(PURPLE)"       - clean $(NAME) file -"$(NONE)
+	@echo $(CURSIVE)$(PURPLE)"		- clean $(NAME) file -"$(NONE)
 re :
 	make fclean
 	make all

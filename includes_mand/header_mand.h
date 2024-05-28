@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/29 00:02:43 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/29 00:42:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ typedef struct s_game
 	t_img		*main_menu;
 	t_ray_dest	*ray_info;
 	t_player	*player;
-	e_game_mode	mode;
+	t_game_mode	mode;
 	t_img		*texture;
 	double		frame_time;
 	int			frame;
