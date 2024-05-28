@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:26:51 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 17:26:06 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:12:27 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,12 @@ void	draw_square_on_img(t_img *img, int x, int y, int color)
 		j = 0;
 		while (j < MINI_MAP_PIXEL)
 		{
-			put_pixel_on_img(img, x + j, y + i, color);
+			if (i < 2 || j < 2)
+				put_pixel_on_img(img, x + j, y + i, 0x00333333);
+			else if (i > MINI_MAP_PIXEL - 2 || j > MINI_MAP_PIXEL - 2)
+				put_pixel_on_img(img, x + j, y + i, 0x00333333);
+			else
+				put_pixel_on_img(img, x + j, y + i, color);
 			j++;
 		}
 		i++;

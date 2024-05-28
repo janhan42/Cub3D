@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:25:01 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 20:06:01 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static void	draw_circle(t_img *img, t_game *game)
 		while (j < r)
 		{
 			if (i * i + j * j <= r * r)
-				put_pixel_on_img(img, game->player->player_x
+				put_pixel_on_img(img, 352
 					/ (int)(PIXEL / MINI_MAP_PIXEL) + j,
-					game->player->player_y
+					352
 					/ (int)(PIXEL / MINI_MAP_PIXEL) + i, 0x00FF0000);
 			j++;
 		}
@@ -41,13 +41,13 @@ void	render_map_player(t_img *img, t_game *game)
 	t_2dot	dots;
 
 	draw_circle(img, game);
-	dots.start_x = game->player->player_x
+	dots.start_x = 352
 		/ (int)(PIXEL / MINI_MAP_PIXEL);
-	dots.start_y = game->player->player_y
+	dots.start_y = 352
 		/ (int)(PIXEL / MINI_MAP_PIXEL);
-	dots.dest_x = game->player->player_x
+	dots.dest_x = 352.0
 		/ (int)(PIXEL / MINI_MAP_PIXEL) + 20 * cos(game->player->player_rad);
-	dots.dest_y = game->player->player_y
+	dots.dest_y = 352.0
 		/ (int)(PIXEL / MINI_MAP_PIXEL) + 20 * sin(game->player->player_rad);
 	draw_line(img, dots, 0x00FF0000);
 	mlx_put_image_to_window(game->mlx,
