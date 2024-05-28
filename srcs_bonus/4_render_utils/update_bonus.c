@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:39:36 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:27:50 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,24 @@ void	game_mouse_update(t_game *game)
 void	render_game(t_game *game)
 {
 	render_3d(game);
-	//render_mini_map(game->minimap_img, game->map);
-	render_mini_map(game);
-	render_map_player(game->minimap_img, game);
+	// if (game->full_map_x)
+	// {
+	// 	render_mini_map(game);
+	// 	render_map_player(game->minimap_img, game);
+	// }
+	// else
+	// {
+	// 	render_mini_map_center(game);
+	// 	render_map_player_center(game->minimap_img, game);
+	// }
+	render_mini_map_center(game);
+	if (game->full_map == TRUE)
+		render_map_player(game->minimap_img, game);
+	else
+		if (game->full_map_x == 0)
+			render_map_player_center(game->minimap_img, game);
+	mlx_put_image_to_window(game->mlx,
+		game->mlx_win, game->minimap_img->img, 0, 0);
 	render_weapon(game);
 }
 

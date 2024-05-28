@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:24:03 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:35:39 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,13 @@ int	key_hook(int keycode, t_game *game)
 		game->player->move_a = TRUE;
 	if (keycode == KEY_D)
 		game->player->move_d = TRUE;
+	if (keycode == KEY_M)
+	{
+		if (game->full_map == FALSE)
+			game->full_map = MAP_SIZE_UP;
+		else if (game->full_map == TRUE)
+			game->full_map = MAP_SIZE_DOWN;
+	}
 	return (0);
 }
 

@@ -6,13 +6,13 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 20:06:01 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:27:41 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-static void	draw_circle(t_img *img, t_game *game)
+static void	draw_circle(t_img *img, t_game *game, int x, int y)
 {
 	int	r;
 	int	i;
@@ -26,9 +26,9 @@ static void	draw_circle(t_img *img, t_game *game)
 		while (j < r)
 		{
 			if (i * i + j * j <= r * r)
-				put_pixel_on_img(img, 352
+				put_pixel_on_img(img, x
 					/ (int)(PIXEL / MINI_MAP_PIXEL) + j,
-					352
+					y
 					/ (int)(PIXEL / MINI_MAP_PIXEL) + i, 0x00FF0000);
 			j++;
 		}
@@ -40,7 +40,23 @@ void	render_map_player(t_img *img, t_game *game)
 {
 	t_2dot	dots;
 
-	draw_circle(img, game);
+	draw_circle(img, game, game->player->player_x, game->player->player_y);
+	dots.start_x = game->player->player_x
+		/ (int)(PIXEL / MINI_MAP_PIXEL);
+	dots.start_y = game->player->player_y
+		/ (int)(PIXEL / MINI_MAP_PIXEL);
+	dots.dest_x = game->player->player_x
+		/ (int)(PIXEL / MINI_MAP_PIXEL) + 20 * cos(game->player->player_rad);
+	dots.dest_y = game->player->player_y
+		/ (int)(PIXEL / MINI_MAP_PIXEL) + 20 * sin(game->player->player_rad);
+	draw_line(img, dots, 0x00FF0000);
+}
+
+void	render_map_player_center(t_img *img, t_game *game)
+{
+	t_2dot	dots;
+
+	draw_circle(img, game, 352, 352);
 	dots.start_x = 352
 		/ (int)(PIXEL / MINI_MAP_PIXEL);
 	dots.start_y = 352
@@ -50,6 +66,4 @@ void	render_map_player(t_img *img, t_game *game)
 	dots.dest_y = 352.0
 		/ (int)(PIXEL / MINI_MAP_PIXEL) + 20 * sin(game->player->player_rad);
 	draw_line(img, dots, 0x00FF0000);
-	mlx_put_image_to_window(game->mlx,
-		game->mlx_win, game->minimap_img->img, 0, 0);
 }

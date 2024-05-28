@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 19:33:19 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:33:49 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	init_game(t_game *game)
 	game->mlx_win = mlx_new_window(game->mlx, WINDOW_W,
 			WINDOW_H, "cub3d");
 	printf("------------1-------------\n");
-	game->minimap_img = make_image(game, (MINI_MAP_RADIUS * 2 + 1) * MINI_MAP_PIXEL,
-			(MINI_MAP_RADIUS * 2 + 1) * MINI_MAP_PIXEL);
+	// game->minimap_img = make_image(game, (MINI_MAP_RADIUS * 2 + 1) * MINI_MAP_PIXEL,
+	// 		(MINI_MAP_RADIUS * 2 + 1) * MINI_MAP_PIXEL);
 	printf("------------1-------------\n");
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	init_mouse(game);
@@ -58,6 +58,9 @@ void	init_game(t_game *game)
 	game->frame = 0;
 	game->mode = INTRO;
 	game->object_count = 0;
+	game->full_map = FALSE;
+	game->full_map_x = 0;
+	game->full_map_y = 0;
 	if (game->main_background->img == NULL)
 		printf("ERROR");
 	print_game_info(game);

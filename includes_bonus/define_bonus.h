@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:51:00 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:35:02 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define WINDOW_W 1920
 # define WINDOW_H 1080
 # define MAX_DISTANCE 10000
+# define MAP_SIZE_UP 2
+# define MAP_SIZE_DOWN 3
 
 /*************************************************************/
 /*========               parse define                ========*/

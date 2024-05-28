@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 17:39:57 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 21:33:49 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -247,6 +247,10 @@ typedef struct s_game		/* 메인 구조체 */
 	t_ray_dest	*ray_info;			//	ray 계산용 구조체
 	t_player	*player;			//	PLAYER 구조체
 	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
+	int			full_map;
+	int			map_resizing;
+	int			full_map_x;
+	int			full_map_y;
 	/* TEST */
 	t_object	**objects;
 	t_img		*object_texture;
@@ -325,9 +329,10 @@ void	render(t_game *game, double distance, int time, int side);
 void	render_texture(t_game *game, t_dest *dest, int t);
 int		color_spoid(int x, int y, t_img *img);
 void	render_3d(t_game *game);
-//void	render_mini_map(t_img *img, char **map);
 void	render_mini_map(t_game *game);
+void	render_mini_map_center(t_game *game);
 void	render_map_player(t_img *img, t_game *game);
+void	render_map_player_center(t_img *img, t_game *game);
 int		render_weapon(t_game *game);
 t_img	*get_texture(t_game *game, t_dest *dest);
 
