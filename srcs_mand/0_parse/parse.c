@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 23:55:32 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 12:59:59 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ int	parse_file(t_game *game, const char *cub_file_path)
 	p.gnl_ret = get_next_line(p.fd, &p.line);
 	while (p.gnl_ret > 0)
 	{
-		printf("%s\n", p.line);
 		p.parse_type = check_parse_type(p.line);
 		if (p.parse_type == FAILURE && is_blank_line(p.line))
 			free(p.line);

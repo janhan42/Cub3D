@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 23:32:37 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:33:41 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@
  */
 void	init_map(t_game *game, int ac, char **av)
 {
-	if (ac != 2)
-		error_exit("usage \"./cub mapfile.cub\"");
-	if (parse_file(game, av[1]) == FAILURE)
-		exit(1);
-	if (check_parse(game) == FAILURE)
-		exit(1);
 	game->map = game->parse.map;
 	print_map_info(game->map);
 	game->map_len_w = game->parse.col;

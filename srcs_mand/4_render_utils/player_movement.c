@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:01:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:19:34 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 16:57:31 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void	player_movement(t_game *game)
 		game->player->player_x += wall_collision(game, 0 + 2 + 1);
 		game->player->player_y += wall_collision(game, 4 + 0 + 0);
 	}
+	game->frame++;
 }

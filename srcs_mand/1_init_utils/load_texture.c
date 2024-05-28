@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 07:51:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 23:30:34 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 16:51:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,22 +95,22 @@ static void	load_door_texture(t_game *game, t_img *tmp)
 static void	load_wall_texture(t_game *game, t_img *tmp)
 {
 	tmp[EAST].img = mlx_png_file_to_image(game->mlx,
-			"resources/textures/1.png", &tmp[EAST].width, &tmp[EAST].height);
+			game->parse.tex[0].tex_path, &tmp[EAST].width, &tmp[EAST].height);
 	tmp[EAST].addr = mlx_get_data_addr(tmp[EAST].img,
 			&tmp[EAST].bit_per_pixel,
 			&tmp[EAST].line_length, &tmp[EAST].endian);
 	tmp[NORTH].img = mlx_png_file_to_image(game->mlx,
-			"resources/textures/2.png", &tmp[NORTH].width, &tmp[NORTH].height);
+			game->parse.tex[1].tex_path, &tmp[NORTH].width, &tmp[NORTH].height);
 	tmp[NORTH].addr = mlx_get_data_addr(tmp[NORTH].img,
 			&tmp[NORTH].bit_per_pixel,
 			&tmp[NORTH].line_length, &tmp[NORTH].endian);
 	tmp[WEST].img = mlx_png_file_to_image(game->mlx,
-			"resources/textures/3.png", &tmp[WEST].width, &tmp[WEST].height);
+			game->parse.tex[2].tex_path, &tmp[WEST].width, &tmp[WEST].height);
 	tmp[WEST].addr = mlx_get_data_addr(tmp[WEST].img,
 			&tmp[WEST].bit_per_pixel,
 			&tmp[WEST].line_length, &tmp[WEST].endian);
 	tmp[SOUTH].img = mlx_png_file_to_image(game->mlx,
-			"resources/textures/5.png", &tmp[SOUTH].width, &tmp[SOUTH].height);
+			game->parse.tex[3].tex_path, &tmp[SOUTH].width, &tmp[SOUTH].height);
 	tmp[SOUTH].addr = mlx_get_data_addr(tmp[SOUTH].img,
 			&tmp[SOUTH].bit_per_pixel,
 			&tmp[SOUTH].line_length, &tmp[SOUTH].endian);

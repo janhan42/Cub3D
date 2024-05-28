@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:27:02 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 15:33:15 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	draw_circle(t_img *img, t_game *game)
 	int	i;
 	int	j;
 
-	r = 8;
+	r = MINI_MAP_PIXEL / 4;
 	i = -r;
 	while (i < r)
 	{

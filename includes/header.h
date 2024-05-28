@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 23:58:06 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 16:55:19 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_vec2d /* vector double */
 	double y;
 }	t_vec2d;
 
-struct s_vec2u		/* vector usigned int */
+typedef struct s_vec2u		/* vector usigned int */
 {
 	unsigned int x;
 	unsigned int y;
