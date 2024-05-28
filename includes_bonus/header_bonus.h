@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 17:20:52 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 17:39:57 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -325,7 +325,8 @@ void	render(t_game *game, double distance, int time, int side);
 void	render_texture(t_game *game, t_dest *dest, int t);
 int		color_spoid(int x, int y, t_img *img);
 void	render_3d(t_game *game);
-void	render_mini_map(t_img *img, char **map);
+//void	render_mini_map(t_img *img, char **map);
+void	render_mini_map(t_game *game);
 void	render_map_player(t_img *img, t_game *game);
 int		render_weapon(t_game *game);
 t_img	*get_texture(t_game *game, t_dest *dest);
