@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 07:51:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 18:40:21 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/29 00:00:20 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,4 @@ void	load_texture(t_game *game)
 	load_door_texture(game, tmp);
 	load_menu_texture(game);
 	game->texture = tmp;
-
 }

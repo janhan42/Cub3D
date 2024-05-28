@@ -6,34 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 21:27:50 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 23:40:06 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-//void	draw_background(t_game *game)
-//{
-//	int	x;
-//	int	y;
-//	int	mid;
-
-//	y = 0;
-//	mid = 1080 / 2 + game->player->player_fov_off_y;
-//	while (y < WINDOW_H)
-//	{
-//		x = 0;
-//		while (x < WINDOW_W)
-//		{
-//			if (y > mid)
-//				put_pixel_on_img(game->background, x, y, game->floor_color);
-//			else
-//				put_pixel_on_img(game->background, x, y, game->ceiling_color);
-//			x++;
-//		}
-//		y++;
-//	}
-//}
 void	game_mouse_update(t_game *game)
 {
 	t_vec2i	mouse_diff;
@@ -67,16 +45,6 @@ void	game_mouse_update(t_game *game)
 void	render_game(t_game *game)
 {
 	render_3d(game);
-	// if (game->full_map_x)
-	// {
-	// 	render_mini_map(game);
-	// 	render_map_player(game->minimap_img, game);
-	// }
-	// else
-	// {
-	// 	render_mini_map_center(game);
-	// 	render_map_player_center(game->minimap_img, game);
-	// }
 	render_mini_map_center(game);
 	if (game->full_map == TRUE)
 		render_map_player(game->minimap_img, game);

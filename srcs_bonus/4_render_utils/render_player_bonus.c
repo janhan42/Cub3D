@@ -6,13 +6,13 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:27:21 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 21:27:41 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:00:04 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-static void	draw_circle(t_img *img, t_game *game, int x, int y)
+static void	draw_circle(t_img *img, int x, int y)
 {
 	int	r;
 	int	i;
@@ -40,7 +40,7 @@ void	render_map_player(t_img *img, t_game *game)
 {
 	t_2dot	dots;
 
-	draw_circle(img, game, game->player->player_x, game->player->player_y);
+	draw_circle(img, game->player->player_x, game->player->player_y);
 	dots.start_x = game->player->player_x
 		/ (int)(PIXEL / MINI_MAP_PIXEL);
 	dots.start_y = game->player->player_y
@@ -56,7 +56,7 @@ void	render_map_player_center(t_img *img, t_game *game)
 {
 	t_2dot	dots;
 
-	draw_circle(img, game, 352, 352);
+	draw_circle(img, 352, 352);
 	dots.start_x = 352
 		/ (int)(PIXEL / MINI_MAP_PIXEL);
 	dots.start_y = 352

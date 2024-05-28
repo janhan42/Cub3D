@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 17:23:21 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/28 23:57:29 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  * @param ac
  * @param av
  */
-void	init_map(t_game *game, int ac, char **av)
+void	init_map(t_game *game)
 {
 	game->map = game->parse.map;
 	print_map_info(game->map);

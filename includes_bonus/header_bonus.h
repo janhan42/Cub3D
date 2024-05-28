@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 21:33:49 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:03:09 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,14 @@ typedef struct s_gnl
 	ssize_t	offset;
 	ssize_t	index;
 }	t_gnl;
+
+typedef struct s_single_minimap
+{
+	int	mx;
+	int	my;
+	int	x;
+	int	y;
+}	t_single_minimap;
 /*------------------------------*/
 
 typedef struct s_ray_dest		/* ray 계산용 구조체 */
@@ -288,7 +296,7 @@ int		check_parse(t_game *game);
 /*========                   init                    ========*/
 /*************************************************************/
 void	init(t_game *game, int ac, char **av);
-void	init_map(t_game *game, int ac, char **av);
+void	init_map(t_game *game);
 void	init_game(t_game *game);
 void	init_player(t_game *game);
 void	init_multi_xpm_img(t_game *game, t_img **img, char *file_path, int size);
@@ -329,6 +337,7 @@ void	render(t_game *game, double distance, int time, int side);
 void	render_texture(t_game *game, t_dest *dest, int t);
 int		color_spoid(int x, int y, t_img *img);
 void	render_3d(t_game *game);
+void	draw_map_squre(t_game *game, t_single_minimap *m);
 void	render_mini_map(t_game *game);
 void	render_mini_map_center(t_game *game);
 void	render_map_player(t_img *img, t_game *game);
