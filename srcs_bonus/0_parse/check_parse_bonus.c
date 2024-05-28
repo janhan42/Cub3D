@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:21:37 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 01:28:56 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int	check_bonus_symbol(t_game *game, int row, int col, int value)
 		if (is_space_around_position(game, row, col) == FAILURE)
 			error_exit("Empty space next to 0!");
 	}
+	if (ft_strchr("L", value) != NULL)
+		game->object_count++;
 	return (SUCCESS);
 }
 
@@ -35,7 +37,7 @@ static int	check_symbol2(t_game *game, int row, int col)
 			error_exit("Empty space next to NSEW!");
 		game->parse.is_d = TRUE;
 	}
-	else if (ft_strchr("0", value) != NULL)
+	else if (ft_strchr("0L", value) != NULL)
 		if (check_bonus_symbol(game, row, col, value) == FAILURE)
 			return (FAILURE);
 	return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 23:39:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/29 01:26:33 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	init_game(t_game *game)
 	game->s_time = 0;
 	game->frame = 0;
 	game->mode = INTRO;
-	game->object_count = 0;
 	game->full_map = FALSE;
 	game->full_map_x = 0;
 	game->full_map_y = 0;

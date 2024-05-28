@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:23:28 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:58:01 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ static void	set_object_position(t_object *object, char **map, int x, int y)
 	object->img_pos_z = 0;
 }
 
-static void	get_object_position(char **map, t_object *object)
+static void	get_object_position(char **map, t_object **object)
 {
 	int	y;
 	int	x;
+	int	i;
+
 
 	y = 0;
+	i = 0;
 	while (map[y])
 	{
 		x = 0;
@@ -41,8 +44,8 @@ static void	get_object_position(char **map, t_object *object)
 		{
 			if (map[y][x] == 'G' || map[y][x] == 'R' || map[y][x] == 'L')
 			{
-				set_object_position(object, map, x, y);
-				return ;
+				set_object_position(object[i], map, x, y);
+				i++;
 			}
 			x++;
 		}
@@ -66,9 +69,9 @@ void	init_object(t_game *game)
 		game->objects[i] = (t_object *)malloc(sizeof(t_object));
 		if (game->objects == NULL)
 			error_exit("init_object malloc failed");
-		get_object_position(game->map, game->objects[i]);
 		i++;
 	}
+	get_object_position(game->map, game->objects);
 	game->object_texture = (t_img *)malloc(sizeof(t_img));
 	game->object_texture->img = mlx_xpm_file_to_image(game->mlx,
 			"resources/sprites/static_sprites/candlebra.xpm",

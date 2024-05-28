@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/29 00:03:09 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/29 04:49:51 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,6 +206,7 @@ typedef struct s_object		/* object struct */
 	double			img_pos_x;	//	이미지의 좌표 x
 	double			img_pos_y;	//	이미지의 좌표 y
 	double			img_pos_z;	//	이미지의 좌표 z
+	double			distance;
 }	t_object;
 
 typedef struct s_texture
@@ -259,9 +260,11 @@ typedef struct s_game		/* 메인 구조체 */
 	int			map_resizing;
 	int			full_map_x;
 	int			full_map_y;
+
+	int			w_dist[WINDOW_W];
 	/* TEST */
 	t_object	**objects;
-	t_img		*object_texture;
+	t_img		*object_texture;	// normal light;
 	int			object_count;
 	t_img		*texture;			//	texture TEST
 	pthread_t	sound_test;			//	sound TEST ptrhead

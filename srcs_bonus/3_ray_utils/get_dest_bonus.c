@@ -6,12 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:24:15 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 06:13:04 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
-#include <math.h>
 
 /*
 	맵 파일에서의 좌표 및 ray의 좌표를 확인후 거리 계산
