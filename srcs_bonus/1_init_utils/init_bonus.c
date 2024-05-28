@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:13:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:22:51 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 00:35:22 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init(t_game *game, int ac, char **av)
 		exit(1);
 	if (check_parse(game) == FAILURE)
 		exit(1);
-	init_map(game, ac, av);
+	init_map(game);
 	init_game(game);
 	init_player(game);
 	init_object(game);

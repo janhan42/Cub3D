@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:26:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/29 00:05:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/29 00:41:15 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,13 @@ void	render_mini_map_center(t_game *game)
 	full_map_update(game);
 	set_position_y(game, &m, py);
 	m.y = 0;
-	while (m.my <= py + MINI_MAP_RADIUS + game->full_map_y)
+	while (m.my <= py + MINI_MAP_RADIUS + game->full_map_y
+			|| (py < MINI_MAP_RADIUS && m.my <= MINI_MAP_RADIUS + game->full_map_y + MINI_MAP_RADIUS))
 	{
 		m.x = 0;
 		set_position_x(game, &m, px);
-		while (m.mx <= px + MINI_MAP_RADIUS + game->full_map_x)
+		while (m.mx <= px + MINI_MAP_RADIUS + game->full_map_x
+				|| (px < MINI_MAP_RADIUS && m.mx <= MINI_MAP_RADIUS + game->full_map_x + MINI_MAP_RADIUS))
 		{
 			draw_map_squre(game, &m);
 			m.x += MINI_MAP_PIXEL;
