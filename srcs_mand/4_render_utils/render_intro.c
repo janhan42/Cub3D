@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:40:50 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:26:41 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 static void	draw_str(t_game *game, int x, int y)
 {

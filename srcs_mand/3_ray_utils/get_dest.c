@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 22:12:16 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:59:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 #include <math.h>
 
 /*
@@ -27,14 +27,12 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 			break ;
 		if (ray->mx >= 0 && ray->mx < game->map_width / 64
 			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& (ft_strchr("1D", game->map[ray->my][ray->mx])) != NULL)
+			&& (ft_strchr("1", game->map[ray->my][ray->mx])) != NULL)
 		{
 			ray->hx = ray->rx;
 			ray->hy = ray->ry;
 			ray->distance_h = dist(x, y, ray->hx, ray->hy);
 			ray->dof = 100;
-			if (game->map[ray->my][ray->mx] == 'D')
-				ray->is_h_door = 1;
 		}
 		else
 		{
@@ -59,14 +57,12 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 			break ;
 		if (ray->mx >= 0 && ray->mx < game->map_width / 64
 			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& (ft_strchr("1D", game->map[ray->my][ray->mx])) != NULL)
+			&& (ft_strchr("1", game->map[ray->my][ray->mx])) != NULL)
 		{
 			ray->vx = ray->rx;
 			ray->vy = ray->ry;
 			ray->distance_v = dist(x, y, ray->vx, ray->vy);
 			ray->dof = 100;
-			if (game->map[ray->my][ray->mx] == 'D')
-				ray->is_v_door = 1;
 		}
 		else
 		{
@@ -86,9 +82,7 @@ static void	compare_distance_sub(t_game *game, t_dest *dest, double rad)
 		dest->distance = game->ray_info->distance_v;
 		dest->y_vert %= 1;
 		dest->offset = dest->y_vert;
-		if (game->ray_info->is_v_door)
-			dest->wall_type = DOOR;
-		else if (rad > M_PI_2 && rad < M_PI + M_PI_2)
+		if (rad > M_PI_2 && rad < M_PI + M_PI_2)
 			dest->wall_type = WEST;
 		else
 			dest->wall_type = EAST;
@@ -105,9 +99,7 @@ static void	compare_distance(t_game *game, t_dest *dest, double rad)
 		dest->x = game->ray_info->hx;
 		dest->y = game->ray_info->hy;
 		dest->distance = game->ray_info->distance_h;
-		if (game->ray_info->is_h_door)
-			dest->wall_type = DOOR;
-		else if (rad > 0 && rad < M_PI)
+		if (rad > 0 && rad < M_PI)
 			dest->wall_type = NORTH;
 		else
 			dest->wall_type = SOUTH;
@@ -131,8 +123,6 @@ t_dest	*get_dest(double x, double y, double rad, t_game *game)
 		rad -= 2 * M_PI;
 	if (rad < 0)
 		rad += 2 * M_PI;
-	game->ray_info->is_h_door = 0;
-	game->ray_info->is_v_door = 0;
 	check_horizion_init(x, y, rad, game->ray_info);
 	check_horizion(game, game->ray_info, x, y);
 	check_vertical_init(x, y, rad, game->ray_info);

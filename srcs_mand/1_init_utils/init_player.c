@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:11:15 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 15:18:38 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:46:03 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 static int	get_player_position_sub(char **map, t_player *player, int x, int y)
 {
@@ -78,21 +78,8 @@ void	init_player(t_game *game)
 	if (game->player == NULL)
 		error_exit("init_player -> player malloc failed");
 	get_player_position(game->map, game->player);
-	game->player->shotgun = (t_img **)malloc(sizeof(t_img *) * 6);
-	if (game->player->shotgun == NULL)
-		error_exit("init_player shotgun malloc failed");
-	init_multi_xpm_img(game, game->player->shotgun,
-		"resources/sprites/weapon/shotgun/", 6);
-	print_img_info(game->player->shotgun[0], "shotgun[0]");
-	game->player->shot_time = 0;
-	game->player->shot_frame = 0;
-	game->player->shot = FALSE;
-	game->player->shot_sound = FALSE;
 	game->player->move_w = FALSE;
 	game->player->move_s = FALSE;
 	game->player->move_a = FALSE;
 	game->player->move_d = FALSE;
-	game->player->player_fov_off_y = 0;
-	print_player_info(game->player);
-	printf("--------------------init_player OK--------------------\n");
 }

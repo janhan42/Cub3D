@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 16:01:07 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 static int	check_bonus_symbol(t_game *game, int row, int col, int value)
 {
