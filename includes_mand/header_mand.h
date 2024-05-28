@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 17:57:02 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 18:34:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,7 +262,6 @@ void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray);
 /*************************************************************/
 int		key_hook(int keycode, t_game *game);
 int		key_hook_release(int keycode, t_game *game);
-int		mouse_handle(int button, int x, int y, t_game *game);
 
 /*************************************************************/
 /*========                render utils               ========*/
@@ -324,8 +323,6 @@ void	print_map_info(char **map);
 /*************************************************************/
 /*========                   TEST                    ========*/
 /*************************************************************/
-void	init_object(t_game *game);
-t_img	*get_texture(t_game *game, t_dest *dest);
 void	render_sprite_object(t_game *game);
 
 #endif

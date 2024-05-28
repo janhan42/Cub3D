@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:44:28 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 18:40:16 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	init_ray_result(t_game *game)
 {
 	game->ray_info->ray_result = ft_calloc(3, sizeof(double));
-	print_ray_result_info(game->ray_info->ray_result);
 }
 
 static void	init_ray_info(t_game *game)
@@ -23,7 +22,6 @@ static void	init_ray_info(t_game *game)
 	game->ray_info = (t_ray_dest *)ft_calloc(1, sizeof(t_ray_dest));
 	if (game->ray_info == NULL)
 		error_exit("init_ray_info malloc failed");
-	print_ray_info(game->ray_info);
 	init_ray_result(game);
 }
 

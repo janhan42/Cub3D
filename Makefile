@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/28 17:17:09 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/28 18:41:23 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,9 +16,10 @@ CC				=		cc
 
 CFLAGS			=		#-Wall -Wextra -Werror
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
-HEADER			=		./includes/header.h										\
-						./includes/define.h
-
+HEADER_MAND		=		./includes_mand/header_mand.h							\
+						./includes_mand/define_mand.h
+HEADER_BONUS	=		./includes_bonus/header_bonus.h							\
+						./includes_bonus/define_bonus.h
 LIBFT_DIR		=		libft
 LIBFT_A			=		libft/libft.a
 
@@ -36,25 +37,18 @@ SRCS_MAN		=		./srcs_mand/main.c											\
 						./srcs_mand/1_init_utils/init.c								\
 						./srcs_mand/1_init_utils/init_game.c						\
 						./srcs_mand/1_init_utils/init_map.c							\
-						./srcs_mand/1_init_utils/init_object.c						\
 						./srcs_mand/1_init_utils/init_player.c						\
 						./srcs_mand/1_init_utils/load_texture.c						\
 						./srcs_mand/1_init_utils/multi_img_init.c					\
 						./srcs_mand/2_hook_utils/key_hook.c							\
-						./srcs_mand/2_hook_utils/mouse_handle.c						\
 						./srcs_mand/3_ray_utils/get_dest.c							\
 						./srcs_mand/3_ray_utils/get_dest_sub.c						\
 						./srcs_mand/4_render_utils/get_texture.c					\
-						./srcs_mand/4_render_utils/object_render.c					\
 						./srcs_mand/4_render_utils/player_movement.c				\
 						./srcs_mand/4_render_utils/render_intro.c					\
-						./srcs_mand/4_render_utils/render_mini_map.c				\
-						./srcs_mand/4_render_utils/render_player.c					\
 						./srcs_mand/4_render_utils/render_texture.c					\
 						./srcs_mand/4_render_utils/render3d.c						\
-						./srcs_mand/4_render_utils/sprite_handle.c					\
 						./srcs_mand/4_render_utils/update.c							\
-						./srcs_mand/5_thread_utils/thread_utils.c					\
 						./srcs_mand/utils/color_rgb.c								\
 						./srcs_mand/utils/dist.c									\
 						./srcs_mand/utils/draw_utils.c								\
@@ -65,44 +59,44 @@ SRCS_MAN		=		./srcs_mand/main.c											\
 						./srcs_mand/utils/make_img.c
 OBJS_MAND		=	$(SRCS_MAN:.c=.o)
 
-SRCS_BONUS		=		print_info.c												\
-						./srcs_bonus/main.c											\
-						./srcs_bonus/0_parse/check_parse.c							\
-						./srcs_bonus/0_parse/check_utils.c							\
-						./srcs_bonus/0_parse/parse.c								\
-						./srcs_bonus/0_parse/parse_utils.c							\
-						./srcs_bonus/0_parse/parse_utils2.c							\
-						./srcs_bonus/0_parse/parse_utils3.c							\
-						./srcs_bonus/1_init_utils/init.c							\
-						./srcs_bonus/1_init_utils/init_game.c						\
-						./srcs_bonus/1_init_utils/init_map.c						\
-						./srcs_bonus/1_init_utils/init_object.c						\
-						./srcs_bonus/1_init_utils/init_player.c						\
-						./srcs_bonus/1_init_utils/load_texture.c					\
-						./srcs_bonus/1_init_utils/multi_img_init.c					\
-						./srcs_bonus/2_hook_utils/key_hook.c						\
-						./srcs_bonus/2_hook_utils/mouse_handle.c					\
-						./srcs_bonus/3_ray_utils/get_dest.c							\
-						./srcs_bonus/3_ray_utils/get_dest_sub.c						\
-						./srcs_bonus/4_render_utils/get_texture.c					\
-						./srcs_bonus/4_render_utils/object_render.c					\
-						./srcs_bonus/4_render_utils/player_movement.c				\
-						./srcs_bonus/4_render_utils/render_intro.c					\
-						./srcs_bonus/4_render_utils/render_mini_map.c				\
-						./srcs_bonus/4_render_utils/render_player.c					\
-						./srcs_bonus/4_render_utils/render_texture.c				\
-						./srcs_bonus/4_render_utils/render3d.c						\
-						./srcs_bonus/4_render_utils/sprite_handle.c					\
-						./srcs_bonus/4_render_utils/update.c						\
-						./srcs_bonus/5_thread_utils/thread_utils.c					\
-						./srcs_bonus/utils/color_rgb.c								\
-						./srcs_bonus/utils/dist.c									\
-						./srcs_bonus/utils/draw_utils.c								\
-						./srcs_bonus/utils/end_program.c							\
-						./srcs_bonus/utils/error_exit.c								\
-						./srcs_bonus/utils/free.c									\
-						./srcs_bonus/utils/get_next_line.c							\
-						./srcs_bonus/utils/make_img.c
+SRCS_BONUS		=		print_info.c													\
+						./srcs_bonus/main_bonus.c										\
+						./srcs_bonus/0_parse/check_parse_bonus.c						\
+						./srcs_bonus/0_parse/check_utils_bonus.c						\
+						./srcs_bonus/0_parse/parse_bonus.c								\
+						./srcs_bonus/0_parse/parse_utils_bonus.c						\
+						./srcs_bonus/0_parse/parse_utils2_bonus.c						\
+						./srcs_bonus/0_parse/parse_utils3_bonus.c						\
+						./srcs_bonus/1_init_utils/init_bonus.c							\
+						./srcs_bonus/1_init_utils/init_game_bonus.c						\
+						./srcs_bonus/1_init_utils/init_map_bonus.c						\
+						./srcs_bonus/1_init_utils/init_object_bonus.c					\
+						./srcs_bonus/1_init_utils/init_player_bonus.c					\
+						./srcs_bonus/1_init_utils/load_texture_bonus.c					\
+						./srcs_bonus/1_init_utils/multi_img_init_bonus.c				\
+						./srcs_bonus/2_hook_utils/key_hook_bonus.c						\
+						./srcs_bonus/2_hook_utils/mouse_handle_bonus.c					\
+						./srcs_bonus/3_ray_utils/get_dest_bonus.c						\
+						./srcs_bonus/3_ray_utils/get_dest_sub_bonus.c					\
+						./srcs_bonus/4_render_utils/get_texture_bonus.c					\
+						./srcs_bonus/4_render_utils/object_render_bonus.c				\
+						./srcs_bonus/4_render_utils/player_movement_bonus.c				\
+						./srcs_bonus/4_render_utils/render_intro_bonus.c				\
+						./srcs_bonus/4_render_utils/render_mini_map_bonus.c				\
+						./srcs_bonus/4_render_utils/render_player_bonus.c				\
+						./srcs_bonus/4_render_utils/render_texture_bonus.c				\
+						./srcs_bonus/4_render_utils/render3d_bonus.c					\
+						./srcs_bonus/4_render_utils/sprite_handle_bonus.c				\
+						./srcs_bonus/4_render_utils/update_bonus.c						\
+						./srcs_bonus/5_thread_utils/thread_utils_bonus.c				\
+						./srcs_bonus/utils/color_rgb_bonus.c							\
+						./srcs_bonus/utils/dist_bonus.c									\
+						./srcs_bonus/utils/draw_utils_bonus.c							\
+						./srcs_bonus/utils/end_program_bonus.c							\
+						./srcs_bonus/utils/error_exit_bonus.c							\
+						./srcs_bonus/utils/free_bonus.c									\
+						./srcs_bonus/utils/get_next_line_bonus.c						\
+						./srcs_bonus/utils/make_img_bonus.c
 OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)
 
 ifdef FLAG
@@ -155,4 +149,3 @@ re	:
 	@make all
 
 .PHONY: all make clean fclean bonus re
-
