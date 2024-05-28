@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:01:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 16:57:31 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:56:55 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 /*
  * if W: 0 0 ?
@@ -35,7 +35,7 @@
  * 	2번비트 1, 0 각각 sin cos
  * 	마지막 비트 1, 0 각각 x y
  */
-double	wall_collision(t_game *game, int state)
+static double	wall_collision(t_game *game, int state)
 {
 	double	offset;
 	int		sign;
@@ -75,13 +75,15 @@ void	player_movement(t_game *game)
 	}
 	if (game->player->move_a)
 	{
-		game->player->player_x += wall_collision(game, 4 + 2 + 1);
-		game->player->player_y += wall_collision(game, 0 + 0 + 0);
+		game->player->player_rad -= 0.02;
 	}
 	if (game->player->move_d)
 	{
-		game->player->player_x += wall_collision(game, 0 + 2 + 1);
-		game->player->player_y += wall_collision(game, 4 + 0 + 0);
+		game->player->player_rad += 0.02;
 	}
+	if (game->player->player_rad > M_PI * 2)
+		game->player->player_rad -= 2 * M_PI;
+	else if (game->player->player_rad < 0)
+		game->player->player_rad += 2 * M_PI;
 	game->frame++;
 }

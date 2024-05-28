@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:28:13 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 15:59:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:48:18 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 static void	set_info(t_game *game, t_single_texture *info, t_dest *dest, int t)
 {
@@ -24,8 +24,7 @@ static void	set_info(t_game *game, t_single_texture *info, t_dest *dest, int t)
 		dest->distance = 1;
 	info->line_h = (WINDOW_H / dest->distance) * 100;
 	info->step = 1.0 * game->texture->height / info->line_h;
-	info->h_offset = (int)(WINDOW_H / 2) - (info->line_h / 2)
-		+ game->player->player_fov_off_y;
+	info->h_offset = (int)(WINDOW_H / 2) - (info->line_h / 2);
 	info->step_y = 0;
 	info->y = 0;
 	info->x = t;

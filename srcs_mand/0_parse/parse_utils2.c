@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:46:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 19:37:43 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 int	parse_color2(int *cf, char **color_malloc)
 {

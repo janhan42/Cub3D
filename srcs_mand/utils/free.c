@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:54:40 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 18:48:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 void	free_memory(void *memory)
 {

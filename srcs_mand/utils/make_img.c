@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:00:25 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/27 17:47:27 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 /**
  * @brief

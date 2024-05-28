@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:54:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 15:54:49 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:58:25 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_mand/header_mand.h"
 
 t_img	*get_texture(t_game *game, t_dest *dest)
 {
@@ -23,5 +23,5 @@ t_img	*get_texture(t_game *game, t_dest *dest)
 	if (dest->wall_type == SOUTH)
 		return (&game->texture[SOUTH]);
 	else
-		return (&game->texture[DOOR]);
+		return (NULL);
 }
