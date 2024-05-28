@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/28 15:24:42 by janhan           ###   ########.fr        #
+#    Updated: 2024/05/28 17:17:09 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ MLX_DIR			=		mlx
 
 # SRCS_MAN		=		./test.c
 
-SRCS_MAN		=		print_info.c												\
-						./srcs_mand/main.c											\
+SRCS_MAN		=		./srcs_mand/main.c											\
 						./srcs_mand/0_parse/check_parse.c							\
 						./srcs_mand/0_parse/check_utils.c							\
 						./srcs_mand/0_parse/parse.c									\
@@ -66,7 +65,44 @@ SRCS_MAN		=		print_info.c												\
 						./srcs_mand/utils/make_img.c
 OBJS_MAND		=	$(SRCS_MAN:.c=.o)
 
-SRCS_BONUS		=
+SRCS_BONUS		=		print_info.c												\
+						./srcs_bonus/main.c											\
+						./srcs_bonus/0_parse/check_parse.c							\
+						./srcs_bonus/0_parse/check_utils.c							\
+						./srcs_bonus/0_parse/parse.c								\
+						./srcs_bonus/0_parse/parse_utils.c							\
+						./srcs_bonus/0_parse/parse_utils2.c							\
+						./srcs_bonus/0_parse/parse_utils3.c							\
+						./srcs_bonus/1_init_utils/init.c							\
+						./srcs_bonus/1_init_utils/init_game.c						\
+						./srcs_bonus/1_init_utils/init_map.c						\
+						./srcs_bonus/1_init_utils/init_object.c						\
+						./srcs_bonus/1_init_utils/init_player.c						\
+						./srcs_bonus/1_init_utils/load_texture.c					\
+						./srcs_bonus/1_init_utils/multi_img_init.c					\
+						./srcs_bonus/2_hook_utils/key_hook.c						\
+						./srcs_bonus/2_hook_utils/mouse_handle.c					\
+						./srcs_bonus/3_ray_utils/get_dest.c							\
+						./srcs_bonus/3_ray_utils/get_dest_sub.c						\
+						./srcs_bonus/4_render_utils/get_texture.c					\
+						./srcs_bonus/4_render_utils/object_render.c					\
+						./srcs_bonus/4_render_utils/player_movement.c				\
+						./srcs_bonus/4_render_utils/render_intro.c					\
+						./srcs_bonus/4_render_utils/render_mini_map.c				\
+						./srcs_bonus/4_render_utils/render_player.c					\
+						./srcs_bonus/4_render_utils/render_texture.c				\
+						./srcs_bonus/4_render_utils/render3d.c						\
+						./srcs_bonus/4_render_utils/sprite_handle.c					\
+						./srcs_bonus/4_render_utils/update.c						\
+						./srcs_bonus/5_thread_utils/thread_utils.c					\
+						./srcs_bonus/utils/color_rgb.c								\
+						./srcs_bonus/utils/dist.c									\
+						./srcs_bonus/utils/draw_utils.c								\
+						./srcs_bonus/utils/end_program.c							\
+						./srcs_bonus/utils/error_exit.c								\
+						./srcs_bonus/utils/free.c									\
+						./srcs_bonus/utils/get_next_line.c							\
+						./srcs_bonus/utils/make_img.c
 OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)
 
 ifdef FLAG
