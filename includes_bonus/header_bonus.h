@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header.h                                           :+:      :+:    :+:   */
+/*   header_bonus.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 16:55:19 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:20:52 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_H
-# define HEADER_H
+#ifndef HEADER_BONUS_H
+# define HEADER_BONUS_H
 
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
-# include "define.h"
+# include "define_bonus.h"
 # include <math.h>
 # include <stdio.h>
 # include <pthread.h>

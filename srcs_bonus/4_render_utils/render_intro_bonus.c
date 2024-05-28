@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_intro.c                                     :+:      :+:    :+:   */
+/*   render_intro_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:40:50 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:26:41 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:24:48 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_bonus/header_bonus.h"
 
 static void	draw_str(t_game *game, int x, int y)
 {

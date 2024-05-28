@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   end_program.c                                      :+:      :+:    :+:   */
+/*   end_program_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:31:30 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 17:45:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:26:12 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_bonus/header_bonus.h"
 
 // int	key_press(int key, t_game *game)
 // {

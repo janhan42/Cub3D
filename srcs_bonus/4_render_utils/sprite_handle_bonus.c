@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sprite_handle.c                                    :+:      :+:    :+:   */
+/*   sprite_handle_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 08:21:37 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 16:53:48 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:25:33 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_bonus/header_bonus.h"
 
 static void	render_weapon_idle(t_game *game,
 	t_img *dst_img, t_single_scale *info)

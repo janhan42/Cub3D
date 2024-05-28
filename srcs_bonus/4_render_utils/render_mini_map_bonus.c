@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_mini_map.c                                  :+:      :+:    :+:   */
+/*   render_mini_map_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:26:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 16:57:28 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:24:56 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_bonus/header_bonus.h"
 
 void	render_mini_map(t_img *img, char **map)
 {

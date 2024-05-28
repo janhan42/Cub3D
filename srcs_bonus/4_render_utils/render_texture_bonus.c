@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_texture.c                                   :+:      :+:    :+:   */
+/*   render_texture_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:28:13 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/27 15:59:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:25:27 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_bonus/header_bonus.h"
 
 static void	set_info(t_game *game, t_single_texture *info, t_dest *dest, int t)
 {

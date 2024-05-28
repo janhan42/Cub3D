@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   multi_img_init.c                                   :+:      :+:    :+:   */
+/*   multi_img_init_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:45:54 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/14 11:14:00 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/28 17:23:51 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/header.h"
+#include "../../includes_bonus/header_bonus.h"
 
 static void	init_multi_png_sub(t_game *game, t_img *img, char *path)
 {
