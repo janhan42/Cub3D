@@ -6,24 +6,24 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/29 06:16:14 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/29 12:33:33 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-static int compare(const void *a , const void *b) 
-{ 
+static int compare(const void *a , const void *b)
+{
 	const t_object *obj_a = *(const t_object **)a;
 	const t_object *obj_b = *(const t_object **)b;
 
-    if(obj_a->distance > obj_b->distance)
-        return -1;
-    else if(obj_a->distance < obj_b->distance)
-        return 1;
-    else
-        return 0;
-} 
+	if(obj_a->distance > obj_b->distance)
+		return -1;
+	else if(obj_a->distance < obj_b->distance)
+		return 1;
+	else
+		return 0;
+}
 
 static void	calculate_obj_dist(t_object **obj, t_player *player, int cnt)
 {
@@ -63,7 +63,7 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 	while (i < cnt)
 	{
 		one_obj = obj[i];
-		scale = (double)WINDOW_W/(one_obj->distance * 50);
+		scale = (double)WINDOW_W/(one_obj->distance * 120);
 		width = game->object_texture->width * scale; // 폭 절반임
 		height = game->object_texture->height * scale;
 		obj_rad = atan2(one_obj->object_y - player->player_y, one_obj->object_x - player->player_x);
@@ -108,21 +108,21 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 			// 	render_x++;
 			// }
 			double angle_diff = obj_rad - player->player_rad;
-            if (angle_diff < -M_PI)
-                angle_diff += 2 * M_PI;
-            if (angle_diff > M_PI)
-                angle_diff -= 2 * M_PI;
+			if (angle_diff < -M_PI)
+				angle_diff += 2 * M_PI;
+			if (angle_diff > M_PI)
+				angle_diff -= 2 * M_PI;
 
-            int screen_x = (int)((angle_diff + M_PI / 6) * (WINDOW_W / (M_PI / 3)));
-            int object_start_x = screen_x - width;
-            int object_end_x = screen_x + width;
-            int render_x = object_start_x;
+			int screen_x = (int)((angle_diff + M_PI / 6) * (WINDOW_W / (M_PI / 3)));
+			int object_start_x = screen_x - width;
+			int object_end_x = screen_x + width;
+			int render_x = object_start_x;
 
-            t_2dot dots;
+			t_2dot dots;
 			double step_x;
 			double step_y;
-            while (render_x < object_end_x) // 오브젝트 왼쪽부터 세로로 한줄씩 그리기
-            {
+			while (render_x < object_end_x) // 오브젝트 왼쪽부터 세로로 한줄씩 그리기
+			{
 				step_y = 0;
 				if (game->w_dist[render_x] > one_obj->distance)
 				{
@@ -134,11 +134,13 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 					// 일단은 라인으로 그렸는데
 					// 렌더 텍스쳐 함수에 있는거 그대로 사용해도 될듯?
 
-					int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y;
-					int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y;
-					
+					int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y + height;
+					int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y + height;
+					if (dest_y > WINDOW_H)
+						dest_y = WINDOW_H;
 					while (start_y < dest_y)
 					{
+						printf("setp_x [%d] setp_y [%d] start_y [%d] dest_y [%d]\n",);
 						unsigned int color = color_spoid((int)step_x, (int)step_y, game->object_texture);
 						if ((color & 0xFF000000) != 0xFF000000)
 							put_pixel_on_img(game->render, render_x, start_y, color);
@@ -146,7 +148,7 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 						step_y += (double)game->object_texture->height / (2 * height);
 					}
 				}
-                render_x++;
+				render_x++;
 				step_x += (double)game->object_texture->width / (2 * width);
 			}
 		}
@@ -160,12 +162,12 @@ void	render_sprite_object(t_game *game)
 	calculate_obj_dist(game->objects, game->player, game->object_count);
 	qsort(game->objects, game->object_count, sizeof(t_object *), compare);
 	draw_obj(game->objects, game->object_count, game->player, game);
-	
+
 }
 
 
 /* 높이 : (WINDOW_H / dest->distance) * 50; <- 원래는 곱하기 100이었음
- * 폭   : 
+ * 폭   :
  *
  * 스프라이트의 기존 높이/폭 비율을 유지해야함
  * 기존 이미지 폭 * scale -> 새로 그릴 오브젝트의 폭
