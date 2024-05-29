@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/05/29 04:36:42 by sangshin         ###   ########.fr        #
+#    Updated: 2024/05/29 22:57:21 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -123,7 +123,7 @@ bonus :
 $(NAME) : $(OBJS_FILES)
 	@echo $(CURSIVE)$(YELLOW) "		- Making $(NAME) Game -" $(NONE)
 	@make -C $(LIBFT_DIR)
-	@make -C $(MLX_DIR)
+	@make -S -C $(MLX_DIR)
 	@$(CC) $(CFLAGS) $(LIBFT_A) $(INCLUDE)  $^ -o $@
 	@install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
 	@echo $(CURSIVE)$(YELLOW) "		- Compiling $(NAME) -" $(NONE)
@@ -135,13 +135,13 @@ $(NAME) : $(OBJS_FILES)
 
 clean :
 	@rm -fr $(OBJS_MAND) $(OBJS_BONUS)
-	@make clean -C $(LIBFT_DIR)
+	@make clean -S -C $(LIBFT_DIR)
 	@echo $(CURSIVE)$(BLUE) "		- clean OBJ files -" $(NONE)
 
 fclean : clean
 	@rm -fr $(NAME)
 	@make fclean -C $(LIBFT_DIR)
-	@make clean -C $(MLX_DIR)
+	@make clean -S -C $(MLX_DIR)
 	@echo $(CURSIVE)$(PURPLE)"		- clean $(NAME) file -"$(NONE)
 
 re	:

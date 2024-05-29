@@ -36,7 +36,7 @@ static char *result[] = {
 "e c #FC8820",
 "r c #FC9840",
 "t c #FCA85C",
-"y c magenta",
+"y c None",
 "u c gray55",
 "i c #989898",
 "p c #D0D0D0",
