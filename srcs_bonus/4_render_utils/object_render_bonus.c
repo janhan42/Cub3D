@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 16:07:14 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 17:09:28 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,13 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 	double		player_right_rad;
 
 	i = 0;
-	player_left_rad = player->player_rad + M_PI/6;
+	player_left_rad = player->player_rad + M_PI / 6;
 	player_right_rad = player->player_rad - M_PI / 6;
 	if (player_right_rad < 0)
 		player_right_rad += M_PI * 2;
 	if (player_left_rad > M_PI * 2)
 		player_left_rad -= M_PI * 2;
+	// TODO: 현재 오브젝트와 멀어진뒤 화면 각도를 전환하면 이상한 부분에서 오브젝트가 없어지는 버그 가있음
 
 	while (i < cnt)
 	{
@@ -91,8 +92,8 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 		obj_left_rad = obj_rad - atan2(width, one_obj->distance);
 		obj_right_rad = obj_rad + atan2(width, one_obj->distance);
 		if(obj[i]->distance > 30) // 너무 가까우면 세그폴트 나길래 가까우면 안그리게 처리해둠.
-			if ((obj_rad > player_right_rad && obj_rad < player_left_rad)
-				|| (player_right_rad > player_left_rad) && ((obj_rad > player_right_rad)
+			if (((obj_rad > player_right_rad && obj_rad < player_left_rad)
+				|| (player_right_rad > player_left_rad)) && ((obj_rad > player_right_rad)
 				|| (obj_rad < player_left_rad)))
 
 			//
@@ -132,7 +133,7 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 				//	angle_diff += 2 * M_PI;
 				//if (angle_diff > M_PI)
 				//	angle_diff -= 2 * M_PI;
-				while (angle_diff < -M_PI)
+				while (angle_diff < M_PI)
 					angle_diff += 2 * M_PI;
 				while (angle_diff > M_PI)
 					angle_diff -= 2 * M_PI;
@@ -140,7 +141,6 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 				int object_start_x = screen_x - width;
 				int object_end_x = screen_x + width;
 				int render_x = object_start_x;
-				t_2dot dots;
 				double step_x;
 				double step_y;
 				step_x = 0;				// 옆으로 좀 밀려서 병신되는거 이거 초기화 안했었음.
@@ -148,30 +148,29 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 				{
 					step_y = 0;
 
-					if (render_x >= 0 && render_x <= 1920)
-						if (game->w_dist[render_x] > one_obj->distance)
+					//if (render_x >= 0 && render_x <= 1920)
+					if (game->w_dist[render_x] > one_obj->distance)
+					{
+						// dots.start_x = render_x;
+						// dots.start_y = WINDOW_H / 2 - height + player->player_fov_off_y;
+						// dots.dest_x = render_x;
+						// dots.dest_y = WINDOW_H / 2 + height + player->player_fov_off_y;
+						// draw_line(game->render, dots, 0x00FF0000);
+						// 일단은 라인으로 그렸는데
+						// 렌더 텍스쳐 함수에 있는거 그대로 사용해도 될듯?
+						int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y + height;
+						int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y + height;
+						if (dest_y > WINDOW_H)
+							dest_y = WINDOW_H;
+						while (start_y < dest_y)
 						{
-							// dots.start_x = render_x;
-							// dots.start_y = WINDOW_H / 2 - height + player->player_fov_off_y;
-							// dots.dest_x = render_x;
-							// dots.dest_y = WINDOW_H / 2 + height + player->player_fov_off_y;
-							// draw_line(game->render, dots, 0x00FF0000);
-							// 일단은 라인으로 그렸는데
-							// 렌더 텍스쳐 함수에 있는거 그대로 사용해도 될듯?
-
-							int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y + height;
-							int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y + height;
-							if (dest_y > WINDOW_H)
-								dest_y = WINDOW_H;
-							while (start_y < dest_y)
-							{
-								unsigned int color = color_spoid((int)step_x, (int)step_y, game->object_texture);
-								if ((color & 0xFF000000) != 0xFF000000)
-									put_pixel_on_img(game->render, render_x, start_y, color);
-								start_y++;
-								step_y += (double)game->object_texture->height / (2 * height);
-							}
+							unsigned int color = color_spoid((int)step_x, (int)step_y, game->object_texture);
+							if ((color & 0xFF000000) != 0xFF000000)
+								put_pixel_on_img(game->render, render_x, start_y, color);
+							start_y++;
+							step_y += (double)game->object_texture->height / (2 * height);
 						}
+					}
 					render_x++;
 					step_x += (double)game->object_texture->width / (2 * width);
 				}
