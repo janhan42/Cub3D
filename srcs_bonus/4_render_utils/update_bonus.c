@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 19:39:23 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/30 20:26:57 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	update(t_game *game)
 			player_movement(game);
 			render_game(game);
 			render_sprite_object(game);
-			mlx_destroy_image(game->mlx, game->minimap_img->img);
-			free(game->minimap_img);
+			// mlx_destroy_image(game->mlx, game->minimap_img->img);
+			// free(game->minimap_img);
 		}
 		if (game->mode == INTRO)
 			render_intro(game);
