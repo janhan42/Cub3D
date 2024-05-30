@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:59:14 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:01:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,18 @@
 */
 static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 {
-	while (ray->dof < 100)
+	while (ray->dof < 100) // && game->map[ray->my][ray->mx] != '\0')
 	{
 		ray->mx = (int)ray->rx >> 6;
 		ray->my = (int)ray->ry >> 6;
-		if (ray->mx < 0 || ray->mx > game->map_width
-			|| ray->my < 0 || ray->my > game->map_height)
+		//printf("ray->mx [%d] ray->my [%d]\n", ray->mx, ray->my);
+		//printf("map_len_w [%d] map_len_h [%d]\n", game->map_len_w, game->map_len_h);
+		if (ray->mx < 0 || ray->mx > game->map_len_w
+			|| ray->my < 0 || ray->my > game->map_len_h)
 			break ;
-		if (ray->mx >= 0 && ray->mx < game->map_width / 64
-			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& (ft_strchr("1", game->map[ray->my][ray->mx])) != NULL)
+		if (ray->mx >= 0 && ray->mx < game->map_len_w
+			&& ray->my >= 0 && ray->my < game->map_len_h
+			&& (ft_strchr("1 ", game->map[ray->my][ray->mx])) != NULL)
 		{
 			ray->hx = ray->rx;
 			ray->hy = ray->ry;
@@ -57,7 +59,7 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 			break ;
 		if (ray->mx >= 0 && ray->mx < game->map_width / 64
 			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& (ft_strchr("1", game->map[ray->my][ray->mx])) != NULL)
+			&& (ft_strchr("1 ", game->map[ray->my][ray->mx])) != NULL)
 		{
 			ray->vx = ray->rx;
 			ray->vy = ray->ry;

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 08:21:37 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:25:33 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/30 08:45:38 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	player_frame_update(t_game *game)
 			game->player->shot_frame++;
 			game->player->shot_time = 0;
 		}
-		if (game->player->shot_frame == 5)
+		if (game->player->shot_frame == 6)
 		{
 			game->player->shot_frame = 0;
 			game->player->shot = FALSE;

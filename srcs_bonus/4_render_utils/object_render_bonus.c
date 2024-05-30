@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/29 23:53:15 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 12:54:01 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 		if (obj_rad < 0)
 			obj_rad += M_PI * 2;
 		// 오브젝트의 좌우 각도 계산
-		obj_left_rad = obj_rad + atan2(width, one_obj->distance);
+		obj_left_rad = obj_rad - atan2(width, one_obj->distance);
 		obj_right_rad = obj_rad + atan2(width, one_obj->distance);
 		if(obj[i]->distance > 30) // 너무 가까우면 세그폴트 나길래 가까우면 안그리게 처리해둠.
 			if ((obj_rad > player_right_rad && obj_rad < player_left_rad)
@@ -128,19 +128,22 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 				// 	render_x++;
 				// }
 				double angle_diff = obj_rad - player->player_rad;
-				if (angle_diff < M_PI)
+				//if (angle_diff < -M_PI)
+				//	angle_diff += 2 * M_PI;
+				//if (angle_diff > M_PI)
+				//	angle_diff -= 2 * M_PI;
+				while (angle_diff < -M_PI)
 					angle_diff += 2 * M_PI;
-				if (angle_diff > M_PI)
+				while (angle_diff > M_PI)
 					angle_diff -= 2 * M_PI;
-
 				int screen_x = (int)((angle_diff + M_PI / 6) * (WINDOW_W / (M_PI / 3)));
 				int object_start_x = screen_x - width;
 				int object_end_x = screen_x + width;
 				int render_x = object_start_x;
-
 				t_2dot dots;
 				double step_x;
 				double step_y;
+				step_x = 0;				// 옆으로 좀 밀려서 병신되는거 이거 초기화 안했었음.
 				while (render_x < object_end_x) // 오브젝트 왼쪽부터 세로로 한줄씩 그리기
 				{
 					step_y = 0;
@@ -166,7 +169,6 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 							start_y++;
 							step_y += (double)game->object_texture->height / (2 * height);
 						}
-						printf("player->rad [%f] start_y [%d] dest_y [%d]\n", game->player->player_rad, start_y, dest_y);
 					}
 					render_x++;
 					step_x += (double)game->object_texture->width / (2 * width);
@@ -174,7 +176,6 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 			}
 		i++;
 	}
-
 }
 
 void	render_sprite_object(t_game *game)

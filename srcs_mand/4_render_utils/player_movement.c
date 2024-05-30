@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:01:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:56:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 12:41:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,11 @@ void	player_movement(t_game *game)
 	}
 	if (game->player->move_a)
 	{
-		game->player->player_rad -= 0.02;
+		game->player->player_rad -= 0.04;
 	}
 	if (game->player->move_d)
 	{
-		game->player->player_rad += 0.02;
+		game->player->player_rad += 0.04;
 	}
 	if (game->player->player_rad > M_PI * 2)
 		game->player->player_rad -= 2 * M_PI;

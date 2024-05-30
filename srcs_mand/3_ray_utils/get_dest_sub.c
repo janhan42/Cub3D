@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:21:20 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 12:44:49 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray)
 	{
 		ray->rx = x;
 		ray->ry = y;
-		ray->dof = 8;
+		ray->dof = 100;
 	}
 }
 
@@ -72,6 +72,6 @@ void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray)
 	{
 		ray->rx = x;
 		ray->ry = y;
-		ray->dof = 8;
+		ray->dof = 100;
 	}
 }

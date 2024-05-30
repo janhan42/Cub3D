@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/29 23:21:37 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 08:05:51 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	init_object(t_game *game)
 	get_object_position(game->map, game->objects);
 	game->object_texture = (t_img *)malloc(sizeof(t_img));
 	game->object_texture->img = mlx_xpm_file_to_image(game->mlx,
-			"resources/textures/table.xpm",
+			"resources/sprites/static_sprites/candlebra.xpm",
 			&game->object_texture->width, &game->object_texture->height);
 	game->object_texture->addr = mlx_get_data_addr(game->object_texture->img,
 			&game->object_texture->bit_per_pixel,
