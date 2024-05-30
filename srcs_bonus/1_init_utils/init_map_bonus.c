@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/30 15:08:11 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 15:12:46 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	setting_map(t_game *game)
 	int	i;
 
 	printf("setting_map\n");
-	game->map = (char **)ft_calloc(game->parse.row, sizeof(char *));
+	game->map = (char **)ft_calloc(game->parse.row + 1, sizeof(char *));
 	if (game->map == NULL)
 		error_exit("game->map malloc failed");
 	i = 0;

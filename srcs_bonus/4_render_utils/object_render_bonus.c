@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 12:54:01 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 16:07:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,29 +147,31 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 				while (render_x < object_end_x) // 오브젝트 왼쪽부터 세로로 한줄씩 그리기
 				{
 					step_y = 0;
-					if (game->w_dist[render_x] > one_obj->distance)
-					{
-						// dots.start_x = render_x;
-						// dots.start_y = WINDOW_H / 2 - height + player->player_fov_off_y;
-						// dots.dest_x = render_x;
-						// dots.dest_y = WINDOW_H / 2 + height + player->player_fov_off_y;
-						// draw_line(game->render, dots, 0x00FF0000);
-						// 일단은 라인으로 그렸는데
-						// 렌더 텍스쳐 함수에 있는거 그대로 사용해도 될듯?
 
-						int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y + height;
-						int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y + height;
-						if (dest_y > WINDOW_H)
-							dest_y = WINDOW_H;
-						while (start_y < dest_y)
+					if (render_x >= 0 && render_x <= 1920)
+						if (game->w_dist[render_x] > one_obj->distance)
 						{
-							unsigned int color = color_spoid((int)step_x, (int)step_y, game->object_texture);
-							if ((color & 0xFF000000) != 0xFF000000)
-								put_pixel_on_img(game->render, render_x, start_y, color);
-							start_y++;
-							step_y += (double)game->object_texture->height / (2 * height);
+							// dots.start_x = render_x;
+							// dots.start_y = WINDOW_H / 2 - height + player->player_fov_off_y;
+							// dots.dest_x = render_x;
+							// dots.dest_y = WINDOW_H / 2 + height + player->player_fov_off_y;
+							// draw_line(game->render, dots, 0x00FF0000);
+							// 일단은 라인으로 그렸는데
+							// 렌더 텍스쳐 함수에 있는거 그대로 사용해도 될듯?
+
+							int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y + height;
+							int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y + height;
+							if (dest_y > WINDOW_H)
+								dest_y = WINDOW_H;
+							while (start_y < dest_y)
+							{
+								unsigned int color = color_spoid((int)step_x, (int)step_y, game->object_texture);
+								if ((color & 0xFF000000) != 0xFF000000)
+									put_pixel_on_img(game->render, render_x, start_y, color);
+								start_y++;
+								step_y += (double)game->object_texture->height / (2 * height);
+							}
 						}
-					}
 					render_x++;
 					step_x += (double)game->object_texture->width / (2 * width);
 				}
