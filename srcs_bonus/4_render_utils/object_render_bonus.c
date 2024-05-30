@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 17:09:28 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 19:43:46 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,12 +144,12 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 				double step_x;
 				double step_y;
 				step_x = 0;				// 옆으로 좀 밀려서 병신되는거 이거 초기화 안했었음.
-				while (render_x < object_end_x) // 오브젝트 왼쪽부터 세로로 한줄씩 그리기
+				while (render_x < object_end_x && render_x < WINDOW_W) // 오브젝트 왼쪽부터 세로로 한줄씩 그리기
 				{
 					step_y = 0;
 
 					//if (render_x >= 0 && render_x <= 1920)
-					if (game->w_dist[render_x] > one_obj->distance)
+					if (render_x > 0 && game->w_dist[render_x] > one_obj->distance)
 					{
 						// dots.start_x = render_x;
 						// dots.start_y = WINDOW_H / 2 - height + player->player_fov_off_y;

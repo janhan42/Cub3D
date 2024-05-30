@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:52:03 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:42:26 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 19:36:28 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ void	print_game_info(t_game *game)
 	printf("/*     int ceiling_color        : %-26d */\n", game->ceiling_color);
 	printf("/*     img *minimap   address   : %-26p */\n", game->minimap_img);
 	printf("/*     img *render    address   : %-26p */\n", game->render);
-	printf("/*     img *back_g    address   : %-26p */\n", game->background);
+	//printf("/*     img *back_g    address   : %-26p */\n", game->background);
 	printf("/*     mouse *mouse   address   : %-26p */\n", game->mouse);
 	printf("/*     ray_d ray_info address   : %-26p */\n", game->ray_info);
 	printf("/*     player *player address   : %-26p */\n", game->player);

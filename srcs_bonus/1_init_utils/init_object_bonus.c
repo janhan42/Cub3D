@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 08:05:51 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 19:35:10 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static void	set_object_position(t_object *object, char **map, int x, int y)
 	if (map[y][x] == 'G')
 		object->type = GREEN_LIGHT;
 	if (map[y][x] == 'R')
-		object->type = RED_LIGHT;
-	if (map[y][x] == 'L')
+		object->type = RED_LIGHT; if (map[y][x] == 'L')
 		object->type = NOMAL_LIGHT;
 	object->img_pos_x = 0;
 	object->img_pos_y = 0;

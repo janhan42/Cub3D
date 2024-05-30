@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/29 06:10:11 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/30 18:17:13 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	render_3d(t_game *game)
 		ray_direction += 0.000545415391;
 		t++;
 	}
-	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
 	render_sprite_object(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
 }

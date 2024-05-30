@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/29 04:49:51 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/05/30 19:27:51 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ typedef struct s_game		/* 메인 구조체 */
 	t_parse		parse;
 	t_img		*minimap_img;		//	좌측 상단 미니맵을 위한 mlx_img
 	t_img		*render;			//	3DWall 을 위한 mlx_img
-	t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
+	//t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
 	t_img		*main_background;	// 메인메뉴 백그라운드.
 	t_img		*start_n;
 	t_img		*start_h;
@@ -266,7 +266,7 @@ typedef struct s_game		/* 메인 구조체 */
 	t_object	**objects;
 	t_img		*object_texture;	// normal light;
 	int			object_count;
-	t_img		*texture;			//	texture TEST
+	t_img		*texture;			//	texture TEST 이건 배열임!!
 	pthread_t	sound_test;			//	sound TEST ptrhead
 	pthread_t	sound_test_theme;	//	sound TEST ptrhead
 	int			pthread_kill;		//	pthread kill flag
@@ -353,6 +353,8 @@ t_img	*get_texture(t_game *game, t_dest *dest);
 /*************************************************************/
 // _init_utils
 t_img	*make_image(t_game *game, int width, int height);
+t_img	*make_xpm_img(t_game *game, char *file_path);
+t_img	make_png_img_nomalloc(t_game *game, char *file_path);
 
 // _gnl
 int	get_next_line(int fd, char **line);

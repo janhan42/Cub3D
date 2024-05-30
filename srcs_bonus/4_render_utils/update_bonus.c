@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 12:54:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/05/30 19:39:23 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,19 @@ int	update(t_game *game)
 		game->player->shot_time++;
 	if (game->s_time >= 100)
 	{
-		mlx_destroy_image(game->mlx, game->render->img);
-		free(game->render);
-		game->render = make_image(game, WINDOW_W, WINDOW_H);
+		// 이제 render 이미지 매번 지우고 새로 만들 필요 없을 것 같아서 주석처리
+		// TODO: 장훈이랑 이야기 해보고 확인 후 지울 예정
+		// mlx_destroy_image(game->mlx, game->render->img);
+		// free(game->render);
+		// game->render = make_image(game, WINDOW_W, WINDOW_H);
 		if (game->mode == GAME)
 		{
 			game_mouse_update(game);
 			player_movement(game);
 			render_game(game);
 			render_sprite_object(game);
+			mlx_destroy_image(game->mlx, game->minimap_img->img);
+			free(game->minimap_img);
 		}
 		if (game->mode == INTRO)
 			render_intro(game);
