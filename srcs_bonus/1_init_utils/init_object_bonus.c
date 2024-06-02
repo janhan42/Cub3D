@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/02 19:50:04 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/02 22:09:14 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void set_object_position_sub(t_object *object, char **map, int x, int y)
 	}
 	if (map[y][x] == 'D')
 	{
-		object->type = DOOR_OBJECT;
+		object->type = VERTICAL_DOOR;
 		object->max_frame = 4;
 	}
 }
@@ -111,6 +111,6 @@ void	init_object(t_game *game)
 			&game->object_texture[NOMAL_LIGHT][0]->width,
 			&game->object_texture[NOMAL_LIGHT][0]->height);
 	game->object_texture[NOMAL_LIGHT][0]->addr = mlx_get_data_addr(game->object_texture[NOMAL_LIGHT][0]->img, &game->object_texture[NOMAL_LIGHT][0]->bit_per_pixel, &game->object_texture[NOMAL_LIGHT][0]->line_length, &game->object_texture[NOMAL_LIGHT][0]->endian);
-	game->object_texture[DOOR_OBJECT] = (t_img **)malloc(sizeof(t_img *) * 4);
-	init_multi_png_img(game, game->object_texture[DOOR_OBJECT], "resources/doors/", 4);
+	game->object_texture[VERTICAL_DOOR] = (t_img **)malloc(sizeof(t_img *) * 4);
+	init_multi_png_img(game, game->object_texture[VERTICAL_DOOR], "resources/doors/", 4);
 }

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/02 12:43:51 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/02 20:45:33 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ typedef enum e_object_type
 	GREEN_LIGHT,
 	RED_LIGHT,
 	NOMAL_LIGHT,
-	DOOR_OBJECT,
+	VERTICAL_DOOR,
+	HORIZONTAL_DOOR,
 }	e_object_type;
 
 typedef enum e_wall_type
