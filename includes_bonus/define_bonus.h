@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 21:35:02 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/01 11:37:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define T_FLOOR 4
 # define T_CEIL 5
 # define T_MAP 6
+# define T_DOOR 7
 # define TEXTURE_COUNT 4
 # define NO_COLOR	0xFF00FF
 

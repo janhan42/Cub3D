@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 13:20:00 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/01 12:09:35 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 			break ;
 		if (ray->mx >= 0 && ray->mx < game->map_len_w
 			&& ray->my >= 0 && ray->my < game->map_len_h
-			&& (ft_strchr("1D ", game->map[ray->my][ray->mx])) != NULL)
+			&& (ft_strchr("1", game->map[ray->my][ray->mx])) != NULL)
 		{
 			ray->hx = ray->rx;
 			ray->hy = ray->ry;
@@ -58,7 +58,7 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 			break ;
 		if (ray->mx >= 0 && ray->mx < game->map_width / 64
 			&& ray->my >= 0 && ray->my < game->map_height / 64
-			&& (ft_strchr("1D", game->map[ray->my][ray->mx])) != NULL)
+			&& (ft_strchr("1", game->map[ray->my][ray->mx])) != NULL)
 		{
 			ray->vx = ray->rx;
 			ray->vy = ray->ry;

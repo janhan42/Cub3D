@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 20:26:57 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/02 19:47:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,21 @@ void	game_mouse_update(t_game *game)
 		game->player->player_rad += 2 * M_PI;
 	if (game->mouse->x > 0 && game->mouse->y > 0)
 		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
+}
+
+static void update_object(t_game *game)
+{
+	int	i;
+
+	i = 0;
+	while (i < game->object_count)
+	{
+		if (game->objects[i]->frame < game->objects[i]->max_frame && game->s_time >= 100)
+			game->objects[i]->frame++;
+		if (game->objects[i]->frame >= game->objects[i]->max_frame)
+			game->objects[i]->frame = 0;
+		i++;
+	}
 }
 
 /**
@@ -72,6 +87,7 @@ int	update(t_game *game)
 		{
 			game_mouse_update(game);
 			player_movement(game);
+			update_object(game);
 			render_game(game);
 			render_sprite_object(game);
 			// mlx_destroy_image(game->mlx, game->minimap_img->img);

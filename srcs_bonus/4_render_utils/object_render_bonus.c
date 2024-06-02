@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 20:38:49 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/02 20:01:24 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 	int			height;
 	int			width;
 	double		scale;
-	double		obj_rad, obj_left_rad, obj_right_rad;
+	double		obj_rad;//, obj_left_rad, obj_right_rad;
 	double		player_left_rad;
 	double		player_right_rad;
 
@@ -78,24 +78,25 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 	while (i < cnt)
 	{
 		one_obj = obj[i];
-		scale = (double)WINDOW_W/(one_obj->distance * 120); // TODO: 이미지의 각 크기가 다를수 있는데 이미지의 크기를 통합할수있는 수식이 필요함
+		scale = (double) 64 /(one_obj->distance); // TODO: 이미지의 각 크기가 다를수 있는데 이미지의 크기를 통합할수있는 수식이 필요함
+															// TODO: 이미지 크기 통합 예정 6월 3일
 		// Wnew = Hnew / Horiginal * Woriginl
 		// WnewA = 300 / 600 * 800 = 0.5 * 800 = 400
-		// WnewB = 300 / 768 * 1024 =0.390625* 1024 = 400
+		// WnewB = 300 / 768 * 1024 =0.390625 * 1024 = 400
 		// 적용이 가능한가 검토.
-		width = game->object_texture->width * scale; // 폭 절반임
-		height = game->object_texture->height * scale;
+
+		width = game->object_texture[one_obj->type][one_obj->frame]->width * scale; // 폭 절반임
+		height = game->object_texture[one_obj->type][one_obj->frame]->height * scale;
 		obj_rad = atan2(one_obj->object_y - player->player_y, one_obj->object_x - player->player_x);
 		if (obj_rad < 0)
 			obj_rad += M_PI * 2;
 		// 오브젝트의 좌우 각도 계산
-		obj_left_rad = obj_rad - atan2(width, one_obj->distance);
-		obj_right_rad = obj_rad + atan2(width, one_obj->distance);
-		if(obj[i]->distance > 30) // 너무 가까우면 세그폴트 나길래 가까우면 안그리게 처리해둠.
+		// obj_left_rad = obj_rad - atan2(width, one_obj->distance);
+		// obj_right_rad = obj_rad + atan2(width, one_obj->distance);
+		if(one_obj->distance > 30) // 문일때의 함수를 빼야함
 			if (((obj_rad > player_right_rad && obj_rad < player_left_rad)
 				|| (player_right_rad > player_left_rad)) && ((obj_rad > player_right_rad)
 				|| (obj_rad < player_left_rad)))
-
 			//
 			// 오브젝트의 좌우 조금이라도 나와야 하면 그리려고 아래 조건문을 썼는데
 			// 아래 조건문을 쓰면 이상하게 나왔다 안나왔다 해서
@@ -164,15 +165,19 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 							dest_y = WINDOW_H;
 						while (start_y < dest_y)
 						{
-							unsigned int color = color_spoid((int)step_x, (int)step_y, game->object_texture);
+							unsigned int color;
+							color = color_spoid((int)step_x, (int)step_y, game->object_texture[one_obj->type][one_obj->frame]);
+							step_y += (double)game->object_texture[one_obj->type][one_obj->frame]->height / (2 * height);
 							if ((color & 0xFF000000) != 0xFF000000)
 								put_pixel_on_img(game->render, render_x, start_y, color);
 							start_y++;
-							step_y += (double)game->object_texture->height / (2 * height);
 						}
 					}
 					render_x++;
-					step_x += (double)game->object_texture->width / (2 * width);
+					if (one_obj->type != DOOR_OBJECT)
+						step_x += (double)game->object_texture[one_obj->type][one_obj->frame]->width / (2 * width);
+					else
+						step_x += (double)game->texture[DOOR].width / (2 * width);
 				}
 			}
 		i++;

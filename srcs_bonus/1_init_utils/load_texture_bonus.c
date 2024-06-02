@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 07:51:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 19:23:34 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/02 19:51:09 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	load_menu_texture_sub(t_game *game)
 {
-	// TODO: 
+	// TODO:
 	// 두번 동적할당해서 수정함
 	// 주석 처리된 부분이 수정 전
 	// game->start_h = make_image(game, 154, 75);
@@ -38,7 +38,7 @@ static void	load_menu_texture_sub(t_game *game)
 	// game->exit_game_h->addr = mlx_get_data_addr(game->exit_game_h->img,
 	// 		&game->exit_game_h->bit_per_pixel,
 	// 		&game->exit_game_h->line_length, &game->exit_game_h->endian);
-	
+
 
 
 	game->start_h = make_xpm_img(game, "resources/textures/Start_h.xpm");
@@ -103,10 +103,10 @@ static void	load_door_texture(t_game *game, t_img *tmp)
 	// tmp[DOOR3].addr = mlx_get_data_addr(tmp[DOOR3].img,
 	// 		&tmp[DOOR3].bit_per_pixel,
 	// 		&tmp[DOOR3].line_length, &tmp[DOOR3].endian);
-	tmp[DOOR] = make_png_img_nomalloc(game, "resources/doors/door_close.png");
-	tmp[DOOR1] = make_png_img_nomalloc(game, "resources/doors/door_1.png");
-	tmp[DOOR2] = make_png_img_nomalloc(game, "resources/doors/door_2.png");
-	tmp[DOOR3] = make_png_img_nomalloc(game, "resources/doors/door_3.png");
+	// tmp[DOOR] = make_png_img_nomalloc(game, "resources/doors/door_close.png");
+	// tmp[DOOR1] = make_png_img_nomalloc(game, "resources/doors/door_1.png");
+	// tmp[DOOR2] = make_png_img_nomalloc(game, "resources/doors/door_2.png");
+	// tmp[DOOR3] = make_png_img_nomalloc(game, "resources/doors/door_3.png");
 }
 
 static void	load_wall_texture(t_game *game, t_img *tmp)

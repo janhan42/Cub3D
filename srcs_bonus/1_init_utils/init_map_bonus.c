@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/30 15:12:46 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/01 11:36:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ size_t	ft_maplcpy(char *dst, const char *src, size_t dstsize)
 	size_t	src_len;
 
 	src_len = ft_strlen(src);
-	printf("%ld\n", dstsize);
 	i = 0;
 	while (src[i])
 	{
@@ -68,48 +67,33 @@ static void	setting_map(t_game *game)
 {
 	int	i;
 
-	printf("setting_map\n");
-	game->map = (char **)ft_calloc(game->parse.row + 1, sizeof(char *));
+	game->map = (char **)ft_calloc(game->parse.row + 1,
+			sizeof(char *));
 	if (game->map == NULL)
 		error_exit("game->map malloc failed");
 	i = 0;
 	while (i < game->parse.row)
 	{
-		game->map[i] = (char *)ft_calloc(game->parse.col + 1, sizeof(char));
+		game->map[i] = (char *)ft_calloc(game->parse.col + 1,
+				sizeof(char));
 		if (game->map[i] == NULL)
-		{
-			while(i <= 0)
-			{
-				free(game->map[i]);
-				i--;
-			}
-			free(game->map);
 			error_exit("game->map[i] malloc failed");
-		}
 		i++;
 	}
 	setting_line(game);
 }
 /**
  * @brief
- * 	맵 파싱 함수 TODO: 구현중
+ * parse_file함수에서 파싱해온 정보를 game->map에 적용
  * @param game
- * @param ac
- * @param av
  */
 void	init_map(t_game *game)
 {
 	setting_map(game);
-	for (int i = 0; i  < game->parse.row; i++)
-	{
-		printf("%s|\n", game->map[i]);
-	}
 	game->map_len_w = game->parse.col;
 	game->map_len_h = game->parse.row;
 	game->map_width = game->parse.col * PIXEL;
 	game->map_height = game->parse.row * PIXEL;
 	game->ceiling_color = game->parse.ceiling_color;
 	game->floor_color = game->parse.floor_color;
-	print_game_info(game);
-	printf("------------------------init_map OK---------------------------\n");
 }

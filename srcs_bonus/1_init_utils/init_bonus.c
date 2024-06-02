@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:13:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/29 01:18:09 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/01 11:34:15 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	init(t_game *game, int ac, char **av)
 		error_exit("usage \"./cub mapfile.cub\"");
 	ft_memset(game, 0, sizeof(t_game));
 	if (parse_file(game, av[1]) == FAILURE)
-		exit(1);
+		error_exit("parse_file failed!");
 	if (check_parse(game) == FAILURE)
-		exit(1);
+		error_exit("check_parse not passed");
 	init_map(game);
 	init_game(game);
 	init_player(game);
