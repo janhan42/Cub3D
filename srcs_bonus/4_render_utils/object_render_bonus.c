@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/03 02:44:43 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/03 03:54:25 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,7 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 		int		width;
 		double		h_offset;
 
-		double		start_height;
+		double		current_height;
 
 		width = get_door_width(one_door, player, game); // 문 전체 폭
 		// 위 함수에 Rad_diff 를 같이 줘서 오프셋을 아예 양수 음수로 바꿔도 될듯
@@ -307,15 +307,13 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 		if ((rad_diff > 0 && rad_diff < M_PI_2) || (rad_diff > M_PI && rad_diff < M_PI_2 + M_PI))
 		// 문이 왼쪽에서 오른쪽으로 갈수록 높이 감소
 		{
-			start_height = line_h + h_offset * width / 2.0;
+			current_height	= line_h + h_offset * width / 2.0;
 			h_offset = -h_offset;
 		}
 		else // 문이 왼쪽에서 오른쪽으로 갈수록 높이 증가
 		{
-			start_height = line_h - h_offset * width / 2.0;
+			current_height = line_h - h_offset * width / 2.0;
 		}
-		printf("***** line_h: %f\n", line_h);
-		printf("h_offset: %f\n", h_offset);
 		while (angle_diff < M_PI)
 			angle_diff += 2 * M_PI;
 		while (angle_diff > M_PI)
@@ -335,27 +333,52 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 		double step_x;
 		double step_y;
 		int	start_y;
+		double one_step_x = (double)game->object_texture[one_door->type][0]->width / width;
 		step_x = 0;
 		while (render_x < door_end && render_x < WINDOW_W)
 		{
 			step_y = 0;
-			start_y = (WINDOW_H / 2.0) - start_height / 2 + player->player_fov_off_y;
+			start_y = (WINDOW_H / 2.0) - current_height / 2 + player->player_fov_off_y;
 			if (render_x > 0 && game->w_dist[render_x] > one_door->distance)
 			{
-				t_2dot dots;
-				dots.start_x = render_x;
-				dots.start_y = start_y;
-				if (dots.start_y < 0)
-					dots.start_y = 0;
-				dots.dest_x = render_x;
-				dots.dest_y = start_y + start_height;
-				if (dots.dest_y > WINDOW_H)
-					dots.dest_y = WINDOW_H;
-				//printf("%d -> %d\n", dots.start_y, dots.dest_y);
-				draw_line(game->render, dots, 0x00FF0000);
+
+				// 아래는 한색깔로 그리는 함수
+				// t_2dot dots;
+				// dots.start_x = render_x;
+				// dots.start_y = start_y;
+				// if (dots.start_y < 0)
+				// 	dots.start_y = 0;
+				// dots.dest_x = render_x;
+				// dots.dest_y = start_y + current_height;
+				// if (dots.dest_y > WINDOW_H)
+				// 	dots.dest_y = WINDOW_H;
+				// //printf("%d -> %d\n", dots.start_y, dots.dest_y);
+				// draw_line(game->render, dots, 0x00FF0000);
+				
+				int dest_y = start_y + current_height;
+				if (dest_y > WINDOW_H)
+					dest_y = WINDOW_H;
+				double one_step_y = (double)game->object_texture[one_door->type][0]->height / current_height;
+				while (start_y < dest_y)
+				{
+					unsigned int color;
+					if (start_y > WINDOW_H)
+						break ;
+					int j = 0;
+					while (start_y + j < 0)
+						j++;
+					step_y += one_step_y * j;
+					start_y += j;
+					color = color_spoid((int)step_x, (int)step_y, game->object_texture[one_door->type][0]);
+					if ((color & 0xFF000000) != 0xFF000000)
+						put_pixel_on_img(game->render, render_x, start_y, color);
+					step_y += one_step_y;
+					start_y++;
+				}
 			}
 			render_x++;
-			start_height += h_offset;
+			current_height += h_offset;
+			step_x += one_step_x;
 		}
 		i++;
 	}
