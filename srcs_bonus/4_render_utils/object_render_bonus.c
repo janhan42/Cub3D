@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/03 03:54:25 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/03 05:40:59 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,22 +212,25 @@ static int	get_door_width(t_object *door, t_player *player, t_game *game)
 
 	x = door->object_x;
 	y = door->object_y;
+
 	if (door->type == VERTICAL_DOOR)
 	{
-		y = y - (y & 63); //  == y - (y % 64);
-		// rad = atan((y - player->player_y) / (x - player->player_x));
-		// rad -= atan((y + 64 - player->player_y) / (x - player->player_x));
-		// rad = fabs(rad);
-		// width = rad / (M_PI / 3.0) * WINDOW_W;
+		y = y - 32; //  == y - (y % 64);
+		rad = atan((y - player->player_y) / (x - player->player_x));
+		rad -= atan((y + 64 - player->player_y) / (x - player->player_x));
+		rad = fabs(rad);
+		// width = rad / (M_PI / 3) * WINDOW_W;
 	}
 	else
-	{
-		x = x - (y & 63);
-	}
-	rad = atan((y - player->player_y) / (x - player->player_x));
-	rad -= atan((door->object_y - player->player_y) / (door->object_x - player->player_x));
-	rad = fabs(rad * 2);
+	   {
+	       double rad1 = atan2(y - player->player_y, x - 32 - player->player_x);
+	       double rad2 = atan2(y - player->player_y, x + 32 - player->player_x);
+	       rad = fabs(rad2 - rad1);
+	   }
+
+
 	width = rad / (M_PI / 3) * WINDOW_W;
+	printf("####width: %d\n", width);
 	return (width);
 }
 
@@ -321,22 +324,24 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 		int	screen_x = (int)((angle_diff + M_PI / 6) * (WINDOW_W / (M_PI / 3)));
 		int	door_start = screen_x - width / 2;
 		int	door_end = screen_x + width / 2;
-		// printf("player rad: %f\n", player->player_rad);
-		// printf("door_rad: %f\n", player_door_rad);
-		// printf("angle_diff: %f\n", angle_diff);
-		// printf("screen_x: %d\n", screen_x);
-		// printf("door_start: %d\n", door_start);
-		// printf("door_end: %d\n", door_end);
-		// printf("width: %d\n", width);
+		printf("player rad: %f\n", player->player_rad);
+		printf("door_rad: %f\n", player_door_rad);
+		printf("angle_diff: %f\n", angle_diff);
+		printf("screen_x: %d\n", screen_x);
+		printf("door_start: %d\n", door_start);
+		printf("door_end: %d\n", door_end);
+		printf("width: %d\n", width);
 
 		int render_x = door_start;
 		double step_x;
 		double step_y;
 		int	start_y;
-		double one_step_x = (double)game->object_texture[one_door->type][0]->width / width;
+		printf("lldb: %d\n", one_door->type);
+		double one_step_x = (double)game->object_texture[HORIZONTAL_DOOR][0]->width / width;
 		step_x = 0;
 		while (render_x < door_end && render_x < WINDOW_W)
 		{
+
 			step_y = 0;
 			start_y = (WINDOW_H / 2.0) - current_height / 2 + player->player_fov_off_y;
 			if (render_x > 0 && game->w_dist[render_x] > one_door->distance)
@@ -358,7 +363,7 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 				int dest_y = start_y + current_height;
 				if (dest_y > WINDOW_H)
 					dest_y = WINDOW_H;
-				double one_step_y = (double)game->object_texture[one_door->type][0]->height / current_height;
+				double one_step_y = (double)game->object_texture[HORIZONTAL_DOOR][0]->height / current_height;
 				while (start_y < dest_y)
 				{
 					unsigned int color;
@@ -369,7 +374,7 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 						j++;
 					step_y += one_step_y * j;
 					start_y += j;
-					color = color_spoid((int)step_x, (int)step_y, game->object_texture[one_door->type][0]);
+					color = color_spoid((int)step_x, (int)step_y, game->object_texture[HORIZONTAL_DOOR][0]);
 					if ((color & 0xFF000000) != 0xFF000000)
 						put_pixel_on_img(game->render, render_x, start_y, color);
 					step_y += one_step_y;

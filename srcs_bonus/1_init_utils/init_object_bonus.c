@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/02 22:09:14 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/03 04:28:24 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ static void set_object_position_sub(t_object *object, char **map, int x, int y)
 		object->type = NOMAL_LIGHT;
 		object->max_frame = 1;
 	}
-	if (map[y][x] == 'D')
+	if (map[y][x] == 'H')
+	{
+		object->type = HORIZONTAL_DOOR;
+		object->max_frame = 4;
+	}
+	if (map[y][x] == 'V')
 	{
 		object->type = VERTICAL_DOOR;
 		object->max_frame = 4;
@@ -65,7 +70,8 @@ static void	get_object_position(char **map, t_object **object)
 			if (map[y][x] == 'G'
 				|| map[y][x] == 'R'
 				|| map[y][x] == 'L'
-				|| map[y][x] == 'D')
+				|| map[y][x] == 'H'
+				|| map[y][x] == 'V')
 			{
 				set_object_position(object[i], map, x, y);
 				i++;
@@ -111,6 +117,6 @@ void	init_object(t_game *game)
 			&game->object_texture[NOMAL_LIGHT][0]->width,
 			&game->object_texture[NOMAL_LIGHT][0]->height);
 	game->object_texture[NOMAL_LIGHT][0]->addr = mlx_get_data_addr(game->object_texture[NOMAL_LIGHT][0]->img, &game->object_texture[NOMAL_LIGHT][0]->bit_per_pixel, &game->object_texture[NOMAL_LIGHT][0]->line_length, &game->object_texture[NOMAL_LIGHT][0]->endian);
-	game->object_texture[VERTICAL_DOOR] = (t_img **)malloc(sizeof(t_img *) * 4);
-	init_multi_png_img(game, game->object_texture[VERTICAL_DOOR], "resources/doors/", 4);
+	game->object_texture[HORIZONTAL_DOOR] = (t_img **)malloc(sizeof(t_img *) * 4);
+	init_multi_png_img(game, game->object_texture[HORIZONTAL_DOOR], "resources/doors/", 4);
 }
