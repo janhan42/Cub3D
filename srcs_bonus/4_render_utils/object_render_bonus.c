@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/03 05:40:59 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/03 14:27:15 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 			continue;
 		}
 		//scale = (double) 64 /(one_obj->distance); // TODO: 이미지의 각 크기가 다를수 있는데 이미지의 크기를 통합할수있는 수식이 필요함
-		scale = (double)WINDOW_W/(one_obj->distance * 120);
+		scale = (double)game->object_texture[one_obj->type][one_obj->frame]->width/(one_obj->distance * 2);
 
 															// TODO: 이미지 크기 통합 예정 6월 3일
 		// Wnew = Hnew / Horiginal * Woriginl
@@ -172,8 +172,8 @@ static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
 						// draw_line(game->render, dots, 0x00FF0000);
 						// 일단은 라인으로 그렸는데
 						// 렌더 텍스쳐 함수에 있는거 그대로 사용해도 될듯?
-					
-						game->w_dist[render_x] = one_obj->distance; // 나중에 문 그려야해서 오브젝트 거리로 덮어씌움
+
+						game->w_dist[render_x] = one_obj->distance; // 나중에 문 그려야해서 오브젝트 거리로 덮어씌움 TODO: 이게 무슨뜻?
 						int	start_y = WINDOW_H / 2 - height + player->player_fov_off_y + height;
 						int	dest_y = WINDOW_H / 2 + height + player->player_fov_off_y + height;
 						if (dest_y > WINDOW_H)
@@ -359,7 +359,7 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 				// 	dots.dest_y = WINDOW_H;
 				// //printf("%d -> %d\n", dots.start_y, dots.dest_y);
 				// draw_line(game->render, dots, 0x00FF0000);
-				
+
 				int dest_y = start_y + current_height;
 				if (dest_y > WINDOW_H)
 					dest_y = WINDOW_H;
