@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/03 14:27:15 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/04 07:56:30 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -374,7 +374,7 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 						j++;
 					step_y += one_step_y * j;
 					start_y += j;
-					color = color_spoid((int)step_x, (int)step_y, game->object_texture[HORIZONTAL_DOOR][0]);
+					color = color_spoid((int)step_x, (int)step_y, game->object_texture[HORIZONTAL_DOOR][one_door->frame]);
 					if ((color & 0xFF000000) != 0xFF000000)
 						put_pixel_on_img(game->render, render_x, start_y, color);
 					step_y += one_step_y;

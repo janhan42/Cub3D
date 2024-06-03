@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/02 19:47:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/04 08:39:14 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,34 @@ static void update_object(t_game *game)
 	i = 0;
 	while (i < game->object_count)
 	{
-		if (game->objects[i]->frame < game->objects[i]->max_frame && game->s_time >= 100)
-			game->objects[i]->frame++;
-		if (game->objects[i]->frame >= game->objects[i]->max_frame)
-			game->objects[i]->frame = 0;
+		if (game->objects[i]->type >=GREEN_LIGHT && game->objects[i]->type <= NOMAL_LIGHT)
+		{
+			if (game->objects[i]->frame < game->objects[i]->max_frame && game->s_time >= 100)
+				game->objects[i]->frame++;
+			if (game->objects[i]->frame >= game->objects[i]->max_frame)
+				game->objects[i]->frame = 0;
+		}
+		else
+		{
+			if (game->objects[i]->state == OPEN && game->objects[i]->frame < game->objects[i]->max_frame)
+				game->objects[i]->frame++;
+			if (game->objects[i]->state == CLOSE && game->objects[i]->frame > 0)
+				game->objects[i]->frame--;
+			if (game->objects[i]->state == OPEN && game->objects[i]->frame == game->objects[i]->max_frame)
+			{
+				if (game->objects[i]->type == HORIZONTAL_DOOR)
+					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'O';
+				else
+					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'P';
+			}
+			else if (game->objects[i]->state == CLOSE && game->objects[i]->frame == 0)
+			{
+				if (game->objects[i]->type == HORIZONTAL_DOOR)
+					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'H';
+				else
+					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'V';
+			}
+		}
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/03 04:28:24 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 08:38:54 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ static void set_object_position_sub(t_object *object, char **map, int x, int y)
 	if (map[y][x] == 'H')
 	{
 		object->type = HORIZONTAL_DOOR;
-		object->max_frame = 4;
+		object->max_frame = 3;
 	}
 	if (map[y][x] == 'V')
 	{
 		object->type = VERTICAL_DOOR;
-		object->max_frame = 4;
+		object->max_frame = 3;
 	}
 }
 
@@ -47,6 +47,7 @@ static void	set_object_position(t_object *object, char **map, int x, int y)
 		object->max_frame = 4;
 	}
 	set_object_position_sub(object, map, x, y);
+	object->state = CLOSE;
 	object->img_pos_x = 0;
 	object->img_pos_y = 0;
 	object->img_pos_z = 0;

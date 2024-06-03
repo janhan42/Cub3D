@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 21:35:39 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 08:41:10 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,31 @@ void	change_mode(t_game *game)
 		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
 		mlx_mouse_hide();
 	}
+}
+
+void	door_open(t_game *game)
+{
+	int	i;
+	t_object *one;
+
+	i = 0;
+	while (i < game->object_count)
+	{
+		one = game->objects[i];
+		if (one->type >= HORIZONTAL_DOOR && one->distance < 100)
+		{
+			if (one->type == HORIZONTAL_DOOR && one->state == CLOSE)
+				one->state = OPEN;
+			else if (one->type == VERTICAL_DOOR && one->state == CLOSE)
+				one->state = OPEN;
+			else if (one->type == HORIZONTAL_DOOR && one->state == OPEN)
+				one->state = CLOSE;
+			else if (one->type == VERTICAL_DOOR && one->state == OPEN)
+				one->state = CLOSE;
+		}
+		i++;
+	}
+
 }
 
 int	key_hook(int keycode, t_game *game)
@@ -49,6 +74,8 @@ int	key_hook(int keycode, t_game *game)
 		else if (game->full_map == TRUE)
 			game->full_map = MAP_SIZE_DOWN;
 	}
+	if (keycode == KEY_E)
+		door_open(game);
 	return (0);
 }
 
