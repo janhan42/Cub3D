@@ -63,7 +63,9 @@ xpm경로가 중복으로 들어가는지(mand한정?)
 ### heap buffer overflow 수정
 
 - `object render`함수에서 배열 범위를 벗어나는 접근이 있었음
-- while 조건문 안에 좌표가 1920을 넘어가면 종료되도록 추가했고
+- while 조건문 안에 좌표가 1920을 넘어가면 종료되도
+
+록 추가했고
 	반복문 안에 if 문에 render_x 가 0보다 작으면 continue할수있게 함
 - render_x > 0 조건이 while 조건으로 들어가면 오브젝트가 왼쪽 화면에 걸쳤을 때 안그려서
 	이렇게 했음 일단
