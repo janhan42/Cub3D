@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 10:51:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:11:25 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,13 +227,11 @@ static int	get_door_width(t_object *door, t_player *player, t_game *game)
 		// width = rad / (M_PI / 3) * WINDOW_W;
 	}
 	else
-	   {
-	       double rad1 = atan2(y - player->player_y, x - 32 - player->player_x);
-	       double rad2 = atan2(y - player->player_y, x + 32 - player->player_x);
-	       rad = fabs(rad2 - rad1);
-	   }
-
-
+	{
+		double rad1 = atan2(y - player->player_y, x - 32 - player->player_x);
+		double rad2 = atan2(y - player->player_y, x + 32 - player->player_x);
+		rad = fabs(rad2 - rad1);
+	}
 	width = rad / (M_PI / 3) * WINDOW_W;
 	printf("####width: %d\n", width);
 	return (width);
@@ -369,7 +367,6 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 				// 	dots.dest_y = WINDOW_H;
 				// //printf("%d -> %d\n", dots.start_y, dots.dest_y);
 				// draw_line(game->render, dots, 0x00FF0000);
-
 				int dest_y = start_y + current_height;
 				if (dest_y > WINDOW_H)
 					dest_y = WINDOW_H;
@@ -406,7 +403,6 @@ void	render_sprite_object(t_game *game)
 	qsort(game->objects, game->object_count, sizeof(t_object *), compare);
 	draw_obj(game->objects, game->object_count, game->player, game);
 	draw_door(game->objects, game->object_count, game->player, game);
-
 }
 
 

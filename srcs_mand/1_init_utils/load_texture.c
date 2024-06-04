@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 07:51:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/29 00:00:20 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/04 12:06:01 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,34 +64,6 @@ static void	load_menu_texture(t_game *game)
 	load_menu_texture_sub(game);
 }
 
-static void	load_door_texture(t_game *game, t_img *tmp)
-{
-	tmp[DOOR].img = mlx_png_file_to_image(game->mlx,
-			"resources/doors/door_close.png",
-			&tmp[DOOR].width, &tmp[DOOR].height);
-	tmp[DOOR].addr = mlx_get_data_addr(tmp[DOOR].img,
-			&tmp[DOOR].bit_per_pixel,
-			&tmp[DOOR].line_length, &tmp[DOOR].endian);
-	tmp[DOOR1].img = mlx_png_file_to_image(game->mlx,
-			"resources/doors/door_1.png",
-			&tmp[DOOR1].width, &tmp[DOOR1].height);
-	tmp[DOOR1].addr = mlx_get_data_addr(tmp[DOOR1].img,
-			&tmp[DOOR1].bit_per_pixel,
-			&tmp[DOOR1].line_length, &tmp[DOOR1].endian);
-	tmp[DOOR2].img = mlx_png_file_to_image(game->mlx,
-			"resources/doors/door_2.png",
-			&tmp[DOOR2].width, &tmp[DOOR2].height);
-	tmp[DOOR2].addr = mlx_get_data_addr(tmp[DOOR2].img,
-			&tmp[DOOR2].bit_per_pixel,
-			&tmp[DOOR2].line_length, &tmp[DOOR2].endian);
-	tmp[DOOR3].img = mlx_png_file_to_image(game->mlx,
-			"resources/doors/door_3.png",
-			&tmp[DOOR3].width, &tmp[DOOR3].height);
-	tmp[DOOR3].addr = mlx_get_data_addr(tmp[DOOR3].img,
-			&tmp[DOOR3].bit_per_pixel,
-			&tmp[DOOR3].line_length, &tmp[DOOR3].endian);
-}
-
 static void	load_wall_texture(t_game *game, t_img *tmp)
 {
 	tmp[EAST].img = mlx_png_file_to_image(game->mlx,
@@ -120,9 +92,8 @@ void	load_texture(t_game *game)
 {
 	t_img	*tmp;
 
-	tmp = ft_calloc(8, sizeof(t_img));
+	tmp = ft_calloc(4, sizeof(t_img));
 	load_wall_texture(game, tmp);
-	load_door_texture(game, tmp);
 	load_menu_texture(game);
 	game->texture = tmp;
 }

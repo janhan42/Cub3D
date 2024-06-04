@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:28:13 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 10:01:06 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 12:17:55 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,57 +43,62 @@ static void	render_ceiling(t_game *game, t_single_texture *info)
 	}
 }
 
-// static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
-// {
-// 	while (info->y < info->line_h)
-// 	{
-// 		if (info->y + info->h_offset > WINDOW_H)
-// 			return ;
-// 		while (info->y + info->h_offset < 0)
-// 		{
-// 			info->step_y += info->step;
-// 			info->y++;
-// 		}
-// 		info->color = color_spoid(info->texture_x, (int)info->step_y, texture);
-// 		put_pixel_on_img(game->render, info->x,
-// 			info->y + info->h_offset, info->color);
-// 		info->step_y += info->step;
-// 		info->y++;
-// 	}
-// }
+//static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
+//{
+//	while (info->y < info->line_h)
+//	{
+//		if (info->y + info->h_offset > WINDOW_H)
+//			return ;
+//		while (info->y + info->h_offset < 0)
+//		{
+//			info->step_y += info->step;
+//			info->y++;
+//		}
+//		info->color = color_spoid(info->texture_x, (int)info->step_y, texture);
+//		put_pixel_on_img(game->render, info->x,
+//			info->y + info->h_offset, info->color);
+//		info->step_y += info->step;
+//		info->y++;
+//	}
+//}
 
-void    int_to_rgb(int rgb, int *r, int *g, int *b)
+void	int_to_rgb(int rgb, int *r, int *g, int *b)
 {
-    *r = (rgb >> 16) & 0xFF;
-    *g = (rgb >> 8) & 0xFF;
-    *b = rgb & 0xFF;
+	*r = (rgb >> 16) & 0xFF;
+	*g = (rgb >> 8) & 0xFF;
+	*b = rgb & 0xFF;
 }
 int rgb_to_int(int r, int g, int b)
 {
-    return (r << 16) | (g << 8) | b;
+	return (r << 16) | (g << 8) | b;
 }
-static void render_wall(t_game *game, t_single_texture *info, t_img *texture)
+
+static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
 {
-    int r, g, b;
-    while (info->y < info->line_h)
-    {
-        if (info->y + info->h_offset > WINDOW_H)
-            return ;
-        while (info->y + info->h_offset < 0)
-        {
-            info->step_y += info->step;
-            info->y++;
-        }
-        info->color = color_spoid(info->texture_x, (int)info->step_y, texture);
-        int_to_rgb(info->color, &r, &g, &b);
-        r *= ((float)info->line_h/1024);
-        g *= ((float)info->line_h/1024);
-        b *= ((float)info->line_h/1024);
-        put_pixel_on_img(game->render, info->x,
-            info->y + info->h_offset, rgb_to_int(r, g, b));
-        info->step_y += info->step;
-        info->y++;
-    }
+	int r, g, b;
+	double	scale;
+	while (info->y < info->line_h)
+	{
+		if (info->y + info->h_offset > WINDOW_H)
+			return ;
+		while (info->y + info->h_offset < 0)
+		{
+			info->step_y += info->step;
+			info->y++;
+		}
+		info->color = color_spoid(info->texture_x, (int)info->step_y, texture);
+		int_to_rgb(info->color, &r, &g, &b);
+		scale = (double)info->line_h / 1024;
+		if (scale > 1)
+			scale = 1;
+		r *= scale;
+		g *= scale;
+		b *= scale;
+		put_pixel_on_img(game->render, info->x,
+			info->y + info->h_offset, rgb_to_int(r, g, b));
+		info->step_y += info->step;
+		info->y++;
+	}
 }
 
 static void	render_floor(t_game *game, t_single_texture *info)
