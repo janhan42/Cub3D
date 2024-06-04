@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 07:56:30 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 09:23:58 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,13 +240,18 @@ static double	get_door_height(t_object *door, t_player *player, int width, doubl
 	double	longer;
 	double	smaller;
 	double	gap;
+	double	rad;
 
 	middle = (WINDOW_H / door->distance) * 100;
 	if (door->type == VERTICAL_DOOR)
 	{
-		longer = dist(player->player_x, player->player_y, door->object_x, door->object_y - ((int)door->object_y & 63));
+		longer = dist(player->player_x, player->player_y, door->object_x, door->object_y - 32);
+		// rad = atan((door->object_y - 32 - player->player_y) / (door->object_x - player->player_x));
+		// longer *= 100/cos(rad);
 		longer = (WINDOW_H / longer) * 100;
-		smaller = dist(player->player_x, player->player_y, door->object_x, door->object_y - ((int)door->object_y & 63) + 64);
+		smaller = dist(player->player_x, player->player_y, door->object_x, door->object_y + 32);
+		// rad = atan((door->object_y + 32 - player->player_y) / (door->object_x - player->player_x));
+		// smaller *= 100/cos(rad);
 		smaller = (WINDOW_H / smaller) * 100;
 	}
 	else
