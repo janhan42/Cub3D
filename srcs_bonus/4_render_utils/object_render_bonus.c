@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 09:23:58 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:51:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ static void	calculate_obj_dist(t_object **obj, t_player *player, int cnt)
 		one_obj->distance = dist(px, py, one_obj->object_x, one_obj->object_y);
 		i++;
 	}
+}
+
+double fisheye_correction(double distance, double angle_diff)
+{
+	return distance * cos(angle_diff);
 }
 
 static void	draw_obj(t_object **obj, int cnt, t_player *player, t_game *game)
@@ -264,7 +269,7 @@ static double	get_door_height(t_object *door, t_player *player, int width, doubl
 	gap = fabs(longer - smaller);
 	*offset = gap / width;
 	// printf("offset: %f", *offset);
-    return (middle);
+	return (middle);
 }
 
 

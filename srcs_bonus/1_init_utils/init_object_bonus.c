@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:53:45 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 08:38:54 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:24:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,9 @@ void	init_object(t_game *game)
 	if (game->object_texture == NULL)
 		error_exit("object_texture malloc failed");
 	game->object_texture[GREEN_LIGHT] = (t_img **)malloc(sizeof(t_img *) * 4);
-	init_multi_xpm_img(game, game->object_texture[GREEN_LIGHT], "resources/sprites/animated_sprites/green_light/", 4);
+	init_multi_xpm_img(game, game->object_texture[GREEN_LIGHT], "resources/sprites/animated_sprites/green_light_low/", 4);
 	game->object_texture[RED_LIGHT] = (t_img **)malloc(sizeof(t_img *) * 4);
-	init_multi_xpm_img(game, game->object_texture[RED_LIGHT], "resources/sprites/animated_sprites/red_light/", 4);
+	init_multi_xpm_img(game, game->object_texture[RED_LIGHT], "resources/sprites/animated_sprites/red_light_low/", 4);
 	game->object_texture[NOMAL_LIGHT] = (t_img **)malloc(sizeof(t_img *));
 	game->object_texture[NOMAL_LIGHT][0] = (t_img *)malloc(sizeof(t_img));
 	game->object_texture[NOMAL_LIGHT][0]->img = mlx_xpm_file_to_image(game->mlx,

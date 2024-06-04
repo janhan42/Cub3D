@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/04 09:16:23 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/04 10:41:16 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	render_3d(t_game *game)
 		f_dest = get_dest(game->player->player_x, game->player->player_y,
 				ray_direction, game);
 		ca = game->player->player_rad - ray_direction;
-		f_dest->distance = f_dest->distance * cos(ca);
 		game->w_dist[t] = f_dest->distance;
+		f_dest->distance = f_dest->distance * cos(ca);
 		render_texture(game, f_dest, t);
 		free(f_dest);
 		ray_direction += 0.000545415391;
