@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 08:39:14 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/05 22:02:52 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,41 +37,53 @@ void	game_mouse_update(t_game *game)
 		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
 }
 
-static void update_object(t_game *game)
+static void	update_object_sub(t_game *game, int i)
+{
+	if (game->objects[i]->state == OPEN
+		&& game->objects[i]->frame < game->objects[i]->max_frame)
+		game->objects[i]->frame++;
+	if (game->objects[i]->state == CLOSE
+		&& game->objects[i]->frame > 0)
+		game->objects[i]->frame--;
+	if (game->objects[i]->state == OPEN
+		&& game->objects[i]->frame == game->objects[i]->max_frame)
+	{
+		if (game->objects[i]->type == HORIZONTAL_DOOR)
+			game->map[(int)(game->objects[i]->object_y - 32) / 64]
+			[(int)(game->objects[i]->object_x - 32) / 64] = 'O';
+		else
+			game->map[(int)(game->objects[i]->object_y - 32) / 64]
+			[(int)(game->objects[i]->object_x - 32) / 64] = 'P';
+	}
+	else if (game->objects[i]->state == CLOSE && game->objects[i]->frame == 0)
+	{
+		if (game->objects[i]->type == HORIZONTAL_DOOR)
+			game->map[(int)(game->objects[i]->object_y - 32) / 64]
+			[(int)(game->objects[i]->object_x - 32) / 64] = 'H';
+		else
+			game->map[(int)(game->objects[i]->object_y - 32) / 64]
+			[(int)(game->objects[i]->object_x - 32) / 64] = 'V';
+	}
+}
+
+static void	update_object(t_game *game)
 {
 	int	i;
 
 	i = 0;
 	while (i < game->object_count)
 	{
-		if (game->objects[i]->type >=GREEN_LIGHT && game->objects[i]->type <= NOMAL_LIGHT)
+		if (GREEN_LIGHT <= game->objects[i]->type
+			&& game->objects[i]->type <= NOMAL_LIGHT)
 		{
-			if (game->objects[i]->frame < game->objects[i]->max_frame && game->s_time >= 100)
+			if (game->objects[i]->frame < game->objects[i]->max_frame
+				&& game->s_time >= 100)
 				game->objects[i]->frame++;
 			if (game->objects[i]->frame >= game->objects[i]->max_frame)
 				game->objects[i]->frame = 0;
 		}
 		else
-		{
-			if (game->objects[i]->state == OPEN && game->objects[i]->frame < game->objects[i]->max_frame)
-				game->objects[i]->frame++;
-			if (game->objects[i]->state == CLOSE && game->objects[i]->frame > 0)
-				game->objects[i]->frame--;
-			if (game->objects[i]->state == OPEN && game->objects[i]->frame == game->objects[i]->max_frame)
-			{
-				if (game->objects[i]->type == HORIZONTAL_DOOR)
-					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'O';
-				else
-					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'P';
-			}
-			else if (game->objects[i]->state == CLOSE && game->objects[i]->frame == 0)
-			{
-				if (game->objects[i]->type == HORIZONTAL_DOOR)
-					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'H';
-				else
-					game->map[(int)(game->objects[i]->object_y - 32) / 64][(int)(game->objects[i]->object_x - 32) / 64] = 'V';
-			}
-		}
+			update_object_sub(game, i);
 		i++;
 	}
 }
@@ -102,20 +114,12 @@ int	update(t_game *game)
 		game->player->shot_time++;
 	if (game->s_time >= 100)
 	{
-		// 이제 render 이미지 매번 지우고 새로 만들 필요 없을 것 같아서 주석처리
-		// TODO: 장훈이랑 이야기 해보고 확인 후 지울 예정
-		// mlx_destroy_image(game->mlx, game->render->img);
-		// free(game->render);
-		// game->render = make_image(game, WINDOW_W, WINDOW_H);
 		if (game->mode == GAME)
 		{
 			game_mouse_update(game);
 			player_movement(game);
 			update_object(game);
 			render_game(game);
-			render_sprite_object(game);
-			// mlx_destroy_image(game->mlx, game->minimap_img->img);
-			// free(game->minimap_img);
 		}
 		if (game->mode == INTRO)
 			render_intro(game);

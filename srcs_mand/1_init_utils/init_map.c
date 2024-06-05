@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/30 15:09:35 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:30:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	copy_map(t_game *game)
 	}
 }
 
-static void setting_line(t_game *game)
+static void	setting_line(t_game *game)
 {
 	int	x;
 	int	y;
@@ -77,7 +77,7 @@ static void	setting_map(t_game *game)
 		game->map[i] = (char *)ft_calloc(game->parse.col + 1, sizeof(char));
 		if (game->map[i] == NULL)
 		{
-			while(i <= 0)
+			while (i <= 0)
 			{
 				free(game->map[i]);
 				i--;
@@ -90,13 +90,6 @@ static void	setting_map(t_game *game)
 	setting_line(game);
 }
 
-/**
- * @brief
- * 	맵 파싱 함수 TODO: 구현중
- * @param game
- * @param ac
- * @param av
- */
 void	init_map(t_game *game)
 {
 	setting_map(game);

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/29 00:42:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:23:21 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,7 @@ typedef enum e_game_mode
 {
 	INTRO,
 	GAME,
-	DIE,
-	MENU,
 }	t_game_mode;
-
-typedef enum e_object_type
-{
-	GREEN_LIGHT,
-	RED_LIGHT,
-	NOMAL_LIGHT,
-}	t_object_type;
 
 typedef enum e_wall_type
 {
@@ -67,7 +58,6 @@ typedef struct s_vec2u
 	unsigned int	y;
 }	t_vec2u;
 
-/* Single ton */
 typedef struct s_single_scale
 {
 	int		x;
@@ -107,7 +97,13 @@ typedef struct s_gnl
 	ssize_t	offset;
 	ssize_t	index;
 }	t_gnl;
-/*------------------------------*/
+
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
 
 typedef struct s_ray_dest
 {
@@ -276,7 +272,7 @@ void	render_intro(t_game *game);
 void	player_movement(t_game *game);
 void	render_texture(t_game *game, t_dest *dest, int t);
 void	render(t_game *game, double distance, int time, int side);
-int		color_spoid(int x, int y, t_img *img);
+
 void	render_3d(t_game *game);
 t_img	*get_texture(t_game *game, t_dest *dest);
 
@@ -295,6 +291,11 @@ void	draw_square_on_img(t_img *img, int x, int y, int color);
 void	put_pixel_on_img(t_img	*img, int x, int y, int color);
 void	one_line(t_img *img, t_2dot *dots, int color);
 void	scale_texture(t_img *src, t_img *dst, float scale_factor);
+void	render_sprite_object(t_game *game);
+int		color_spoid(int x, int y, t_img *img);
+void	int_to_rgb(int rgb, int *r, int *g, int *b);
+int		rgb_to_int(int r, int g, int b);
+
 // 1_trash
 double	dist(double x, double y, double hx, double hy);
 
@@ -323,6 +324,5 @@ void	print_map_info(char **map);
 /*************************************************************/
 /*========                   TEST                    ========*/
 /*************************************************************/
-void	render_sprite_object(t_game *game);
 
 #endif

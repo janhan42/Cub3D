@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/03 05:01:46 by sangshin         ###   ########.fr        #
+#    Updated: 2024/06/06 00:59:33 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=		cub3d
 
 CC				=		cc
 
-CFLAGS			=		-g# -fsanitize=address -Wall -Wextra -Werror
+CFLAGS			=		 -Wall -Wextra -Werror #-fsanitize=address
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 HEADER_MAND		=		./includes_mand/header_mand.h							\
 						./includes_mand/define_mand.h
@@ -79,7 +79,10 @@ SRCS_BONUS		=		print_info.c													\
 						./srcs_bonus/3_ray_utils/get_dest_bonus.c						\
 						./srcs_bonus/3_ray_utils/get_dest_sub_bonus.c					\
 						./srcs_bonus/4_render_utils/get_texture_bonus.c					\
-						./srcs_bonus/4_render_utils/object_render_bonus.c				\
+						./srcs_bonus/4_render_utils/render_object_bonus.c				\
+						./srcs_bonus/4_render_utils/render_object_sub_bonus.c			\
+						./srcs_bonus/4_render_utils/render_door_bonus.c					\
+						./srcs_bonus/4_render_utils/render_door_sub_bonus.c				\
 						./srcs_bonus/4_render_utils/player_movement_bonus.c				\
 						./srcs_bonus/4_render_utils/render_intro_bonus.c				\
 						./srcs_bonus/4_render_utils/render_mini_map_bonus.c				\

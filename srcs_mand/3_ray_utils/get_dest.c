@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 15:01:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 18:58:32 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 */
 static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 {
-	while (ray->dof < 100) // && game->map[ray->my][ray->mx] != '\0')
+	while (ray->dof < 100)
 	{
 		ray->mx = (int)ray->rx >> 6;
 		ray->my = (int)ray->ry >> 6;
-		//printf("ray->mx [%d] ray->my [%d]\n", ray->mx, ray->my);
-		//printf("map_len_w [%d] map_len_h [%d]\n", game->map_len_w, game->map_len_h);
 		if (ray->mx < 0 || ray->mx > game->map_len_w
 			|| ray->my < 0 || ray->my > game->map_len_h)
 			break ;
@@ -112,10 +110,6 @@ static void	compare_distance(t_game *game, t_dest *dest, double rad)
 	compare_distance_sub(game, dest, rad);
 }
 
-/*
- * dest[3] == 0 or 1 or 2 or 3
- * 			 right / up / left / down
- */
 t_dest	*get_dest(double x, double y, double rad, t_game *game)
 {
 	t_dest	*dest;

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:28:13 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 12:17:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:44:23 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,12 @@ static void	render_ceiling(t_game *game, t_single_texture *info)
 	}
 }
 
-//static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
+/*
+	음영 적용 할지 말지 고민중이라 이전 코드 남겨둠.
+	6월 5일 Janhan
+*/
+//static void	render_wall(t_game *game,
+// t_single_texture *info, t_img *texture)
 //{
 //	while (info->y < info->line_h)
 //	{
@@ -62,21 +67,11 @@ static void	render_ceiling(t_game *game, t_single_texture *info)
 //	}
 //}
 
-void	int_to_rgb(int rgb, int *r, int *g, int *b)
-{
-	*r = (rgb >> 16) & 0xFF;
-	*g = (rgb >> 8) & 0xFF;
-	*b = rgb & 0xFF;
-}
-int rgb_to_int(int r, int g, int b)
-{
-	return (r << 16) | (g << 8) | b;
-}
-
 static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
 {
-	int r, g, b;
+	t_rgb	rgb;
 	double	scale;
+
 	while (info->y < info->line_h)
 	{
 		if (info->y + info->h_offset > WINDOW_H)
@@ -87,15 +82,15 @@ static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
 			info->y++;
 		}
 		info->color = color_spoid(info->texture_x, (int)info->step_y, texture);
-		int_to_rgb(info->color, &r, &g, &b);
+		int_to_rgb(info->color, &rgb.r, &rgb.g, &rgb.b);
 		scale = (double)info->line_h / 1024;
 		if (scale > 1)
 			scale = 1;
-		r *= scale;
-		g *= scale;
-		b *= scale;
+		rgb.r *= scale;
+		rgb.g *= scale;
+		rgb.b *= scale;
 		put_pixel_on_img(game->render, info->x,
-			info->y + info->h_offset, rgb_to_int(r, g, b));
+			info->y + info->h_offset, rgb_to_int(rgb.r, rgb.g, rgb.b));
 		info->step_y += info->step;
 		info->y++;
 	}

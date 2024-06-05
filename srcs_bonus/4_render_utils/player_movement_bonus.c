@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:01:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 12:30:18 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:39:22 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ double	wall_collision(t_game *game, int state)
 	sign = 1 * ((state & 4) == 4) - 1 * ((state & 4) == 0);
 	if (state & 1)
 	{
-		if (ft_strchr("1HV", game->map[(int)(game->player->player_y)>> 6]
+		if (ft_strchr("1HV", game->map[(int)(game->player->player_y) >> 6]
 			[(int)(game->player->player_x + offset * sign * 10) >> 6]))
 			return (0);
 		else
@@ -53,7 +53,8 @@ double	wall_collision(t_game *game, int state)
 	}
 	else
 	{
-		if (ft_strchr("1HV", game->map[(int)(game->player->player_y + offset * sign * 10) >> 6]
+		if (ft_strchr("1HV", game->map
+				[(int)(game->player->player_y + offset * sign * 10) >> 6]
 			[(int)(game->player->player_x) >> 6]))
 			return (0);
 		else

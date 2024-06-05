@@ -6,11 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/01 11:36:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 19:02:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
+
 size_t	ft_maplcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	i;
@@ -43,7 +44,7 @@ static void	copy_map(t_game *game)
 	}
 }
 
-static void setting_line(t_game *game)
+static void	setting_line(t_game *game)
 {
 	int	x;
 	int	y;
@@ -82,11 +83,7 @@ static void	setting_map(t_game *game)
 	}
 	setting_line(game);
 }
-/**
- * @brief
- * parse_file함수에서 파싱해온 정보를 game->map에 적용
- * @param game
- */
+
 void	init_map(t_game *game)
 {
 	setting_map(game);

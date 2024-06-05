@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/03 04:13:08 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/06 01:02:25 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef enum e_game_mode
 	GAME,
 	DIE,
 	MENU,
-}	e_game_mode;
+}	t_game_mode;
 
 typedef enum e_object_type
 {
@@ -37,7 +37,7 @@ typedef enum e_object_type
 	NOMAL_LIGHT,
 	HORIZONTAL_DOOR,
 	VERTICAL_DOOR,
-}	e_object_type;
+}	t_object_type;
 
 typedef enum e_wall_type
 {
@@ -49,27 +49,26 @@ typedef enum e_wall_type
 	DOOR1,
 	DOOR2,
 	DOOR3,
-}	e_wall_type;
+}	t_wall_type;
 
-typedef struct s_vec2i /* vector int */
+typedef struct s_vec2i
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 }	t_vec2i;
 
-typedef struct s_vec2d /* vector double */
+typedef struct s_vec2d
 {
-	double x;
-	double y;
+	double	x;
+	double	y;
 }	t_vec2d;
 
-typedef struct s_vec2u		/* vector usigned int */
+typedef struct s_vec2u
 {
-	unsigned int x;
-	unsigned int y;
+	unsigned int	x;
+	unsigned int	y;
 }	t_vec2u;
 
-/* Single ton */
 typedef struct s_single_scale
 {
 	int		x;
@@ -110,6 +109,13 @@ typedef struct s_gnl
 	ssize_t	index;
 }	t_gnl;
 
+typedef struct s_rgb
+{
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb;
+
 typedef struct s_single_minimap
 {
 	int	mx;
@@ -117,101 +123,145 @@ typedef struct s_single_minimap
 	int	x;
 	int	y;
 }	t_single_minimap;
-/*------------------------------*/
 
-typedef struct s_ray_dest		/* ray 계산용 구조체 */
+typedef struct s_ray_dest
 {
-	double	*ray_result;		//	ray 계산값 (ray의 x, ray의 y, 직선의 거리) 저장
-	double	rx;					//	ray 계산용 ray의 x 좌표
-	double	ry;					//	ray 계산용 ray의 y 좌표
-	double	hx;					//	ray 계산용 ray의 수평 x 좌표
-	double	hy;					//	ray 계산용 ray의 수평 y 좌표
-	double	vx;					//	ray 계산용 ray의 수직 x 좌표
-	double	vy;					//	ray 계산용 ray의 수직 y 좌표
-	double	xo;					//	ray 계산용 ray의 x 오프셋 값
-	double	yo;					//	ray 계산용 ray의 y 오프셋 값
-	double	distance_h;			//	ray 계산용 ray의 수평선에 대한 거리
+	double	*ray_result;
+	double	rx;
+	double	ry;
+	double	hx;
+	double	hy;
+	double	vx;
+	double	vy;
+	double	xo;
+	double	yo;
+	double	distance_h;
 	int		is_h_door;
-	double	distance_v;			//	ray 계산용 ray의 수직선에 대한 거리
+	double	distance_v;
 	int		is_v_door;
-	double	a_tan;				//	ray 계산용 ray의 수평에서의 삼각함수 계산용
-	double	n_tan;				//	ray 계산용 ray의 수직에서의 삼각함수 계산용
-	int		mx;					//	ray 계산용 ray의 map에서의 x 좌표
-	int		my;					//	ray 계산용 ray의 map에서의 y 좌표
-	int		dof;				//	ray 계산용 ray의 계산 depth 조정
+	double	a_tan;
+	double	n_tan;
+	int		mx;
+	int		my;
+	int		dof;
 }	t_ray_dest;
 
-typedef struct	s_dest /* ray 케이스팅 결과값 계산용 */
+typedef struct s_dest
 {
-	int		x;				// 결과 ray의 x 좌표
-	int		y;				// 결과 ray의 y 좌표
-	double	distance;		// 결과 ray의 거리
-	//int		direction;		// 결과 ray의 방향
+	int		x;
+	int		y;
+	double	distance;
+
 	int		wall_type;
-	double	offset;			// 결과 ray의 texture offset
-	int		y_vert;			// 결과 ray의 수직일때 좌표
-	int		x_hor;			// 결과 ray의 수평일때 좌표
+	double	offset;
+	int		y_vert;
+	int		x_hor;
 }	t_dest;
 
-typedef	struct	s_2dot /* pixel_put_img */
+typedef struct s_2dot
 {
-	int	start_x;		// 시작 x
-	int	start_y;		// 시작 y
-	int	dest_x;			// 도착 x
-	int	dest_y;			// 도착 y
+	int	start_x;
+	int	start_y;
+	int	dest_x;
+	int	dest_y;
 }	t_2dot;
 
-typedef	struct	s_img		/* mlx 이미지 구조체 */
+typedef struct s_img
 {
-	void	*img;				// mlx_img mlx_***_to_image
-	char	*addr;				// mlx_img mlx_get_data_addr
-	int		bit_per_pixel;		// mlx_img mlx_get_data_addr
-	int		line_length;		// mlx_img mlx_get_data_addr
-	int		endian;				// mlx_img mlx_get_data_addr
-	int		width;				// mlx_img mlx_get_data_addr
-	int		height;				// mlx_img mlx_get_data_addr
+	void	*img;
+	char	*addr;
+	int		bit_per_pixel;
+	int		line_length;
+	int		endian;
+	int		width;
+	int		height;
 }	t_img;
 
-typedef struct s_mouse		/* mouse 이벤트 관리용 */
+typedef struct s_mouse
 {
-	int	x;						// mlx_get_mouse_pos
-	int	y;						// mlx_get_mouse_pos
-	int	prev_x;					// mlx_get_mouse_pos
-	int	prev_y;					// mlx_get_mouse_pos
+	int	x;
+	int	y;
+	int	prev_x;
+	int	prev_y;
 }	t_mouse;
 
-typedef struct s_player		/* player info */
+typedef struct s_player
 {
-	double	player_x;			//	플레이어의 x 좌표
-	double	player_y;			//	플레이어의 y 좌표
-	double	player_rad;			//	플레이어의 각도
-	int		player_fov_off_y;	//	플레이어의 마우스 수직방향용 오프셋
-	int		shot;				//	플레이어의 총 발사용 bool 플레그 용도
-	int		shot_sound;			//	플레이어의 총 발사음 bool 플레그 용도
-	int		shot_frame;			//	플레이어의 총의 스프라이트를 위한 프레임
-	int		shot_time;			//	플레이어의 총의 스프라이트를 위한 프레임 시간
-	int		move_w;				//	플레이어의 이동 플레그
-	int		move_s;				//	플레이어의 이동 플레그
-	int		move_a;				//	플레이어의 이동 플레그
-	int		move_d;				//	플레이어의 이동 플레그
-	t_img	**shotgun;			//	플레이어의 총 스프라이트 이미지 **
+	double	player_x;
+	double	player_y;
+	double	player_rad;
+	int		player_fov_off_y;
+	int		shot;
+	int		shot_sound;
+	int		shot_frame;
+	int		shot_time;
+	int		move_w;
+	int		move_s;
+	int		move_a;
+	int		move_d;
+	t_img	**shotgun;
 }	t_player;
 
-typedef struct s_object		/* object struct */
+typedef struct s_object
 {
-	e_object_type	type;		//	오브젝트 타입
-	int				state;		//	오브젝트 상태
-	double			object_x;	//	오브젝트 좌표 x
-	double			object_y;	//	오브젝트 좌표 y
+	t_object_type	type;
+	int				state;
+	double			object_x;
+	double			object_y;
 	double			object_z;
-	t_img			*img;		//	그 오브젝트의 이미지
-	double			img_pos_x;	//	이미지의 좌표 x
-	double			img_pos_y;	//	이미지의 좌표 y
-	double			img_pos_z;	//	이미지의 좌표 z
-	double			distance;	//	플레이어와의 거리
-	int				frame;		//	스프라이트 오브젝트 또는 문일때 그 프레임
+	t_img			*img;
+	double			img_pos_x;
+	double			img_pos_y;
+	double			img_pos_z;
+	double			distance;
+	int				frame;
 	int				max_frame;
 }	t_object;
+
+typedef struct s_draw_obj
+{
+	t_object		*target;
+	int				height;
+	int				width;
+	int				screen_x;
+	int				object_start_x;
+	int				object_end_x;
+	int				render_x;
+	int				start_y;
+	int				dest_y;
+	double			angle_diff;
+	double			object_rad;
+	double			player_left;
+	double			player_right;
+	double			step_x;
+	double			step_y;
+	double			scale;
+	unsigned int	color;
+}	t_draw_obj;
+
+typedef struct s_draw_door
+{
+	t_object		*target;
+	int				width;
+	double			height;
+	int				screen_x;
+	int				render_x;
+	int				start_y;
+	int				dest_y;
+	int				door_start;
+	int				door_end;
+	double			player_door_rad;
+	double			door_rad;
+	double			angle_diff;
+	double			h_offset;
+	double			current_height;
+	double			step_x;
+	double			step_y;
+	double			one_step_x;
+	double			one_step_y;
+	double			rad_diff;
+	unsigned int	color;
+}	t_draw_door;
 
 typedef struct s_texture
 {
@@ -235,45 +285,42 @@ typedef struct s_parse
 	t_texture	tex[TEXTURE_COUNT];
 }	t_parse;
 
-typedef struct s_game		/* 메인 구조체 */
+typedef struct s_game
 {
-	void		*mlx;				//	mlx -> init_game()
-	void		*mlx_win;			//	mlx window -> init_game()
-	char		**map;				//	문자열로 읽어들인 맵 -> init_map()
-	int			map_len_w;			//	MAP 의 최대 X의 길이 -> init_map()
-	int			map_len_h;			//	MAP 의 최대 Y의 길이 ->init_map()
-	int			map_width;			//	MAP X * IMG_SIZE -> init_map()
-	int			map_height;			//	MAP Y * IMG_SIZE -> init_map()
-	int			floor_color;		//	MAP 바닥 색상 -> init_map()
-	int			ceiling_color;		//	MAP 천장 색상 -> init_map()
+	void		*mlx;
+	void		*mlx_win;
+	char		**map;
+	int			map_len_w;
+	int			map_len_h;
+	int			map_width;
+	int			map_height;
+	int			floor_color;
+	int			ceiling_color;
 	t_parse		parse;
-	t_img		*minimap_img;		//	좌측 상단 미니맵을 위한 mlx_img
-	t_img		*render;			//	3DWall 을 위한 mlx_img
-	//t_img		*background;		//	배경(바닥, 천장)을 위한 mlx_img
-	t_img		*main_background;	// 메인메뉴 백그라운드.
+	t_img		*minimap_img;
+	t_img		*render;
+	t_img		*main_background;
 	t_img		*start_n;
 	t_img		*start_h;
 	t_img		*exit_game_n;
 	t_img		*exit_game_h;
-	t_img		*main_menu;			//	게임 시작 이전의 메인메뉴 mlx_img
-	t_mouse		*mouse;				//	마우스 이벤트 관리 구조체
-	t_ray_dest	*ray_info;			//	ray 계산용 구조체
-	t_player	*player;			//	PLAYER 구조체
-	e_game_mode	mode;				//	현재 게임 모드에 대한 상태값.
+	t_img		*main_menu;
+	t_mouse		*mouse;
+	t_ray_dest	*ray_info;
+	t_player	*player;
+	t_game_mode	mode;
 	int			full_map;
 	int			map_resizing;
 	int			full_map_x;
 	int			full_map_y;
-
 	int			w_dist[WINDOW_W];
-	/* TEST */
 	t_object	**objects;
-	t_img		***object_texture;	// normal light;
+	t_img		***object_texture;
 	int			object_count;
-	t_img		*texture;			//	texture TEST 이건 배열임!!
-	pthread_t	sound_test;			//	sound TEST ptrhead
-	pthread_t	sound_test_theme;	//	sound TEST ptrhead
-	int			pthread_kill;		//	pthread kill flag
+	t_img		*texture;
+	pthread_t	sound_test;
+	pthread_t	sound_test_theme;
+	int			pthread_kill;
 	double		frame_time;
 	int			frame;
 	int			s_time;
@@ -306,9 +353,12 @@ void	init(t_game *game, int ac, char **av);
 void	init_map(t_game *game);
 void	init_game(t_game *game);
 void	init_player(t_game *game);
-void	init_multi_xpm_img(t_game *game, t_img **img, char *file_path, int size);
-void	init_multi_png_img(t_game *game, t_img **img, char *file_path, int size);
+void	init_multi_xpm_img(t_game *game,
+			t_img **img, char *file_path, int size);
+void	init_multi_png_img(t_game *game,
+			t_img **img, char *file_path, int size);
 void	load_texture(t_game *game);
+void	init_object(t_game *game);
 
 /*************************************************************/
 /*========                 ray utils                 ========*/
@@ -334,15 +384,24 @@ int		update(t_game *game);
 void	render_intro(t_game *game);
 
 // 1_game
+void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game);
+int		get_door_width(t_object *door, t_player *player);
+void	get_door_height_horizion(t_player *player, t_object *door,
+			double *longer, double *smaller);
+double	get_door_height(t_object *door, t_player *player, int width,
+			double *offset);
+void	set_door_info_sub(t_draw_door *info);
+void	set_door_info(t_draw_door *info, t_player *player);
+void	render_object(t_game *game);
 void	game_mouse_update(t_game *game);
 void	render_game(t_game *game);
 void	player_movement(t_game *game);
-
-// void	draw_background(t_game *game);
+int		compare(const void *a, const void *b);
+void	calculate_obj_dist(t_object **obj, t_player *player, int cnt);
+void	set_obj_info(t_draw_obj *info, t_player *player, t_game *game);
 double	wall_collision(t_game *game, int state);
 void	render(t_game *game, double distance, int time, int side);
 void	render_texture(t_game *game, t_dest *dest, int t);
-int		color_spoid(int x, int y, t_img *img);
 void	render_3d(t_game *game);
 void	draw_map_squre(t_game *game, t_single_minimap *m);
 void	render_mini_map(t_game *game);
@@ -361,7 +420,7 @@ t_img	*make_xpm_img(t_game *game, char *file_path);
 t_img	make_png_img_nomalloc(t_game *game, char *file_path);
 
 // _gnl
-int	get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
 
 // 0_draw_utils
 void	draw_line(t_img *img, t_2dot dots, int color);
@@ -369,6 +428,10 @@ void	draw_square_on_img(t_img *img, int x, int y, int color);
 void	put_pixel_on_img(t_img	*img, int x, int y, int color);
 void	one_line(t_img *img, t_2dot *dots, int color);
 void	scale_texture(t_img *src, t_img *dst, float scale_factor);
+int		color_spoid(int x, int y, t_img *img);
+void	int_to_rgb(int rgb, int *r, int *g, int *b);
+int		rgb_to_int(int r, int g, int b);
+
 // 1_trash
 double	dist(double x, double y, double hx, double hy);
 
@@ -401,12 +464,5 @@ void	print_ray_info(t_ray_dest *ray);
 void	print_game_info(t_game *game);
 void	print_object_info(t_object *object);
 void	print_map_info(char **map);
-
-/*************************************************************/
-/*========                   TEST                    ========*/
-/*************************************************************/
-void	init_object(t_game *game);
-t_img	*get_texture(t_game *game, t_dest *dest);
-void	render_sprite_object(t_game *game);
 
 #endif

@@ -6,30 +6,17 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:32 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/01 11:33:28 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/05 21:56:34 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/header_bonus.h"
-#include <math.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <pthread.h>
-#include <sys/time.h>
 
-// TODO: // 코드 정리, 구조체 정리, 로직 한번더 처리 및 생각
-// 순서 init -> update -> key hook flag
-// -> 정보 업데이트(플레이어 포지션에 따른 반응)-> 업데이트된 정보를 가지고 렌더 -> 화면에 띄우기
-// TODO: 05m 26d minimap size와
-// 미니맵 플레이어 사이즈 가변형 조절값이 필요함
-// mapfile에서 받아온 텍스쳐 경로로 init하는거 처리 해야함
 int	main(int ac, char **av)
 {
 	t_game	*game;
 
 	game = (t_game *)ft_calloc(1, sizeof(t_game));
-
-
 	signal(SIGINT, kill_sound);
 	init(game, ac, av);
 	pthread_create(&game->sound_test, NULL, &sound_handle, game);

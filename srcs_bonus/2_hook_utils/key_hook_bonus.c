@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 08:41:10 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:38:04 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	change_mode(t_game *game)
 
 void	door_open(t_game *game)
 {
-	int	i;
-	t_object *one;
+	int			i;
+	t_object	*one;
 
 	i = 0;
 	while (i < game->object_count)
@@ -50,7 +50,6 @@ void	door_open(t_game *game)
 		}
 		i++;
 	}
-
 }
 
 int	key_hook(int keycode, t_game *game)

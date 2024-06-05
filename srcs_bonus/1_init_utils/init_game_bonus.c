@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 19:26:05 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/05 19:01:27 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	init_game(t_game *game)
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	init_mouse(game);
 	init_ray_info(game);
-	//game->background = make_image(game, WINDOW_W, WINDOW_H);
 	load_texture(game);
 	game->s_time = 0;
 	game->frame = 0;
