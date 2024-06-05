@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/06 01:02:25 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 06:16:35 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,6 +285,58 @@ typedef struct s_parse
 	t_texture	tex[TEXTURE_COUNT];
 }	t_parse;
 
+// NPC TEST
+
+typedef enum e_npc_type
+{
+	CACO_DEMON,
+	CYBER_DEMON,
+	SILDIRE,
+}	t_npc_type;
+
+typedef enum e_npc_state
+{
+	IDLE,
+	WALK,
+	ATTACK,
+	PAIN,
+	DEATH,
+}	t_npc_state;
+
+typedef struct s_npc
+{
+	t_npc_type		type;
+	t_npc_state		state;
+	double			npc_x;
+	double			npc_y;
+	double			npc_z;
+	double			distance;
+	int				frame;
+	int				frame_max;
+}	t_npc;
+
+
+typedef struct s_draw_npc
+{
+	t_npc			*target;
+	int				height;
+	int				width;
+	int				screen_x;
+	int				npc_start_x;
+	int				npc_end_x;
+	int				render_x;
+	int				start_y;
+	int				dest_y;
+	double			angle_diff;
+	double			npc_rad;
+	double			player_left;
+	double			player_right;
+	double			step_x;
+	double			step_y;
+	double			scale;
+	unsigned int	color;
+}	t_draw_npc;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -315,7 +367,7 @@ typedef struct s_game
 	int			full_map_y;
 	int			w_dist[WINDOW_W];
 	t_object	**objects;
-	t_img		***object_texture;
+	t_img		***object_texture; // [type][frame]
 	int			object_count;
 	t_img		*texture;
 	pthread_t	sound_test;
@@ -324,6 +376,10 @@ typedef struct s_game
 	double		frame_time;
 	int			frame;
 	int			s_time;
+	// TEST
+	int			npc_count;
+	t_npc		**npcs;
+	t_img		****npc_texture; // [type][state][frame]
 }	t_game;
 
 /*************************************************************/
