@@ -6,13 +6,13 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 09:09:41 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_mand/header_mand.h"
 
-int	check_color(int type, t_parse *parse, char *line)
+static int	check_color(int type, t_parse *parse, char *line)
 {
 	if (type == T_CEIL)
 	{
@@ -113,8 +113,9 @@ int	parse_file(t_game *game, const char *cub_file_path)
 			error_exit("WRONG PARSE TYPE");
 		else if (do_parsing(&game->parse, p.gnl_ret, p.parse_type, p.line)
 			== FAILURE)
-			return (FAILURE);
+			error_exit("do_parsing failed");
 		p.gnl_ret = get_next_line(p.fd, &p.line);
+		printf("parse_file line [%s]\n", p.line);
 	}
 	do_parsing(&game->parse, p.gnl_ret, p.parse_type, p.line);
 	close(p.fd);

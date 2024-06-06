@@ -35,6 +35,8 @@
 - [ ] 문에 접근시 성능저하 해결
 - [ ] 오브젝트가 화면 중앙이 아닌 좌우 끝에 있을때 높이가 올라가는거 찾아야함.
 - [ ] mand버전 최신화? texture malloc으로 할당하고있는데 보너스는 할당 안하고 하고있는데 그냥 두고 쓸까?
+- [ ] mapfile parse map이 5*5 면 파싱이 안되는 버그있음
+
 ## 제출 전 체크 사항
 -Wall -Wextra -Werror -fsanitize=address로 테스트
 norm 체크

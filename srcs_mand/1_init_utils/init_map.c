@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/05 19:30:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 07:01:29 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ size_t	ft_maplcpy(char *dst, const char *src, size_t dstsize)
 	size_t	src_len;
 
 	src_len = ft_strlen(src);
-	printf("%ld\n", dstsize);
 	i = 0;
 	while (src[i])
 	{

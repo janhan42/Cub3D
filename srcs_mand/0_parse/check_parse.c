@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 07:09:54 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,6 @@ static int	check_symbol2(t_game *game, int row, int col)
 	return (SUCCESS);
 }
 
-/**
- * @brief
- * 맵파일에서의 허용되는 글자 그리고 플레이어 포지션이 두개가 있지 않은지 0의 주변이 빈 공간이 있는지 확인.
- * @param game
- * @return int
- */
 static int	check_symbol(t_game *game)
 {
 	int		row;
@@ -67,12 +61,6 @@ static int	check_symbol(t_game *game)
 	return (SUCCESS);
 }
 
-/**
- * @brief
- * row, col의 길이가 있는지, 천장 바닥 색상이 파싱 되었는지, 텍스쳐 중복이 있는지, 파싱안된 텍스쳐가 있는지
- * @param game
- * @return int
- */
 static int	check_type(t_game *game)
 {
 	int	i;
@@ -91,12 +79,6 @@ static int	check_type(t_game *game)
 	return (SUCCESS);
 }
 
-/**
- * @brief
- * 맵 파일에서 받아온 정보가 맞는지 체크
- * @param game
- * @return int
- */
 int	check_parse(t_game *game)
 {
 	if (check_type(game) == FAILURE)

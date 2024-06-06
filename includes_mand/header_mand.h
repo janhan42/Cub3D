@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/05 19:23:21 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 07:00:25 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,19 +310,5 @@ void	str_free(char *str);
 void	free_memory(void *memory);
 int		free_memory_return(void *memory, int return_code);
 void	free_array_memory(void **memory, int index);
-
-/*************************************************************/
-/*========                print info                 ========*/
-/*************************************************************/
-void	print_img_info(t_img *img, char *name);
-void	print_player_info(t_player *player);
-void	print_ray_result_info(double ray_result[4]);
-void	print_ray_info(t_ray_dest *ray);
-void	print_game_info(t_game *game);
-void	print_map_info(char **map);
-
-/*************************************************************/
-/*========                   TEST                    ========*/
-/*************************************************************/
 
 #endif
