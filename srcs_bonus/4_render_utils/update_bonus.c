@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 15:14:16 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:02:54 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void	render_game(t_game *game)
 int	update(t_game *game)
 {
 	game->s_time++;
-	game->npc_frame_time++;
 	if (game->player->shot == TRUE)
 		game->player->shot_time++;
 	if (game->s_time >= 100)

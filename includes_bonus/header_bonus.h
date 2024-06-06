@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/06 15:43:09 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:14:38 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -315,6 +315,7 @@ typedef struct s_npc
 	double			distance;
 	int				frame;
 	int				frame_max;
+	int				frame_time;
 	int				hp;
 }	t_npc;
 
@@ -380,12 +381,13 @@ typedef struct s_game
 	int			frame;
 	int			s_time;
 	// TEST
-	int			npc_frame_time;
 	int			npc_count;
 	t_npc		**npcs;
 	t_img		****npc_texture; // [type][state][frame]
 	pthread_t	npc_sound;
 	int			npc_sound_flag;
+	int			npc_death_flag;
+	int			npc_attack_flag;
 }	t_game;
 
 /*************************************************************/

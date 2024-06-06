@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 15:45:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:14:48 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,12 @@ void	init_game(t_game *game)
 	load_texture(game);
 	game->s_time = 0;
 	game->frame = 0;
-	game->npc_frame_time = 0;
 	game->mode = INTRO;
 	game->full_map = FALSE;
 	game->full_map_x = 0;
 	game->full_map_y = 0;
+	game->npc_death_flag = FALSE;
+	game->npc_attack_flag = FALSE;
 	if (game->main_background->img == NULL)
 		printf("ERROR");
 }

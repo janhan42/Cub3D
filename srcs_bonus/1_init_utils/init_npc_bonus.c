@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 06:33:44 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 15:29:22 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:09:40 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	set_npc_position(t_npc *npc, char **map, int x, int y)
 	npc->npc_z = 0;
 	npc->state = IDLE;
 	npc->frame = 0;
-	npc->frame_max = 8;
+	npc->frame_max = 7;
+	npc->frame_time = 0;
 	npc->hp = 3;
 	if (map[y][x] == 'T')
 		npc->type = CACO_DEMON;

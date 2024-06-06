@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:24:00 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 15:45:21 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:17:34 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ void	*sound_npc(void *game)
 			sound_game->npc_sound = FALSE;
 			system("afplay resources/sound/npc_pain.wav &");
 			usleep(100);
+		}
+		if (sound_game->npc_death_flag == TRUE)
+		{
+			system("afplay resources/sound/npc_death.wav &");
+			sound_game->npc_death_flag = FALSE;
+		}
+		if (sound_game->npc_attack_flag == TRUE)
+		{
+			system("afplay resources/sound/npc_attack.wav &");
+			sound_game->npc_attack_flag = FALSE;
 		}
 	}
 	return (0);

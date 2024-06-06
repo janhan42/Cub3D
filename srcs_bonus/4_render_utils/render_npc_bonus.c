@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 05:55:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 15:49:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:23:45 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	set_npc_info(t_draw_npc *info, t_player *player, t_game *game)
 	if (info->player_left > M_PI * 2)
 		info->player_left -= M_PI * 2;
 	info->scale = (double)game->npc_texture[info->target->type][info->target->state]
-	[info->target->frame]->width / (info->target->distance * 2);
+	[info->target->frame]->width / (info->target->distance);
 	info->width = game->npc_texture[info->target->type][info->target->state]
 	[info->target->frame]->width * info->scale;
 	info->height = game->npc_texture[info->target->type][info->target->state]
@@ -131,13 +131,21 @@ void	draw_npc_core(t_draw_npc *info, t_player *player, t_game *game)
 	}
 }
 
+/*
+		CACO_DEMON	CYBER_DEMON	SOLDIRE
+IDLE		8			8			8
+WALK		3			4			4
+ATTACK		5			2			2
+PAIN		2			2			1
+DEATH		6			9			9
+*/
 void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 {
 	t_draw_npc	info;
 	int			i;
 	int			limiter;
 
-	limiter = 200;
+	limiter = 3;
 	i = 0;
 	while (i < cnt)
 	{
@@ -146,17 +154,20 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 		printf("distance [%f]\n", info.target->distance);
 		if (info.target->state != DEATH)
 		{
-			if (info.target->distance < 50 && info.target->state != ATTACK)
+			if (info.target->distance < 150 && info.target->state != ATTACK)
 			{
 				info.target->state = ATTACK;
 				info.target->frame = 0;
-				info.target->frame_max = 5;
+				if (info.target->type == CACO_DEMON)
+					info.target->frame_max = 5;
+				else
+					info.target->frame_max = 2;
 			}
-			else if (info.target->distance > 50 && info.target->state == ATTACK)
+			else if (info.target->distance > 150 && info.target->state == ATTACK)
 			{
 				info.target->state = IDLE;
 				info.target->frame = 0;
-				info.target->frame_max = 8;
+				info.target->frame_max = 7;
 			}
 			if (WINDOW_W / 2 - info.width / 2 < info.screen_x
 				&& info.screen_x < WINDOW_W / 2 + info.width / 2 && player->shot == TRUE && info.target->state != PAIN && info.target->state != DEATH && game->player->npc_hit == FALSE)
@@ -165,44 +176,45 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 				game->player->npc_hit = TRUE;
 				game->npc_sound_flag = TRUE;
 				info.target->frame = 0;
-				info.target->frame_max = 1;
+				if (info.target->type == SOLDIRE)
+					info.target->frame_max = 0;
+				else
+					info.target->frame_max = 1;
 				info.target->hp--;
-				limiter = 300;
 			}
 			if (info.target->hp <= 0 && info.target->state != DEATH)
 			{
 				info.target->state = DEATH;
+				game->npc_death_flag = TRUE;
 				info.target->frame = 0;
-				info.target->frame_max = 5;
-				limiter = 300;
+				if (info.target->type == CACO_DEMON)
+					info.target->frame_max = 5;
+				else
+					info.target->frame_max = 8;
 			}
 		}
-		printf("frame [%d]\n", info.target->frame);
-		printf("frame_max [%d]\n", info.target->frame_max);
-		printf("state [%d]\n", info.target->state);
 		if (info.target->state == PAIN && info.target->frame >= info.target->frame_max && player->npc_hit == TRUE)
 		{
-			printf("시발 안들어와? ");
-			info.target->frame = 0;
-			info.target->frame_max = 8;
 			info.target->state = IDLE;
-			printf("아니 씨발 이거 아이들이라니까 [%d]\n\n\n\n\n", info.target->state);
+			info.target->frame = 0;
+			info.target->frame_max = 7;
 		}
 		if	(((info.player_left < info.npc_rad
 				&& info.npc_rad < info.player_right)
 						|| (info.player_right > info.player_left))
 					&& ((info.player_left < info.npc_rad)
 						|| (info.npc_rad < info.player_right)))
-		{
 			draw_npc_core(&info, player, game);
-			if (info.target->frame < info.target->frame_max && game->npc_frame_time > limiter)
-			{
-				info.target->frame++;
-				game->npc_frame_time = 0;
-			}
-			if (info.target->frame >= info.target->frame_max && info.target->state != PAIN && info.target->state != DEATH)
-				info.target->frame = 0;
+		if (info.target->frame < info.target->frame_max && info.target->frame_time > limiter)
+		{
+			info.target->frame++;
+			info.target->frame_time = 0;
+			if (info.target->state == ATTACK && info.target->frame == 2)
+				game->npc_attack_flag = TRUE;
 		}
+		if (info.target->frame >= info.target->frame_max && info.target->state != PAIN && info.target->state != DEATH)
+			info.target->frame = 0;
+		info.target->frame_time++;
 		i++;
 	}
 }
