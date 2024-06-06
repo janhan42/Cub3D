@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/06 07:11:02 by janhan           ###   ########.fr        #
+#    Updated: 2024/06/06 09:58:36 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,6 +70,7 @@ SRCS_BONUS		=		print_info.c													\
 						./srcs_bonus/1_init_utils/init_bonus.c							\
 						./srcs_bonus/1_init_utils/init_game_bonus.c						\
 						./srcs_bonus/1_init_utils/init_map_bonus.c						\
+						./srcs_bonus/1_init_utils/init_npc_bonus.c						\
 						./srcs_bonus/1_init_utils/init_object_bonus.c					\
 						./srcs_bonus/1_init_utils/init_player_bonus.c					\
 						./srcs_bonus/1_init_utils/load_texture_bonus.c					\

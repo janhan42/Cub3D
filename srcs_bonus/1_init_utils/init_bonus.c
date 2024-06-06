@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:13:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/05 19:01:14 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 09:58:00 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	init(t_game *game, int ac, char **av)
 	init_game(game);
 	init_player(game);
 	init_object(game);
+	init_npc(game);
 }

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/06 06:16:35 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 09:58:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -291,7 +291,7 @@ typedef enum e_npc_type
 {
 	CACO_DEMON,
 	CYBER_DEMON,
-	SILDIRE,
+	SOLDIRE,
 }	t_npc_type;
 
 typedef enum e_npc_state
@@ -415,7 +415,7 @@ void	init_multi_png_img(t_game *game,
 			t_img **img, char *file_path, int size);
 void	load_texture(t_game *game);
 void	init_object(t_game *game);
-
+void	init_npc(t_game *game);
 /*************************************************************/
 /*========                 ray utils                 ========*/
 /*************************************************************/

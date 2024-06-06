@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 20:05:54 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 06:09:48 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 10:03:36 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void	set_obj_info(t_draw_obj *info, t_player *player, t_game *game)
 {
 	info->player_left = player->player_rad - M_PI / 6;
 	info->player_right = player->player_rad + M_PI / 6;
-	if (info->player_left < 0)
-		info->player_left += M_PI * 2;
-	if (info->player_right > M_PI * 2)
-		info->player_right -= M_PI * 2;
+	if (info->player_right < 0)
+		info->player_right += M_PI * 2;
+	if (info->player_left > M_PI * 2)
+		info->player_left -= M_PI * 2;
 	info->scale = (double)game->object_texture[info->target->type]
 	[info->target->frame]->width / (info->target->distance * 2);
 	info->width = game->object_texture[info->target->type]
