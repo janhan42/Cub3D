@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 07:02:54 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:45:04 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,12 @@ void	render_game(t_game *game)
 	mlx_put_image_to_window(game->mlx,
 		game->mlx_win, game->minimap_img->img, 0, 0);
 	render_weapon(game);
+	if (game->blood_flag == TRUE)
+	{
+		mlx_put_image_to_window(game->mlx, game->mlx_win, game->blood->img, 0, 0);
+		game->blood_flag = FALSE;
+		printf("들어오긴하나\n");
+	}
 }
 
 int	update(t_game *game)

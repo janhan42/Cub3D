@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 05:55:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 07:23:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:35:52 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,7 +210,10 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 			info.target->frame++;
 			info.target->frame_time = 0;
 			if (info.target->state == ATTACK && info.target->frame == 2)
+			{
 				game->npc_attack_flag = TRUE;
+				game->blood_flag = TRUE;
+			}
 		}
 		if (info.target->frame >= info.target->frame_max && info.target->state != PAIN && info.target->state != DEATH)
 			info.target->frame = 0;

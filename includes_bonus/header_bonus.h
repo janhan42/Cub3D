@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/07 07:14:38 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 07:39:56 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -388,6 +388,8 @@ typedef struct s_game
 	int			npc_sound_flag;
 	int			npc_death_flag;
 	int			npc_attack_flag;
+	t_img		*blood;
+	int			blood_flag;
 }	t_game;
 
 /*************************************************************/
