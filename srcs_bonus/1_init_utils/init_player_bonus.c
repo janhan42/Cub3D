@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:11:15 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:23:35 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:08:44 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	init_player(t_game *game)
 	game->player->shot_time = 0;
 	game->player->shot_frame = 0;
 	game->player->shot = FALSE;
+	game->player->npc_hit = FALSE;
 	game->player->shot_sound = FALSE;
 	game->player->move_w = FALSE;
 	game->player->move_s = FALSE;

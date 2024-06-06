@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/05 19:38:04 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 14:39:44 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,10 @@ int	key_hook(int keycode, t_game *game)
 			game->full_map = MAP_SIZE_UP;
 		else if (game->full_map == TRUE)
 			game->full_map = MAP_SIZE_DOWN;
+	}
+	if (keycode == KEY_R)
+	{
+		printf("씨이이이이이이뻘 스타트\n\n\n\n\n\n\n\n");
 	}
 	if (keycode == KEY_E)
 		door_open(game);

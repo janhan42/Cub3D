@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 06:33:44 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 10:10:54 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:29:22 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 static void	set_npc_position(t_npc *npc, char **map, int x, int y)
 {
 	npc->npc_x = x * PIXEL + (int)(PIXEL / 2);
-	npc->npc_x = y * PIXEL + (int)(PIXEL / 2);
+	npc->npc_y = y * PIXEL + (int)(PIXEL / 2);
 	npc->npc_z = 0;
 	npc->state = IDLE;
 	npc->frame = 0;
-	npc->frame_max = 7;
+	npc->frame_max = 8;
+	npc->hp = 3;
 	if (map[y][x] == 'T')
 		npc->type = CACO_DEMON;
 	if (map[y][x] == 'Y')
@@ -117,6 +118,7 @@ void	init_npc(t_game *game)
 		game->npcs[i] = (t_npc *)malloc(sizeof(t_npc));
 		if (game->npcs[i] == NULL)
 			error_exit("init_npcs[i] malloc failed");
+		printf("npcs malloc [%d]\n", i);
 		i++;
 	}
 	get_npc_position(game->map, game->npcs);

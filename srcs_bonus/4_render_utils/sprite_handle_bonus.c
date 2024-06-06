@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 08:21:37 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/30 08:45:38 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:47:09 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	player_frame_update(t_game *game)
 {
 	if (game->player->shot == TRUE)
 	{
+		game->npc_sound_flag = FALSE;
 		if (game->player->shot_frame < 3 && game->player->shot_time >= 100)
 		{
 			game->player->shot_frame++;
@@ -46,6 +47,7 @@ void	player_frame_update(t_game *game)
 		{
 			game->player->shot_frame = 0;
 			game->player->shot = FALSE;
+			game->player->npc_hit = FALSE;
 		}
 	}
 }

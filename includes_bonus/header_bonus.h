@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/06 10:05:30 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 15:43:09 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <fcntl.h>
+#include <sys/_pthread/_pthread_t.h>
 # include <sys/_types/_ssize_t.h>
 
 typedef enum e_game_mode
@@ -192,6 +193,7 @@ typedef struct s_player
 	double	player_rad;
 	int		player_fov_off_y;
 	int		shot;
+	int		npc_hit;
 	int		shot_sound;
 	int		shot_frame;
 	int		shot_time;
@@ -313,6 +315,7 @@ typedef struct s_npc
 	double			distance;
 	int				frame;
 	int				frame_max;
+	int				hp;
 }	t_npc;
 
 
@@ -377,9 +380,12 @@ typedef struct s_game
 	int			frame;
 	int			s_time;
 	// TEST
+	int			npc_frame_time;
 	int			npc_count;
 	t_npc		**npcs;
 	t_img		****npc_texture; // [type][state][frame]
+	pthread_t	npc_sound;
+	int			npc_sound_flag;
 }	t_game;
 
 /*************************************************************/
@@ -509,6 +515,7 @@ void	free_array_memory(void **memory, int index);
 /*************************************************************/
 void	*sound_handle(void *game);
 void	*sound_theme(void	*game);
+void	*sound_npc(void *game);
 
 /*************************************************************/
 /*========                print info                 ========*/
