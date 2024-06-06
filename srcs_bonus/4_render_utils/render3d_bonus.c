@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/05 20:14:16 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 10:05:13 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ void	render_3d(t_game *game)
 		t++;
 	}
 	render_object(game);
+	render_npc(game);
 	mlx_put_image_to_window(game->mlx, game->mlx_win, game->render->img, 0, 0);
 }

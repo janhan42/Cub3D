@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 06:33:44 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 09:59:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 10:10:54 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	set_npc_position(t_npc *npc, char **map, int x, int y)
 	npc->state = IDLE;
 	npc->frame = 0;
 	npc->frame_max = 7;
-	if (map[y][x] == 'R')
-		npc->type = CACO_DEMON;
 	if (map[y][x] == 'T')
-		npc->type = CYBER_DEMON;
+		npc->type = CACO_DEMON;
 	if (map[y][x] == 'Y')
+		npc->type = CYBER_DEMON;
+	if (map[y][x] == 'U')
 		npc->type = SOLDIRE;
 }
 
@@ -41,9 +41,9 @@ static void	get_npc_position(char **map, t_npc **npcs)
 		x = 0;
 		while (map[y][x])
 		{
-			if (map[y][x] == 'R'
-			|| map[y][x] == 'T'
-			|| map[y][x] == 'Y')
+			if (map[y][x] == 'T'
+			|| map[y][x] == 'Y'
+			|| map[y][x] == 'U')
 			{
 				set_npc_position(npcs[i], map, x, y);
 				i++;

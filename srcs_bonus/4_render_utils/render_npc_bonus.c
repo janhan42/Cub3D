@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_npc.c                                       :+:      :+:    :+:   */
+/*   render_npc_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 05:55:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 06:31:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 10:20:44 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ void	set_npc_info(t_draw_npc *info, t_player *player, t_game *game)
 {
 	info->player_left = player->player_rad - M_PI / 6;
 	info->player_right = player->player_rad + M_PI / 6;
-	if (info->player_left < 0)
-		info->player_left += M_PI * 2;
-	if (info->player_right > M_PI * 2)
-		info->player_right -= M_PI * 2;
+	if (info->player_right < 0)
+		info->player_right += M_PI * 2;
+	if (info->player_left > M_PI * 2)
+		info->player_left -= M_PI * 2;
 	info->scale = (double)game->npc_texture[info->target->type][info->target->state][info->target->frame]->width / (info->target->distance * 2);
 	info->width = game->npc_texture[info->target->type][info->target->state][info->target->frame]->width * info->scale;
 	info->height = game->npc_texture[info->target->type][info->target->state][info->target->frame]->height * info->scale;
@@ -70,7 +70,7 @@ void	draw_npc_core_sub(t_draw_npc *info, t_game *game)
 	while (info->start_y < info->dest_y)
 	{
 		info->color = color_spoid((int)info->step_x, (int)info->step_y, game->npc_texture[info->target->type][info->target->state][info->target->frame]);
-		info->step_y += (double)game->npc_texture[info->target->type][info->target->state][info->target->frame]->height / ( 2 * info->height);
+		info->step_y += (double)game->npc_texture[info->target->type][info->target->state][info->target->frame]->height / (2 * info->height);
 		if ((info->color & 0xFF000000) != 0xFF000000)
 			put_pixel_on_img(game->render, info->render_x, info->start_y, info->color);
 		info->start_y++;
@@ -113,11 +113,13 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 	{
 		info.target = npcs[i];
 		set_npc_info(&info, player, game);
-		if	(((info.player_left < info.npc_rad && info.npc_rad < info.player_right)
-						|| (info.player_right > info.player_left))
-					&& ((info.player_left < info.npc_rad) || (info.npc_rad < info.player_right)))
-			draw_npc_core(&info, player, game);
-
+		//if	(((info.player_left < info.npc_rad
+		//		&& info.npc_rad < info.player_right)
+		//				|| (info.player_right > info.player_left))
+		//			&& ((info.player_left < info.npc_rad)
+		//				|| (info.npc_rad < info.player_right)))
+		draw_npc_core(&info, player, game);
+		i++;
 	}
 }
 

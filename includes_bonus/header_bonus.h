@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/06 09:58:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 10:05:30 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -441,6 +441,7 @@ void	render_intro(t_game *game);
 
 // 1_game
 void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game);
+void	render_npc(t_game *game);
 int		get_door_width(t_object *door, t_player *player);
 void	get_door_height_horizion(t_player *player, t_object *door,
 			double *longer, double *smaller);
