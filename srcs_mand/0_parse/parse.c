@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 12:22:20 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:30:18 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static int	check_color(int type, t_parse *parse, char *line)
  */
 static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 {
+	g_ret++;
 	if (T_NO <= type && type <= T_EA)
 	{
 		if (parse->tex[type].tex_path)
@@ -53,12 +54,14 @@ static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 		if (check_color(type, parse, line) == FAILURE)
 			return (free_memory_return(line, FAILURE));
 	}
-	else
-	{
-		parse->temp_map = update_map(parse->temp_map, line);
-		if (g_ret == 0 && parse_map(parse) == FAILURE)
-			return (free_memory_return(line, FAILURE));
-	}
+	// else
+	// {
+	// 	//parse->temp_map = update_map(parse->temp_map, line);
+	// 	printf("in do_parsing :%s", line);
+	// 	parse->temp_map = line;
+	// 	if (/*g_ret == 0 && */parse_map(parse) == FAILURE)
+	// 		return (free_memory_return(line, FAILURE));
+	// }
 	return (free_memory_return(line, SUCCESS));
 }
 
@@ -70,6 +73,8 @@ static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
  */
 int	check_parse_type(char *line)
 {
+	if (line == NULL)
+		return (EMPTY);
 	if (line[0] == 'N' && line[1] == 'O')
 		return (T_NO);
 	else if (line[0] == 'S' && line[1] == 'O')
@@ -82,10 +87,39 @@ int	check_parse_type(char *line)
 		return (T_FLOOR);
 	else if (line[0] == 'C' && line[1] == ' ')
 		return (T_CEIL);
+	else if (line[0] == '\n' && line[1] == '\0')
+		return (EMPTY);
 	else if (is_map_valid(line))
 		return (T_MAP);
 	return (FAILURE);
 }
+
+static int	read_map(t_game *game, char *s, int fd)
+{
+	char	*one_line;
+	char	*tmp_map;
+	int		type;
+
+	tmp_map = s;
+	one_line = get_next_line(fd);
+	type = check_parse_type(one_line);
+	while (one_line && type == T_MAP)
+	{
+		tmp_map = ft_strjoin(tmp_map, one_line);
+		free(one_line);
+		one_line = get_next_line(fd);
+		type = check_parse_type(one_line);
+	}
+	free(s);
+	close(fd);
+	if (one_line != NULL)
+	{
+		free(one_line);
+		return (FAILURE);
+	}
+	return (parse_map(&game->parse, tmp_map));
+}
+
 
 /**
  * @brief
@@ -103,21 +137,25 @@ int	parse_file(t_game *game, const char *cub_file_path)
 	p.fd = open(cub_file_path, O_RDONLY);
 	if (p.fd < 0)
 		error_exit("WRONG FILE PATH OR CAN'T OPEN");
-	p.gnl_ret = get_next_line(p.fd, &p.line);
-	while (p.gnl_ret > 0)
+	p.line = get_next_line(p.fd);
+	p.parse_type = check_parse_type(p.line);
+	while (p.line && p.parse_type != T_MAP)
 	{
-		p.parse_type = check_parse_type(p.line);
-		if (p.parse_type == FAILURE && is_blank_line(p.line))
+		printf("line:%s", p.line);
+		printf("type: %d\n", p.parse_type);
+		if ((p.parse_type == FAILURE && is_blank_line(p.line)) || p.parse_type == EMPTY)
 			free(p.line);
 		else if (p.parse_type == FAILURE)
 			error_exit("WRONG PARSE TYPE");
 		else if (do_parsing(&game->parse, p.gnl_ret, p.parse_type, p.line)
 			== FAILURE)
 			error_exit("do_parsing failed");
-		p.gnl_ret = get_next_line(p.fd, &p.line);
+		p.line = get_next_line(p.fd);
+		p.parse_type = check_parse_type(p.line);
 	}
-	p.parse_type = check_parse_type(p.line);
-	do_parsing(&game->parse, p.gnl_ret, p.parse_type, p.line);
+	if (p.parse_type == T_MAP)
+		return (read_map(game, p.line, p.fd));
+
 	close(p.fd);
 	return (SUCCESS);
 }

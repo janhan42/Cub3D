@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:35:48 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 13:00:22 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_blank_line(char *line)
 {
 	int	i;
 
-	if (line[0] == '\0')
+	if (line[0] == '\0' || (line[0] == '\n' && line[1] == '\0'))
 		return (TRUE);
 	i = 0;
 	while (line[i])

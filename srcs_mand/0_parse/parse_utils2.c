@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:46:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 11:56:16 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 12:29:48 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	parse_color2(int *cf, char **color_malloc)
 		*cf *= 256;
 		x = 0;
 		color = 0;
-		while (color_malloc[i][x] != '\0')
+		while (color_malloc[i][x] != '\0' && color_malloc[i][x] != '\n')
 		{
 			if (ft_isdigit(color_malloc[i][x] == FALSE))
 				return (FAILURE);
@@ -73,14 +73,14 @@ char	*update_map(char *s1, char *s2)
 	return (result);
 }
 
-int	parse_map(t_parse *parse)
+int	parse_map(t_parse *parse, char *temp_map)
 {
 	int	row;
 	int	col;
 
-	parse->map = ft_split(parse->temp_map, '\n');
+	parse->map = ft_split(temp_map, '\n');
 	if (parse->map == NULL)
-		return (free_memory_return(parse->temp_map, FAILURE));
+		return (free_memory_return(temp_map, FAILURE));
 	row = 0;
 	col = 0;
 	while (parse->map[row] != NULL)
@@ -97,7 +97,11 @@ int	parse_map(t_parse *parse)
 char	*parse_path_malloc(char *line)
 {
 	char	*temp;
+	int		i;
 
+	while (line[i])
+		i++;
+	line[i - 1] = 0;
 	while (is_upper(*line) == TRUE)
 		line++;
 	while (is_space(*line) == TRUE)

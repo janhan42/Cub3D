@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:51:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 09:05:38 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 12:37:56 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	gnl_tool(char **save, t_gnl *g, int fd)
 	}
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line1(int fd, char **line)
 {
 	t_gnl		g;
 	static char	*save[10240];

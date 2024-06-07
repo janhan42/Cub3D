@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/06 07:00:25 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 12:14:15 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <pthread.h>
 # include <fcntl.h>
 # include <sys/_types/_ssize_t.h>
+
+# include "../get_next_line.h"
 
 typedef enum e_game_mode
 {
@@ -222,7 +224,7 @@ typedef struct s_game
 /*************************************************************/
 int		parse_file(t_game *game, const char *cub_file_path);
 int		parse_color(int *cf, char *line);
-int		parse_map(t_parse *parse);
+int		parse_map(t_parse *parse, char *temp_map);
 char	*update_map(char *s1, char *s2);
 char	*parse_path_malloc(char *line);
 // _valid
@@ -283,7 +285,7 @@ t_img	*get_texture(t_game *game, t_dest *dest);
 t_img	*make_image(t_game *game, int width, int height);
 
 // _gnl
-int		get_next_line(int fd, char **line);
+//int		get_next_line(int fd, char **line);
 
 // 0_draw_utils
 void	draw_line(t_img *img, t_2dot dots, int color);
