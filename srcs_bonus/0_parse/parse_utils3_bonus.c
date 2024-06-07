@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils3_bonus.c                               :+:      :+:    :+:   */
+/*   parse_utils3.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:35:48 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 13:00:30 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/06 13:00:22 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes_bonus/header_bonus.h"
+#include "../../includes_mand/header_mand.h"
 
 int	is_blank_line(char *line)
 {
 	int	i;
 
-	if (line[0] == '\0')
+	if (line[0] == '\0' || (line[0] == '\n' && line[1] == '\0'))
 		return (TRUE);
 	i = 0;
 	while (line[i])

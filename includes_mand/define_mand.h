@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 13:57:36 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:40:47 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@
 # define WINDOW_W 1920
 # define WINDOW_H 1080
 # define MAX_DISTANCE 10000
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
 
 /*************************************************************/
 /*========               parse define                ========*/

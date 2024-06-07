@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 12:30:18 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:46:05 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,8 +141,6 @@ int	parse_file(t_game *game, const char *cub_file_path)
 	p.parse_type = check_parse_type(p.line);
 	while (p.line && p.parse_type != T_MAP)
 	{
-		printf("line:%s", p.line);
-		printf("type: %d\n", p.parse_type);
 		if ((p.parse_type == FAILURE && is_blank_line(p.line)) || p.parse_type == EMPTY)
 			free(p.line);
 		else if (p.parse_type == FAILURE)
@@ -155,7 +153,6 @@ int	parse_file(t_game *game, const char *cub_file_path)
 	}
 	if (p.parse_type == T_MAP)
 		return (read_map(game, p.line, p.fd));
-
 	close(p.fd);
 	return (SUCCESS);
 }

@@ -5,102 +5,136 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 17:51:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 12:37:56 by sangshin         ###   ########.fr       */
+/*   Created: 2023/10/24 19:11:50 by sangshin          #+#    #+#             */
+/*   Updated: 2024/06/07 14:40:23 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_mand/header_mand.h"
 
-static char	*ft_strndup(const char *str, ssize_t offst)
+char	*get_next_line(int fd)
 {
-	char	*result;
-	ssize_t	cnt;
+	static char	*strings[OPEN_MAX + 1];
+	char		*tmp;
 
-	cnt = 0;
-	result = (char *)malloc(sizeof(char) * (offst + 1));
-	if (!result)
+	if (fd < 0 || fd > OPEN_MAX)
 		return (0);
-	while (*str != '\0' && cnt < offst)
+	if (reader(&strings[fd], fd) == 0)
 	{
-		*result++ = *str++;
-		cnt++;
+		free(strings[fd]);
+		strings[fd] = 0;
+		return (0);
 	}
-	*result = '\0';
-	return (result - cnt);
+	tmp = cutter_cal(&strings[fd]);
+	return (tmp);
 }
 
-static ssize_t	find_newline(char *str)
+char	*reader(char **string, int fd)
 {
-	ssize_t	cnt;
+	char	buf[BUFFER_SIZE + 1];
+	long	read_size;
+	int		i;
 
-	cnt = 0;
-	while (str != NULL && *str != '\0') // 문자열이 널이 아니고
+	while (1)
 	{
-		if (*str == '\n') // 만약에 개행이 있으면
-			return (cnt); // 거기까지의 인덱스를 리턴
-		str++;
-		cnt++;
+		i = 0;
+		while (i <= BUFFER_SIZE)
+			buf[i++] = 0;
+		read_size = read(fd, buf, BUFFER_SIZE);
+		if (read_size <= 0)
+			break ;
+		i = 0;
+		while (buf[i] != 10 && buf[i])
+			i++;
+		*string = join(*string, buf);
+		if (i < BUFFER_SIZE || *string == 0)
+			break ;
 	}
-	return (FAILURE);
+	if (read_size < 0)
+		return (0);
+	return (*string);
 }
 
-static ssize_t	make_line(char **line, char **save, ssize_t index)
+char	*join(char *string, char *buf)
 {
-	char	*temp;
-	char	*next_line;
+	int		i;
+	char	*tmp;
 
-	if (index >= 0) // 개행이 들어있는 라인이면
+	i = 0;
+	if (string == 0)
 	{
-		*line = ft_strndup(*save, index);
-		next_line = *save + index + 1;
-		temp = ft_strndup(next_line, ft_strlen(next_line));
-		str_free(*save);
-		*save = temp;
-		return (1);
+		string = (char *)malloc(1);
+		if (string == 0)
+			return (0);
+		string[0] = 0;
 	}
-	if (*save == NULL)
-		*line = ft_strndup("", 0);
-	else
+	while (string[i])
+		i++;
+	tmp = (char *)malloc(i + BUFFER_SIZE + 1);
+	i = -1;
+	if (tmp != 0)
 	{
-		*line = *save;
-		*save = NULL;
+		while (string[++i])
+			tmp[i] = string[i];
+		while (*buf)
+			tmp[i++] = *buf++;
+		tmp[i] = 0;
 	}
-	return (0);
+	free(string);
+	return (tmp);
 }
 
-void	gnl_tool(char **save, t_gnl *g, int fd)
+char	*cutter_cal(char **string)
 {
-	while ((g->index == FAILURE && g->offset > 0)) // index가 failure 고 g->offset 이 0보다 클때 읽은 글자가 있을때
+	char	*tmp;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = -1;
+	while ((*string)[i] != 10 && (*string)[i])
+		i++;
+	tmp = (char *)malloc(i + 1 + ((*string)[i] == 10));
+	if (tmp == 0)
 	{
-		g->buf[g->offset] = '\0'; // 널가드
-		if (*save == NULL) // save가 처음 읽어들인 부분이면
-			g->temp = ft_strndup(g->buf, g->offset); // 그대로 복사
-		else
-			g->temp = ft_strjoin(*save, g->buf); // 아니면 join으로 이어붙이기
-		str_free(*save); // 이전 라인프리
-		*save = g->temp; // 새롭게 업데이트된 문자열
-		g->index = find_newline(*save); // 개행까지의 인덱스 저장
-		if (g->index == FAILURE) // 만약에 개행이 없으면 버퍼에 한번더 read
-			g->offset = read(fd, g->buf, 20);
+		free(*string);
+		*string = 0;
+		return (0);
 	}
+	while (++j <= i)
+		tmp[j] = (*string)[j];
+	tmp[i + 0 + ((*string)[i] == 10)] = 0;
+	if (j == 1 && (*string)[i] == 0)
+	{
+		free(tmp);
+		tmp = 0;
+	}
+	*string = rose_knife(*string, i + 1);
+	return (tmp);
 }
 
-int	get_next_line1(int fd, char **line)
+char	*rose_knife(char *string, int i)
 {
-	t_gnl		g;
-	static char	*save[10240];
+	int		len;
+	int		j;
+	char	*tmp;
 
-	if (fd < 0 || fd > 10240 || line == NULL)
-		return (FAILURE);
-	g.buf = (char *)malloc(sizeof(char) * (21)); // 20글자씩 읽어드릴 버퍼
-	if (g.buf == NULL)
-		return (FAILURE);
-	g.index = FAILURE;
-	g.offset = read(fd, g.buf, 20); // 버퍼에 20글자 읽어들임.
-	gnl_tool(&save[fd], &g, fd);
-	str_free(g.buf);
-	if (g.offset < 0)
-		return (FAILURE);
-	return (make_line(line, &save[fd], g.index));
+	len = 0;
+	j = -1;
+	if (string == 0)
+		return (0);
+	if (string[i - 1] == 0)
+	{
+		free(string);
+		string = 0;
+		return (0);
+	}
+	while (string[i + len])
+		len++;
+	tmp = (char *)malloc(len + 1);
+	if (tmp != 0)
+		while (++j <= len)
+			tmp[j] = string[i + j];
+	free(string);
+	return (tmp);
 }

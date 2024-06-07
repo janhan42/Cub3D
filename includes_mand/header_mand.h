@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/07 12:14:15 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:41:21 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <pthread.h>
 # include <fcntl.h>
 # include <sys/_types/_ssize_t.h>
-
-# include "../get_next_line.h"
 
 typedef enum e_game_mode
 {
@@ -285,7 +283,11 @@ t_img	*get_texture(t_game *game, t_dest *dest);
 t_img	*make_image(t_game *game, int width, int height);
 
 // _gnl
-//int		get_next_line(int fd, char **line);
+char	*get_next_line(int fd);
+char	*reader(char **string, int fd);
+char	*join(char *string, char *buf);
+char	*cutter_cal(char **string);
+char	*rose_knife(char *string, int i);
 
 // 0_draw_utils
 void	draw_line(t_img *img, t_2dot dots, int color);

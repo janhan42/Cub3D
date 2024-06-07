@@ -6,11 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:59:28 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 10:10:26 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:48:03 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes_bonus/header_bonus.h"
+#include "../../includes_mand/header_mand.h"
 
 int	is_space(char c)
 {
@@ -71,7 +71,7 @@ int	is_map_valid(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (find_char("01NESW LRGHVTYU", line[i]) == FALSE)
+		if (find_char("01NESW VHOPRGLTYU \n", line[i]) == FALSE)
 			return (FALSE);
 		i++;
 	}

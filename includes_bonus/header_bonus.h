@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/07 07:39:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:43:16 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <fcntl.h>
-#include <sys/_pthread/_pthread_t.h>
+# include <sys/_pthread/_pthread_t.h>
 # include <sys/_types/_ssize_t.h>
 
 typedef enum e_game_mode
@@ -319,7 +319,6 @@ typedef struct s_npc
 	int				hp;
 }	t_npc;
 
-
 typedef struct s_draw_npc
 {
 	t_npc			*target;
@@ -371,7 +370,7 @@ typedef struct s_game
 	int			full_map_y;
 	int			w_dist[WINDOW_W];
 	t_object	**objects;
-	t_img		***object_texture; // [type][frame]
+	t_img		***object_texture;
 	int			object_count;
 	t_img		*texture;
 	pthread_t	sound_test;
@@ -383,7 +382,7 @@ typedef struct s_game
 	// TEST
 	int			npc_count;
 	t_npc		**npcs;
-	t_img		****npc_texture; // [type][state][frame]
+	t_img		****npc_texture;
 	pthread_t	npc_sound;
 	int			npc_sound_flag;
 	int			npc_death_flag;
@@ -432,7 +431,7 @@ void	init_npc(t_game *game);
 t_dest	*get_dest(double x, double y, double rad, t_game *game);
 void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray);
 void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray);
-
+int		npc_ray(t_player *player, t_npc *npc, t_game *game);
 /*************************************************************/
 /*========                 event hook                ========*/
 /*************************************************************/
@@ -487,7 +486,11 @@ t_img	*make_xpm_img(t_game *game, char *file_path);
 t_img	make_png_img_nomalloc(t_game *game, char *file_path);
 
 // _gnl
-int		get_next_line(int fd, char **line);
+char	*get_next_line(int fd);
+char	*reader(char **string, int fd);
+char	*join(char *string, char *buf);
+char	*cutter_cal(char **string);
+char	*rose_knife(char *string, int i);
 
 // 0_draw_utils
 void	draw_line(t_img *img, t_2dot dots, int color);

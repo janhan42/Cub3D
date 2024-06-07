@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/04 08:11:52 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 14:42:23 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@
 # define T_DOOR 7
 # define TEXTURE_COUNT 4
 # define NO_COLOR	0xFF00FF
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
 
 /*************************************************************/
 /*========               keyboard code               ========*/

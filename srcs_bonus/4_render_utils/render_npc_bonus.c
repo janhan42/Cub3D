@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 05:55:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 07:35:52 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 14:48:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,16 +144,33 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 	t_draw_npc	info;
 	int			i;
 	int			limiter;
-
+	int			ray_flag;
 	limiter = 3;
 	i = 0;
 	while (i < cnt)
 	{
 		info.target = npcs[i];
 		set_npc_info(&info, player, game);
-		printf("distance [%f]\n", info.target->distance);
+
 		if (info.target->state != DEATH)
 		{
+			ray_flag = npc_ray(player, info.target, game);
+			if (ray_flag == TRUE && info.target->state != ATTACK)
+			{
+				info.target->state = WALK;
+				info.target->frame = 0;
+				if (info.target->type == CACO_DEMON)
+					info.target->frame_max = 2;
+				else
+					info.target->frame_max = 3;
+				double	next_x = player->player_x;
+				double	next_y = player->player_y;
+				double	angle = atan2(next_y + 0.5 - info.target->npc_y, next_x + 0.5 - info.target->npc_x);
+				double	dx = cos(angle) * 1.5;
+				double	dy = sin(angle) * 1.5;
+				info.target->npc_x += dx;
+				info.target->npc_y += dy;
+			}
 			if (info.target->distance < 150 && info.target->state != ATTACK)
 			{
 				info.target->state = ATTACK;
@@ -163,7 +180,7 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 				else
 					info.target->frame_max = 2;
 			}
-			else if (info.target->distance > 150 && info.target->state == ATTACK)
+			else if (info.target->distance > 150 && info.target->state == ATTACK && info.target->state != WALK)
 			{
 				info.target->state = IDLE;
 				info.target->frame = 0;

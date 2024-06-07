@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 23:43:33 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/05 23:01:57 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 08:30:15 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void	render_object(t_game *game)
 	calculate_obj_dist(game->objects, game->player, game->object_count);
 	qsort(game->objects, game->object_count, sizeof(t_object *), compare);
 	draw_obj(game->objects, game->object_count, game->player, game);
+	render_npc(game);
 	draw_door(game->objects, game->object_count, game->player, game);
 }

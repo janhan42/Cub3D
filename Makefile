@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/07 12:37:58 by sangshin         ###   ########.fr        #
+#    Updated: 2024/06/07 14:46:05 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ MLX_DIR			=		mlx
 
 # SRCS_MAN		=		./test.c
 
-SRCS_MAN		=		./get_next_line.c											\
-						./srcs_mand/main.c											\
+SRCS_MAN		=		./srcs_mand/main.c											\
 						./srcs_mand/0_parse/check_parse.c							\
 						./srcs_mand/0_parse/check_utils.c							\
 						./srcs_mand/0_parse/parse.c									\
@@ -80,6 +79,7 @@ SRCS_BONUS		=		print_info.c													\
 						./srcs_bonus/2_hook_utils/mouse_handle_bonus.c					\
 						./srcs_bonus/3_ray_utils/get_dest_bonus.c						\
 						./srcs_bonus/3_ray_utils/get_dest_sub_bonus.c					\
+						./srcs_bonus/3_ray_utils/npc_ray_bonus.c						\
 						./srcs_bonus/4_render_utils/get_texture_bonus.c					\
 						./srcs_bonus/4_render_utils/render_npc_bonus.c					\
 						./srcs_bonus/4_render_utils/render_object_bonus.c				\
