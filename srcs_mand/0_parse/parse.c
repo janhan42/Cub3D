@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 09:09:41 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/06 12:22:20 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,8 @@ int	parse_file(t_game *game, const char *cub_file_path)
 			== FAILURE)
 			error_exit("do_parsing failed");
 		p.gnl_ret = get_next_line(p.fd, &p.line);
-		printf("parse_file line [%s]\n", p.line);
 	}
+	p.parse_type = check_parse_type(p.line);
 	do_parsing(&game->parse, p.gnl_ret, p.parse_type, p.line);
 	close(p.fd);
 	return (SUCCESS);

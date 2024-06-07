@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/06 10:05:53 by janhan           ###   ########.fr        #
+#    Updated: 2024/06/07 12:35:53 by sangshin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=		cub3d
 
 CC				=		cc
 
-CFLAGS			=		 -Wall -Wextra -Werror -g#-fsanitize=address
+CFLAGS			=		-g #-Wall -Wextra -Werror -fsanitize=address
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 HEADER_MAND		=		./includes_mand/header_mand.h							\
 						./includes_mand/define_mand.h
@@ -27,7 +27,8 @@ MLX_DIR			=		mlx
 
 # SRCS_MAN		=		./test.c
 
-SRCS_MAN		=		./srcs_mand/main.c											\
+SRCS_MAN		=		./get_next_line.c											\
+						./srcs_mand/main.c											\
 						./srcs_mand/0_parse/check_parse.c							\
 						./srcs_mand/0_parse/check_utils.c							\
 						./srcs_mand/0_parse/parse.c									\
