@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 05:55:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 14:48:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 15:53:56 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,19 +70,19 @@ void	set_npc_info(t_draw_npc *info, t_player *player, t_game *game)
 	info->npc_start_x = info->screen_x - info->width;
 	info->npc_end_x = info->screen_x + info->width;
 	info->render_x = info->npc_start_x;
-	printf("-----------------------------------------------\n");
-	printf("player_left [%f]\n", info->player_left);
-	printf("player_right [%f]\n", info->player_right);
-	printf("scale [%f]\n", info->scale);
-	printf("width [%d]\n", info->width);
-	printf("height [%d]\n", info->height);
-	printf("npc_rad [%f]\n", info->npc_rad);
-	printf("angle_diff [%f]\n", info->angle_diff);
-	printf("screen_x [%d]\n", info->screen_x);
-	printf("npc_start_x [%d]\n", info->npc_start_x);
-	printf("npc_end_x [%d]\n", info->npc_end_x);
-	printf("render_x [%d]\n", info->render_x);
-	printf("-----------------------------------------------\n");
+	//printf("-----------------------------------------------\n");
+	//printf("player_left [%f]\n", info->player_left);
+	//printf("player_right [%f]\n", info->player_right);
+	//printf("scale [%f]\n", info->scale);
+	//printf("width [%d]\n", info->width);
+	//printf("height [%d]\n", info->height);
+	//printf("npc_rad [%f]\n", info->npc_rad);
+	//printf("angle_diff [%f]\n", info->angle_diff);
+	//printf("screen_x [%d]\n", info->screen_x);
+	//printf("npc_start_x [%d]\n", info->npc_start_x);
+	//printf("npc_end_x [%d]\n", info->npc_end_x);
+	//printf("render_x [%d]\n", info->render_x);
+	//printf("-----------------------------------------------\n");
 }
 void	draw_npc_core_sub(t_draw_npc *info, t_game *game)
 {

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:13:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 07:05:12 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/07 15:07:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	init(t_game *game, int ac, char **av)
 {
 	if (ac != 2)
 		error_exit("usage \"./cub mapfile.cub\"");
+	if (is_cub_file(av[1]) == FALSE)
+		error_exit("NOT \".cub\" FILE");
 	ft_memset(game, 0, sizeof(t_game));
 	if (parse_file(game, av[1]) == FAILURE)
 		exit(1);

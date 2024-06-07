@@ -6,16 +6,18 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 07:23:35 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:24:08 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/07 15:52:58 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
+#include <stdlib.h>
 
 static void	event_in_game(int button, t_game *game)
 {
 	if (button == 1 && game->player->shot == FALSE)
 	{
+		system("leaks cub3d");
 		game->player->shot = TRUE;
 		game->player->shot_sound = TRUE;
 		game->player->shot_time = 0;
