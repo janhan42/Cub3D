@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 14:40:47 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/11 02:36:39 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,4 +101,8 @@
 # define WINDOW_CLOSE	17
 # define KEY_PRESS 2
 # define KEY_RELEASE 3
+# define ARROW_L 123
+# define ARROW_R 124
+# define ARROW_D 125
+# define ARROW_U 126
 #endif

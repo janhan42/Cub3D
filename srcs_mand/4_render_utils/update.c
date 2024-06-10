@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:54:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/11 02:28:20 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,6 @@ int	update(t_game *game)
 	game->s_time++;
 	if (game->s_time >= 100)
 	{
-		mlx_destroy_image(game->mlx, game->render->img);
-		free(game->render);
-		game->render = make_image(game, WINDOW_W, WINDOW_H);
 		if (game->mode == GAME)
 		{
 			player_movement(game);

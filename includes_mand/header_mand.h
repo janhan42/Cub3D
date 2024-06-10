@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/07 14:41:21 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/11 03:56:06 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,7 @@ typedef struct s_game
 	t_img		*exit_game_n;
 	t_img		*exit_game_h;
 	t_img		*main_menu;
+	t_img		*intro;
 	t_ray_dest	*ray_info;
 	t_player	*player;
 	t_game_mode	mode;
@@ -249,7 +250,7 @@ void	load_texture(t_game *game);
 /*************************************************************/
 /*========                 ray utils                 ========*/
 /*************************************************************/
-t_dest	*get_dest(double x, double y, double rad, t_game *game);
+t_dest	get_dest(double x, double y, double rad, t_game *game);
 void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray);
 void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray);
 

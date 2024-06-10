@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   parse_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 14:44:02 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/11 02:56:58 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ static int	read_map(t_game *game, char *s, int fd)
 {
 	char	*one_line;
 	char	*tmp_map;
+	char	*joined_str;
 	int		type;
 
 	tmp_map = s;
@@ -105,12 +106,13 @@ static int	read_map(t_game *game, char *s, int fd)
 	type = check_parse_type(one_line);
 	while (one_line && type == T_MAP)
 	{
-		tmp_map = ft_strjoin(tmp_map, one_line);
+		joined_str = ft_strjoin(tmp_map, one_line);
 		free(one_line);
+		free(tmp_map);
+		tmp_map = joined_str;
 		one_line = get_next_line(fd);
 		type = check_parse_type(one_line);
 	}
-	free(s);
 	close(fd);
 	if (one_line != NULL)
 	{

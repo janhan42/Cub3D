@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/05 18:58:32 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/11 03:45:10 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,11 @@ static void	compare_distance(t_game *game, t_dest *dest, double rad)
 	compare_distance_sub(game, dest, rad);
 }
 
-t_dest	*get_dest(double x, double y, double rad, t_game *game)
+t_dest	get_dest(double x, double y, double rad, t_game *game)
 {
-	t_dest	*dest;
+	t_dest	dest;
 
-	dest = ft_calloc(1, sizeof(t_dest));
+	//dest = ft_calloc(1, sizeof(t_dest));
 	if (rad > 2 * M_PI)
 		rad -= 2 * M_PI;
 	if (rad < 0)
@@ -123,6 +123,6 @@ t_dest	*get_dest(double x, double y, double rad, t_game *game)
 	check_horizion(game, game->ray_info, x, y);
 	check_vertical_init(x, y, rad, game->ray_info);
 	check_vertical(game, game->ray_info, x, y);
-	compare_distance(game, dest, rad);
+	compare_distance(game, &dest, rad);
 	return (dest);
 }

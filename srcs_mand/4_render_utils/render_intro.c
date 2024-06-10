@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 16:40:50 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/11 04:12:14 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,15 @@ static void	draw_str(t_game *game, int x, int y)
  */
 void	render_intro(t_game *game)
 {
-	t_img		intro;
-	float		scale_factor;
-	int			x;
-	int			y;
+	const t_img		*logo = game->intro;
+	int				x;
+	int				y;
 
 	mlx_mouse_get_pos(game->mlx_win, &x, &y);
-	scale_factor = 0.3;
-	intro.width = (int)(game->main_menu->width * scale_factor);
-	intro.height = (int)(game->main_menu->height * scale_factor);
-	intro.img = mlx_new_image(game->mlx, intro.width, intro.height);
-	intro.addr = mlx_get_data_addr(intro.img,
-			&intro.bit_per_pixel, &intro.line_length, &intro.endian);
-	scale_texture(game->main_menu, &intro, scale_factor);
 	mlx_put_image_to_window(game->mlx, game->mlx_win,
 		game->main_background->img, 0, 0);
-	mlx_put_image_to_window(game->mlx, game->mlx_win,
-		intro.img, WINDOW_W / 2 - (intro.width / 2),
-		WINDOW_H / 2 - (intro.height));
 	draw_str(game, x, y);
+	mlx_put_image_to_window(game->mlx, game->mlx_win,
+		logo->img, WINDOW_W / 2 - (logo->width / 2),
+		WINDOW_H / 2 - (logo->height));
 }

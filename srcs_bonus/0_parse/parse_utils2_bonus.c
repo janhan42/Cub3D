@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils2.c                                     :+:      :+:    :+:   */
+/*   parse_utils2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:46:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 12:29:48 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/11 02:57:34 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	parse_map(t_parse *parse, char *temp_map)
 	}
 	parse->row = row;
 	parse->col = col;
-	return (free_memory_return(parse->temp_map, SUCCESS));
+	return (free_memory_return(temp_map, SUCCESS));
 }
 
 char	*parse_path_malloc(char *line)
