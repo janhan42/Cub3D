@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 15:36:48 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/14 07:08:33 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,20 +96,19 @@ static void	update_object(t_game *game)
 void	render_game(t_game *game)
 {
 	render_3d(game);
-	render_mini_map_center(game);
-	if (game->full_map == TRUE)
-		render_map_player(game->minimap_img, game);
-	else
-		if (game->full_map_x == 0)
-			render_map_player_center(game->minimap_img, game);
-	mlx_put_image_to_window(game->mlx,
-		game->mlx_win, game->minimap_img->img, 0, 0);
+	//render_mini_map_center(game);
+	//if (game->full_map == TRUE)
+	//	render_map_player(game->minimap_img, game);
+	//else
+	//	if (game->full_map_x == 0)
+	//		render_map_player_center(game->minimap_img, game);
+	//mlx_put_image_to_window(game->mlx,
+	//	game->mlx_win, game->minimap_img->img, 0, 0);
 	render_weapon(game);
 	if (game->blood_flag == TRUE)
 	{
 		mlx_put_image_to_window(game->mlx, game->mlx_win, game->blood->img, 0, 0);
 		game->blood_flag = FALSE;
-		printf("들어오긴하나\n");
 	}
 }
 

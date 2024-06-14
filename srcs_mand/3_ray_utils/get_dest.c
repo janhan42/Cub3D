@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 03:45:10 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/14 07:33:54 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ t_dest	get_dest(double x, double y, double rad, t_game *game)
 {
 	t_dest	dest;
 
-	//dest = ft_calloc(1, sizeof(t_dest));
 	if (rad > 2 * M_PI)
 		rad -= 2 * M_PI;
 	if (rad < 0)

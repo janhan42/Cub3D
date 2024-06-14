@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/07 14:43:16 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/14 07:18:28 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,7 @@ typedef struct s_game
 	t_img		*exit_game_n;
 	t_img		*exit_game_h;
 	t_img		*main_menu;
+	t_img		*intro;
 	t_mouse		*mouse;
 	t_ray_dest	*ray_info;
 	t_player	*player;
@@ -428,7 +429,7 @@ void	init_npc(t_game *game);
 /*************************************************************/
 /*========                 ray utils                 ========*/
 /*************************************************************/
-t_dest	*get_dest(double x, double y, double rad, t_game *game);
+t_dest	get_dest(double x, double y, double rad, t_game *game);
 void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray);
 void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray);
 int		npc_ray(t_player *player, t_npc *npc, t_game *game);

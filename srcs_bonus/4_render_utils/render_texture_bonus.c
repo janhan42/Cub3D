@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:28:13 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/05 19:44:23 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/14 07:13:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,6 @@ static void	render_ceiling(t_game *game, t_single_texture *info)
 		i++;
 	}
 }
-
-/*
-	음영 적용 할지 말지 고민중이라 이전 코드 남겨둠.
-	6월 5일 Janhan
-*/
-//static void	render_wall(t_game *game,
-// t_single_texture *info, t_img *texture)
-//{
-//	while (info->y < info->line_h)
-//	{
-//		if (info->y + info->h_offset > WINDOW_H)
-//			return ;
-//		while (info->y + info->h_offset < 0)
-//		{
-//			info->step_y += info->step;
-//			info->y++;
-//		}
-//		info->color = color_spoid(info->texture_x, (int)info->step_y, texture);
-//		put_pixel_on_img(game->render, info->x,
-//			info->y + info->h_offset, info->color);
-//		info->step_y += info->step;
-//		info->y++;
-//	}
-//}
 
 static void	render_wall(t_game *game, t_single_texture *info, t_img *texture)
 {

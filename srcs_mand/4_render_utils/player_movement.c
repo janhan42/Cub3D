@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:01:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 02:33:58 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/14 07:34:20 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,29 +63,6 @@ static double	wall_collision(t_game *game, int state)
 
 void	player_movement(t_game *game)
 {
-	// if (game->player->move_w)
-	// {
-	// 	game->player->player_x += wall_collision(game, 5);
-	// 	game->player->player_y += wall_collision(game, 4 + 2 + 0);
-	// }
-	// if (game->player->move_s)
-	// {
-	// 	game->player->player_x += wall_collision(game, 0 + 0 + 1);
-	// 	game->player->player_y += wall_collision(game, 0 + 2 + 0);
-	// }
-	// if (game->player->move_a)
-	// {
-	// 	game->player->player_rad -= 0.04;
-	// }
-	// if (game->player->move_d)
-	// {
-	// 	game->player->player_rad += 0.04;
-	// }
-	// if (game->player->player_rad > M_PI * 2)
-	// 	game->player->player_rad -= 2 * M_PI;
-	// else if (game->player->player_rad < 0)
-	// 	game->player->player_rad += 2 * M_PI;
-	// game->frame++;
 	if (game->player->move_w)
 	{
 		game->player->player_x += wall_collision(game, 5);
