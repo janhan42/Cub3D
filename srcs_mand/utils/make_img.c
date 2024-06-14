@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:00:25 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 17:41:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/14 10:52:41 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,32 @@ t_img	*make_image(t_game *game, int width, int height)
 			&img->line_length, &img->endian);
 	img->width = width;
 	img->height = height;
+	return (img);
+}
+
+t_img	*make_xpm_img(t_game *game, char *file_path)
+{
+	t_img	*img;
+
+	img = ft_calloc(1, sizeof(t_img));
+	img->img = mlx_xpm_file_to_image(game->mlx, file_path,
+			&img->width, &img->height);
+	if (img->img == NULL)
+		error_exit("make_image failed");
+	img->addr = mlx_get_data_addr(img->img, &img->bit_per_pixel,
+			&img->line_length, &img->endian);
+	return (img);
+}
+
+t_img	make_png_img_nomalloc(t_game *game, char *file_path)
+{
+	t_img	img;
+
+	img.img = mlx_png_file_to_image(game->mlx, file_path,
+			&img.width, &img.height);
+	if (img.img == NULL)
+		error_exit("make_image failed");
+	img.addr = mlx_get_data_addr(img.img, &img.bit_per_pixel,
+			&img.line_length, &img.endian);
 	return (img);
 }

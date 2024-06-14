@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/11 03:56:06 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/14 10:51:35 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,8 @@ t_img	*get_texture(t_game *game, t_dest *dest);
 /*************************************************************/
 // _init_utils
 t_img	*make_image(t_game *game, int width, int height);
+t_img	*make_xpm_img(t_game *game, char *file_path);
+t_img	make_png_img_nomalloc(t_game *game, char *file_path);
 
 // _gnl
 char	*get_next_line(int fd);
