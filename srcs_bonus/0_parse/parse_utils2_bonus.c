@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 18:46:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 02:57:34 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/16 05:42:34 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ char	*parse_path_malloc(char *line)
 	char	*temp;
 	int		i;
 
+	i = 0;
 	while (line[i])
 		i++;
 	line[i - 1] = 0;

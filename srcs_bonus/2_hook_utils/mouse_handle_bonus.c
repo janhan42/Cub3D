@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 07:23:35 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 15:52:58 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 06:30:07 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	event_in_game(int button, t_game *game)
 {
 	if (button == 1 && game->player->shot == FALSE)
 	{
-		system("leaks cub3d");
 		game->player->shot = TRUE;
 		game->player->shot_sound = TRUE;
 		game->player->shot_time = 0;
@@ -57,7 +56,6 @@ int	mouse_handle(int button, int x, int y, t_game *game)
 {
 	game->mouse->x = x;
 	game->mouse->y = y;
-	printf("CLICK!!!!!!!!!!!!");
 	if (game->mode == GAME)
 		event_in_game(button, game);
 	if (game->mode == INTRO)

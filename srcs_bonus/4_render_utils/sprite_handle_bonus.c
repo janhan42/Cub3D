@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 08:21:37 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 15:47:09 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 06:33:09 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	render_weapon_sprite(t_game *game,
 		dst_img->img, info->x, info->y);
 }
 
-int	render_weapon(t_game *game)
+int	render_weapon(t_game *game) // TODO: fix 예정 06m 16d janhan
 {
 	t_img			dst_img;
 	t_single_scale	info;

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/14 06:59:24 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 06:30:44 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 			ray->hy = ray->ry;
 			ray->distance_h = dist(x, y, ray->hx, ray->hy);
 			ray->dof = 100;
-			if (game->map[ray->my][ray->mx] == 'D')
+			if (game->map[ray->my][ray->mx] == 'D') // TODO: 이거 이제 없어도 되는거 아닌가
 				ray->is_h_door = 1;
 		}
 		else

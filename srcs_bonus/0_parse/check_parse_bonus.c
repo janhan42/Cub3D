@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 10:10:45 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 06:23:27 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
  */
 static int	check_bonus_symbol(t_game *game, int row, int col, int value)
 {
-	if (ft_strchr("0", value) != NULL)
+	if (ft_strchr("0RGLT", value) != NULL)
 	{
 		if (is_space_around_position(game, row, col) == FAILURE)
-			error_exit("Empty space next to 0!");
+			error_exit("Empty space next to 0 or object and NPC!");
 	}
 	if (ft_strchr("LRGHV", value) != NULL)
 		game->object_count++;
-	if (ft_strchr("TYU", value) != NULL)
+	if (ft_strchr("TYU", value) != NULL) // NPC
 		game->npc_count++;
 	return (SUCCESS);
 }
@@ -48,7 +48,7 @@ static int	check_symbol2(t_game *game, int row, int col)
 			error_exit("Empty space next to NSEW!");
 		game->parse.is_d = TRUE;
 	}
-	else if (ft_strchr("0LRGHVTYU", value) != NULL)
+	else if (ft_strchr("0LRGHVTYU", value) != NULL) // NPC
 		if (check_bonus_symbol(game, row, col, value) == FAILURE)
 			return (FAILURE);
 	return (SUCCESS);

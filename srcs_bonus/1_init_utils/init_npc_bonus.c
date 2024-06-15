@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 06:33:44 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 07:09:40 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 06:15:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static void	set_npc_position(t_npc *npc, char **map, int x, int y)
 	npc->hp = 3;
 	if (map[y][x] == 'T')
 		npc->type = CACO_DEMON;
-	if (map[y][x] == 'Y')
+	if (map[y][x] == 'Y') // NPC
 		npc->type = CYBER_DEMON;
-	if (map[y][x] == 'U')
+	if (map[y][x] == 'U') // NPC
 		npc->type = SOLDIRE;
 }
 
@@ -44,8 +44,8 @@ static void	get_npc_position(char **map, t_npc **npcs)
 		while (map[y][x])
 		{
 			if (map[y][x] == 'T'
-			|| map[y][x] == 'Y'
-			|| map[y][x] == 'U')
+			|| map[y][x] == 'Y' // NPC
+			|| map[y][x] == 'U') // NPC
 			{
 				set_npc_position(npcs[i], map, x, y);
 				i++;
@@ -57,11 +57,11 @@ static void	get_npc_position(char **map, t_npc **npcs)
 }
 
 // img[type][state][frame]
-void	load_npc_texture(t_game *game)
+void	load_npc_texture(t_game *game) // NPC
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	game->npc_texture = (t_img ****)malloc(sizeof(t_img ***) * 3);
 	if (game->npc_texture == NULL)
 		error_exit("game->npc_texture **** malloc failed");

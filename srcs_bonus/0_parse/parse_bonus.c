@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 02:56:58 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/16 05:42:17 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static int	check_color(int type, t_parse *parse, char *line)
 static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 {
 	g_ret++;
+	(void)g_ret;
 	if (T_NO <= type && type <= T_EA)
 	{
 		if (parse->tex[type].tex_path)
