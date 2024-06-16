@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/16 07:01:39 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:33:53 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,29 @@ typedef enum e_npc_state
 	DEATH,
 }	t_npc_state;
 
+typedef struct s_npc_ray
+{
+	double	dx;
+	double	dy;
+	double	distance;
+	double	angle;
+	double	x;
+	double	y;
+	int		map_x;
+	int		map_y;
+	int		i;
+}	t_npc_ray;
+
+typedef struct s_npc_update
+{
+	int		ray_flag;
+	double	next_x;
+	double	next_y;
+	double	angle;
+	double	dx;
+	double	dy;
+}	t_npc_update;
+
 typedef struct s_npc
 {
 	t_npc_type		type;
@@ -376,7 +399,6 @@ typedef struct s_game
 	double		frame_time;
 	int			frame;
 	int			s_time;
-	// TEST
 	int			npc_count;
 	t_npc		**npcs;
 	t_img		****npc_texture;
@@ -447,7 +469,17 @@ void	render_intro(t_game *game);
 
 // 1_game
 void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game);
+
+// NPC
 void	render_npc(t_game *game);
+void	set_npc_info(t_draw_npc *info, t_player *player, t_game *game);
+void	calculate_npc_dist(t_npc **npc, t_player *player, int cnt);
+int		compare_npc(const void *a, const void *b);
+void	update_npc(t_npc *npc, t_player *player, t_game *game);
+void	shot_npc(t_draw_npc *info, t_game *game,
+			t_player *player, int *limiter);
+void	frame_npc(t_draw_npc *info, t_game *game, int limiter);
+
 int		get_door_width(t_object *door, t_player *player);
 void	get_door_height_horizion(t_player *player, t_object *door,
 			double *longer, double *smaller);

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 07:51:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 08:26:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 15:39:14 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,5 @@ void	load_texture(t_game *game)
 	load_wall_texture(game, wall);
 	load_menu_texture(game);
 	game->texture = wall;
-	// TEST
 	game->blood = make_xpm_img(game, "resources/textures/blood_screen.xpm");
 }

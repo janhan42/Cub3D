@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:57:56 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 09:34:32 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:04:29 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	get_door_width(t_object *door, t_player *player)
 				- atan((y + 64 - player->player_y) / (x - player->player_x)));
 	}
 	else
-		rad = fabs(atan2(y - player->player_y, x + 32 - player->player_x)
-				- atan2(y - player->player_y, x - 32 - player->player_x));
+		rad = fabs(atan2(y - player->player_y, x + 36 - player->player_x)
+				- atan2(y - player->player_y, x - 36 - player->player_x));
 	width = rad / (M_PI / 3) * WINDOW_W;
 	printf("####width: %d\n", width);
 	return (width);
@@ -43,7 +43,7 @@ double *longer, double *smaller)
 			door->object_y);
 	*longer = (WINDOW_H / *longer) * 100;
 	*smaller = dist(player->player_x, player->player_y,
-			door->object_x - ((int)door->object_x & 63) + 64,
+			door->object_x - ((int)door->object_x & 63) + 32,
 			door->object_y);
 	*smaller = (WINDOW_H / *smaller) * 100;
 }
@@ -60,10 +60,10 @@ int width, double *offset)
 	if (door->type == VERTICAL_DOOR)
 	{
 		longer = dist(player->player_x, player->player_y,
-				door->object_x, door->object_y - 32);
+				door->object_x, door->object_y - 34);
 		longer = (WINDOW_H / longer) * 100;
 		smaller = dist(player->player_x, player->player_y,
-				door->object_x, door->object_y + 32);
+				door->object_x, door->object_y + 34);
 		smaller = (WINDOW_H / smaller) * 100;
 	}
 	else
@@ -114,6 +114,5 @@ void	set_door_info(t_draw_door *info, t_player *player)
 		info->door_rad = M_PI_2;
 	else
 		info->door_rad = 2 * M_PI;
-	printf("info->door_rad [%f]\n", info->door_rad);
 	set_door_info_sub(info);
 }

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 07:42:50 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:04:00 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ void	render_game(t_game *game)
 	render_weapon(game);
 	if (game->blood_flag == TRUE)
 	{
-		mlx_put_image_to_window(game->mlx, game->mlx_win, game->blood->img, 0, 0);
+		mlx_put_image_to_window(game->mlx,
+			game->mlx_win, game->blood->img, 0, 0);
 		game->blood_flag = FALSE;
 	}
 	mlx_destroy_image(game->mlx, game->minimap_img->img);

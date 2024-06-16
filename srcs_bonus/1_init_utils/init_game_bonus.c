@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 07:35:42 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 15:40:00 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,7 @@ void	init_game(t_game *game)
 	game->full_map = FALSE;
 	game->full_map_x = 0;
 	game->full_map_y = 0;
-	// TEST
 	game->npc_death_flag = FALSE;
 	game->npc_attack_flag = FALSE;
 	game->blood_flag = FALSE;
-	if (game->main_background->img == NULL)
-		printf("ERROR");
 }

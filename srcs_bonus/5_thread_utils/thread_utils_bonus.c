@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:24:00 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 07:17:34 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:04:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	*sound_handle(void *game)
 
 void	*sound_npc(void *game)
 {
-	t_game *sound_game;
+	t_game	*sound_game;
 
 	sound_game = (t_game *)game;
 	while (1)

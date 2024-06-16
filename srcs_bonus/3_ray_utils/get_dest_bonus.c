@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 06:30:44 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:03:31 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 			ray->hy = ray->ry;
 			ray->distance_h = dist(x, y, ray->hx, ray->hy);
 			ray->dof = 100;
-			if (game->map[ray->my][ray->mx] == 'D') // TODO: 이거 이제 없어도 되는거 아닌가
-				ray->is_h_door = 1;
 		}
 		else
 		{
@@ -64,8 +62,6 @@ static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 			ray->vy = ray->ry;
 			ray->distance_v = dist(x, y, ray->vx, ray->vy);
 			ray->dof = 100;
-			if (game->map[ray->my][ray->mx] == 'D')
-				ray->is_v_door = 1;
 		}
 		else
 		{
@@ -125,7 +121,6 @@ t_dest	get_dest(double x, double y, double rad, t_game *game)
 {
 	t_dest	dest;
 
-	//dest = ft_calloc(1, sizeof(t_dest));
 	if (rad > 2 * M_PI)
 		rad -= 2 * M_PI;
 	if (rad < 0)

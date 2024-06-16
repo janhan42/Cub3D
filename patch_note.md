@@ -1,6 +1,6 @@
 2024-06-16 05:45
 
-- [ ] NPC type은 Caco_demon하나만
+- [x] NPC type은 Caco_demon하나만
 - [ ] minimap 리사이즈
 - [ ] 샷건 이미지 사이즈 조정?
 - [ ] npc부분 norm fix

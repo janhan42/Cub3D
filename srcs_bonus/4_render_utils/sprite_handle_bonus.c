@@ -6,25 +6,18 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 08:21:37 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 06:33:09 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:03:49 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-static void	render_weapon_idle(t_game *game,
-	t_img *dst_img, t_single_scale *info)
+static void	render_weapon_idle(t_game *game, t_single_scale *info)
 {
-	dst_img->width = (int)(game->player->shotgun[0]->width * info->scale);
-	dst_img->height = (int)(game->player->shotgun[0]->height * info->scale);
-	dst_img->img = mlx_new_image(game->mlx, dst_img->width, dst_img->height);
-	dst_img->addr = mlx_get_data_addr(dst_img->img,
-			&dst_img->bit_per_pixel, &dst_img->line_length, &dst_img->endian);
-	info->x = WINDOW_W / 2 - (dst_img->width / 2);
-	info->y = WINDOW_H - dst_img->height;
-	scale_texture(game->player->shotgun[0], dst_img, info->scale);
+	info->x = WINDOW_W / 2 - (game->player->shotgun[0]->width / 2);
+	info->y = WINDOW_H - game->player->shotgun[0]->height;
 	mlx_put_image_to_window(game->mlx, game->mlx_win,
-		dst_img->img,
+		game->player->shotgun[0]->img,
 		info->x, info->y);
 }
 
@@ -52,39 +45,30 @@ void	player_frame_update(t_game *game)
 	}
 }
 
-static void	render_weapon_sprite(t_game *game,
-	t_img *dst_img, t_single_scale *info)
+static void	render_weapon_sprite(t_game *game, t_single_scale *info)
 {
-	dst_img->width = (int)(game->player
-			->shotgun[game->player->shot_frame]->width * info->scale);
-	dst_img->height = (int)(game->player
-			->shotgun[game->player->shot_frame]->height * info->scale);
-	dst_img->img = mlx_new_image(game->mlx, dst_img->width, dst_img->height);
-	dst_img->addr = mlx_get_data_addr(dst_img->img,
-			&dst_img->bit_per_pixel, &dst_img->line_length, &dst_img->endian);
-	info->x = WINDOW_W / 2 - (dst_img->width / 2);
-	info->y = WINDOW_H - dst_img->height;
-	scale_texture(game->player->shotgun[game->player->shot_frame],
-		dst_img, info->scale);
+	info->x = WINDOW_W / 2 - (game->player->shotgun
+		[game->player->shot_frame]->width / 2);
+	info->y = WINDOW_H - game->player->shotgun
+	[game->player->shot_frame]->height;
 	mlx_put_image_to_window(game->mlx, game->mlx_win,
-		dst_img->img, info->x, info->y);
+		game->player->shotgun[game->player->shot_frame]->img, info->x, info->y);
 }
 
-int	render_weapon(t_game *game) // TODO: fix 예정 06m 16d janhan
+int	render_weapon(t_game *game)
 {
-	t_img			dst_img;
 	t_single_scale	info;
 
 	info.scale = 0.5;
 	if (game->player->shot == FALSE)
 	{
-		render_weapon_idle(game, &dst_img, &info);
+		render_weapon_idle(game, &info);
 		return (0);
 	}
 	else
 	{
 		player_frame_update(game);
-		render_weapon_sprite(game, &dst_img, &info);
+		render_weapon_sprite(game, &info);
 	}
 	return (0);
 }

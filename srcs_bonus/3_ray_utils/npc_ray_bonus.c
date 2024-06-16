@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 08:40:47 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 08:55:02 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:05:02 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,26 @@
 
 int	npc_ray(t_player *player, t_npc *npc, t_game *game)
 {
-	double	dx;
-	double	dy;
-	double	distance;
-	double	angle;
-	int		i;
-	double	x;
-	double	y;
-	int		map_x;
-	int		map_y;
+	t_npc_ray	ray;
 
-	// NPC에서 플레이어로 향하는 방향 계산
-	dx = player->player_x - npc->npc_x;
-	dy = player->player_y - npc->npc_y;
-	distance = sqrt(dx * dx + dy * dy); // 거리 계산
-	angle = atan2(dy, dx);
-
-	// 초기 위치는 NPC의 위치
-	x = npc->npc_x;
-	y = npc->npc_y;
-	i = 0;
-	while(i < (int)distance)
+	ray.dx = player->player_x - npc->npc_x;
+	ray.dy = player->player_y - npc->npc_y;
+	ray.distance = sqrt(ray.dx * ray.dx + ray.dy * ray.dy);
+	ray.angle = atan2(ray.dy, ray.dx);
+	ray.x = npc->npc_x;
+	ray.y = npc->npc_y;
+	ray.i = 0;
+	while (ray.i < (int)ray.distance)
 	{
-		x += cos(angle);
-		y += sin(angle);
-		map_x = (int)x >> 6; // 64로 나눔 (타일 크기 가정)
-		map_y = (int)y >> 6;
-
-		// 벽 충돌 검사
-		if (game->map[map_y][map_x] == '1' || game->map[map_y][map_x] == 'V' || game->map[map_y][map_x] == 'H')
+		ray.x += cos(ray.angle);
+		ray.y += sin(ray.angle);
+		ray.map_x = (int)ray.x >> 6;
+		ray.map_y = (int)ray.y >> 6;
+		if (game->map[ray.map_y][ray.map_x] == '1'
+			|| game->map[ray.map_y][ray.map_x] == 'V'
+			|| game->map[ray.map_y][ray.map_x] == 'H')
 			return (FALSE);
-		i++;
+		ray.i++;
 	}
 	return (TRUE);
 }

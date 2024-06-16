@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/10 16:11:41 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/16 15:55:34 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,6 @@ static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 		if (check_color(type, parse, line) == FAILURE)
 			return (free_memory_return(line, FAILURE));
 	}
-	// else
-	// {
-	// 	//parse->temp_map = update_map(parse->temp_map, line);
-	// 	printf("in do_parsing :%s", line);
-	// 	parse->temp_map = line;
-	// 	if (/*g_ret == 0 && */parse_map(parse) == FAILURE)
-	// 		return (free_memory_return(line, FAILURE));
-	// }
 	return (free_memory_return(line, SUCCESS));
 }
 

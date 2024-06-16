@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/16 05:44:05 by janhan           ###   ########.fr        #
+#    Updated: 2024/06/16 17:22:05 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -82,6 +82,8 @@ SRCS_BONUS		=		print_info.c													\
 						./srcs_bonus/3_ray_utils/npc_ray_bonus.c						\
 						./srcs_bonus/4_render_utils/get_texture_bonus.c					\
 						./srcs_bonus/4_render_utils/render_npc_bonus.c					\
+						./srcs_bonus/4_render_utils/render_npc_sub_bonus.c				\
+						./srcs_bonus/4_render_utils/update_npc_bonus.c					\
 						./srcs_bonus/4_render_utils/render_object_bonus.c				\
 						./srcs_bonus/4_render_utils/render_object_sub_bonus.c			\
 						./srcs_bonus/4_render_utils/render_door_bonus.c					\

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 23:00:05 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 09:32:59 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 15:56:10 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	draw_door_core(t_draw_door *info, t_player *player, t_game *game)
 	}
 }
 
-
 void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 {
 	t_draw_door	info;
@@ -65,7 +64,7 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 	{
 		info.target = obj[i];
 		if (HORIZONTAL_DOOR <= info.target->type
-			&& info.target->type <= VERTICAL_DOOR)
+			&& info.target->type <= VERTICAL_DOOR && info.target->distance > 20)
 		{
 			set_door_info(&info, player);
 			info.step_x = 0;

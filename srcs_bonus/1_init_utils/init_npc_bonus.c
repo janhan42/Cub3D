@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 06:33:44 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 07:33:11 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 16:00:00 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,21 @@ void	load_npc_texture(t_game *game)
 	game->npc_texture[CACO_DEMON] = (t_img ***)malloc(sizeof(t_img **) * 5);
 	game->npc_texture[CACO_DEMON][IDLE] = (t_img **)malloc(sizeof(t_img *) * 8);
 	game->npc_texture[CACO_DEMON][WALK] = (t_img **)malloc(sizeof(t_img *) * 4);
-	game->npc_texture[CACO_DEMON][ATTACK] = (t_img **)malloc(sizeof(t_img *) * 5);
+	game->npc_texture[CACO_DEMON][ATTACK]
+		= (t_img **)malloc(sizeof(t_img *) * 5);
 	game->npc_texture[CACO_DEMON][PAIN] = (t_img **)malloc(sizeof(t_img *) * 2);
-	game->npc_texture[CACO_DEMON][DEATH] = (t_img **)malloc(sizeof(t_img *) * 6);
-	init_multi_png_img(game, game->npc_texture[CACO_DEMON][IDLE], "resources/sprites/npc/caco_demon/idle/", 8);
-	init_multi_png_img(game, game->npc_texture[CACO_DEMON][WALK], "resources/sprites/npc/caco_demon/walk/", 4);
-	init_multi_png_img(game, game->npc_texture[CACO_DEMON][ATTACK], "resources/sprites/npc/caco_demon/attack/", 5);
-	init_multi_png_img(game, game->npc_texture[CACO_DEMON][PAIN], "resources/sprites/npc/caco_demon/pain/", 2);
-	init_multi_png_img(game, game->npc_texture[CACO_DEMON][DEATH], "resources/sprites/npc/caco_demon/death/", 6);
+	game->npc_texture[CACO_DEMON][DEATH]
+		= (t_img **)malloc(sizeof(t_img *) * 6);
+	init_multi_png_img(game, game->npc_texture[CACO_DEMON][IDLE],
+		"resources/sprites/npc/caco_demon/idle/", 8);
+	init_multi_png_img(game, game->npc_texture[CACO_DEMON][WALK],
+		"resources/sprites/npc/caco_demon/walk/", 4);
+	init_multi_png_img(game, game->npc_texture[CACO_DEMON][ATTACK],
+		"resources/sprites/npc/caco_demon/attack/", 5);
+	init_multi_png_img(game, game->npc_texture[CACO_DEMON][PAIN],
+		"resources/sprites/npc/caco_demon/pain/", 2);
+	init_multi_png_img(game, game->npc_texture[CACO_DEMON][DEATH],
+		"resources/sprites/npc/caco_demon/death/", 6);
 }
 
 void	init_npc(t_game *game)

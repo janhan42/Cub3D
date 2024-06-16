@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 05:42:17 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 15:58:42 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 		if (check_color(type, parse, line) == FAILURE)
 			return (free_memory_return(line, FAILURE));
 	}
-	// else
-	// {
-	// 	//parse->temp_map = update_map(parse->temp_map, line);
-	// 	printf("in do_parsing :%s", line);
-	// 	parse->temp_map = line;
-	// 	if (/*g_ret == 0 && */parse_map(parse) == FAILURE)
-	// 		return (free_memory_return(line, FAILURE));
-	// }
 	return (free_memory_return(line, SUCCESS));
 }
 
@@ -123,7 +115,6 @@ static int	read_map(t_game *game, char *s, int fd)
 	return (parse_map(&game->parse, tmp_map));
 }
 
-
 /**
  * @brief
  * .cub 파일의 확장자 및 오픈 체크 후 파싱하는 함수
@@ -135,8 +126,6 @@ int	parse_file(t_game *game, const char *cub_file_path)
 {
 	t_single_parse	p;
 
-	if (!(is_cub_file(cub_file_path)))
-		error_exit("NOT \".cub\" FILE");
 	p.fd = open(cub_file_path, O_RDONLY);
 	if (p.fd < 0)
 		error_exit("WRONG FILE PATH OR CAN'T OPEN");
@@ -144,7 +133,8 @@ int	parse_file(t_game *game, const char *cub_file_path)
 	p.parse_type = check_parse_type(p.line);
 	while (p.line && p.parse_type != T_MAP)
 	{
-		if ((p.parse_type == FAILURE && is_blank_line(p.line)) || p.parse_type == EMPTY)
+		if ((p.parse_type == FAILURE && is_blank_line(p.line))
+			|| p.parse_type == EMPTY)
 			free(p.line);
 		else if (p.parse_type == FAILURE)
 			error_exit("WRONG PARSE TYPE");
