@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:11:15 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 15:44:32 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:49:41 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	init_player(t_game *game)
 		error_exit("init_player shotgun malloc failed");
 	init_multi_xpm_img(game, game->player->shotgun,
 		"resources/sprites/weapon/shotgun/", 6);
-	print_img_info(game->player->shotgun[0], "shotgun[0]");
 	game->player->shot_time = 0;
 	game->player->shot_frame = 0;
 	game->player->shot = FALSE;
@@ -94,6 +93,4 @@ void	init_player(t_game *game)
 	game->player->move_a = FALSE;
 	game->player->move_d = FALSE;
 	game->player->player_fov_off_y = 0;
-	print_player_info(game->player);
-	printf("--------------------init_player OK--------------------\n");
 }

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/16 17:33:53 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:49:20 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -552,17 +552,5 @@ void	free_array_memory(void **memory, int index);
 void	*sound_handle(void *game);
 void	*sound_theme(void	*game);
 void	*sound_npc(void *game);
-
-/*************************************************************/
-/*========                print info                 ========*/
-/*************************************************************/
-void	print_mouse_info(t_mouse *mouse);
-void	print_img_info(t_img *img, char *name);
-void	print_player_info(t_player *player);
-void	print_ray_result_info(double ray_result[4]);
-void	print_ray_info(t_ray_dest *ray);
-void	print_game_info(t_game *game);
-void	print_object_info(t_object *object);
-void	print_map_info(char **map);
 
 #endif

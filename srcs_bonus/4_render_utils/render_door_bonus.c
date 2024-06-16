@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 23:00:05 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 15:56:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:50:42 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,8 @@ void	draw_door(t_object **obj, int cnt, t_player *player, t_game *game)
 			info.one_step_x
 				= (double)game->object_texture[HORIZONTAL_DOOR][0]->width
 				/ info.width;
-			printf("door: info.one_step_x [%f]\n", info.one_step_x);
 			draw_door_core(&info, player, game);
 		}
 		i++;
 	}
 }
-
-// printf("player rad: %f\n", player->player_rad);
-// printf("door_rad: %f\n", player_door_rad);
-// printf("angle_diff: %f\n", angle_diff);
-// printf("screen_x: %d\n", screen_x);
-// printf("door_start: %d\n", door_start);
-// // printf("door_end: %d\n", door_end);
-// printf("width: %d\n", width);

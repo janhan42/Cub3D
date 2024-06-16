@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/16 17:22:05 by janhan           ###   ########.fr        #
+#    Updated: 2024/06/16 17:49:01 by janhan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,8 +59,7 @@ SRCS_MAN		=		./srcs_mand/main.c											\
 						./srcs_mand/utils/make_img.c
 OBJS_MAND		=	$(SRCS_MAN:.c=.o)
 
-SRCS_BONUS		=		print_info.c													\
-						./srcs_bonus/main_bonus.c										\
+SRCS_BONUS		=		./srcs_bonus/main_bonus.c										\
 						./srcs_bonus/0_parse/check_parse_bonus.c						\
 						./srcs_bonus/0_parse/check_utils_bonus.c						\
 						./srcs_bonus/0_parse/parse_bonus.c								\

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 15:40:00 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:49:33 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static void	init_ray_result(t_game *game)
 {
 	game->ray_info->ray_result = ft_calloc(3, sizeof(double));
-	print_ray_result_info(game->ray_info->ray_result);
 }
 
 static void	init_ray_info(t_game *game)
@@ -23,7 +22,6 @@ static void	init_ray_info(t_game *game)
 	game->ray_info = (t_ray_dest *)ft_calloc(1, sizeof(t_ray_dest));
 	if (game->ray_info == NULL)
 		error_exit("init_ray_info malloc failed");
-	print_ray_info(game->ray_info);
 	init_ray_result(game);
 }
 
@@ -36,7 +34,6 @@ static void	init_mouse(t_game *game)
 		&game->mouse->x, &game->mouse->y);
 	game->mouse->prev_x = WINDOW_W / 2;
 	game->mouse->prev_y = WINDOW_H / 2;
-	print_mouse_info(game->mouse);
 }
 
 void	init_game(t_game *game)

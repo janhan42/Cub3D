@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 18:51:34 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/07 15:33:54 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:50:33 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static void	setting_line(t_game *game)
 		while (x < game->parse.col)
 		{
 			game->map[y][x] = ' ';
-			printf("x : %d y : %d\n", x, y);
 			x++;
 		}
 		y++;

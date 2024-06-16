@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 06:33:44 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 16:00:00 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:50:52 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	init_npc(t_game *game)
 		game->npcs[i] = (t_npc *)malloc(sizeof(t_npc));
 		if (game->npcs[i] == NULL)
 			error_exit("init_npcs[i] malloc failed");
-		printf("npcs malloc [%d]\n", i);
 		i++;
 	}
 	get_npc_position(game->map, game->npcs);

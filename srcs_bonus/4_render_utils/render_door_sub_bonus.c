@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:57:56 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 16:04:29 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:50:45 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	get_door_width(t_object *door, t_player *player)
 		rad = fabs(atan2(y - player->player_y, x + 36 - player->player_x)
 				- atan2(y - player->player_y, x - 36 - player->player_x));
 	width = rad / (M_PI / 3) * WINDOW_W;
-	printf("####width: %d\n", width);
 	return (width);
 }
 

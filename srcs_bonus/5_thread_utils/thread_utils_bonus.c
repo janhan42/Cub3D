@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 20:24:00 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 16:04:10 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 17:51:15 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	*sound_theme(void	*game)
 	while (1)
 	{
 		system("afplay resources/sound/theme.mp3 &");
-		printf("sound_game->pthread_kill : %d\n", sound_game->pthread_kill);
 		usleep(171000000);
 		if (sound_game->player->player_rad == TRUE)
 			pthread_exit(NULL);
