@@ -6,11 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 05:55:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 15:53:56 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 09:20:01 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
+#include <stdio.h>
 
 int	compare_npc(const void *a, const void *b)
 {
@@ -43,7 +44,6 @@ void	calculate_npc_dist(t_npc **npc, t_player *player, int cnt)
 
 void	set_npc_info(t_draw_npc *info, t_player *player, t_game *game)
 {
-	printf("info->frame [%d]\n", info->target->frame);
 	info->player_left = player->player_rad - M_PI / 6;
 	info->player_right = player->player_rad + M_PI / 6;
 	if (info->player_right < 0)
@@ -84,6 +84,7 @@ void	set_npc_info(t_draw_npc *info, t_player *player, t_game *game)
 	//printf("render_x [%d]\n", info->render_x);
 	//printf("-----------------------------------------------\n");
 }
+
 void	draw_npc_core_sub(t_draw_npc *info, t_game *game)
 {
 	while (info->start_y < info->dest_y)
@@ -132,60 +133,78 @@ void	draw_npc_core(t_draw_npc *info, t_player *player, t_game *game)
 }
 
 /*
-		CACO_DEMON	CYBER_DEMON	SOLDIRE
-IDLE		8			8			8
-WALK		3			4			4
-ATTACK		5			2			2
-PAIN		2			2			1
-DEATH		6			9			9
+		CACO_DEMON
+IDLE		8
+WALK		3
+ATTACK		5
+PAIN		2
+DEATH		6
 */
+
+void	update_npc(t_npc *npc, t_player *player, t_game *game)
+{
+	int	ray_flag;
+
+	ray_flag = npc_ray(player, npc, game); // player가 npc시야에 있는지
+	if (ray_flag == TRUE) // 시야에 있을때
+	{
+		if (npc->state != PAIN) // PAIN이 우선 순위
+		{
+			if (npc->distance < 150 && npc->state != ATTACK) // 플레이어와의 거리가 150 이하이고 공격중이 아닐때
+			{
+				npc->state = ATTACK;
+				npc->frame = 0;
+				npc->frame_max = 5;
+			}
+			else if (150 <= npc->distance && npc->distance <= 300 && npc->state != WALK) // 플레이어와의 거리가 150이상 300 이하이고 WALK가 아닐때
+			{
+				npc->state = WALK;
+				npc->frame = 0;
+				npc->frame_max = 4;
+			}
+			else if (300 < npc->distance && npc->state != IDLE) // 플레이어와의 거리가 300 이상면 IDLE
+			{
+				npc->state = IDLE;
+				npc->frame = 0;
+				npc->frame_max = 7;
+			}
+			if (npc->state == WALK)
+			{
+				double	next_x = player->player_x;
+				double	next_y = player->player_y;
+				double	angle = atan2(next_y + 0.5 - npc->npc_y, next_x + 0.5 - npc->npc_x);
+				double	dx = cos(angle) * 1.5;
+				double	dy = sin(angle) * 1.5;
+				npc->npc_x += dx;
+				npc->npc_y += dy;
+			}
+		}
+		if (npc->state == PAIN && npc->frame >= npc->frame_max)
+		{
+			npc->state = IDLE;
+			npc->frame = 0;
+			npc->frame_max = 7;
+		}
+	}
+
+}
+
+
+
 void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 {
 	t_draw_npc	info;
 	int			i;
 	int			limiter;
-	int			ray_flag;
 	limiter = 3;
 	i = 0;
 	while (i < cnt)
 	{
 		info.target = npcs[i];
 		set_npc_info(&info, player, game);
-
-		if (info.target->state != DEATH)
+		if (info.target->state != DEATH)	// 살아있는걸 기본으로.
 		{
-			ray_flag = npc_ray(player, info.target, game);
-			if (ray_flag == TRUE && info.target->state != ATTACK)
-			{
-				info.target->state = WALK;
-				info.target->frame = 0;
-				if (info.target->type == CACO_DEMON)
-					info.target->frame_max = 2;
-				else
-					info.target->frame_max = 3;
-				double	next_x = player->player_x;
-				double	next_y = player->player_y;
-				double	angle = atan2(next_y + 0.5 - info.target->npc_y, next_x + 0.5 - info.target->npc_x);
-				double	dx = cos(angle) * 1.5;
-				double	dy = sin(angle) * 1.5;
-				info.target->npc_x += dx;
-				info.target->npc_y += dy;
-			}
-			if (info.target->distance < 150 && info.target->state != ATTACK)
-			{
-				info.target->state = ATTACK;
-				info.target->frame = 0;
-				if (info.target->type == CACO_DEMON)
-					info.target->frame_max = 5;
-				else
-					info.target->frame_max = 2;
-			}
-			else if (info.target->distance > 150 && info.target->state == ATTACK && info.target->state != WALK)
-			{
-				info.target->state = IDLE;
-				info.target->frame = 0;
-				info.target->frame_max = 7;
-			}
+			update_npc(info.target, player, game);
 			if (WINDOW_W / 2 - info.width / 2 < info.screen_x
 				&& info.screen_x < WINDOW_W / 2 + info.width / 2 && player->shot == TRUE && info.target->state != PAIN && info.target->state != DEATH && game->player->npc_hit == FALSE)
 			{
@@ -193,10 +212,9 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 				game->player->npc_hit = TRUE;
 				game->npc_sound_flag = TRUE;
 				info.target->frame = 0;
-				if (info.target->type == SOLDIRE)
-					info.target->frame_max = 0;
-				else
-					info.target->frame_max = 1;
+				info.target->frame_max = 1;
+				info.target->frame_time = 0;
+				limiter = 6;
 				info.target->hp--;
 			}
 			if (info.target->hp <= 0 && info.target->state != DEATH)
@@ -204,18 +222,11 @@ void	draw_npc(t_npc **npcs, int cnt, t_player *player, t_game *game)
 				info.target->state = DEATH;
 				game->npc_death_flag = TRUE;
 				info.target->frame = 0;
-				if (info.target->type == CACO_DEMON)
-					info.target->frame_max = 5;
-				else
-					info.target->frame_max = 8;
+				info.target->frame_max = 5;
 			}
 		}
-		if (info.target->state == PAIN && info.target->frame >= info.target->frame_max && player->npc_hit == TRUE)
-		{
-			info.target->state = IDLE;
-			info.target->frame = 0;
-			info.target->frame_max = 7;
-		}
+		printf("frame : [%d] frame_max [%d] npc_hit [%d]\n", info.target->frame, info.target->frame_max, player->npc_hit);
+
 		if	(((info.player_left < info.npc_rad
 				&& info.npc_rad < info.player_right)
 						|| (info.player_right > info.player_left))

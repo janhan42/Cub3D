@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 00:57:56 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 01:03:55 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 09:34:32 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,6 @@ void	set_door_info(t_draw_door *info, t_player *player)
 		info->door_rad = M_PI_2;
 	else
 		info->door_rad = 2 * M_PI;
+	printf("info->door_rad [%f]\n", info->door_rad);
 	set_door_info_sub(info);
 }

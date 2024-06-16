@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/14 07:18:28 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/16 07:01:39 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,13 +287,9 @@ typedef struct s_parse
 	t_texture	tex[TEXTURE_COUNT];
 }	t_parse;
 
-// NPC TEST
-
 typedef enum e_npc_type
 {
 	CACO_DEMON,
-	CYBER_DEMON,
-	SOLDIRE,
 }	t_npc_type;
 
 typedef enum e_npc_state
