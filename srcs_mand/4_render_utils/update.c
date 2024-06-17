@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 11:57:02 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:25:31 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,8 @@ int	update(t_game *game)
 	game->s_time++;
 	if (game->s_time >= 100)
 	{
-		if (game->mode == GAME)
-		{
-			player_movement(game);
-			render_3d(game);
-		}
-		if (game->mode == INTRO)
-			render_intro(game);
+		player_movement(game);
+		render_3d(game);
 		game->s_time = 0;
 	}
 	return (0);

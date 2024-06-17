@@ -6,27 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 07:51:36 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 15:55:40 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 12:53:24 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_mand/header_mand.h"
-
-static void	load_menu_texture(t_game *game)
-{
-	game->main_menu = make_xpm_img(game,
-			"resources/textures/klipartz.com.xpm");
-	game->main_background = make_xpm_img(game,
-			"resources/textures/main_background.xpm");
-	game->start_n = make_xpm_img(game,
-			"resources/textures/Start_n.xpm");
-	game->start_h = make_xpm_img(game,
-			"resources/textures/Start_h.xpm");
-	game->exit_game_n = make_xpm_img(game,
-			"resources/textures/Exit_game_n.xpm");
-	game->exit_game_h = make_xpm_img(game,
-			"resources/textures/Exit_game_h.xpm");
-}
 
 static void	load_wall_texture(t_game *game, t_img *wall)
 {
@@ -42,6 +26,5 @@ void	load_texture(t_game *game)
 
 	wall = ft_calloc(4, sizeof(t_img));
 	load_wall_texture(game, wall);
-	load_menu_texture(game);
 	game->texture = wall;
 }

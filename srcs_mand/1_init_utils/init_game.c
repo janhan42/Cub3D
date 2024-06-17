@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:05:49 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 18:40:16 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 12:25:34 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	init_game(t_game *game)
 			WINDOW_H, "cub3d");
 	game->render = make_image(game, WINDOW_W, WINDOW_H);
 	init_ray_info(game);
-	game->background = make_image(game, WINDOW_W, WINDOW_H);
 	load_texture(game);
 	game->s_time = 0;
 	game->frame = 0;
-	game->mode = INTRO;
 }
