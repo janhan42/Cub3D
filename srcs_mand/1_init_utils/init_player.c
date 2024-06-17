@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:11:15 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:46:03 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:13:52 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	get_player_position_sub(char **map, t_player *player, int x, int y)
 	{
 		player->player_x = x * PIXEL + (int)(PIXEL / 2);
 		player->player_y = y * PIXEL + (int)(PIXEL / 2);
-		player->player_rad = M_PI + M_PI_2;
+		player->player_rad = M_PI_2;
 		return (SUCCESS);
 	}
 	return (FAILURE);
@@ -61,7 +61,7 @@ static void	get_player_position(char **map, t_player *player)
 			{
 				player->player_x = x * PIXEL + (int)(PIXEL / 2);
 				player->player_y = y * PIXEL + (int)(PIXEL / 2);
-				player->player_rad = M_PI_2;
+				player->player_rad = M_PI_2 + M_PI;
 				return ;
 			}
 			if (get_player_position_sub(map, player, x, y) == SUCCESS)
