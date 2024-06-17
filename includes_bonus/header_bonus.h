@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/17 13:03:30 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 14:10:19 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ typedef struct s_vec2d
 	double	x;
 	double	y;
 }	t_vec2d;
-
-typedef struct s_vec2u
-{
-	unsigned int	x;
-	unsigned int	y;
-}	t_vec2u;
 
 typedef struct s_single_scale
 {
