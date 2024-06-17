@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/07 12:12:47 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:59:50 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int	check_symbol(t_game *game)
 		while (game->parse.map[row][++col] != '\0')
 		{
 			if (check_symbol2(game, row, col) == FAILURE)
-				return (FAILURE);
+				error_exit("씨발\n");
 		}
 	}
 	if (game->parse.is_d != TRUE)

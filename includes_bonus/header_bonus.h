@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/16 17:49:20 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:03:30 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ typedef enum e_object_type
 
 typedef enum e_wall_type
 {
-	EAST,
 	NORTH,
-	WEST,
 	SOUTH,
+	WEST,
+	EAST,
 	DOOR,
 	DOOR1,
 	DOOR2,

@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/14 07:33:54 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:03:07 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ static void	compare_distance_sub(t_game *game, t_dest *dest, double rad)
 		dest->y_vert %= 1;
 		dest->offset = dest->y_vert;
 		if (rad > M_PI_2 && rad < M_PI + M_PI_2)
-			dest->wall_type = WEST;
-		else
 			dest->wall_type = EAST;
+		else
+			dest->wall_type = WEST;
 		dest->offset = game->ray_info->vy - floor(game->ray_info->vy);
 		if (!(rad > M_PI_2 && rad < 3 * M_PI_2))
 			dest->offset = 1 - dest->offset;
