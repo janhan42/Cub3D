@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 02:28:20 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/17 11:57:02 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@
  * game->mode = GAME
  * @param game
  */
-static void	render_game(t_game *game)
-{
-	render_3d(game);
-}
-
 int	update(t_game *game)
 {
 	game->s_time++;
@@ -30,7 +25,7 @@ int	update(t_game *game)
 		if (game->mode == GAME)
 		{
 			player_movement(game);
-			render_game(game);
+			render_3d(game);
 		}
 		if (game->mode == INTRO)
 			render_intro(game);
