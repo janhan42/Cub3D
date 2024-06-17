@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/17 13:01:12 by sangshin         ###   ########.fr        #
+#    Updated: 2024/06/17 13:46:49 by sangshin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ SRCS_MAN		=		./srcs_mand/main.c											\
 						./srcs_mand/3_ray_utils/get_dest_sub.c						\
 						./srcs_mand/4_render_utils/get_texture.c					\
 						./srcs_mand/4_render_utils/player_movement.c				\
-						./srcs_mand/4_render_utils/render_intro.c					\
 						./srcs_mand/4_render_utils/render_texture.c					\
 						./srcs_mand/4_render_utils/render3d.c						\
 						./srcs_mand/4_render_utils/update.c							\
@@ -109,8 +108,10 @@ OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)
 
 ifdef FLAG
 	OBJS_FILES = $(OBJS_BONUS)
+	HEADER = $(HEADER_BONUS)
 else
 	OBJS_FILES = $(OBJS_MAND)
+	HEADER = $(HEADER_MAND)
 endif
 
 NONE='\033[0m'

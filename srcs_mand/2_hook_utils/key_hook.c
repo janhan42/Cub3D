@@ -6,32 +6,14 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:05:34 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 02:37:40 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:43:51 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_mand/header_mand.h"
 
-void	change_mode(t_game *game)
-{
-	if (game->mode == GAME)
-	{
-		game->mode = INTRO;
-		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
-		mlx_mouse_show();
-	}
-	else if (game->mode == INTRO)
-	{
-		game->mode = GAME;
-		mlx_mouse_move(game->mlx_win, WINDOW_W / 2, WINDOW_H / 2);
-		mlx_mouse_hide();
-	}
-}
-
 int	key_hook(int keycode, t_game *game)
 {
-	if (keycode == KEY_C)
-		change_mode(game);
 	if (keycode == ESC)
 		end_program(game);
 	if (keycode == KEY_W)

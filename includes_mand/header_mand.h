@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/17 12:58:13 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:51:14 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,6 @@
 # include <fcntl.h>
 # include <sys/_types/_ssize_t.h>
 
-typedef enum e_game_mode
-{
-	INTRO,
-	GAME,
-}	t_game_mode;
-
 typedef enum e_wall_type
 {
 	NORTH,
@@ -36,23 +30,11 @@ typedef enum e_wall_type
 	EAST,
 }	t_wall_type;
 
-typedef struct s_vec2i
-{
-	int	x;
-	int	y;
-}	t_vec2i;
-
 typedef struct s_vec2d
 {
 	double	x;
 	double	y;
 }	t_vec2d;
-
-typedef struct s_vec2u
-{
-	unsigned int	x;
-	unsigned int	y;
-}	t_vec2u;
 
 typedef struct s_single_scale
 {
@@ -197,17 +179,8 @@ typedef struct s_game
 	int			ceiling_color;
 	t_parse		parse;
 	t_img		*render;
-	t_img		*background;
-	t_img		*main_background;
-	t_img		*start_n;
-	t_img		*start_h;
-	t_img		*exit_game_n;
-	t_img		*exit_game_h;
-	t_img		*main_menu;
-	t_img		*intro;
 	t_ray_dest	*ray_info;
 	t_player	*player;
-	t_game_mode	mode;
 	t_img		*texture;
 	double		frame_time;
 	int			frame;
@@ -262,9 +235,6 @@ int		key_hook_release(int keycode, t_game *game);
 
 int		update(t_game *game);
 
-// 0_intro
-void	render_intro(t_game *game);
-
 // 1_game
 void	player_movement(t_game *game);
 void	render_texture(t_game *game, t_dest *dest, int t);
@@ -289,10 +259,8 @@ char	*cutter_cal(char **string);
 char	*rose_knife(char *string, int i);
 
 // 0_draw_utils
-void	draw_line(t_img *img, t_2dot dots, int color);
 void	draw_square_on_img(t_img *img, int x, int y, int color);
 void	put_pixel_on_img(t_img	*img, int x, int y, int color);
-void	one_line(t_img *img, t_2dot *dots, int color);
 void	scale_texture(t_img *src, t_img *dst, float scale_factor);
 void	render_sprite_object(t_game *game);
 int		color_spoid(int x, int y, t_img *img);
@@ -303,7 +271,6 @@ int		rgb_to_int(int r, int g, int b);
 double	dist(double x, double y, double hx, double hy);
 
 // 2_end_program
-void	kill_sound(int sig);
 int		end_program(t_game *game);
 int		key_press(int key, t_game *game);
 void	error_exit(char *msg);

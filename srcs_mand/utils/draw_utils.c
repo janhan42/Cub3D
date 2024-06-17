@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:26:51 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 18:34:03 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:49:55 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,6 @@ void	one_line(t_img *img, t_2dot *dots, int color)
 		vec.y += dy / (double)steps;
 		i++;
 	}
-}
-
-void	draw_line(t_img *img, t_2dot dots, int color)
-{
-	int	offset;
-
-	if (dots.start_x == dots.dest_x)
-	{
-		offset = (dots.start_y > dots.dest_y) * -1
-			+ (dots.start_y < dots.dest_y) * 1;
-		while (dots.start_y != dots.dest_y)
-		{
-			put_pixel_on_img(img, dots.start_x, dots.start_y, color);
-			dots.start_y += offset;
-		}
-	}
-	else if (dots.start_y == dots.dest_y)
-	{
-		offset = (dots.start_x > dots.dest_x) * -1
-			+ (dots.start_x < dots.dest_x) * 1;
-		while (dots.start_x != dots.dest_x)
-		{
-			put_pixel_on_img(img, dots.start_x, dots.start_y, color);
-			dots.start_x += offset;
-		}
-	}
-	else
-		one_line(img, &dots, color);
 }
 
 /**
