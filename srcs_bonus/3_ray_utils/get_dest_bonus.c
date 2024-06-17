@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 16:03:31 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/17 13:04:44 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,10 @@ static void	compare_distance_sub(t_game *game, t_dest *dest, double rad)
 		dest->distance = game->ray_info->distance_v;
 		dest->y_vert %= 1;
 		dest->offset = dest->y_vert;
-		if (game->ray_info->is_v_door)
-			dest->wall_type = DOOR;
-		else if (rad > M_PI_2 && rad < M_PI + M_PI_2)
-			dest->wall_type = WEST;
-		else
+		if (rad > M_PI_2 && rad < M_PI + M_PI_2)
 			dest->wall_type = EAST;
+		else
+			dest->wall_type = WEST;
 		dest->offset = game->ray_info->vy - floor(game->ray_info->vy);
 		if (!(rad > M_PI_2 && rad < 3 * M_PI_2))
 			dest->offset = 1 - dest->offset;
@@ -100,9 +98,7 @@ static void	compare_distance(t_game *game, t_dest *dest, double rad)
 		dest->x = game->ray_info->hx;
 		dest->y = game->ray_info->hy;
 		dest->distance = game->ray_info->distance_h;
-		if (game->ray_info->is_h_door)
-			dest->wall_type = DOOR;
-		else if (rad > 0 && rad < M_PI)
+		if (rad > 0 && rad < M_PI)
 			dest->wall_type = NORTH;
 		else
 			dest->wall_type = SOUTH;
@@ -125,8 +121,6 @@ t_dest	get_dest(double x, double y, double rad, t_game *game)
 		rad -= 2 * M_PI;
 	if (rad < 0)
 		rad += 2 * M_PI;
-	game->ray_info->is_h_door = 0;
-	game->ray_info->is_v_door = 0;
 	check_horizion_init(x, y, rad, game->ray_info);
 	check_horizion(game, game->ray_info, x, y);
 	check_vertical_init(x, y, rad, game->ray_info);

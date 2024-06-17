@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/07 08:25:54 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/14 10:51:35 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:58:13 by janhan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,10 @@ typedef enum e_game_mode
 
 typedef enum e_wall_type
 {
-	EAST,
 	NORTH,
-	WEST,
 	SOUTH,
-	DOOR,
-	DOOR1,
-	DOOR2,
-	DOOR3,
+	WEST,
+	EAST,
 }	t_wall_type;
 
 typedef struct s_vec2i
