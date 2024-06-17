@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:59:28 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 13:05:46 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/17 13:08:03 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	is_map_valid(char *line)
 	while (line[i])
 	{
 		if (find_char("01NESW \n", line[i]) == FALSE)
-			error_exit("wrong char\n");
+			error_exit("wrong char");
 		i++;
 	}
 	return (TRUE);
