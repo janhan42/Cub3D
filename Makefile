@@ -6,7 +6,7 @@
 #    By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/13 10:33:06 by janhan            #+#    #+#              #
-#    Updated: 2024/06/16 17:49:01 by janhan           ###   ########.fr        #
+#    Updated: 2024/06/17 13:01:12 by sangshin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME			=		cub3D
 
 CC				=		cc
 
-CFLAGS			=		-Wall -Wextra -Werror #-fsanitize=address
+CFLAGS			=		-g -Wall -Wextra -Werror #-fsanitize=address
 INCLUDE			=		-Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 HEADER_MAND		=		./includes_mand/header_mand.h							\
 						./includes_mand/define_mand.h
