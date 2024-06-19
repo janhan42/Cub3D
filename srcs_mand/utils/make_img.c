@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:00:25 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/14 10:52:41 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:46:01 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 /**
  * @brief
- * mlx_new_image fail 처리가 되어있음 (exit)
+ * allocate new img struct and make new img with width and height
  * @param game
- * @param width 새로 만들 이미지의 가로
- * @param height 새로 만들 이미지의 세로
+ * @param width new img width
+ * @param height new img height
  * @return t_img*
  */
 t_img	*make_image(t_game *game, int width, int height)

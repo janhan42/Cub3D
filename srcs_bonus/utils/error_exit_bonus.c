@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:18:10 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:26:19 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:57:07 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 /**
  * @brief
- * "Error\n" 를 출력후 "msg\n"를 출력하고 exit (1);
- * @param msg // 출력시킬 문자열
+ * print "ERROR\n" and print msg and exit (1);
+ * @param msg // string to print
  */
 void	error_exit(char *msg)
 {

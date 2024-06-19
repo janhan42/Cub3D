@@ -6,20 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:00:25 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/05 21:58:01 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:57:26 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-/**
- * @brief
- * mlx_new_image fail 처리가 되어있음 (exit)
- * @param game
- * @param width 새로 만들 이미지의 가로
- * @param height 새로 만들 이미지의 세로
- * @return t_img*
- */
 t_img	*make_image(t_game *game, int width, int height)
 {
 	t_img	*img;

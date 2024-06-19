@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/05 20:05:54 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/06 10:03:36 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:54:39 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief
- * qsort함수용 비교 함수
+ * compare for qsort
  * @param a
  * @param b
  * @return int
@@ -34,7 +34,6 @@ int	compare(const void *a, const void *b)
 
 /**
  * @brief
- * 플레이어와 오브젝트 간의 거리 계산
  * @param obj
  * @param player
  * @param cnt

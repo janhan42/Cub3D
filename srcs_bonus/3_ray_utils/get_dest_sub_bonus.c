@@ -6,15 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 15:21:20 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:24:20 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:53:03 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-/*
-	수평선 체크를 위한 info 정리 및 초기화
-*/
 void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray)
 {
 	ray->hx = x;
@@ -44,9 +41,6 @@ void	check_horizion_init(double x, double y, double rad, t_ray_dest *ray)
 	}
 }
 
-/*
-	수직선 체크를 위한 info 정리 및 초기화
-*/
 void	check_vertical_init(double x, double y, double rad, t_ray_dest *ray)
 {
 	ray->n_tan = -tan(rad);

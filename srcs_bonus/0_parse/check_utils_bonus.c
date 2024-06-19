@@ -6,18 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:25:53 by janhan            #+#    #+#             */
-/*   Updated: 2024/05/28 17:21:48 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:49:04 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-/**
- * @brief
- * 텍스쳐 중복 파일 체크
- * @param game
- * @return int
- */
 int	check_tex(t_game *game)
 {
 	int	i;

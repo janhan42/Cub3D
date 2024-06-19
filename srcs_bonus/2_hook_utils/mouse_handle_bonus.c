@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 07:23:35 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 06:30:07 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:52:13 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static void	event_in_intro(int button, int x, int y, t_game *game)
 
 /**
  * @brief
- * 마우스의 클릭 이벤트와 이동좌표를 저장
- * @param button 버튼 이벤트 코드
- * @param x mouse x좌표
- * @param y mouse y좌표
+ * save mouse click event and x, y position
+ * @param button  button event code
+ * @param x mouse x position
+ * @param y mouse y position
  * @param game
  * @return int
  */

@@ -6,15 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 11:31:58 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 13:04:44 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:52:55 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
-/*
-	맵 파일에서의 좌표 및 ray의 좌표를 확인후 거리 계산
-*/
 static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 {
 	while (ray->dof < 100)
@@ -42,9 +39,6 @@ static void	check_horizion(t_game *game, t_ray_dest *ray, double x, double y)
 	}
 }
 
-/*
-	맵 파일에서의 좌표 및 ray의 좌표를 확인후 거리 계산
-*/
 static void	check_vertical(t_game *game, t_ray_dest *ray, double x, double y)
 {
 	while (ray->dof < 100)

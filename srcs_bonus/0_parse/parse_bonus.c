@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:57:25 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 15:58:42 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:49:50 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,6 @@ static int	check_color(int type, t_parse *parse, char *line)
 	return (SUCCESS);
 }
 
-/**
- * @brief
- * 받아온 타입을 기준으로 path를 저장할 것인지 floor 와 ceiling 색상을 파싱할것인지 아니면 그냥 맵으로 넣을것인지 분기
- * @param parse
- * @param g_ret
- * @param type
- * @param line
- * @return int
- */
 static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 {
 	g_ret++;
@@ -58,12 +49,6 @@ static int	do_parsing(t_parse *parse, int g_ret, int type, char *line)
 	return (free_memory_return(line, SUCCESS));
 }
 
-/**
- * @brief
- * 맵파일에서 처음 나오는 텍스트 지정과 천장 바닥 색상일때의 타입과 그 외의 Map파일에 있어도 되는 글자인지 확인하는 함수
- * @param line
- * @return int
- */
 int	check_parse_type(char *line)
 {
 	if (line == NULL)
@@ -115,13 +100,6 @@ static int	read_map(t_game *game, char *s, int fd)
 	return (parse_map(&game->parse, tmp_map));
 }
 
-/**
- * @brief
- * .cub 파일의 확장자 및 오픈 체크 후 파싱하는 함수
- * @param game
- * @param cub_file_path
- * @return int
- */
 int	parse_file(t_game *game, const char *cub_file_path)
 {
 	t_single_parse	p;

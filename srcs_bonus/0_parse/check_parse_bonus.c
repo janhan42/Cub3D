@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 22:20:17 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/16 07:00:32 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:48:58 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /**
  * @brief
- * 벽 : 1, 바닥 : 0, 오브젝트 : LRGHVOP, NPC : RTY
+ * wall : 1, empty : 0, object : LRGHVOP, NPC : RTY
  * @param game
  * @param row
  * @param col
@@ -56,7 +56,7 @@ static int	check_symbol2(t_game *game, int row, int col)
 
 /**
  * @brief
- * 맵파일에서의 허용되는 글자 그리고 플레이어 포지션이 두개가 있지 않은지 0의 주변이 빈 공간이 있는지 확인.
+ * check map condition
  * @param game
  * @return int
  */
@@ -82,7 +82,7 @@ static int	check_symbol(t_game *game)
 
 /**
  * @brief
- * row, col의 길이가 있는지, 천장 바닥 색상이 파싱 되었는지, 텍스쳐 중복이 있는지, 파싱안된 텍스쳐가 있는지
+ * check error case
  * @param game
  * @return int
  */
@@ -106,7 +106,7 @@ static int	check_type(t_game *game)
 
 /**
  * @brief
- * 맵 파일에서 받아온 정보가 맞는지 체크
+ * check information
  * @param game
  * @return int
  */

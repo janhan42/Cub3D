@@ -6,12 +6,11 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 08:13:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 12:12:52 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:46:27 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_mand/header_mand.h"
-
 
 void	init(t_game *game, int ac, char **av)
 {

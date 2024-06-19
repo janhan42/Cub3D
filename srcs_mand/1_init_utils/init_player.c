@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 09:11:15 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 13:13:52 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:37:53 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,7 @@ static int	get_player_position_sub(char **map, t_player *player, int x, int y)
 
 /**
  * @brief jang hun han
- *	char **map에서
- * x, y로 **map을 탐색하면서
- * 플레이어 포지션에서의 좌표 지정
+ * get player position
  * @param map
  * @param player
  */

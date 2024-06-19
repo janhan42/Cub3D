@@ -6,14 +6,14 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 22:34:45 by sangshin          #+#    #+#             */
-/*   Updated: 2024/06/16 06:32:04 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 12:53:30 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
 /*
- * f_dest[0] = x좌표
+ * f_dest[0] = x position
  * f_dest[1] = y
  * f_dest[2] = distance
  * f_dest[3] = direction

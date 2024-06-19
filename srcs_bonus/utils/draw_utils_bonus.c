@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 20:26:51 by sangshin          #+#    #+#             */
-/*   Updated: 2024/05/28 20:12:27 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:56:17 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,6 @@ void	draw_line(t_img *img, t_2dot dots, int color)
 		one_line(img, &dots, color);
 }
 
-/**
- * @brief
- * 상단 우측 img 수정
- * @param img
- * @param x
- * @param y
- * @param color
- */
 void	draw_square_on_img(t_img *img, int x, int y, int color)
 {
 	int	i;
@@ -107,14 +99,6 @@ void	put_pixel_on_img(t_img	*img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-// TODO: 이미지 스케일링 함수인데 전달 방식 및 처리 방식의 개편이 필요
-/**
- * @brief
- *
- * @param src 변환전 오리지널 이미지 구조체.
- * @param dst 스케일링후 이미지를 넣을 구조체.
- * @param scale_factor 스케일
- */
 void	scale_texture(t_img *src, t_img *dst, float scale_factor)
 {
 	t_single_scale	info;
