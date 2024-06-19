@@ -6,17 +6,12 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 09:42:08 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 12:25:31 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:35:46 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_mand/header_mand.h"
 
-/**
- * @brief
- * game->mode = GAME
- * @param game
- */
 int	update(t_game *game)
 {
 	game->s_time++;

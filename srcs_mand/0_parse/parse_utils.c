@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:59:28 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/17 13:08:03 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 12:21:29 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,6 @@ int	is_space_around_position(t_game *game, int row, int col)
 	return (SUCCESS);
 }
 
-/**
- * @brief
- * 현재 멘데토리 기준 "01NESW " 만 유효하게 검사중 보너스는 추가로 검사를 넣을것
- * @param line
- * @return int
- */
 int	is_map_valid(char *line)
 {
 	int	i;

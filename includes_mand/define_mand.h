@@ -6,7 +6,7 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:33:01 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/11 02:36:39 by sangshin         ###   ########.fr       */
+/*   Updated: 2024/06/19 11:50:16 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,4 +105,13 @@
 # define ARROW_R 124
 # define ARROW_D 125
 # define ARROW_U 126
+/*************************************************************/
+/*========              wall collision               ========*/
+/*************************************************************/
+# define PLUS 4
+# define MINUS 0
+# define SIN 2
+# define COS 0
+# define X 1
+# define Y 0
 #endif

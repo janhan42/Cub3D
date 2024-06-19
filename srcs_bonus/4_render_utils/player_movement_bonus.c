@@ -6,13 +6,22 @@
 /*   By: janhan <janhan@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 17:01:52 by janhan            #+#    #+#             */
-/*   Updated: 2024/06/05 19:39:22 by janhan           ###   ########.fr       */
+/*   Updated: 2024/06/19 11:50:24 by sangshin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes_bonus/header_bonus.h"
 
 /*
+ * 	state is made of three bits
+ *
+ * 	first bit:	1 for plus, 0 for minus
+ *
+ * 	second bit:	1 for sin, 0 for cos
+ *
+ * 	third bit:	1 for x, 0 for cos
+ *
+ * 	-- EXAMPLE --
  * if W: 0 0 ?
  * 	x + cos : 1 0 1 -> 5
  * 	y + sin : 1 1 1 -> 6
@@ -28,12 +37,6 @@
  * 	if d: 1 1 ?
  * 	x - sin : 0 1 1 -> 3
  * 	y + cos : 1 0 0 -> 4
- *
- *
- * 	state : 3bit	_ _ _
- * 	첫비트 1, 0 각각 플러스 마이너스
- * 	2번비트 1, 0 각각 sin cos
- * 	마지막 비트 1, 0 각각 x y
  */
 double	wall_collision(t_game *game, int state)
 {
@@ -66,23 +69,23 @@ void	player_movement(t_game *game)
 {
 	if (game->player->move_w)
 	{
-		game->player->player_x += wall_collision(game, 5);
-		game->player->player_y += wall_collision(game, 4 + 2 + 0);
+		game->player->player_x += wall_collision(game, PLUS | COS | X);
+		game->player->player_y += wall_collision(game, PLUS | SIN | Y);
 	}
 	if (game->player->move_s)
 	{
-		game->player->player_x += wall_collision(game, 0 + 0 + 1);
-		game->player->player_y += wall_collision(game, 0 + 2 + 0);
+		game->player->player_x += wall_collision(game, MINUS + COS + X);
+		game->player->player_y += wall_collision(game, MINUS + SIN + Y);
 	}
 	if (game->player->move_a)
 	{
-		game->player->player_x += wall_collision(game, 4 + 2 + 1);
-		game->player->player_y += wall_collision(game, 0 + 0 + 0);
+		game->player->player_x += wall_collision(game, PLUS + SIN + X);
+		game->player->player_y += wall_collision(game, MINUS + COS + Y);
 	}
 	if (game->player->move_d)
 	{
-		game->player->player_x += wall_collision(game, 0 + 2 + 1);
-		game->player->player_y += wall_collision(game, 4 + 0 + 0);
+		game->player->player_x += wall_collision(game, MINUS + SIN + X);
+		game->player->player_y += wall_collision(game, PLUS + COS + Y);
 	}
 	game->frame++;
 }
